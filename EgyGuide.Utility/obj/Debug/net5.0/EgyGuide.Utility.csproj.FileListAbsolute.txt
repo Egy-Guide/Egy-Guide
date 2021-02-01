@@ -1,0 +1,12 @@
+E:\EgyGuide\EgyGuide\EgyGuide.Utility\bin\Debug\net5.0\EgyGuide.Utility.deps.json
+E:\EgyGuide\EgyGuide\EgyGuide.Utility\bin\Debug\net5.0\EgyGuide.Utility.dll
+E:\EgyGuide\EgyGuide\EgyGuide.Utility\bin\Debug\net5.0\ref\EgyGuide.Utility.dll
+E:\EgyGuide\EgyGuide\EgyGuide.Utility\bin\Debug\net5.0\EgyGuide.Utility.pdb
+E:\EgyGuide\EgyGuide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.csprojAssemblyReference.cache
+E:\EgyGuide\EgyGuide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.GeneratedMSBuildEditorConfig.editorconfig
+E:\EgyGuide\EgyGuide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.AssemblyInfoInputs.cache
+E:\EgyGuide\EgyGuide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.AssemblyInfo.cs
+E:\EgyGuide\EgyGuide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.csproj.CoreCompileInputs.cache
+E:\EgyGuide\EgyGuide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.dll
+E:\EgyGuide\EgyGuide\EgyGuide.Utility\obj\Debug\net5.0\ref\EgyGuide.Utility.dll
+E:\EgyGuide\EgyGuide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.pdb

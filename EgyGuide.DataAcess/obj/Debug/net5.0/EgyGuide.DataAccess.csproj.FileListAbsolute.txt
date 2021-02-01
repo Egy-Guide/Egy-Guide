@@ -1,0 +1,17 @@
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.DataAccess.deps.json
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.DataAccess.dll
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\bin\Debug\net5.0\ref\EgyGuide.DataAccess.dll
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.DataAccess.pdb
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.Models.dll
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.Utility.dll
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.Models.pdb
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.Utility.pdb
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.csprojAssemblyReference.cache
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.AssemblyInfoInputs.cache
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.AssemblyInfo.cs
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.csproj.CoreCompileInputs.cache
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.csproj.CopyComplete
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.dll
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\obj\Debug\net5.0\ref\EgyGuide.DataAccess.dll
+E:\EgyGuide\EgyGuide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.pdb

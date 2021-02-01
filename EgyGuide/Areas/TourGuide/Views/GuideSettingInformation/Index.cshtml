@@ -1,0 +1,275 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="~/Views/Shared/Breadcrumb.cshtml">
+<partial name="~/Views/Shared/UserProfileWrapper.cshtml">
+
+<div class="pt-30 pb-50">
+
+    <div class="container">
+
+        <div class="row">
+
+            <partial name="~/Views/Shared/TourGuide/DashboardSidebarMenu.cshtml">
+
+            <div class="col-xs-12 col-sm-8 col-md-9 mt-20">
+
+                <div class="dashboard-wrapper">
+
+                    <h4 class="section-title">Guide Information</h4>
+                    <p class="mmt-15 mb-20"> Prepared interest proposal it he exercise. My wishing an in attempt ferrars. Visited eat you why service looking engaged. At place no walls hopes rooms fully in. Roof hope shy tore leaf joy paid boy.</p>
+
+                    <form class="post-form-wrapper">
+
+                        <div class="row gap-20">
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>Short Introduction</label>
+                                    <textarea class="form-control" placeholder="Enter text ..." rows="6"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Guide Classification</label>
+                                    <select class="selectpicker show-tick form-control" data-live-search="false">
+                                        <option value="0">Select</option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2" selected>Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                        <option value="5">Option 5</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Nationality</label>
+                                    <input type="text" class="form-control" placeholder="placeholder">
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group">
+                                    <label>Base Location</label>
+                                    <input type="text" class="form-control" placeholder="placeholder">
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group">
+                                    <label>Service Areas</label>
+                                    <input type="text" class="form-control tokenfield" value="Bangkok, Pattaya, Chiangmai, Phuket, Chiangrai" placeholder="up to 10" />
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group">
+                                    <label>Speak</label>
+                                    <input type="text" class="form-control tokenfield" value="Thai, English, Malay" placeholder="up to 10" />
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-4 col-md-3">
+
+                                <div class="form-group form-spin-group">
+                                    <label>Years of Experience</label>
+                                    <input type="text" class="form-control form-spin" value="1" />
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-4 col-md-3">
+
+                                <div class="form-group">
+                                    <label>Private Transportation</label>
+                                    <div class="radio-wrapper">
+                                        <div class="radio-inline">
+                                            <input id="private_transportation-1" name="private_transportation" type="radio" class="radio" />
+                                            <label class="" for="private_transportation-1">Yes</label>
+                                        </div>
+                                        <div class="radio-inline">
+                                            <input id="private_transportation-2" name="private_transportation" type="radio" class="radio" />
+                                            <label class="" for="private_transportation-2">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-4 col-md-3">
+
+                                <div class="form-group">
+                                    <label>Public Transportation</label>
+                                    <div class="radio-wrapper">
+                                        <div class="radio-inline">
+                                            <input id="public_transportation-1" name="public_transportation" type="radio" class="checkbox" />
+                                            <label class="" for="public_transportation-1">Yes</label>
+                                        </div>
+                                        <div class="radio-inline">
+                                            <input id="public_transportation-2" name="public_transportation" type="radio" class="checkbox" />
+                                            <label class="" for="public_transportation-2">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>Special remark</label>
+                                    <textarea class="form-control" placeholder="Enter text ..." rows="6"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>More detail</label>
+                                    <textarea class="bootstrap3-wysihtml5 form-control" placeholder="Enter text ..." style="height: 200px;"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                                <div class="form-group">
+                                    <label>Checkbox Option</label>
+                                    <p class="mb-10">On then sake home is am leaf. Of suspicion do departure at extremely he believing.</p>
+
+                                    <div class="checkbox-block">
+                                        <input id="checkbox_option-1" name="checkbox_option" type="checkbox" class="checkbox" checked />
+                                        <label class="" for="checkbox_option-1">Checkbox Option One home </label>
+                                    </div>
+                                    <div class="checkbox-block">
+                                        <input id="checkbox_option-2" name="checkbox_option" type="checkbox" class="checkbox" />
+                                        <label class="" for="checkbox_option-2">Checkbox Option Two</label>
+                                    </div>
+                                    <div class="checkbox-block">
+                                        <input id="checkbox_option-3" name="checkbox_option" type="checkbox" class="checkbox" />
+                                        <label class="" for="checkbox_option-3">Checkbox Option Three</label>
+                                    </div>
+                                    <div class="checkbox-block">
+                                        <input id="checkbox_option-4" name="checkbox_option" type="checkbox" class="checkbox" />
+                                        <label class="" for="checkbox_option-4">Checkbox Option Four</label>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                                <div class="form-group">
+                                    <label>Radio Option</label>
+                                    <p class="mb-10">On then sake home is am leaf. Of suspicion do departure at extremely he believing.</p>
+
+                                    <div class="radio-block">
+                                        <input id="radio_option-1" name="radio_option" type="radio" class="radio" checked />
+                                        <label for="radio_option-1">Radio Option One</label>
+                                    </div>
+                                    <div class="radio-block">
+                                        <input id="radio_option-2" name="radio_option" type="radio" class="radio" />
+                                        <label for="radio_option-2">Radio Option Two</label>
+                                    </div>
+                                    <div class="radio-block">
+                                        <input id="radio_option-3" name="radio_option" type="radio" class="radio" />
+                                        <label for="radio_option-3">Radio Option Three</label>
+                                    </div>
+                                    <div class="radio-block">
+                                        <input id="radio_option-4" name="radio_option" type="radio" class="radio" />
+                                        <label for="radio_option-4">Radio Option Four</label>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>Certificate</label>
+                                    <input type="file" name="form-photos" multiple id="form-photos">
+                                    <span class="font12 font-italic">** only jpg, png, tiff are allowed</span>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-12 col-md-10 mb-15">
+
+                                <div class="checkbox-block">
+                                    <input id="checkbox_optionff-1" name="radio_optionff" type="checkbox" class="checkbox" />
+                                    <label for="checkbox_optionff-1">Accepting <a href="#">Terms &amp; COnditions</a> Noisier out brought entered detract because sitting sir. Fat put occasion rendered off humanity has.</label>
+                                </div>
+
+                            </div>
+
+                            <div class="clear mb-10"></div>
+
+                            <div class="col-sm-12">
+                                <a href="#" class="btn btn-primary">Save</a>
+                                <a href="#" class="btn btn-primary btn-border">Cancel</a>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{ 
+    <partial name="~/Views/Shared/UserProfileScripts.cshtml">
+}
