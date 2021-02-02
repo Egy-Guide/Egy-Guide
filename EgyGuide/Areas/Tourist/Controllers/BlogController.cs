@@ -20,5 +20,11 @@ namespace EgyGuide.Areas.Tourist.Controllers
         {
             return View();
         }
+
+        [Route("blog-create")]
+        public IActionResult BlogCreate()
+        {
+            return View();
+        }
     }
 }

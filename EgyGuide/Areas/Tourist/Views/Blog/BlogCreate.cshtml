@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewData["Title"] = "BlogCreate";
+    ViewData["AddClassToBodyTag"] = "transparent-header";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- start breadcrumb -->
+<div class="breadcrumb-image-bg pb-100 no-bg" style="background-image:url('images/breadcrumb-bg.jpg');">
+    <div class="container">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                    <h2>Create Your Blog</h2>
+                    <p>Publish your passions, your way</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Blog Create</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb -->
+
+<div class="bg-light">
+
+    <div class="create-tour-wrapper">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+
+                    <div class="form">
+
+                        <div class="create-tour-inner">
+
+                            <div class="promo-box-02 mb-40">
+
+                                <div class="icon">
+                                    <i class="ti-plus"></i>
+                                </div>
+
+                                <h4>No account? Please sign-up now. It's free. </h4>
+
+                                <a href="#" class="btn">Sign Up</a>
+
+                            </div>
+
+                            <h4 class="section-title">New Blog</h4>
+
+                            <div class="row">
+
+                                <div class="col-xs-12 col-sm-12">
+
+                                    <div class="form-group form-group-lg">
+                                        <label>Title:</label>
+                                        <input type="text" class="form-control" />
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="form-group form-group-lg">
+                                        <label>Description:</label>
+                                        <textarea class="form-control" rows="5"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6">
+
+                                    <div class="form-group">
+                                        <label>Category:</label>
+                                        <select class="selectpicker show-tick form-control" title="Select placeholder">
+                                            <option value="0">Select Option 1</option>
+                                            <option value="1">Select Option 2</option>
+                                            <option value="2">Select Option 3</option>
+                                            <option value="3">Select Option 4</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="mb-10"></div>                            
+
+                            <h4 class="section-title">Add Image</h4>
+
+                            <div class="submite-list-box">
+
+                                <div id="file-submit" class="dropzone">
+                                    <input name="file" type="file" multiple>
+                                    <div class="dz-default dz-message"><span>Click or Drop Images Here</span></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-50">
+                            <a asp-controller="Blog" asp-action="Index" class="btn btn-primary btn-wide">Submit</a>
+                            <a href="#" class="btn btn-primary btn-wide btn-border">Save as draft</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{ 
+<script src="js/jquery.bootstrap-touchspin.js"></script>
+<script src="js/dropzone.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.ui.timepicker.js"></script>
+<script src="js/bootstrap-tokenfield.js"></script>
+<script src="js/typeahead.bundle.min.js"></script>
+<script src="js/customs-create.js"></script>
+}
+
