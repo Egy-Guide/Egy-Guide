@@ -10,3 +10,15 @@ E:\EgyGuide\EgyGuide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.csproj.C
 E:\EgyGuide\EgyGuide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.dll
 E:\EgyGuide\EgyGuide\EgyGuide.Utility\obj\Debug\net5.0\ref\EgyGuide.Utility.dll
 E:\EgyGuide\EgyGuide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.pdb
+E:\project\Egy-Guide\EgyGuide.Utility\bin\Debug\net5.0\EgyGuide.Utility.deps.json
+E:\project\Egy-Guide\EgyGuide.Utility\bin\Debug\net5.0\EgyGuide.Utility.dll
+E:\project\Egy-Guide\EgyGuide.Utility\bin\Debug\net5.0\ref\EgyGuide.Utility.dll
+E:\project\Egy-Guide\EgyGuide.Utility\bin\Debug\net5.0\EgyGuide.Utility.pdb
+E:\project\Egy-Guide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.csprojAssemblyReference.cache
+E:\project\Egy-Guide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.GeneratedMSBuildEditorConfig.editorconfig
+E:\project\Egy-Guide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.AssemblyInfoInputs.cache
+E:\project\Egy-Guide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.AssemblyInfo.cs
+E:\project\Egy-Guide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.csproj.CoreCompileInputs.cache
+E:\project\Egy-Guide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.dll
+E:\project\Egy-Guide\EgyGuide.Utility\obj\Debug\net5.0\ref\EgyGuide.Utility.dll
+E:\project\Egy-Guide\EgyGuide.Utility\obj\Debug\net5.0\EgyGuide.Utility.pdb
