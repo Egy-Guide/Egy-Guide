@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\EgyGuide.Models.csproj": {}
+    "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj": {}
   },
   "projects": {
-    "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\EgyGuide.Models.csproj": {
+    "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\EgyGuide.Models.csproj",
+        "projectUniqueName": "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj",
         "projectName": "EgyGuide.Models",
-        "projectPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\EgyGuide.Models.csproj",
+        "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj",
         "packagesPath": "C:\\Users\\Sully\\.nuget\\packages\\",
-        "outputPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\obj\\",
+        "outputPath": "E:\\project\\Egy-Guide\\EgyGuide.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sully\\AppData\\Roaming\\NuGet\\NuGet.Config",

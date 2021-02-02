@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\EgyGuide\\EgyGuide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj": {}
+    "E:\\project\\Egy-Guide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj": {}
   },
   "projects": {
-    "E:\\EgyGuide\\EgyGuide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj": {
+    "E:\\project\\Egy-Guide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\EgyGuide\\EgyGuide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj",
+        "projectUniqueName": "E:\\project\\Egy-Guide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj",
         "projectName": "EgyGuide.DataAccess",
-        "projectPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj",
+        "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj",
         "packagesPath": "C:\\Users\\Sully\\.nuget\\packages\\",
-        "outputPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.DataAcess\\obj\\",
+        "outputPath": "E:\\project\\Egy-Guide\\EgyGuide.DataAcess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sully\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\EgyGuide.Models.csproj": {
-                "projectPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\EgyGuide.Models.csproj"
+              "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj": {
+                "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj"
               },
-              "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {
-                "projectPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\EgyGuide.Utility.csproj"
+              "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {
+                "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj"
               }
             }
           }
@@ -75,14 +75,14 @@
         }
       }
     },
-    "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\EgyGuide.Models.csproj": {
+    "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\EgyGuide.Models.csproj",
+        "projectUniqueName": "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj",
         "projectName": "EgyGuide.Models",
-        "projectPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\EgyGuide.Models.csproj",
+        "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj",
         "packagesPath": "C:\\Users\\Sully\\.nuget\\packages\\",
-        "outputPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\obj\\",
+        "outputPath": "E:\\project\\Egy-Guide\\EgyGuide.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sully\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -129,14 +129,14 @@
         }
       }
     },
-    "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {
+    "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
+        "projectUniqueName": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
         "projectName": "EgyGuide.Utility",
-        "projectPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
+        "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
         "packagesPath": "C:\\Users\\Sully\\.nuget\\packages\\",
-        "outputPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\obj\\",
+        "outputPath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sully\\AppData\\Roaming\\NuGet\\NuGet.Config",

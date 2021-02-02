@@ -7652,11 +7652,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\EgyGuide\\EgyGuide\\EgyGuide\\EgyGuide.csproj",
+      "projectUniqueName": "E:\\project\\Egy-Guide\\EgyGuide\\EgyGuide.csproj",
       "projectName": "EgyGuide",
-      "projectPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide\\EgyGuide.csproj",
+      "projectPath": "E:\\project\\Egy-Guide\\EgyGuide\\EgyGuide.csproj",
       "packagesPath": "C:\\Users\\Sully\\.nuget\\packages\\",
-      "outputPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide\\obj\\",
+      "outputPath": "E:\\project\\Egy-Guide\\EgyGuide\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Sully\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -7673,14 +7673,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\EgyGuide\\EgyGuide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj": {
-              "projectPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj"
+            "E:\\project\\Egy-Guide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj": {
+              "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj"
             },
-            "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\EgyGuide.Models.csproj": {
-              "projectPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Models\\EgyGuide.Models.csproj"
+            "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj": {
+              "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj"
             },
-            "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {
-              "projectPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\EgyGuide.Utility.csproj"
+            "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {
+              "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj"
             }
           }
         }

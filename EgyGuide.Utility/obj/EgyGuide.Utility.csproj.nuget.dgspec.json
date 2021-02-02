@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {}
+    "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {}
   },
   "projects": {
-    "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {
+    "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
+        "projectUniqueName": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
         "projectName": "EgyGuide.Utility",
-        "projectPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
+        "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
         "packagesPath": "C:\\Users\\Sully\\.nuget\\packages\\",
-        "outputPath": "E:\\EgyGuide\\EgyGuide\\EgyGuide.Utility\\obj\\",
+        "outputPath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sully\\AppData\\Roaming\\NuGet\\NuGet.Config",
