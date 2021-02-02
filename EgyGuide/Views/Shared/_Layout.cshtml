@@ -26,28 +26,6 @@
 
 </head>
 <body class=@ViewData["AddClassToBodyTag"]>
-	@*<header>
-			<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-				<div class="container">
-					<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EgyGuide</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-						<ul class="navbar-nav flex-grow-1">
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-							</li>
-						</ul>
-						<partial name="_LoginPartial" />
-					</div>
-				</div>
-			</nav>
-		</header>*@
 
 	<!-- start Container Wrapper -->
 	<div class="container-wrapper">
@@ -435,34 +413,6 @@
 
 	</div>
 
-	<ul>
-		<li>Tourist</li>
-		<li><a asp-area="Tourist" asp-controller="RequestedCreate" asp-action="Index">RequestedCreate</a></li>
-		<li><a asp-area="Tourist" asp-controller="RequestedDetails" asp-action="Index">RequestedDetails</a></li>
-		<li><a asp-area="Tourist" asp-controller="RequestedTravelHistory" asp-action="Index">RequestedTravelHistory</a></li>
-	</ul>
-	<ul>
-		<li>TourGuide</li>
-		<li><a asp-area="TourGuide" asp-controller="GuideDetails" asp-action="Index">GuideDetails</a></li>
-		<li><a asp-area="TourGuide" asp-controller="GuideDetailsFollower" asp-action="Index">GuideDetailsFollower</a></li>
-		<li><a asp-area="TourGuide" asp-controller="GuideDetailsFollwing" asp-action="Index">GuideDetailsFollwing</a></li>
-		<li><a asp-area="TourGuide" asp-controller="GuideDetailsGallery" asp-action="Index">GuideDetailsGallery</a></li>
-		<li><a asp-area="TourGuide" asp-controller="GuideDetailsOffer" asp-action="Index">GuideDetailsOffer</a></li>
-		<li><a asp-area="TourGuide" asp-controller="GuideDetailsReviews" asp-action="Index">RequestedTravelHistory</a></li>
-		<li><a asp-area="TourGuide" asp-controller="GuideSetting" asp-action="Index">GuideSetting</a></li>
-		<li><a asp-area="TourGuide" asp-controller="GuideSettingChangePassword" asp-action="Index">GuideSettingChangePassword</a></li>
-		<li><a asp-area="TourGuide" asp-controller="GuideSettingInformationUpsert" asp-action="Index">GuideSettingInformationUpsert</a></li>
-		<li><a asp-area="TourGuide" asp-controller="GuideSettingProfileUpsert" asp-action="Index">GuideSettingProfileUpsert</a></li>
-		<li><a asp-area="TourGuide" asp-controller="GuideSettingForTours" asp-action="Index">GuideSettingForTours</a></li>
-		<li><a asp-area="TourGuide" asp-controller="GuideSettingWishList" asp-action="Index">GuideSettingWishList</a></li>
-		<li><a asp-area="TourGuide" asp-controller="GuidePayment" asp-action="Index">GuidePayment</a></li>
-	</ul>
-	<!-- end Forget Password Modal -->
-	@*<footer class="border-top footer text-muted">
-			<div class="container">
-				&copy; 2021 - EgyGuide - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-			</div>
-		</footer>*@
 	<!-- Core JS -->
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/core-plugins.js"></script>
