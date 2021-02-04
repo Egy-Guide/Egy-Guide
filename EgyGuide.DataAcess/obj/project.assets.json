@@ -1547,6 +1547,9 @@
       "EgyGuide.Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.Extensions.Identity.Stores": "5.0.2"
+        },
         "compile": {
           "bin/placeholder/EgyGuide.Models.dll": {}
         },
