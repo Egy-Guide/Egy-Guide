@@ -15,7 +15,7 @@ namespace EgyGuide.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            
+            //
         }
     }
 }
