@@ -10,6 +10,7 @@ namespace EgyGuide.Models
 {
     public class Guide
     {
+        [Key]
         public int GuideId { get; set; }
         public string ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]

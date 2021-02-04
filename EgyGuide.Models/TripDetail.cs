@@ -30,7 +30,7 @@ namespace EgyGuide.Models
         [Column(TypeName = "text")]
         public string Description { get; set; }
         public ICollection<Tag> SelectedTags { get; set; }
-        public ICollection<Place> SelectedStyles { get; set; }
+        public ICollection<Style> SelectedStyles { get; set; }
         public ICollection<Language> SelectedLanguages { get; set; }
         public int MaxTravellers { get; set; }
         public ICollection<Gallery> SelectedImages { get; set; }
