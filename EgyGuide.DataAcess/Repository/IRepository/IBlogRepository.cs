@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace EgyGuide.DataAccess.Repository.IRepository
 {
-    public interface IOfferCreateRepository
+    public interface IBlogRepository : IRepository<Blog>
     {
-        void Update(TripDetail tripDetail);
+        void Update(Blog blog);
     }
 }

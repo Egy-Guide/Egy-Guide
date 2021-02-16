@@ -1,4 +1,4 @@
-﻿using EgyGuide.Data;
+﻿using EgyGuide.DataAccess.Data;
 using EgyGuide.DataAccess.Repository.IRepository;
 using System;
 using System.Collections.Generic;
@@ -14,12 +14,15 @@ namespace EgyGuide.DataAccess.Repository
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
-            OfferCreate = new OfferCreateRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
+            Category = new CategoryRepository(_db);
+            Blog = new BlogRepository(_db);
         }
 
-        public IOfferCreateRepository OfferCreate { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        public ICategoryRepository Category { get; private set; }
+        public IBlogRepository Blog { get; private set; }
+
         public void Dispose()
         {
             _db.Dispose();

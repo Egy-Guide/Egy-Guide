@@ -8,8 +8,9 @@ namespace EgyGuide.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork: IDisposable
     {
-        IOfferCreateRepository OfferCreate { get; }
         IApplicationUserRepository ApplicationUser { get; }
+        ICategoryRepository Category { get; }
+        IBlogRepository Blog { get; }
         void Save();
     }
 }

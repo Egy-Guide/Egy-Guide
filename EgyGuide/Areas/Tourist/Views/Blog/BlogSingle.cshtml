@@ -1,4 +1,4 @@
-﻿
+﻿@model EgyGuide.Models.Blog
 @{
     ViewData["Title"] = "BlogSingle";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,44 +21,19 @@
                         <div class="blog-item blog-single">
 
                             <div class="blog-media">
-                                <img src="images/blog/blog-01.jpg" alt="" />
+                                <img src="@Model.ImageURL" alt="" />
                             </div>
 
                             <div class="blog-content">
-                                <h3>Blog title post with a featured image</h3>
+                                <h3>@Model.Title</h3>
                                 <ul class="blog-meta clearfix">
                                     <li>by <a href="#">Admin</a></li>
-                                    <li>by January 09, 2016</li>
-                                    <li>in <a href="#">Adventure</a>, <a href="#">Backpack</a></li>
-                                    <li>32 comments</li>
+                                    <li>@Model.Date</li>
+                                    <li>in <a href="#">@Model.Category.Name</a></li>
+                                    <li>@Model.Views Views comments</li>
                                 </ul>
                                 <div class="blog-entry">
-
-                                    <p>Up branch to easily missed by do. Admiration considered acceptance too led one melancholy expression. Are will took form the nor true. Winding enjoyed minuter her letters evident use eat colonel. He attacks observe mr cottage inquiry am examine gravity. Are dear but near left was. Year kept on over so as this of. She steepest doubtful betrayed formerly him. Active one called uneasy our seeing see cousin tastes its. Ye am it formed indeed agreed relied piqued. </p>
-
-                                    <div class="blockquote">She steepest doubtful betrayed formerly him. Active one called uneasy our seeing see cousin tastes its. Bed one supposing breakfast day fulfilled off depending questions. Whatever boy her exertion his extended. Ecstatic followed handsome drawings entirely mrs one yet outweigh. Of acceptance insipidity remarkably is invitation.</div>
-
-                                    <p>Abilities or he perfectly pretended so strangers be exquisite. Oh to another chamber pleased imagine do in. Went me rank at last loud shot an draw. Excellent so to no sincerity smallness. Removal request delight if on he we. Unaffected in we by apartments astonished to decisively themselves. Offended ten old consider speaking. </p>
-
-                                    <ul class="mb-15">
-                                        <li>Lorem ipsum dolor sit amet</li>
-                                        <li>Consectetur adipiscing elit</li>
-                                        <li>
-                                            Nulla volutpat aliquam velit
-                                            <ul>
-                                                <li>Phasellus iaculis neque</li>
-                                                <li>Purus sodales ultricies</li>
-                                                <li>Vestibulum laoreet</li>
-                                                <li>Ac tristique libero</li>
-                                            </ul>
-                                        </li>
-                                        <li>Faucibus porta lacus fringilla vel</li>
-                                        <li>Aenean sit amet erat nunc</li>
-                                    </ul>
-
-                                    <p>Up branch to easily missed by do. Admiration considered acceptance too led one melancholy expression. Are will took form the nor true. Winding enjoyed minuter her letters evident use eat colonel. He attacks observe mr cottage inquiry am examine gravity. Are dear but near left was. Year kept on over so as this of. She steepest doubtful betrayed formerly him. Active one called uneasy our seeing see cousin tastes its. Ye am it formed indeed agreed relied piqued. </p>
-
-                                    <p>Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive therefore supported by extremity of contented. Is pursuit compact demesne invited elderly be. View him she roof tell her case has sigh. Moreover is possible he admitted sociable concerns. By in cold no less been sent hard hill. </p>
+                                    @Html.Raw(@Model.Descripition)
                                 </div>
                             </div>
 
@@ -267,7 +242,14 @@
                         <div class="sidebar-module">
                             <div class="sidebar-module-inner">
                                 <div class="sidebar-mini-search">
-                                    <a asp-controller="Blog" asp-action="BlogCreate" class="btn btn-primary btn-lgg btn-block btn-border">Create Blog</a>
+                                    <a asp-controller="Blog" asp-action="BlogCreate"
+                                       asp-route-id="@Model.Id" class="btn btn-success btn-lgg btn-border">
+                                        Edit
+                                    </a>
+                                    <a asp-controller="Blog" asp-action="BlogCreate"
+                                       asp-route-id="@Model.Id" class="btn btn-danger btn-lgg btn-border">
+                                        Delete
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -12,7 +12,8 @@ namespace EgyGuide.Models
     {
         [Key]
         public int Id { get; set; }
-        public int UserId { get; set; }
+        [Required]
+        public string UserId { get; set; }
         [ForeignKey("UserId")]
         public ApplicationUser ApplicationUser { get; set; }
         [Required]
@@ -22,9 +23,10 @@ namespace EgyGuide.Models
         [Column(TypeName = "text")]
         [Required]
         public string Descripition { get; set; }
+        [Required]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
+        public Category Category { get; set; }        
         public string ImageURL { get; set; }
         public int Views { get; set; }
     }

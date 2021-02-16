@@ -14,8 +14,11 @@ namespace EgyGuide.Models
     {
         [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         public string Country { get; set; }
+        [Required]
         public string Nationality { get; set; }
         public string ImageUrl { get; set; }
         

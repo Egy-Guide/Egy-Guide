@@ -1,4 +1,4 @@
-﻿using EgyGuide.Data;
+﻿using EgyGuide.DataAccess.Data;
 using EgyGuide.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System;

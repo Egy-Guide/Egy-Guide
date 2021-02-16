@@ -781,6 +781,7 @@ E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Diagnostics.
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.dll
+E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Razor.Language.dll
@@ -816,6 +817,7 @@ E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGe
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Newtonsoft.Json.dll
+E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\System.Composition.AttributedModel.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\System.Composition.Convention.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\System.Composition.Hosting.dll
@@ -913,6 +915,10 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\scopedcss\bundle\EgyGuide.styles.
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.TagHelpers.input.cache
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.TagHelpers.output.cache
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.RazorCoreGenerate.cache
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Admin\Views\Category\CategoryCreate.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Admin\Views\Category\Index.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Admin\Views\_ViewImports.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Admin\Views\_ViewStart.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\GuideDetailsFollower\Index.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\GuideDetailsFollowing\Index.cshtml.g.cs
@@ -935,6 +941,9 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\Offer
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\_ViewImports.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\_ViewStart.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\AboutUs\Index.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\BlogCreate.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\BlogSingle.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\Index.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Guide\Index.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Home\ContactUs.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Home\FAQ.cshtml.g.cs
@@ -959,6 +968,8 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\Filter.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\Header.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\TourGuide\DashboardSidebarMenu.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\TourGuide\UserProfileScripts.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\TourGuide\UserProfileWrapper.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -972,8 +983,4 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.dll
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\ref\EgyGuide.dll
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.pdb
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.genruntimeconfig.cache
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\Index.cshtml.g.cs
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\BlogSingle.cshtml.g.cs
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\TourGuide\UserProfileScripts.cshtml.g.cs
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\TourGuide\UserProfileWrapper.cshtml.g.cs
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\BlogCreate.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\HtmlAgilityPack.dll

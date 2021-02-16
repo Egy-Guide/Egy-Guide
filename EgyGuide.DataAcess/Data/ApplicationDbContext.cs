@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using EgyGuide.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EgyGuide.Data
+namespace EgyGuide.DataAccess.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -13,9 +14,8 @@ namespace EgyGuide.Data
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            //
-        }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
