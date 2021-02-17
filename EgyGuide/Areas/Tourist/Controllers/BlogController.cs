@@ -30,8 +30,13 @@ namespace EgyGuide.Areas.Tourist.Controllers
         [Route("blog")]
         public IActionResult Index()
         {
-            IEnumerable<Blog> blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category");
-            return View(blogs);
+            BlogIndexVM blogIndexVM = new BlogIndexVM()
+            {
+                Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category"),
+                Categories = _unitOfWork.Category.GetAll()
+            };
+
+            return View(blogIndexVM);
         }
 
         [Route("blog-single")]

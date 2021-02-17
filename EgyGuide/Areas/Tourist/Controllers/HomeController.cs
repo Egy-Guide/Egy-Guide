@@ -1,4 +1,5 @@
-﻿using EgyGuide.Models;
+﻿using EgyGuide.DataAccess.Repository.IRepository;
+using EgyGuide.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +13,19 @@ namespace EgyGuide.Controllers
     [Area("Tourist")]
     public class HomeController : Controller
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+            IEnumerable<Blog> blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category")
+                                                      .OrderByDescending(b => b.Id);
             return View();
         }
 
