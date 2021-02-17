@@ -5,8 +5,8 @@
     ViewData["AddClassToBodyTag"] = "transparent-header";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var title = "Add";
-    
+    string pageTitle = Model.Blog.Id == 0 ? "Add" : "Edit";
+    string imageTitle = Model.Blog.ImageURL == null ? "Add" : "Change";
 }
 
 <!-- start breadcrumb -->
@@ -15,7 +15,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                    <h2>@title Your Blog</h2>
+                    <h2>@pageTitle Your Blog</h2>
                     <p>Publish your passions, your way</p>
                 </div>
             </div>
@@ -24,7 +24,7 @@
         <div class="breadcrumb-wrapper">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Blog @title</a></li>
+                <li><a href="#">Blog @pageTitle</a></li>
             </ol>
         </div>
     </div>
@@ -88,19 +88,27 @@
                                 </div>
 
                                 <div class="col-xs-6 col-sm-6">
-
                                     <div class="form-group">
                                         <label>Category:</label>
                                         <select asp-for="Blog.CategoryId" asp-items="@Model.CategoryList" class="selectpicker show-tick form-control"></select>
                                     </div>
-
                                 </div>
+
+                                @if (Model.Blog.ImageURL != null)
+                                {
+                                    <div class="col-xs-12 col-sm-12">
+                                        <div class="form-group form-group-lg">
+                                            <label>Current Image:</label>
+                                            <img src="@Model.Blog.ImageURL" style="max-height:415px">
+                                        </div>
+                                    </div>
+                                }
 
                             </div>
 
                             <div class="mb-10"></div>
 
-                            <h4 class="section-title">Add Image</h4>
+                            <h4 class="section-title">@imageTitle Image</h4>
 
                             @*<div class="submite-list-box">
 
@@ -112,12 +120,8 @@
                             </div>*@
 
                             <div>
-
                                 <input name="files" type="file" multiple>
-
-
-
-                            </div>
+                            </div>                      
 
                         </div>
 

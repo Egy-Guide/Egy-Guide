@@ -41,7 +41,10 @@ namespace EgyGuide.Areas.Tourist.Controllers
 
         [Route("blog-single")]
         public IActionResult BlogSingle(int id)
-        {            
+        {
+            if (id == 0)
+                return RedirectToAction(nameof(Index));
+
             Blog blogFromDb = _unitOfWork.Blog.GetFirstOrDefault(b => b.Id == id, includeProperties: "Category");
             blogFromDb.Views++;
             _unitOfWork.Save();
