@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EgyGuide.DataAccess.Migrations
 {
-    public partial class addTripModels : Migration
+    public partial class newtest : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,11 +60,26 @@ namespace EgyGuide.DataAccess.Migrations
                 {
                     CityId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cities", x => x.CityId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TripStyles",
+                columns: table => new
+                {
+                    StyleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StyleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClassName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsChecked = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TripStyles", x => x.StyleId);
                 });
 
             migrationBuilder.CreateTable(
@@ -181,6 +196,8 @@ namespace EgyGuide.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     IdentityCard = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Languages = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CityId = table.Column<int>(type: "int", nullable: false),
                     YearExperinces = table.Column<int>(type: "int", nullable: false),
                     PricePerHour = table.Column<float>(type: "real", nullable: false),
                     Rate = table.Column<float>(type: "real", nullable: false),
@@ -199,25 +216,11 @@ namespace EgyGuide.DataAccess.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ServiceAreas",
-                columns: table => new
-                {
-                    AreaId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AreaName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GuideId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ServiceAreas", x => x.AreaId);
                     table.ForeignKey(
-                        name: "FK_ServiceAreas_Guides_GuideId",
-                        column: x => x.GuideId,
-                        principalTable: "Guides",
-                        principalColumn: "GuideId",
+                        name: "FK_Guides_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "CityId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -227,16 +230,18 @@ namespace EgyGuide.DataAccess.Migrations
                 {
                     TripId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    GuideId = table.Column<int>(type: "int", nullable: false),
                     CityId = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SelectedPlaces = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Days = table.Column<int>(type: "int", nullable: false),
                     Nights = table.Column<int>(type: "int", nullable: false),
                     Transport = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MeetingPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MeetingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    SelectedTags = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SelectedLanguages = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MaxTravellers = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -247,12 +252,6 @@ namespace EgyGuide.DataAccess.Migrations
                         column: x => x.CityId,
                         principalTable: "Cities",
                         principalColumn: "CityId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TripDetails_Guides_GuideId",
-                        column: x => x.GuideId,
-                        principalTable: "Guides",
-                        principalColumn: "GuideId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -278,40 +277,12 @@ namespace EgyGuide.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Languages",
-                columns: table => new
-                {
-                    TagId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TagName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TripId = table.Column<int>(type: "int", nullable: false),
-                    TripDetailTripId = table.Column<int>(type: "int", nullable: true),
-                    GuideId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Languages", x => x.TagId);
-                    table.ForeignKey(
-                        name: "FK_Languages_Guides_GuideId",
-                        column: x => x.GuideId,
-                        principalTable: "Guides",
-                        principalColumn: "GuideId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Languages_TripDetails_TripDetailTripId",
-                        column: x => x.TripDetailTripId,
-                        principalTable: "TripDetails",
-                        principalColumn: "TripId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Places",
                 columns: table => new
                 {
                     PlaceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PlaceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PlaceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TripId = table.Column<int>(type: "int", nullable: false),
                     TripDetailTripId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -327,44 +298,30 @@ namespace EgyGuide.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Styles",
+                name: "SelectedStyles",
                 columns: table => new
                 {
-                    StyleId = table.Column<int>(type: "int", nullable: false)
+                    SelectedStyleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StyleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StyleId = table.Column<int>(type: "int", nullable: false),
+                    TripStyleStyleId = table.Column<int>(type: "int", nullable: true),
                     TripId = table.Column<int>(type: "int", nullable: false),
                     TripDetailTripId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Styles", x => x.StyleId);
+                    table.PrimaryKey("PK_SelectedStyles", x => x.SelectedStyleId);
                     table.ForeignKey(
-                        name: "FK_Styles_TripDetails_TripDetailTripId",
+                        name: "FK_SelectedStyles_TripDetails_TripDetailTripId",
                         column: x => x.TripDetailTripId,
                         principalTable: "TripDetails",
                         principalColumn: "TripId",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tags",
-                columns: table => new
-                {
-                    TagId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TagName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TripId = table.Column<int>(type: "int", nullable: false),
-                    TripDetailTripId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tags", x => x.TagId);
                     table.ForeignKey(
-                        name: "FK_Tags_TripDetails_TripDetailTripId",
-                        column: x => x.TripDetailTripId,
-                        principalTable: "TripDetails",
-                        principalColumn: "TripId",
+                        name: "FK_SelectedStyles_TripStyles_TripStyleStyleId",
+                        column: x => x.TripStyleStyleId,
+                        principalTable: "TripStyles",
+                        principalColumn: "StyleId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -444,14 +401,9 @@ namespace EgyGuide.DataAccess.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Languages_GuideId",
-                table: "Languages",
-                column: "GuideId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Languages_TripDetailTripId",
-                table: "Languages",
-                column: "TripDetailTripId");
+                name: "IX_Guides_CityId",
+                table: "Guides",
+                column: "CityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Places_TripDetailTripId",
@@ -459,19 +411,14 @@ namespace EgyGuide.DataAccess.Migrations
                 column: "TripDetailTripId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServiceAreas_GuideId",
-                table: "ServiceAreas",
-                column: "GuideId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Styles_TripDetailTripId",
-                table: "Styles",
+                name: "IX_SelectedStyles_TripDetailTripId",
+                table: "SelectedStyles",
                 column: "TripDetailTripId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tags_TripDetailTripId",
-                table: "Tags",
-                column: "TripDetailTripId");
+                name: "IX_SelectedStyles_TripStyleStyleId",
+                table: "SelectedStyles",
+                column: "TripStyleStyleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TripDaysDetails_TripId",
@@ -482,11 +429,6 @@ namespace EgyGuide.DataAccess.Migrations
                 name: "IX_TripDetails_CityId",
                 table: "TripDetails",
                 column: "CityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TripDetails_GuideId",
-                table: "TripDetails",
-                column: "GuideId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -510,19 +452,13 @@ namespace EgyGuide.DataAccess.Migrations
                 name: "Galleries");
 
             migrationBuilder.DropTable(
-                name: "Languages");
+                name: "Guides");
 
             migrationBuilder.DropTable(
                 name: "Places");
 
             migrationBuilder.DropTable(
-                name: "ServiceAreas");
-
-            migrationBuilder.DropTable(
-                name: "Styles");
-
-            migrationBuilder.DropTable(
-                name: "Tags");
+                name: "SelectedStyles");
 
             migrationBuilder.DropTable(
                 name: "TripDaysDetails");
@@ -531,16 +467,16 @@ namespace EgyGuide.DataAccess.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "TripStyles");
+
+            migrationBuilder.DropTable(
                 name: "TripDetails");
 
             migrationBuilder.DropTable(
                 name: "Cities");
-
-            migrationBuilder.DropTable(
-                name: "Guides");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }

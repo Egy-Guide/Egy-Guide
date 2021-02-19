@@ -2,13 +2,13 @@
 
 namespace EgyGuide.Models
 {
-    public class Language
+    public class SelectedStyle
     {
         [Key]
-        public int TagId { get; set; }
-        public string TagName { get; set; }
+        public int SelectedStyleId { get; set; }
+        public int StyleId { get; set; }
+        public TripStyle TripStyle { get; set; }
         public int TripId { get; set; }
-
         public TripDetail TripDetail { get; set; }
     }
 }

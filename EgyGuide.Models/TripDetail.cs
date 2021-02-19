@@ -12,27 +12,44 @@ namespace EgyGuide.Models
     {
         [Key]
         public int TripId { get; set; }
-        public int GuideId { get; set; }
-        [ForeignKey("GuideId")]
-        public Guide Guide { get; set; }
+        
+        //public int GuideId { get; set; }
+        //[ForeignKey("GuideId")]
+        //public Guide Guide { get; set; }
+       
+        [Required]
         public int CityId { get; set; }
         [ForeignKey("CityId")]
         public City City { get; set; }
+
+        [Required]
         public string Title { get; set; }
-        public ICollection<Place> SelectedPlaces { get; set; }
+        [Required]
+        public string SelectedPlaces { get; set; }
+
+        [Required]
         public int Days { get; set; }
+        [Required]
         public int Nights { get; set; }
         public string Transport { get; set; }
         public string MeetingPlace { get; set; }
         public DateTime MeetingDate { get; set; }
+        [Required]
         public string Price { get; set; }
-
+        [Required]
         [Column(TypeName = "text")]
         public string Description { get; set; }
-        public ICollection<Tag> SelectedTags { get; set; }
-        public ICollection<Style> SelectedStyles { get; set; }
-        public ICollection<Language> SelectedLanguages { get; set; }
+
+        public string SelectedTags { get; set; }
+
+        public string SelcetedStyles { get; set; }
+        [Required]
+        public string SelectedLanguages { get; set; }
         public int MaxTravellers { get; set; }
+        
+        
+        
+        
         public ICollection<Gallery> SelectedImages { get; set; }
 
 

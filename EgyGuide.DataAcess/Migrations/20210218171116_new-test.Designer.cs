@@ -4,14 +4,16 @@ using EgyGuide.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EgyGuide.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210218171116_new-test")]
+    partial class newtest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -233,9 +235,6 @@ namespace EgyGuide.DataAccess.Migrations
 
                     b.Property<string>("Price")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SelcetedStyles")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SelectedLanguages")
@@ -561,7 +560,7 @@ namespace EgyGuide.DataAccess.Migrations
                         .HasForeignKey("TripDetailTripId");
 
                     b.HasOne("EgyGuide.Models.TripStyle", "TripStyle")
-                        .WithMany("SelectedStyle")
+                        .WithMany()
                         .HasForeignKey("TripStyleStyleId");
 
                     b.Navigation("TripDetail");
@@ -645,11 +644,6 @@ namespace EgyGuide.DataAccess.Migrations
             modelBuilder.Entity("EgyGuide.Models.TripDetail", b =>
                 {
                     b.Navigation("SelectedImages");
-                });
-
-            modelBuilder.Entity("EgyGuide.Models.TripStyle", b =>
-                {
-                    b.Navigation("SelectedStyle");
                 });
 #pragma warning restore 612, 618
         }

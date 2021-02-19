@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EgyGuide.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210204152618_addTripModels")]
-    partial class addTripModels
+    [Migration("20210218234859_testCheckboxes")]
+    partial class testCheckboxes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,7 @@ namespace EgyGuide.DataAccess.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CityId");
@@ -69,7 +70,14 @@ namespace EgyGuide.DataAccess.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<string>("IdentityCard")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Languages")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -101,35 +109,9 @@ namespace EgyGuide.DataAccess.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
+                    b.HasIndex("CityId");
+
                     b.ToTable("Guides");
-                });
-
-            modelBuilder.Entity("EgyGuide.Models.Language", b =>
-                {
-                    b.Property<int>("TagId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("GuideId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TagName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TripDetailTripId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TripId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TagId");
-
-                    b.HasIndex("GuideId");
-
-                    b.HasIndex("TripDetailTripId");
-
-                    b.ToTable("Languages");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.Place", b =>
@@ -140,6 +122,7 @@ namespace EgyGuide.DataAccess.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("PlaceName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TripDetailTripId")
@@ -155,35 +138,15 @@ namespace EgyGuide.DataAccess.Migrations
                     b.ToTable("Places");
                 });
 
-            modelBuilder.Entity("EgyGuide.Models.ServiceArea", b =>
+            modelBuilder.Entity("EgyGuide.Models.SelectedStyle", b =>
                 {
-                    b.Property<int>("AreaId")
+                    b.Property<int>("SelectedStyleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("AreaName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GuideId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AreaId");
-
-                    b.HasIndex("GuideId");
-
-                    b.ToTable("ServiceAreas");
-                });
-
-            modelBuilder.Entity("EgyGuide.Models.Style", b =>
-                {
                     b.Property<int>("StyleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("StyleName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("int");
 
                     b.Property<int?>("TripDetailTripId")
                         .HasColumnType("int");
@@ -191,34 +154,16 @@ namespace EgyGuide.DataAccess.Migrations
                     b.Property<int>("TripId")
                         .HasColumnType("int");
 
-                    b.HasKey("StyleId");
+                    b.Property<int?>("TripStyleStyleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SelectedStyleId");
 
                     b.HasIndex("TripDetailTripId");
 
-                    b.ToTable("Styles");
-                });
+                    b.HasIndex("TripStyleStyleId");
 
-            modelBuilder.Entity("EgyGuide.Models.Tag", b =>
-                {
-                    b.Property<int>("TagId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("TagName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TripDetailTripId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TripId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TagId");
-
-                    b.HasIndex("TripDetailTripId");
-
-                    b.ToTable("Tags");
+                    b.ToTable("SelectedStyles");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.TripDaysDetail", b =>
@@ -273,10 +218,8 @@ namespace EgyGuide.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("GuideId")
-                        .HasColumnType("int");
 
                     b.Property<int>("MaxTravellers")
                         .HasColumnType("int");
@@ -291,9 +234,25 @@ namespace EgyGuide.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Price")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SelcetedStyles")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SelectedLanguages")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SelectedPlaces")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SelectedTags")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Transport")
@@ -303,9 +262,28 @@ namespace EgyGuide.DataAccess.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.HasIndex("GuideId");
-
                     b.ToTable("TripDetails");
+                });
+
+            modelBuilder.Entity("EgyGuide.Models.TripStyle", b =>
+                {
+                    b.Property<int>("StyleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("ClassName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StyleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StyleId");
+
+                    b.ToTable("TripStyles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -558,58 +536,39 @@ namespace EgyGuide.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
+                    b.HasOne("EgyGuide.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("ApplicationUser");
-                });
 
-            modelBuilder.Entity("EgyGuide.Models.Language", b =>
-                {
-                    b.HasOne("EgyGuide.Models.Guide", null)
-                        .WithMany("SelectedLanguages")
-                        .HasForeignKey("GuideId");
-
-                    b.HasOne("EgyGuide.Models.TripDetail", "TripDetail")
-                        .WithMany("SelectedLanguages")
-                        .HasForeignKey("TripDetailTripId");
-
-                    b.Navigation("TripDetail");
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.Place", b =>
                 {
                     b.HasOne("EgyGuide.Models.TripDetail", "TripDetail")
-                        .WithMany("SelectedPlaces")
+                        .WithMany()
                         .HasForeignKey("TripDetailTripId");
 
                     b.Navigation("TripDetail");
                 });
 
-            modelBuilder.Entity("EgyGuide.Models.ServiceArea", b =>
-                {
-                    b.HasOne("EgyGuide.Models.Guide", "Guide")
-                        .WithMany("SelectedAreas")
-                        .HasForeignKey("GuideId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Guide");
-                });
-
-            modelBuilder.Entity("EgyGuide.Models.Style", b =>
+            modelBuilder.Entity("EgyGuide.Models.SelectedStyle", b =>
                 {
                     b.HasOne("EgyGuide.Models.TripDetail", "TripDetail")
-                        .WithMany("SelectedStyles")
+                        .WithMany()
                         .HasForeignKey("TripDetailTripId");
 
-                    b.Navigation("TripDetail");
-                });
-
-            modelBuilder.Entity("EgyGuide.Models.Tag", b =>
-                {
-                    b.HasOne("EgyGuide.Models.TripDetail", "TripDetail")
-                        .WithMany("SelectedTags")
-                        .HasForeignKey("TripDetailTripId");
+                    b.HasOne("EgyGuide.Models.TripStyle", "TripStyle")
+                        .WithMany("SelectedStyle")
+                        .HasForeignKey("TripStyleStyleId");
 
                     b.Navigation("TripDetail");
+
+                    b.Navigation("TripStyle");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.TripDaysDetail", b =>
@@ -631,15 +590,7 @@ namespace EgyGuide.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EgyGuide.Models.Guide", "Guide")
-                        .WithMany()
-                        .HasForeignKey("GuideId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("City");
-
-                    b.Navigation("Guide");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -693,24 +644,14 @@ namespace EgyGuide.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EgyGuide.Models.Guide", b =>
-                {
-                    b.Navigation("SelectedAreas");
-
-                    b.Navigation("SelectedLanguages");
-                });
-
             modelBuilder.Entity("EgyGuide.Models.TripDetail", b =>
                 {
                     b.Navigation("SelectedImages");
+                });
 
-                    b.Navigation("SelectedLanguages");
-
-                    b.Navigation("SelectedPlaces");
-
-                    b.Navigation("SelectedStyles");
-
-                    b.Navigation("SelectedTags");
+            modelBuilder.Entity("EgyGuide.Models.TripStyle", b =>
+                {
+                    b.Navigation("SelectedStyle");
                 });
 #pragma warning restore 612, 618
         }

@@ -18,8 +18,12 @@ namespace EgyGuide.Models
         
         [Required]
         public string IdentityCard { get; set; }
-        public ICollection<Language> SelectedLanguages { get; set; }
-        public ICollection<ServiceArea> SelectedAreas { get; set; }
+        [Required]
+        public string Languages { get; set; }
+        [Required]
+        public int CityId { get; set; }
+        [ForeignKey("CityId")]
+        public City City { get; set; }
         public int YearExperinces { get; set; }
         public float PricePerHour { get; set; }
         public float Rate { get; set; }
