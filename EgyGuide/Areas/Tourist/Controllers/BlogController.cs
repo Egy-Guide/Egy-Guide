@@ -45,11 +45,17 @@ namespace EgyGuide.Areas.Tourist.Controllers
             if (id == 0)
                 return RedirectToAction(nameof(Index));
 
-            Blog blogFromDb = _unitOfWork.Blog.GetFirstOrDefault(b => b.Id == id, includeProperties: "Category");
-            blogFromDb.Views++;
+            BlogIndexVM blogIndexVM = new BlogIndexVM()
+            {
+                Blog = _unitOfWork.Blog.GetFirstOrDefault(b => b.Id == id, includeProperties: "Category"),
+                Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category"),
+                Categories = _unitOfWork.Category.GetAll()
+            };
+
+            blogIndexVM.Blog.Views++;
             _unitOfWork.Save();
 
-            return View(blogFromDb);
+            return View(blogIndexVM);
         }
 
         [Route("blog-create")]
@@ -98,7 +104,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
                 if (BlogVM.Blog.Id == 0)
                 {
                     BlogVM.Blog.Date = DateTime.Now;
-                    BlogVM.Blog.Views = 1;
+                    BlogVM.Blog.Views = 0;
 
                     // Uploaded Successfully, if the user choose an image.
                     if (image.Count > 0)

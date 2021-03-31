@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{ 
+	var currentUser = await UserManager.GetUserAsync(User);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -10,23 +17,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<!-- Fav and Touch Icons -->
-	<link rel="apple-touch-icon" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon" href="images/ico/apple-touch-icon-57-precomposed.png">
-	<link rel="shortcut icon" href="images/ico/favicon.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="~/images/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="~/images/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="~/images/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon" href="~/images/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="~/images/ico/favicon.png">
 
 	<!-- CSS Plugins -->
 	<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" media="screen" />
-	<link href="css/main.css" rel="stylesheet">
-	<link href="css/plugin.css" rel="stylesheet">
+	<link rel="stylesheet" href="~/css/main.css">
+	<link rel="stylesheet" href="~/css/plugin.css">
 
 	<!-- CSS Custom -->
-	<link href="css/style.css" rel="stylesheet">
+	<link href="~/css/style.css" rel="stylesheet">
 
 </head>
 <body class=@ViewData["AddClassToBodyTag"]>
-
+	
 	<!-- start Container Wrapper -->
 	<div class="container-wrapper">
 
@@ -41,7 +48,7 @@
 					<div class="logo-wrapper">
 						<div class="logo">
 							<a asp-area="Tourist" asp-controller="Home" asp-action="Index">
-								<img src="images/logo-white.png" alt="Logo" />
+								<img src="~/images/logo-white.png" alt="Logo" />
 							</a>
 						</div>
 					</div>
@@ -49,7 +56,6 @@
 					<div id="navbar" class="navbar-nav-wrapper">
 
 						<ul class="nav navbar-nav" id="responsive-menu">
-
 							<li><a asp-area="Tourist" asp-controller="Home" asp-action="Index">Home</a></li>
 
 							<li><a asp-area="Tourist" asp-controller="Offered" asp-action="Index">Offered Tour</a></li>
@@ -62,15 +68,38 @@
 
 						</ul>
 
-					</div><!--/.nav-collapse -->
-
-					<div class="nav-mini-wrapper">
-						<ul class="nav-mini">
-							<li><a data-toggle="modal" href="#registerModal"><i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" title="sign up"></i></a></li>
-							<li><a data-toggle="modal" href="#loginModal"><i class="icon-login" data-toggle="tooltip" data-placement="bottom" title="login"></i> </a></li>
-						</ul>
 					</div>
 
+					<!--/.nav-collapse -->
+					<div class="nav-mini-wrapper">
+						<ul class="nav-mini">
+							@if (SignInManager.IsSignedIn(User))
+							{
+								<li class="nav-item">
+									<a class="text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Welcome, <b>@currentUser.UserName</b></a>
+								</li>
+								<li class="nav-item">
+									<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+										<button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+									</form>
+								</li>
+
+							}
+							else
+							{
+								<li>
+									<a data-toggle="modal" asp-area="Identity" asp-page="/Account/Register">
+										<i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" title="sign up"></i>
+									</a>
+								</li>
+								<li>
+									<a data-toggle="modal" asp-area="Identity" asp-page="/Account/Login">
+										<i class="icon-login" data-toggle="tooltip" data-placement="bottom" title="login"></i>
+									</a>
+								</li>
+							}
+						</ul>
+					</div>
 				</div>
 
 				<div id="slicknav-mobile"></div>
@@ -414,9 +443,9 @@
 	</div>
 
 	<!-- Core JS -->
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/core-plugins.js"></script>
-	<script type="text/javascript" src="js/customs.js"></script>
+	<script type="text/javascript" src="~/js/jquery.min.js"></script>
+	<script type="text/javascript" src="~/js/core-plugins.js"></script>
+	<script type="text/javascript" src="~/js/customs.js"></script>
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

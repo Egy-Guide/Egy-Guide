@@ -2,6 +2,7 @@ using EgyGuide.DataAccess;
 using EgyGuide.DataAccess.Data;
 using EgyGuide.DataAccess.Repository;
 using EgyGuide.DataAccess.Repository.IRepository;
+using EgyGuide.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,10 +36,12 @@ namespace EgyGuide
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI();
             services.AddControllersWithViews();
-
+            services.AddRazorPages();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 

@@ -5,7 +5,7 @@
     ViewData["AddClassToBodyTag"] = "transparent-header";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    string pageTitle = Model.Blog.Id == 0 ? "Add" : "Edit";
+    string pageTitle = Model.Blog.Id == 0 ? "Create" : "Edit";
     string imageTitle = Model.Blog.ImageURL == null ? "Add" : "Change";
 }
 

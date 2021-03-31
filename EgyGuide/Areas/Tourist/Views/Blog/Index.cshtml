@@ -9,6 +9,7 @@
                                                .Take(PostsNumber);
     IEnumerable<Blog> popularPosts = Model.Blogs.OrderByDescending(b => b.Views)
                                                 .Take(PostsNumber);
+    var archives = Model.Blogs.GroupBy(b => b.Date.ToString("MMMM yyyy"));
 }
 
 <!-- start breadcrumb -->
@@ -26,7 +27,7 @@
                     <div class="blog-wrapper">
 
                         <!-- start Blog Item -->
-                        @foreach (var blog in Model.Blogs)
+                        @foreach (var blog in Model.Blogs.OrderByDescending(b => b.Date))
                         {
                             <div class="blog-item">
 
@@ -175,11 +176,10 @@
                             <h4 class="sidebar-title">Archives</h4>
                             <div class="sidebar-module-inner">
                                 <ul class="sidebar-archives">
-                                    <li><a href="#">January 2015<span>(25)</span></a></li>
-                                    <li class="active"><a href="#">February 2015<span>(2)</span></a></li>
-                                    <li><a href="#">March 2015<span>(14)</span></a></li>
-                                    <li><a href="#">April 2015<span>(157)</span></a></li>
-                                    <li><a href="#">June 2015<span>(87)</span></a></li>
+                                    @foreach (var archive in archives)
+                                    {                                        
+                                        <li><a href="#">@archive.Key <span>(@archive.Count())</span></a></li>                                    
+                                    }
                                 </ul>
                             </div>
                         </div>
