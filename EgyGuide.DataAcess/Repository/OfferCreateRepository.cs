@@ -22,10 +22,7 @@ namespace EgyGuide.DataAccess.Repository
             var objFromDb = _db.TripDetails.FirstOrDefault(s => s.TripId == tripDetail.TripId);
             if (objFromDb != null)
             {
-                if (tripDetail.SelectedImages != null)
-                {
-                    objFromDb.SelectedImages = tripDetail.SelectedImages;
-                }
+                
                 objFromDb.City = tripDetail.City;
                 objFromDb.Title = tripDetail.Title;
                 objFromDb.SelectedPlaces = tripDetail.SelectedPlaces;

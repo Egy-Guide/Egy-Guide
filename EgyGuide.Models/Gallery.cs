@@ -5,10 +5,11 @@ namespace EgyGuide.Models
     public class Gallery
     {
         [Key]
-        public int TagId { get; set; }
-        public string TagName { get; set; }
+        public int Id { get; set; }
         public int TripId { get; set; }
-
         public TripDetail TripDetail { get; set; }
+        public string URL { get; set; }
+
+      
     }
 }

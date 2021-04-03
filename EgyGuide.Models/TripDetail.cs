@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -46,11 +47,14 @@ namespace EgyGuide.Models
         [Required]
         public string SelectedLanguages { get; set; }
         public int MaxTravellers { get; set; }
+
+        public ICollection<Excluded> Excluded { get; set; }
+
+        public ICollection<Included> Included { get; set; }
         
         
+        public List<Gallery> SelectedImages { get; set; }
         
-        
-        public ICollection<Gallery> SelectedImages { get; set; }
 
 
 

@@ -13,12 +13,7 @@ namespace EgyGuide.Data
             : base(options)
         {
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-
-        }
+       
         public DbSet<City> Cities { get; set; }
         public DbSet<Gallery> Galleries { get; set; }
         public DbSet<Guide> Guides { get; set; }
@@ -31,7 +26,9 @@ namespace EgyGuide.Data
         
         public DbSet<TripDetail> TripDetails { get; set; }
         public DbSet<TripDaysDetail> TripDaysDetails { get; set; }
+        public DbSet<Included> Includeds { get; set; }
+        public DbSet<Excluded> Excludeds { get; set; }
 
-        
+
     }
 }

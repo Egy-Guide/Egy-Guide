@@ -13,8 +13,8 @@ namespace EgyGuide.Models.ViewModels
     {
         public IEnumerable<TripStyle> TripStyles { get; set; }
         public TripDetail TripDetail { get; set; }
-
-        //public IEnumerable<SelectedStyle> SelectedStyles { get; set; }
+        public Included Included { get; set; }
+        public Excluded Excluded { get; set; }
         public IEnumerable<SelectListItem> CityList { get; set; }
        
         

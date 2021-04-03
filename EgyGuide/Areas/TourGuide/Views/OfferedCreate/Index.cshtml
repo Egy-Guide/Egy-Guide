@@ -1,15 +1,13 @@
 ﻿@model EgyGuide.Models.ViewModels.OfferCreateVM
 
-@{
-    ViewData["Title"] = "Tour";
+@{ ViewData["Title"] = "Tour";
     ViewData["AddClassToBodyTag"] = "transparent-header";
     ViewData["AddToBreadcrumbHeaderHereBox"] = "pb-100 no-bg";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var title = "Create";
 
     if (Model.TripDetail.TripId != 0)
-        title = "Update";
-}
+        title = "Update"; }
 
 
 
@@ -54,8 +52,7 @@
                                 @if (Model.TripDetail.TripId != 0)
                                 {
 
-                                    <input type="hidden" asp-for="TripDetail.TripId" />
-                                }
+                    <input type="hidden" asp-for="TripDetail.TripId" />}
                                 <div class="col-xs-12 col-sm-12">
 
                                     <div class="form-group form-group-lg">
@@ -155,30 +152,28 @@ new { @class = "form-control" })
 
                                     <label class="block">Tour style:</label>
 
-                                    <div  class="category-checkbox-wrapper clearfix mt-10 mb-15">
+                                    <div class="category-checkbox-wrapper clearfix mt-10 mb-15">
 
                                         @foreach (var style in Model.TripStyles)
                                         {
-                                            <div class="category-checkbox-item">
-                                                <div class="checkbox-block">
+                            <div class="category-checkbox-item">
+                                <div class="checkbox-block">
 
-                                                    <input id="checkbox_block-@style.StyleId"  type="checkbox" class="checkbox @style.StyleId"  checked="@style.IsChecked" />
-                                                    <label asp-for="@style.StyleId" class="" for="checkbox_block-@style.StyleId">
-                                                        <span class="category-checkbox-inner">
-                                                            <span class="middle-outer">
-                                                                <span class="middle-inner">
-                                                                    <span class="icon">
-                                                                        <i class="flaticon-travel-icons-@style.ClassName"></i>
-                                                                    </span>
-                                                                    @style.StyleName
-                                                                </span>
-                                                            </span>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                        }
+                                    <input  id="checkbox_block-@style.StyleId" type="checkbox" class="checkbox @style.StyleId" checked="@style.IsChecked" />
+                                    <label asp-for="@style.StyleId" class="" for="checkbox_block-@style.StyleId">
+                                        <span class="category-checkbox-inner">
+                                            <span class="middle-outer">
+                                                <span class="middle-inner">
+                                                    <span class="icon">
+                                                        <i class="flaticon-travel-icons-@style.ClassName"></i>
+                                                    </span>
+                                                    @style.StyleName
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>}
                                     </div>
 
                                 </div>
@@ -189,11 +184,9 @@ new { @class = "form-control" })
 
 
 
-
-
                         </div>
 
-                       
+
                         <div class="mb-30"></div>
 
                         <h4 class="section-title">Trip detail</h4>
@@ -245,16 +238,13 @@ new { @class = "form-control" })
 
 
 
-                            <div class="col-xs-12 col-sm-6">
+                            <div class="col-xs-12 col-sm-12">
 
                                 <div class="form-group">
-                                    <label>Transport</label>
-                                    <select class="selectpicker show-tick form-control" title="Select placeholder" data-selected-text-format="count > 6" data-done-button="true" data-done-button-text="OK" multiple>
-                                        <option value="0">Select Option 1</option>
-                                        <option value="1">Select Option 2</option>
-                                        <option value="2">Select Option 3</option>
-                                        <option value="3">Select Option 4</option>
-                                    </select>
+                                    <label asp-for="TripDetail.Transport">Transport:</label>
+                                    <input asp-for="TripDetail.Transport" type="text" class="form-control" id="autocompleteTagging2" value="" placeholder="Train-Car" />
+                                    <span asp-validation-for="TripDetail.Transport" class="text-danger"></span>
+
                                 </div>
 
                             </div>
@@ -264,118 +254,19 @@ new { @class = "form-control" })
 
                         <div class="mb-40"></div>
 
-                        <h4 class="section-title">What's included?</h4>
-
-                        <div class="row checkbox-wrapper">
-                            <div class="col-xss-12 col-xs-6 col-sm-6 col-md-4">
-                                <div class="checkbox-block">
-                                    <input id="filter_checkbox-1" name="filter_checkbox" type="checkbox" class="checkbox" />
-                                    <label class="" for="filter_checkbox-1">Checkbox One</label>
-                                </div>
-                            </div>
-                            <div class="col-xss-12 col-xs-6 col-sm-6 col-md-4">
-                                <div class="checkbox-block">
-                                    <input id="filter_checkbox-2" name="filter_checkbox" type="checkbox" class="checkbox" />
-                                    <label class="" for="filter_checkbox-2">Checkbox Two</label>
-                                </div>
-                            </div>
-                            <div class="col-xss-12 col-xs-6 col-sm-6 col-md-4">
-                                <div class="checkbox-block">
-                                    <input id="filter_checkbox-3" name="filter_checkbox" type="checkbox" class="checkbox" />
-                                    <label class="" for="filter_checkbox-3">Checkbox Three</label>
-                                </div>
-                            </div>
-                            <div class="col-xss-12 col-xs-6 col-sm-6 col-md-4">
-                                <div class="checkbox-block">
-                                    <input id="filter_checkbox-4" name="filter_checkbox" type="checkbox" class="checkbox" />
-                                    <label class="" for="filter_checkbox-4">Checkbox Four</label>
-                                </div>
-                            </div>
-                            <div class="col-xss-12 col-xs-6 col-sm-6 col-md-4">
-                                <div class="checkbox-block">
-                                    <input id="filter_checkbox-5" name="filter_checkbox" type="checkbox" class="checkbox" />
-                                    <label class="" for="filter_checkbox-5">Checkbox Five</label>
-                                </div>
-                            </div>
-                            <div class="col-xss-12 col-xs-6 col-sm-6 col-md-4">
-                                <div class="checkbox-block">
-                                    <input id="filter_checkbox-6" name="filter_checkbox" type="checkbox" class="checkbox" />
-                                    <label class="" for="filter_checkbox-6">Checkbox Six</label>
-                                </div>
-                            </div>
-                            <div class="col-xss-12 col-xs-6 col-sm-6 col-md-4">
-                                <div class="checkbox-block">
-                                    <input id="filter_checkbox-7" name="filter_checkbox" type="checkbox" class="checkbox" />
-                                    <label class="" for="filter_checkbox-7">Checkbox Seven</label>
-                                </div>
-                            </div>
-                            <div class="col-xss-12 col-xs-6 col-sm-6 col-md-4">
-                                <div class="checkbox-block">
-                                    <input id="filter_checkbox-8" name="filter_checkbox" type="checkbox" class="checkbox" />
-                                    <label class="" for="filter_checkbox-8">Checkbox Eight</label>
-                                </div>
-                            </div>
-                            <div class="col-xss-12 col-xs-6 col-sm-6 col-md-4">
-                                <div class="checkbox-block">
-                                    <input id="filter_checkbox-9" name="filter_checkbox" type="checkbox" class="checkbox" />
-                                    <label class="" for="filter_checkbox-9">Checkbox Nine</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-40"></div>
-
-                        <h4 class="section-title">What's excluded?</h4>
+                        <h4 class="section-title">What's encluded?</h4>
 
                         <div class="row gap-15 mt-25">
-
+                            @for (var i = 0; i <= 6; i++) {
+                                
                             <div class="col-xs-12 col-xs-6 col-md-4">
                                 <div class="form-group">
-                                    <input type="text" class="form-control">
+                                    
+                                    <input id="@i" asp-for="TripDetail.Included" type="text" class="form-control">
                                 </div>
                             </div>
+                                    } 
 
-                            <div class="col-xs-12 col-xs-6 col-md-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-xs-6 col-md-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-xs-6 col-md-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-xs-6 col-md-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-xs-6 col-md-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-xs-6 col-md-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-xs-6 col-md-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
 
                             @*<div class="col-xs-12 col-xs-6 col-md-4">
                 <div class="add-more-form">
@@ -387,15 +278,43 @@ new { @class = "form-control" })
 
                         </div>
 
+                        <div class="mb-40"></div>
+
+                        <h4 class="section-title">What's excluded?</h4>
+
+                        <div class="row gap-15 mt-25">
+                            @for (var i = 7; i <= 13; i++)
+                            {
+
+                        <div class="col-xs-12 col-xs-6 col-md-4">
+                            <div class="form-group">
+                                <input id="@i" asp-for="TripDetail.Excluded" type="text" class="form-control">
+                            </div>
+                        </div>}
+
+
+
+
+                            @*<div class="col-xs-12 col-xs-6 col-md-4">
+            <div class="add-more-form">
+                <span>Add/remove form</span>
+                <a href="#"><i class="ion-android-add-circle"></i></a>
+                <a href="#"><i class="ion-android-remove-circle"></i></a>
+            </div>
+        </div>*@
+
+                        </div>
+
                         <div class="mb-30"></div>
 
                         <h4 class="section-title">Gallery</h4>
-
+                        <p><strong><span style="color:red">hint***</span> The first photo will be the cover photo of the trip</strong></p>
                         <div class="submite-list-box">
 
-                            <div id="file-submit" class="dropzone">
-                                <input name="file" type="file" multiple>
+                            <div>
+                                <input asp-for="TripDetail.SelectedImages" name="file" type="file" multiple>
                                 <div class="dz-default dz-message"><span>Click or Drop Images Here</span></div>
+
                             </div>
 
                         </div>
@@ -728,23 +647,23 @@ new { @class = "form-control" })
     <script>
         //function to send checkboxes data to controller
         var saveList = function () {
-            
+
             var arrItem = [];
             var commaSeperatedIds = "";
             $("#ItemList input[type=checkbox]").each(function (index, val) {
-               
-            var checkId = $(val).attr("Id");
-            var arr = checkId.split('-');
-            var currentCheckboxId = arr[1];
-            var IsChecked = $("#" + checkId).is(":checked", true);
-            if (IsChecked) {
-                arrItem.push(currentCheckboxId);
-            }
-        })
+
+                var checkId = $(val).attr("Id");
+                var arr = checkId.split('-');
+                var currentCheckboxId = arr[1];
+                var IsChecked = $("#" + checkId).is(":checked", true);
+                if (IsChecked) {
+                    arrItem.push(currentCheckboxId);
+                }
+            })
             if (arrItem.length != 0) {
                 commaSeperatedIds = arrItem.toString();
                 $.ajax({
-                    url:"/TourGuide/OfferedCreate/SaveList",
+                    url: "/TourGuide/OfferedCreate/SaveList",
                     type: "POST",
                     data: { ItemList: commaSeperatedIds },
                     success: function (response) {
@@ -752,8 +671,53 @@ new { @class = "form-control" })
                     }
                 })
             }
-    }
-   
+
+            var arrTextBoxesEncluded = [];
+            for (var i = 0; i <= 6; i++) {
+                var value = document.getElementById(i).value;
+                if (value != "") {
+                    arrTextBoxesEncluded.push(value);
+                }
+            }
+            
+            var string = arrTextBoxesEncluded.toString();
+
+            if (arrTextBoxesEncluded.length != 0) {
+                
+                $.ajax({
+                    url: "/TourGuide/OfferedCreate/SaveEncluded",
+                    type: "POST",
+                    data: { ItemList: string },
+                    success: function (response) {
+                        //
+                    }
+                })
+            }
+
+
+            var arrTextBoxesExcluded = [];
+            for (var i = 7; i <= 13; i++) {
+                var value = document.getElementById(i).value;
+                if (value != "") {
+                    arrTextBoxesExcluded.push(value);
+                }
+            }
+            
+            var stringEx = arrTextBoxesExcluded.toString();
+            if (arrTextBoxesExcluded.length != 0) {
+
+                $.ajax({
+                    url: "/TourGuide/OfferedCreate/SaveExecluded",
+                    type: "POST",
+                    data: { ItemList: string },
+                    success: function (response) {
+                        //
+                    }
+                })
+            }
+            
+        }
+
     </script>
     <partial name="_ValidationScriptsPartial" />
     <script src="https://cdn.tiny.cloud/1/i54fe6u5lagl1he8pqydwfq525q0iiqncl244x4bzlp7acjm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>

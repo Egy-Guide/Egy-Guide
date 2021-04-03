@@ -1,28 +1,29 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - EgyGuide</title>
-	<meta name="description" content="HTML template for multiple tour agency, local agency, traveller, tour hosting based on Twitter Bootstrap 3.x.x" />
-	<meta name="keywords" content="tour agency, tour guide, travel, trip, holiday, vocation, relax, adventure, virtual tour, tour planner" />
-	<meta name="author" content="crenoveative">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EgyGuide</title>
+    <meta name="description" content="HTML template for multiple tour agency, local agency, traveller, tour hosting based on Twitter Bootstrap 3.x.x" />
+    <meta name="keywords" content="tour agency, tour guide, travel, trip, holiday, vocation, relax, adventure, virtual tour, tour planner" />
+    <meta name="author" content="crenoveative">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<!-- Fav and Touch Icons -->
-	<link rel="apple-touch-icon" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon" href="images/ico/apple-touch-icon-57-precomposed.png">
-	<link rel="shortcut icon" href="images/ico/favicon.png">
+    <!-- Fav and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="images/ico/favicon.png">
 
-	<!-- CSS Plugins -->
-	<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" media="screen" />
-	<link href="css/main.css" rel="stylesheet">
-	<link href="css/plugin.css" rel="stylesheet">
+    <!-- CSS Plugins -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" media="screen" />
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/plugin.css" rel="stylesheet">
 
-	<!-- CSS Custom -->
-	<link href="css/style.css" rel="stylesheet">
+    <!-- CSS Custom -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/dropdown.css" rel="stylesheet">
 
 </head>
 <body class=@ViewData["AddClassToBodyTag"]>
@@ -66,7 +67,19 @@
 
 					<div class="nav-mini-wrapper">
 						<ul class="nav-mini">
-							<li><a data-toggle="modal" href="#registerModal"><i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" title="sign up"></i></a></li>
+                            <li>
+                                <div class="dropdown">
+ 
+                                    <i class="icon-user-follow" style="color:white;"></i>
+                          
+                                    <div class="dropdown-content">
+
+                                        <a href="#"><i class="icon-user-follow"></i>Tourist</a>
+                                        <a href="#"><i class="icon-user-follow"></i>Tour Guide</a>
+                                    </div>
+                                </div>
+
+                            </li>
 							<li><a data-toggle="modal" href="#loginModal"><i class="icon-login" data-toggle="tooltip" data-placement="bottom" title="login"></i> </a></li>
 						</ul>
 					</div>

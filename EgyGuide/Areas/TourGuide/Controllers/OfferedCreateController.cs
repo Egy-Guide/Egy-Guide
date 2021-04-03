@@ -15,13 +15,15 @@ using System.Threading.Tasks;
 
 namespace EgyGuide.Areas.TourGuide.Controllers
 {
-    [Area("TourGuide")]    
+    [Area("TourGuide")]
     public class OfferedCreateController : Controller
     {
         private readonly IUnitOfWork _unit;
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly ApplicationDbContext _db;
-        
+
+        [BindProperty]
+        public OfferCreateVM tripVM { get; set; }
 
         public OfferedCreateController(IUnitOfWork unit, IWebHostEnvironment hostEnvironment, ApplicationDbContext db)
         {
@@ -30,15 +32,15 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             _db = db;
 
         }
-       
-      
+
+
         [Route("offered-create")]
         public async Task<IActionResult> Index(int? id)
         {
 
             var cityList = await _db.Cities.ToListAsync();
 
-            OfferCreateVM tripVM = new OfferCreateVM()
+             tripVM = new OfferCreateVM()
             {
                 TripStyles = _db.TripStyles,
                 TripDetail = new TripDetail(),
@@ -47,10 +49,10 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                     Text = i.Name,
                     Value = i.CityId.ToString()
                 }),
-                
-                
+
+
             };
-            
+
             if (id == null)
             {
                 //this is for create
@@ -67,66 +69,69 @@ namespace EgyGuide.Areas.TourGuide.Controllers
         }
 
         [HttpPost]
-        public void SaveList( string ItemList )
+        public void SaveList(string ItemList)
         {
             // save the value into session to can use it again in other functions
             //must initialze a key
             var key = "my-key";
-            
-            HttpContext.Session.SetString(key, ItemList);
-            
 
-           
+            HttpContext.Session.SetString(key, ItemList);
         }
+        [HttpPost]
+        public void SaveEncluded(string ItemList)
+        {
+            var key2 = "encluded";
+
+            HttpContext.Session.SetString(key2, ItemList);
+
+        }
+        [HttpPost]
+        public void SaveExecluded(string ItemList)
+        {
+            var key3 = "excluded";
+
+            HttpContext.Session.SetString(key3, ItemList);
+
+        }
+        
         [Route("offered-create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> IndexPost(OfferCreateVM tripVM)
+        public async Task<IActionResult> Index()
         {
 
             if (ModelState.IsValid)
             {
+             
                 //retrive the value that in the session
                 //must initialize the same key i initialized before
                 var key = "my-key";
                 var dataFromView = HttpContext.Session.GetString(key);
-                
-                if (tripVM.TripDetail.TripId == 0)
+
+                var key2 = "encluded";
+                var dataEncluded = HttpContext.Session.GetString(key2);
+
+                var key3 = "excluded";
+                var dataExcluded = HttpContext.Session.GetString(key3);
+
+                if (tripVM.TripDetail.TripId == 0 )
                 {
+                   
                     //save the data from view into trip table
-                    tripVM.TripDetail.SelcetedStyles = dataFromView ;
+                    tripVM.TripDetail.SelcetedStyles = dataFromView;
                     //save all the model
                     _unit.OfferCreate.Add(tripVM.TripDetail);
                     _unit.Save();
-                     
-                    
-                    // want to save every place that the tourguide enter in the trip
-                    
-                    // get the last trip that i have  recently added so i can get the id
-                    //of it to save places in places table with the id of the trip
-                    var lastRecord = _db.TripDetails.OrderByDescending(i => i.TripId).FirstOrDefault();
-                    string selectedPlaces = tripVM.TripDetail.SelectedPlaces;
-                    string[] places = selectedPlaces.Split(null);
-                    foreach (string place in places)
-                    {
-                        Place Place = new Place();
-                        Place.PlaceName = place;
-                        Place.TripId = lastRecord.TripId;
-                        _db.Places.Add(Place);
 
-                    }
-                    // coveret the data from view into list so i can loop through it
-                    var data = dataFromView.Split(',').ToList();
-                    // save into selected styles table
-                    foreach (var item in data)
-                    {
-                        var selectedStyle = new SelectedStyle()
-                        {
-                            StyleId = Convert.ToInt16(item),
-                            TripId = lastRecord.TripId
-                        };
-                        _db.SelectedStyles.Add(selectedStyle);
-                    }
+                    SavePlaces();
+
+                    SaveStyles(dataFromView);
+
+                    SaveEncludedTexts(dataEncluded);
+                    SaveExcludedTexts(dataExcluded);
+
+                    UploadImages();
+
                     _db.SaveChanges();
 
                 }
@@ -142,6 +147,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             }
             else
             {
+               
                 var cityList = await _db.Cities.ToListAsync();
                 tripVM.CityList = cityList.Select(i => new SelectListItem
                 {
@@ -153,13 +159,114 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 {
                     tripVM.TripDetail = _unit.OfferCreate.Get(tripVM.TripDetail.TripId);
                 }
+                
             }
             return View(tripVM);
         }
-        
-       
 
-        [Route("offered-create-done")]    
+        public void SavePlaces()
+        {
+            // want to save every place that the tourguide enter in the trip
+
+            // get the last trip that i have  recently added so i can get the id
+            //of it to save places in places table with the id of the trip
+
+            var lastRecord = _db.TripDetails.OrderByDescending(i => i.TripId).FirstOrDefault();
+            string selectedPlaces = tripVM.TripDetail.SelectedPlaces;
+            string[] places = selectedPlaces.Split(null);
+            foreach (string place in places)
+            {
+                Place Place = new Place();
+                Place.PlaceName = place;
+                Place.TripId = lastRecord.TripId;
+                _db.Places.Add(Place);
+
+            }
+        }
+        public void UploadImages()
+        {
+            var lastRecord = _db.TripDetails.OrderByDescending(i => i.TripId).FirstOrDefault();
+
+            string webRootPath = _hostEnvironment.WebRootPath;
+            var files = HttpContext.Request.Form.Files;
+
+            tripVM.TripDetail.SelectedImages = new List<Gallery>();
+
+            for (var i = 0; i < files.Count; i++)
+            {
+                var uploads = Path.Combine(webRootPath, @"Trips/gallery");
+                var fileName = Guid.NewGuid().ToString();
+                var extension = Path.GetExtension(files[i].FileName);
+                string fullPath = uploads + fileName + extension;
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+
+                }
+                var gallery = new Gallery()
+                {
+
+                    URL = @"\Trips\gallery\" + fileName + extension,
+                    TripId = lastRecord.TripId,
+
+                };
+                tripVM.TripDetail.SelectedImages.Add(gallery);
+
+            }
+        }
+        public void SaveStyles(string dataFromView)
+        {
+            // coveret the data from view into list so i can loop through it
+            var data = dataFromView.Split(',').ToList();
+
+            var lastRecord = _db.TripDetails.OrderByDescending(i => i.TripId).FirstOrDefault();
+            // save into selected styles table
+            foreach (var item in data)
+            {
+                var selectedStyle = new SelectedStyle()
+                {
+                    StyleId = Convert.ToInt16(item),
+                    TripId = lastRecord.TripId
+                };
+                _db.SelectedStyles.Add(selectedStyle);
+            }
+        }
+        public void SaveEncludedTexts(string ItemList)
+        {
+            var lastRecord = _db.TripDetails.OrderByDescending(i => i.TripId).FirstOrDefault();
+
+            var data = ItemList.Split(",");
+            var dataList = data.ToList();
+
+            for (var i = 0; i < dataList.Count; i++)
+            {
+                Included included = new Included();
+                included.Title = data[i];
+                included.TripId = lastRecord.TripId;
+                _db.Includeds.Add(included);
+               
+
+            }
+        }
+        public void SaveExcludedTexts(string ItemList)
+        {
+            var lastRecord = _db.TripDetails.OrderByDescending(i => i.TripId).FirstOrDefault();
+
+            var data = ItemList.Split(",");
+            var dataList = data.ToList();
+
+            for (var i = 0; i < dataList.Count; i++)
+            {
+                Excluded excluded = new Excluded();
+                excluded.Title = data[i];
+                excluded.TripId = lastRecord.TripId;
+                _db.Excludeds.Add(excluded);
+
+
+            }
+        }
+        
+          [Route("offered-create-done")]
         public IActionResult OfferedCreateDone()
         {
             return View();

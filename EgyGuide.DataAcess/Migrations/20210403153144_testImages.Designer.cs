@@ -4,14 +4,16 @@ using EgyGuide.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EgyGuide.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210403153144_testImages")]
+    partial class testImages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,15 +44,12 @@ namespace EgyGuide.DataAccess.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("TripId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Excludeds");
+                    b.ToTable("Excluded");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.Gallery", b =>
@@ -137,15 +136,12 @@ namespace EgyGuide.DataAccess.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("TripId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Includeds");
+                    b.ToTable("Included");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.Place", b =>
