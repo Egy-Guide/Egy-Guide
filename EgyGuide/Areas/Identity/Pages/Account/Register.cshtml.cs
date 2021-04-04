@@ -50,6 +50,7 @@ namespace EgyGuide.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            // Add another claims.
             [Required]
             public string FirstName { get; set; }
             [Required]
@@ -58,7 +59,9 @@ namespace EgyGuide.Areas.Identity.Pages.Account
             public string Country { get; set; }
             [Required]
             public string Nationality { get; set; }
-            public string City { get; set; }
+            [Required]
+            public string PhoneNumber { get; set; }
+            public string City { get; set; }            
 
             [Required]
             [EmailAddress]
@@ -95,6 +98,7 @@ namespace EgyGuide.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     Country = Input.Country,
                     Nationality = Input.Nationality,
+                    PhoneNumber = Input.PhoneNumber,
                     City = Input.City,
                     UserName = Input.Email,
                     Email = Input.Email
@@ -113,6 +117,7 @@ namespace EgyGuide.Areas.Identity.Pages.Account
                     //if (!await _roleManager.RoleExistsAsync(SD.Role_User_Tour_Guide))
                     //    await _roleManager.CreateAsync(new IdentityRole(SD.Role_User_Tour_Guide));
 
+                    // Add default role (Tourist) to user.
                     if (user.Role == null)
                         await _userManager.AddToRoleAsync(user, SD.Role_User_Tourist);
 

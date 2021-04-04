@@ -6,6 +6,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using EgyGuide.Models;
+using EgyGuide.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -48,6 +50,19 @@ namespace EgyGuide.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            // Add another claims
+            [Required]
+            public string FirstName { get; set; }
+            [Required]
+            public string LastName { get; set; }
+            [Required]
+            public string Country { get; set; }
+            [Required]
+            public string Nationality { get; set; }
+            [Required]
+            public string PhoneNumber { get; set; }
+            public string City { get; set; }
+
             [Required]
             [EmailAddress]
             public string Email { get; set; }
@@ -101,7 +116,11 @@ namespace EgyGuide.Areas.Identity.Pages.Account
                 {
                     Input = new InputModel
                     {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        // Binding more details about user from the provider.
+                        FirstName = info.Principal.FindFirstValue(ClaimTypes.Name).Split(" ")[0],
+                        LastName = info.Principal.FindFirstValue(ClaimTypes.Name).Split(" ")[1],
+                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                        PhoneNumber = info.Principal.FindFirstValue(ClaimTypes.MobilePhone)
                     };
                 }
                 return Page();
@@ -121,7 +140,17 @@ namespace EgyGuide.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser
+                {
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    Country = Input.Country,
+                    Nationality = Input.Nationality,
+                    PhoneNumber = Input.PhoneNumber,
+                    City = Input.City,
+                    UserName = Input.Email,
+                    Email = Input.Email                    
+                };
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
@@ -130,6 +159,10 @@ namespace EgyGuide.Areas.Identity.Pages.Account
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+
+                        // Add default role (Tourist) to user.
+                        if (user.Role == null)
+                            _userManager.AddToRoleAsync(user, SD.Role_User_Tourist);
 
                         var userId = await _userManager.GetUserIdAsync(user);
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

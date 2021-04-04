@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" media="screen" />
 	<link rel="stylesheet" href="~/css/main.css">
 	<link rel="stylesheet" href="~/css/plugin.css">
+	<link rel="stylesheet" href="~/css/dropdown.css">
 
 	<!-- CSS Custom -->
 	<link href="~/css/style.css" rel="stylesheet">
@@ -88,13 +89,23 @@
 							else
 							{
 								<li>
-									<a data-toggle="modal" asp-area="Identity" asp-page="/Account/Register">
-										<i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" title="sign up"></i>
-									</a>
+									<div class="dropdown">
+										<i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" style="color:white" title="Join"></i>
+										<div class="dropdown-content">
+											<a asp-area="Identity" asp-page="/Account/Register" style="text-transform:capitalize">
+												<i class="icon-user-follow"></i> as tourist
+											</a>
+											<a href="#" style="text-transform:capitalize"><i class="icon-user-follow">
+												</i> as guide
+											</a>
+										</div>
+									</div>
+
 								</li>
+								
 								<li>
-									<a data-toggle="modal" asp-area="Identity" asp-page="/Account/Login">
-										<i class="icon-login" data-toggle="tooltip" data-placement="bottom" title="login"></i>
+									<a asp-area="Identity" asp-page="/Account/Login">
+										<i class="icon-login" data-toggle="tooltip" data-placement="bottom" title="Login"></i>
 									</a>
 								</li>
 							}

@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "6ak3qeC4/MlX3ODfL5767LdkfTD/uzugkFo3tddJj4xVolzwBZQaSaaIgcMsywNm3SCKQwxRskO0Y0gna/yNsA==",
+  "dgSpecHash": "H4A18vXbcJglThkorjAvel6Sn0eHv/8DnhA9dXSJV7tZ8HsILhCQySgzFbDQ1PaAPneXx3v0AfUa8AXmI2yBUQ==",
   "success": true,
   "projectFilePath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Sully\\.nuget\\packages\\microsoft.aspnetcore.authentication.facebook\\5.0.4\\microsoft.aspnetcore.authentication.facebook.5.0.4.nupkg.sha512",
+    "C:\\Users\\Sully\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\5.0.4\\microsoft.aspnetcore.authentication.google.5.0.4.nupkg.sha512"
+  ],
   "logs": []
 }

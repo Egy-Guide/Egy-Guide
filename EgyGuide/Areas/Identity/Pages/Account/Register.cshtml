@@ -22,12 +22,32 @@
                     <h4 class="text-center">Use another service to register.</h4>
                     <hr />
 
-                    <div class="col-sm-6 col-md-6">
-                        <button class="btn btn-facebook btn-lg btn-block mb-5-xs">Register with Facebook</button>
-                    </div>
-                    <div class="col-sm-6 col-md-6">
-                        <button class="btn btn-google-plus btn-lg btn-block">Register with Google+</button>
-                    </div>
+                    <!-- External OAuth -->
+                    <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            if (provider.Name.ToLower().Contains("facebook"))
+                            {
+                                <div class="col-sm-6 col-md-6">
+                                    <button type="submit" name="provider" class="btn btn-facebook btn-lg btn-block mb-5-xs" value="@provider.Name" title="@provider.DisplayName">
+                                        Register with Facebook
+                                    </button>
+                                </div>
+                            }
+
+                            if (provider.Name.ToLower().Contains("google"))
+                            {
+                                <div class="col-sm-6 col-md-6">
+                                    <button type="submit" name="provider" class="btn btn-google-plus btn-lg btn-block" value="@provider.Name" title="@provider.DisplayName">
+                                        Register with Google
+                                    </button>
+                                </div>
+                            }
+
+                        }
+
+                    </form>
+                    <!-- End External OAuth -->
 
                     <div class="col-md-12">
                         <div class="login-modal-or">
@@ -38,40 +58,22 @@
                     <form autocomplete="off" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>
 
-                        <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label>First Name</label>
                                 <input asp-for="Input.FirstName" class="form-control" type="text">
                                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-12">
+
+                        <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label>Last Name</label>
                                 <input asp-for="Input.LastName" class="form-control" type="text">
                                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <label>Country</label>
-                                <input asp-for="Input.Country" class="form-control" type="text">
-                                <span asp-validation-for="Input.Country" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <label>Nationality</label>
-                                <input asp-for="Input.Nationality" class="form-control" type="text">
-                                <span asp-validation-for="Input.Nationality" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <label>City</label>
-                                <input asp-for="Input.City" class="form-control" type="text">
-                            </div>
-                        </div>
+
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group">
                                 <label>Email</label>
@@ -79,6 +81,42 @@
                                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
                         </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input asp-for="Input.PhoneNumber" class="form-control" type="text">
+                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Nationality</label>
+                                <select asp-for="Input.Nationality" class="selectpicker show-tick form-control">
+                                    <partial name="~/Views/Shared/Country.cshtml" />
+                                </select>
+                                <span asp-validation-for="Input.Nationality" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <select asp-for="Input.Country" class="selectpicker show-tick form-control">
+                                    <partial name="~/Views/Shared/Country.cshtml" />
+                                </select>
+                                <span asp-validation-for="Input.Country" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input asp-for="Input.City" class="form-control" type="text">
+                            </div>
+                        </div>
+
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group">
                                 <label>Password</label>
@@ -86,6 +124,7 @@
                                 <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
                         </div>
+
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group">
                                 <label>Confirm Password</label>
