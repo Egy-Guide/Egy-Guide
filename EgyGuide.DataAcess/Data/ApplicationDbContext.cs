@@ -14,8 +14,15 @@ namespace EgyGuide.DataAccess.Data
         {
         }
 
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    builder.Entity<Follower>().HasKey(f => new { f.UserId, f.FollowerId });
+        //}
+
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<GuideUser> GuideUsers { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Category> Categories { get; set; }
+        //public DbSet<Follower> Followers { get; set; }       
     }
 }

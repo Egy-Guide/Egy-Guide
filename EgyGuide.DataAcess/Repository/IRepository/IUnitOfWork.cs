@@ -9,6 +9,7 @@ namespace EgyGuide.DataAccess.Repository.IRepository
     public interface IUnitOfWork: IDisposable
     {
         IApplicationUserRepository ApplicationUser { get; }
+        IGuideUserRepository GuideUser { get; }
         ICategoryRepository Category { get; }
         IBlogRepository Blog { get; }
         void Save();

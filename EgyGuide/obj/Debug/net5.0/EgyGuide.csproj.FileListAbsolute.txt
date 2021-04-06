@@ -776,6 +776,8 @@ E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\EgyGuide.Views.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\EgyGuide.Views.pdb
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\HtmlAgilityPack.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Humanizer.dll
+E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Facebook.dll
+E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Google.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
@@ -926,6 +928,7 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Accoun
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ExternalLogin.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ForgotPassword.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\GuideRegisterConfirmation.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Lockout.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\LoginWith2fa.cshtml.g.cs
@@ -1004,6 +1007,7 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\BreadcrumbHead
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\BreadcrumbOL.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\BreadcrumbTitleForCreate.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\BreadcrumbTitleForDetails.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\Country.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\Filter.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\Header.cshtml.g.cs
@@ -1023,6 +1027,3 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.dll
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\ref\EgyGuide.dll
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.pdb
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.genruntimeconfig.cache
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\Country.cshtml.g.cs
-E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Facebook.dll
-E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Google.dll

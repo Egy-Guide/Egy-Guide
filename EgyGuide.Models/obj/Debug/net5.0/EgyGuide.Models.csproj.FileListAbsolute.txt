@@ -14,7 +14,6 @@ E:\project\Egy-Guide\EgyGuide.Models\bin\Debug\net5.0\EgyGuide.Models.deps.json
 E:\project\Egy-Guide\EgyGuide.Models\bin\Debug\net5.0\EgyGuide.Models.dll
 E:\project\Egy-Guide\EgyGuide.Models\bin\Debug\net5.0\ref\EgyGuide.Models.dll
 E:\project\Egy-Guide\EgyGuide.Models\bin\Debug\net5.0\EgyGuide.Models.pdb
-E:\project\Egy-Guide\EgyGuide.Models\obj\Debug\net5.0\EgyGuide.Models.csprojAssemblyReference.cache
 E:\project\Egy-Guide\EgyGuide.Models\obj\Debug\net5.0\EgyGuide.Models.GeneratedMSBuildEditorConfig.editorconfig
 E:\project\Egy-Guide\EgyGuide.Models\obj\Debug\net5.0\EgyGuide.Models.AssemblyInfoInputs.cache
 E:\project\Egy-Guide\EgyGuide.Models\obj\Debug\net5.0\EgyGuide.Models.AssemblyInfo.cs

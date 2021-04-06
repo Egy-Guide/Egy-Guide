@@ -49,7 +49,7 @@ namespace EgyGuide
             {
                 options.ClientId = Configuration["Authentication:Google:ClientId"];
                 options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-            });     
+            });
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddScoped<IUnitOfWork, UnitOfWork>();

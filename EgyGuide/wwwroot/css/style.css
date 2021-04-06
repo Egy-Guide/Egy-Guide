@@ -855,13 +855,18 @@ ul.bottom-footer-menu.for-social li:after {
 	background: #3b5998
 }
 
+.btn-facebook:hover {
+	background: #2d4373;
+	color: #FFF
+}
+
 .btn-google-plus {
 	background: #d34836
 }
 
-.btn-facebook:hover,
 .btn-google-plus:hover {
-	opacity: .8
+	background: #c23321;
+	color: #FFF
 }
 
 .login-container-wrapper {

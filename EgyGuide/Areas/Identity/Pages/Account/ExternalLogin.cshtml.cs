@@ -162,7 +162,7 @@ namespace EgyGuide.Areas.Identity.Pages.Account
 
                         // Add default role (Tourist) to user.
                         if (user.Role == null)
-                            _userManager.AddToRoleAsync(user, SD.Role_User_Tourist);
+                            await _userManager.AddToRoleAsync(user, SD.Role_User_Tourist);
 
                         var userId = await _userManager.GetUserIdAsync(user);
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

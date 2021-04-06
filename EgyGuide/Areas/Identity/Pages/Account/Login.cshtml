@@ -21,12 +21,31 @@
                     <h4 class="text-center">Use another service to login.</h4>
                     <hr />
 
-                    <div class="col-sm-6 col-md-6">
-                        <button class="btn btn-facebook btn-lg btn-block mb-5-xs">Log-in with Facebook</button>
-                    </div>
-                    <div class="col-sm-6 col-md-6">
-                        <button class="btn btn-google-plus btn-lg btn-block">Log-in with Google+</button>
-                    </div>
+                    <!-- External OAuth -->
+                    <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            if (provider.Name.ToLower().Contains("facebook"))
+                            {
+                                <div class="col-sm-6 col-md-6">
+                                    <button type="submit" name="provider" class="btn btn-facebook btn-lg btn-block mb-5-xs" value="@provider.Name" title="@provider.DisplayName">
+                                        <i class="fa fa-facebook"></i> Log-in with Facebook
+                                    </button>
+                                </div>
+                            }
+
+                            if (provider.Name.ToLower().Contains("google"))
+                            {
+                                <div class="col-sm-6 col-md-6">
+                                    <button type="submit" name="provider" class="btn btn-google-plus btn-lg btn-block" value="@provider.Name" title="@provider.DisplayName">
+                                        <i class="fa fa-google"></i> Log-in with Google
+                                    </button>
+                                </div>
+                            }
+
+                        }
+                    </form>
+                    <!-- End External OAuth -->
 
                     <div class="col-md-12">
                         <div class="login-modal-or">
@@ -74,7 +93,7 @@
                         <div class="col-sm-12 col-md-12">
                             <div class="login-box-box-action">
                                 <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                            </div>                            
+                            </div>
                         </div>
 
                         <div class="text-center">
