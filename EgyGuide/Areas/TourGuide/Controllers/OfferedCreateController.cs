@@ -143,7 +143,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
 
 
-                return RedirectToAction(nameof(OfferedCreateDone));
+                return RedirectToAction("TripDays","TripDays",new { area="TourGuide"});
             }
             else
             {
@@ -266,12 +266,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             }
         }
         
-          [Route("offered-create-done")]
-        public IActionResult OfferedCreateDone()
-        {
-            return View();
-        }
-
+       
         #region API CALLS
 
         [HttpGet]
