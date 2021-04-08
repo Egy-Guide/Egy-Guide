@@ -1,6 +1,7 @@
 ﻿using EgyGuide.DataAccess.Repository.IRepository;
 using EgyGuide.Models;
 using EgyGuide.Models.ViewModels;
+using HtmlAgilityPack;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -179,6 +180,6 @@ namespace EgyGuide.Areas.Tourist.Controllers
 
             // Upload image to Database
             BlogVM.Blog.ImageURL = @"\images\blog\" + imageName + extension;
-        }
+        }        
     }
 }

@@ -1,15 +1,32 @@
 ﻿@model EgyGuide.Models.ViewModels.BlogIndexVM
+@using HtmlAgilityPack
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int PostsNumber = 5;
+    int maxDescriptionWords = 50;
 
     IEnumerable<Blog> latestPosts = Model.Blogs.OrderByDescending(b => b.Id)
                                                .Take(PostsNumber);
     IEnumerable<Blog> popularPosts = Model.Blogs.OrderByDescending(b => b.Views)
                                                 .Take(PostsNumber);
     var archives = Model.Blogs.GroupBy(b => b.Date.ToString("MMMM yyyy"));
+
+    string StripHtml(string htmlDescription)
+    {
+        var mainDoc = new HtmlDocument();
+        mainDoc.LoadHtml(htmlDescription);
+
+        return mainDoc.DocumentNode.InnerText;
+    }
+
+    string SubstringByWords(string text, int wordsNumber)
+    {
+        string newString = String.Join(" ", text.Split(" ").Take(wordsNumber));
+        return newString.TrimEnd('.');
+    }
+
 }
 
 <!-- start breadcrumb -->
@@ -52,8 +69,8 @@
                                         <li>in <a href="#">@blog.Category.Name</a>, <a href="#">Backpack</a></li>
                                         <li>32 comments</li>
                                     </ul>
-                                    <div class="blog-entry" style="color: none;">
-                                        @Html.Raw(blog.Descripition)
+                                    <div class="blog-entry" style="color: none;">                                       
+                                        @SubstringByWords(StripHtml(blog.Descripition), maxDescriptionWords).                                 
                                     </div>
                                     <a asp-controller="Blog" asp-action="BlogSingle"  asp-route-id="@blog.Id" class="btn-blog">Read More <i class="fa fa-long-arrow-right"></i></a>
                                 </div>
