@@ -3320,6 +3320,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "HtmlAgilityPack": "1.11.30",
           "Microsoft.AspNetCore.Authentication.Facebook": "5.0.4",
           "Microsoft.AspNetCore.Authentication.Google": "5.0.4"
         },
