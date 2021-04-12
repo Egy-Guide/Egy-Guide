@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,7 +22,7 @@ namespace EgyGuide.Models
         [Required]
         public string Language { get; set; }
         [Required]
-        public string YearExperience { get; set; }
+        public string YearExperience { get; set; }        
         public string IdentityCardUrl { get; set; }
         public double PricePerHour { get; set; }      
         public double Rating { get; set; }
@@ -32,6 +33,9 @@ namespace EgyGuide.Models
         public string InstagramProfile { get; set; }
         public string YoutubeProfile { get; set; }
         public string Remark { get; set; }
-        
+
+        [Required]
+        [NotMapped]
+        public IFormFile IdentityImage { get; set; }
     }
 }

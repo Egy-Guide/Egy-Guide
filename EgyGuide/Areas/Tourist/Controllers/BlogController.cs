@@ -2,8 +2,10 @@
 using EgyGuide.Models;
 using EgyGuide.Models.ViewModels;
 using HtmlAgilityPack;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -19,25 +21,50 @@ namespace EgyGuide.Areas.Tourist.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostEnvironment;
-        public BlogController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
+        private readonly UserManager<IdentityUser> _userManager;
+        public BlogController(
+            IUnitOfWork unitOfWork,
+            IWebHostEnvironment hostEnvironment,
+            UserManager<IdentityUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _hostEnvironment = hostEnvironment;
+            _userManager = userManager;
         }
         [BindProperty]
         public BlogVM BlogVM { get; set; }
-
+        [BindProperty]
+        public BlogIndexVM BlogIndexVM { get; set; }
 
         [Route("blog")]
         public IActionResult Index()
         {
-            BlogIndexVM blogIndexVM = new BlogIndexVM()
+            BlogIndexVM = new BlogIndexVM()
             {
-                Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category"),
+                Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category,ApplicationUser")
+                                        .OrderByDescending(b => b.Date),
                 Categories = _unitOfWork.Category.GetAll()
             };
 
-            return View(blogIndexVM);
+            return View(BlogIndexVM);
+        }
+
+        [Route("archive")]
+        public IActionResult Archive(DateTime? date)
+        {
+            if (date == null)
+                return RedirectToAction(nameof(Index));
+
+            BlogIndexVM = new BlogIndexVM()
+            {
+                Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category")
+                                        .Where(b => b.Date.Year == date.Value.Year)
+                                        .Where(b => b.Date.Month == date.Value.Month)
+                                        .OrderByDescending(b => b.Date),
+                Categories = _unitOfWork.Category.GetAll()
+            };
+
+            return View(BlogIndexVM);
         }
 
         [Route("blog-single")]
@@ -59,6 +86,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
             return View(blogIndexVM);
         }
 
+        [Authorize]
         [Route("blog-create")]
         public IActionResult BlogCreate(int? id)
         {
@@ -89,9 +117,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult BlogCreate()
-        {
-            //BlogVM.Blog.UserId = "24252d1f-8785-4d46-a427-848a6e6a4865";
-
+        {            
             if (ModelState.IsValid)
             {
                 // Get wwwroot path
@@ -116,6 +142,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
                         BlogVM.Blog.ImageURL = @"\images\blog\blog_default.png";
                     }
 
+                    BlogVM.Blog.UserId = _userManager.GetUserId(User);
                     _unitOfWork.Blog.Add(BlogVM.Blog);
                 }
                 #endregion
@@ -162,6 +189,22 @@ namespace EgyGuide.Areas.Tourist.Controllers
 
             return View(BlogVM);
         }
+
+        #region APIs
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var deletedBlog = _unitOfWork.Blog.Get(id);
+
+            if (deletedBlog == null)
+                return Json(new { success = false });
+
+            _unitOfWork.Blog.Remove(deletedBlog);
+            _unitOfWork.Save();
+
+            return Json(new { success = true });
+        }
+        #endregion
 
         public void UploadImage(string rootPath, IFormFileCollection image)
         {

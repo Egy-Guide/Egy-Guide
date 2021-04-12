@@ -1027,3 +1027,7 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.dll
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\ref\EgyGuide.dll
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.pdb
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.genruntimeconfig.cache
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\Archive.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\LatestPosts.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\PopularPosts.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\ArchiveSidebar.cshtml.g.cs

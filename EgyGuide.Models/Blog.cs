@@ -12,7 +12,6 @@ namespace EgyGuide.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public ApplicationUser ApplicationUser { get; set; }

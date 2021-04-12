@@ -45,31 +45,13 @@
                         <input type="hidden" asp-for="Blog.Id">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                        <div class="create-tour-inner">
-
-                            <div class="promo-box-02 mb-40">
-
-                                <div class="icon">
-                                    <i class="ti-plus"></i>
-                                </div>
-
-                                <h4>No account? Please sign-up now. It's free. </h4>
-
-                                <a href="#" class="btn">Sign Up</a>
-
-                            </div>
+                        <div class="create-tour-inner">                           
 
                             <h4 class="section-title">New Blog</h4>
 
                             <div class="row">
 
                                 <div class="col-xs-12 col-sm-12">
-
-                                    <div class="form-group form-group-lg">
-                                        <label>UserId:</label>
-                                        <input asp-for="Blog.UserId" type="text" class="form-control" />
-                                        <span asp-validation-for="Blog.UserId" class="text-danger"></span>
-                                    </div>
 
                                     <div class="form-group form-group-lg">
                                         <label>Title:</label>
@@ -158,7 +140,8 @@
     tinymce.init({
         selector: 'textarea',
         plugins: 'lists',
-        manubar: 'file edit format'
+        manubar: 'file edit format',
+        height: '480'
     });
 
 </script>

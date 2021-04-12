@@ -1,4 +1,5 @@
 ﻿@model EgyGuide.Models.ViewModels.BlogIndexVM
+
 @{
     ViewData["Title"] = "BlogSingle";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -248,12 +249,10 @@
                         <div class="sidebar-module">
                             <div class="sidebar-module-inner">
                                 <div class="sidebar-mini-search">
-                                    <a asp-controller="Blog" asp-action="BlogCreate"
-                                       asp-route-id="@Model.Blog.Id" class="btn btn-success btn-lgg btn-border">
+                                    <a asp-action="BlogCreate" asp-route-id="@Model.Blog.Id" class="btn btn-success btn-lgg btn-border">
                                         Edit
                                     </a>
-                                    <a asp-controller="Blog" asp-action="BlogCreate"
-                                       asp-route-id="@Model.Blog.Id" class="btn btn-danger btn-lgg btn-border">
+                                    <a onclick="Delete(@Model.Blog.Id)" class="btn btn-danger btn-lgg btn-border">
                                         Delete
                                     </a>
                                 </div>
@@ -350,3 +349,27 @@
         </div>
 
     </div>
+
+@section Scripts{ 
+    <script>
+        function Delete(id) {
+            var isConfirmed = confirm("Are you sure to delete?")
+
+            if (isConfirmed) {
+                $.ajax({
+                    url: "/Tourist/Blog/Delete?id=" + id,
+                    type: "DELETE",
+                    success: function (data) {
+                        if (data) {
+                            alert("Deleted Done..")
+                            window.location.replace("/blog");
+                        }                            
+                        else
+                            alert("OOH! Problem has occured")
+                    }
+                })
+            }
+           
+        }
+    </script>
+} 

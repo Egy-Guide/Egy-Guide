@@ -8,6 +8,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using EgyGuide.DataAccess.Repository.IRepository;
 using EgyGuide.Models;
+using EgyGuide.Models.ViewModels;
 using EgyGuide.Utility;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -52,50 +53,10 @@ namespace EgyGuide.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
-
-        [BindProperty]
-        public GuideUser Guide { get; set; }
-
+        public RegisterVM RegisterVM { get; set; }
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
-        public class InputModel
-        {
-            // Add another claims.
-            [Required]
-            public string FirstName { get; set; }
-            [Required]
-            public string LastName { get; set; }
-            [Required]
-            public string Country { get; set; }
-            [Required]
-            public string Nationality { get; set; }
-            [Required]
-            public string PhoneNumber { get; set; }
-            [Required]
-            public IFormFile IdentityImage { get; set; }
-            public string City { get; set; }
-
-            public string Role { get; set; }
-
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
-            public string Email { get; set; }
-
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
-            [Display(Name = "Password")]
-            public string Password { get; set; }
-
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
-        }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -112,33 +73,33 @@ namespace EgyGuide.Areas.Identity.Pages.Account
             {
                 var user = new ApplicationUser
                 {
-                    FirstName = Input.FirstName,
-                    LastName = Input.LastName,
-                    Country = Input.Country,
-                    Nationality = Input.Nationality,
-                    PhoneNumber = Input.PhoneNumber,
-                    City = Input.City,
-                    UserName = Input.Email,
-                    Email = Input.Email,
-                    Role = Input.Role
+                    FirstName = RegisterVM.Input.FirstName,
+                    LastName = RegisterVM.Input.LastName,
+                    Country = RegisterVM.Input.Country,
+                    Nationality = RegisterVM.Input.Nationality,
+                    PhoneNumber = RegisterVM.Input.PhoneNumber,
+                    City = RegisterVM.Input.City,
+                    UserName = RegisterVM.Input.Email,
+                    Email = RegisterVM.Input.Email,
+                    Role = RegisterVM.Input.Role
                 };                
 
                 // Add new user.
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                var result = await _userManager.CreateAsync(user, RegisterVM.Input.Password);
 
                 // Add new guide.
-                if (Guide != null)
+                if (RegisterVM.Guide != null)
                 {
                     // Locked the new guide for revising.
                     var futureDateLocked = DateTime.Now.AddYears(1000);
                     await _userManager.SetLockoutEndDateAsync(user, futureDateLocked);
 
-                    Guide.UserId = await _userManager.GetUserIdAsync(user);         
+                    RegisterVM.Guide.UserId = await _userManager.GetUserIdAsync(user);         
 
                     #region Upload Identity Card
 
                     string rootPath = _hostEnviroment.WebRootPath;
-                    var image = Input.IdentityImage;
+                    var image = RegisterVM.Guide.IdentityImage;
 
                     if (image != null)
                     {
@@ -150,14 +111,14 @@ namespace EgyGuide.Areas.Identity.Pages.Account
 
                         FileStream fileStream = new FileStream(imageURL, FileMode.Create);
                         await image.CopyToAsync(fileStream);
-                        
-                        Guide.IdentityCardUrl = imageURL;
+
+                        RegisterVM.Guide.IdentityCardUrl = imageURL;
 
                     }
 
                     #endregion
 
-                    _unitOfWork.GuideUser.Add(Guide);
+                    _unitOfWork.GuideUser.Add(RegisterVM.Guide);
                 }                    
 
                 if (result.Succeeded)
@@ -189,12 +150,12 @@ namespace EgyGuide.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    await _emailSender.SendEmailAsync(RegisterVM.Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        return RedirectToPage("RegisterConfirmation", new { email = RegisterVM.Input.Email, returnUrl = returnUrl });
                     }
                     else
                     {
