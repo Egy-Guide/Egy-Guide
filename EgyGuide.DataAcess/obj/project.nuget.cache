@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "L2jA9QPYLfdu6pYmlUmWjhZZI9z/bmTUC92eYkJz1lquxU7VK67EQ2Tm3jsmB3GCnrw3MRK3LNRPfQkQ5jETWw==",
+  "dgSpecHash": "eBvM07EIFxgrSUiKAiOWOHU1/kcRz8+8MZJENgx9KrEK9siExsiqzXdl5vdEHag91ZqdyA/YwtyDZ4+GhECnIg==",
   "success": true,
   "projectFilePath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\M&G\\.nuget\\packages\\htmlagilitypack\\1.11.32\\htmlagilitypack.1.11.32.nupkg.sha512",
     "C:\\Users\\M&G\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\M&G\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\M&G\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "FRvQXb3GnLElkh24OE9dVXyIkE+Oe/yt/aI8g4mApdVrIGWKM4VMqme50Y0iibSLwUnpUShAu0xggJNUODpMRw==",
+  "dgSpecHash": "/h+TyaiP5cShrOqWWZOKMUifK98yO47gDp+xH/mheViggVleu29DQay/vWJeyqM+wmpprPRB0CFa/r0fGtlbZA==",
   "success": true,
   "projectFilePath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\M&G\\.nuget\\packages\\htmlagilitypack\\1.11.32\\htmlagilitypack.1.11.32.nupkg.sha512",
     "C:\\Users\\M&G\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.2\\microsoft.entityframeworkcore.5.0.2.nupkg.sha512",
     "C:\\Users\\M&G\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.2\\microsoft.entityframeworkcore.abstractions.5.0.2.nupkg.sha512",
     "C:\\Users\\M&G\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.2\\microsoft.entityframeworkcore.analyzers.5.0.2.nupkg.sha512",

@@ -1,4 +1,5 @@
-﻿
+﻿@model EgyGuide.Models.ViewModels.OfferCreateVM
+@using EgyGuide.Utility
 @{
     ViewData["Title"] = "Index";
     ViewData["AddClassToBodyTag"] = "transparent-header with-multiple-sticky";
@@ -6,7 +7,41 @@
 }
 
 <!-- start breadcrumb -->
-<partial name="~/Views/Shared/BreadcrumbHeaderBg.cshtml">
+<!-- For Details Pages -->
+
+<div class="breadcrumb-image-bg detail-breadcrumb" style="background-image:url('images/detail-header.jpg');">
+    <div class="container">
+        <div class="page-title detail-header-02">
+            <div class="row">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+
+                    <h2>@Model.TripDetail.Title</h2>
+                    <span class="labeling text-white mt-25"><span>@Model.TripDetail.SelectedPlaces</span> <span>@Model.TripDetail.Days Days</span></span>
+                    <div class="rating-item rating-item-lg mb-25">
+                        <input type="hidden" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="4.5" />
+                        <div class="rating-text"> <a href="#">(32 reviews)</a></div>
+                    </div>
+                    <ul class="list-with-icon list-inline-block">
+                        <li><i class="ion-android-done text-primary"></i>100% private</li>
+                        <li><i class="ion-android-done text-primary"></i>Instantly confirmed</li>
+                        <li><i class="ion-android-done text-primary"></i>Free cancellation</li>
+                        <li><i class="ion-android-done text-primary"></i>Satisfaction guarantee</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+            <div class="breadcrumb-wrapper text-left">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li class="active">Result page grid</li>
+                </ol>
+            </div>
+
+    </div>
+</div>
 <!-- end breadcrumb -->
 
 <div class="multiple-sticky hidden-sm hidden-xs">
@@ -68,7 +103,7 @@
 
                     <div id="detail-content-sticky-nav-01">
 
-                        <p class="lead">Many tourists do not have much time to spend in Cairo, so I arrange one-day tour to visit the Highlights of Cairo; the Pyramids of Giza including the Great Pyramid, Khephren pyramid, Mycarenus Pyramid and the Great Sphinx, and then the National museum where we can see the treasures found inside the tombs and temples. In the evening you can book a Dinner Cruise or enjoy a sound and light show (optional). It is a summary to all of Cairo, so if you want a quick tour, this one is exactly what you need. . .</p>
+                        <p class="lead"> @SD.StripHtml(Model.TripDetail.Description)</p>
 
                         <div class="bt mt-30 mb-30"></div>
 
@@ -84,7 +119,7 @@
                                             <div class="icon text-primary">
                                                 <i class="flaticon-travel-icons-suitcase-1"></i>
                                             </div>
-                                            7 hours<br />tour
+                                            @Model.TripDetail.Days<br />tour
                                         </div>
 
                                     </div>
@@ -95,7 +130,9 @@
                                             <div class="icon text-primary">
                                                 <i class="flaticon-travel-icons-map"></i>
                                             </div>
-                                            Visit 2 citied:<br />Giza Pyramids &amp; Museum with Dinner
+                                            @{ string[] places = @Model.TripDetail.SelectedPlaces.Split("-");
+                                                var count = places.Length;  }
+                                            Visit @count places:<br />@Model.TripDetail.SelectedPlaces
                                         </div>
 
                                     </div>
@@ -106,7 +143,7 @@
                                             <div class="icon text-primary">
                                                 <i class="flaticon-travel-icons-bus"></i>
                                             </div>
-                                            Travel with a van all the trip <br />for up to 4 people
+                                            Travel with a @Model.TripDetail.Transport  <br />
                                         </div>
 
                                     </div>
@@ -126,50 +163,23 @@
                             <div class="GridLex-gap-30 GridLex-gap-20-xs">
 
                                 <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-4_sm-4_xs-3_xss-1 GridLex-grid-center">
+                                    
+                                    @foreach (var style in Model.TripStyles) {
 
                                     <div class="GridLex-col">
 
                                         <div class="featured-icon-simple-item">
                                             <div class="icon">
-                                                <i class="flaticon-travel-icons-mountain"></i>
+                                                <i class="flaticon-travel-icons-@style.ClassName"></i>
                                             </div>
-                                            Adventure
+                                            @style.StyleName
                                         </div>
 
                                     </div>
+                                    }
+                                    
 
-                                    <div class="GridLex-col">
 
-                                        <div class="featured-icon-simple-item">
-                                            <div class="icon">
-                                                <i class="flaticon-travel-icons-island"></i>
-                                            </div>
-                                            Dinner
-                                        </div>
-
-                                    </div>
-
-                                    <div class="GridLex-col">
-
-                                        <div class="featured-icon-simple-item">
-                                            <div class="icon">
-                                                <i class="flaticon-travel-icons-kayak"></i>
-                                            </div>
-                                            Fun
-                                        </div>
-
-                                    </div>
-
-                                    <div class="GridLex-col">
-
-                                        <div class="featured-icon-simple-item">
-                                            <div class="icon">
-                                                <i class="flaticon-travel-icons-cocktail"></i>
-                                            </div>
-                                            Drinks
-                                        </div>
-
-                                    </div>
 
                                 </div>
 
@@ -218,15 +228,16 @@
                                                 Meeting point (where we meet?)
                                             </div>
                                             <div class="col-xs-12 col-sm-5 text-primary text-right text-left-xs mt-xs space">
-                                                <i class="ti-location-pin mr-5"></i> Hotel
+                                                <i class="ti-location-pin mr-5"></i> @Model.TripDetail.MeetingPlace
                                             </div>
                                         </li>
                                         <li class="row gap-20">
                                             <div class="col-xs-12 col-sm-7">
                                                 Meeting time (what time we meet?)
                                             </div>
+                                            
                                             <div class="col-xs-12 col-sm-5 text-primary text-right text-left-xs mt-xs space">
-                                                <i class="ti-timer mr-5"></i> 09:00 am
+                                                <i class="ti-timer mr-5"></i> @Model.TripDetail.MeetingDate.ToString("hh:mm")
                                             </div>
                                         </li>
                                         <li class="row gap-20">
@@ -234,7 +245,7 @@
                                                 Maximum traellers
                                             </div>
                                             <div class="col-xs-12 col-sm-5 text-primary text-right text-left-xs mt-xs space">
-                                                <i class="ti-user mr-5"></i> 4
+                                                <i class="ti-user mr-5"></i> @Model.TripDetail.MaxTravellers
                                             </div>
                                         </li>
                                         <li class="row gap-20">
@@ -242,7 +253,7 @@
                                                 Languages (guide speaks)
                                             </div>
                                             <div class="col-xs-12 col-sm-5 text-primary text-right text-left-xs mt-xs space">
-                                                <i class="ti-flag mr-5"></i> English, italy, French
+                                                <i class="ti-flag mr-5"></i> @Model.TripDetail.SelectedLanguages
                                             </div>
                                         </li>
                                     </ul>
@@ -257,10 +268,10 @@
                                     <h4 class="text-uppercase spacing-1">What's included?</h4>
 
                                     <ul class="list-yes-no">
-                                        <li>Tickets</li>
-                                        <li>Transportations</li>
-                                        <li>Free cancellation</li>
-                                        <li>Free Gift</li>
+                                        @foreach (var included in Model.Included) {
+                                        <li>@included.Title </li>
+
+                                        }
                                     </ul>
                                 </div>
 
@@ -295,18 +306,19 @@
                         <div class="itinerary-toggle-wrapper mb-40">
 
                             <div class="panel-group bootstrap-toggle">
-
+                            @foreach (var day in Model.TripDaysDetail)
+                            {
                                 <div class="panel">
                                     <div class="panel-heading">
                                         <div class="panel-title">
                                             <a data-toggle="collapse" data-parent="#" href="#bootstarp-toggle-one-2">
                                                 <div class="itinerary-day">
-                                                    Part
-                                                    <span class="number">01</span>
+                                                    Day
+                                                    <span class="number">@day.DayNum</span>
                                                 </div>
                                                 <div class="itinerary-header">
                                                     <h4>Vist National Museum</h4>
-                                                    <p class="font-md">I will show you the master pieces.</p>
+                                                    <p class="font-md">@day.Title</p>
                                                     <div class="image"><img src="images/itinerary-sq/01.jpg" alt="images" /></div>
                                                 </div>
                                             </a>
@@ -314,132 +326,16 @@
                                     </div>
                                     <div id="bootstarp-toggle-one-2" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            <p class="font-lg">Our first stop will be the National Museum. I will show you the master pieces.</p>
-                                            <p class="font-lg">If you can only afford a half-day tour in Cairo as your time is tight, take a tour of the Egyptian Museum of Antiquities and learn ALL about the ancient Egyptian civilization. Your visit to the museum will undoubtedly give you an insight into the Egyptian history, culture and civilization.</p>
-                                            <p class="font-md">Tickets and transportations are provided.</p>
+                                            <p class="font-lg">@SD.StripHtml(day.Description). </p>
 
-                                            <div class="sumi-gallery-wrapper sumi-gallery-size-sm clearfix mt-25">
-                                                <img data-sgallery="group1tt" title="lightbox image caption 1" data-full="images/requested-light-box/01.jpg" data-thumb="images/requested-light-box/01.jpg" src="images/requested-light-box/01.jpg" alt="images">
-                                                <img data-sgallery="group1tt" title="lightbox image caption 1" data-full="images/requested-light-box/02.jpg" data-thumb="images/requested-light-box/02.jpg" src="images/requested-light-box/02.jpg" alt="images">
-                                                <img data-sgallery="group1tt" title="lightbox image caption 1" data-full="images/requested-light-box/03.jpg" data-thumb="images/requested-light-box/03.jpg" src="images/requested-light-box/03.jpg" alt="images">
-                                                <img data-sgallery="group1tt" title="lightbox image caption 1" data-full="images/requested-light-box/04.jpg" data-thumb="images/requested-light-box/04.jpg" src="images/requested-light-box/04.jpg" alt="images">
-                                                <img data-sgallery="group1tt" title="lightbox image caption 1" data-full="images/requested-light-box/05.jpg" data-thumb="images/requested-light-box/05.jpg" src="images/requested-light-box/05.jpg" alt="images">
-                                            </div>
 
                                         </div>
                                     </div>
 
                                 </div>
+     }
                                 <!-- end of panel -->
 
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#" href="#bootstarp-toggle-two-2" class="clearfix">
-                                                <div class="itinerary-day">
-                                                    Part
-                                                    <span class="number">02</span>
-                                                </div>
-                                                <div class="itinerary-header">
-                                                    <h4>Visit the Mummy room</h4>
-                                                    <p class="font-md">visit the Mummy room if you Interested.</p>
-                                                    <div class="image"><img src="images/itinerary-sq/02.jpg" alt="images" /></div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div id="bootstarp-toggle-two-2" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <p class="font-lg">
-                                                Give you free time to have your own tour and visit the Mummy room if you are interested. At the museum you will see the breath-taking collection of the famous infant-king Tut-ankh-amon, including the king's golden mask. You will also see masterpieces devoted to other kings and queens such as the figures of the pyramid builders, Cheops, Chefren and Mycerinus. You will also see the incredible mummies of the ancient Egyptians which still have tissue, hair and fingernails. I have good news for you; now you can take as many pictures as you like when you go around the Museum.
-                                            </p>
-                                            <p class="font-lg">The National museum where we can see the treasures found inside the tombs and temples.</p>
-                                            <p class="font-md">Tickets and transportations are provided.</p>
-                                            <div class="sumi-gallery-wrapper sumi-gallery-size-sm clearfix mt-25">
-                                                <img data-sgallery="group1tts" title="lightbox image caption 1" data-full="images/requested-light-box/01.jpg" data-thumb="images/requested-light-box/01.jpg" src="images/requested-light-box/01.jpg" alt="images">
-                                                <img data-sgallery="group1tts" title="lightbox image caption 1" data-full="images/requested-light-box/02.jpg" data-thumb="images/requested-light-box/02.jpg" src="images/requested-light-box/02.jpg" alt="images">
-                                                <img data-sgallery="group1tts" title="lightbox image caption 1" data-full="images/requested-light-box/03.jpg" data-thumb="images/requested-light-box/03.jpg" src="images/requested-light-box/03.jpg" alt="images">
-                                                <img data-sgallery="group1tts" title="lightbox image caption 1" data-full="images/requested-light-box/04.jpg" data-thumb="images/requested-light-box/04.jpg" src="images/requested-light-box/04.jpg" alt="images">
-                                                <img data-sgallery="group1tts" title="lightbox image caption 1" data-full="images/requested-light-box/05.jpg" data-thumb="images/requested-light-box/05.jpg" src="images/requested-light-box/05.jpg" alt="images">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end of panel -->
-
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#" href="#bootstarp-toggle-three-2" class="clearfix">
-                                                <div class="itinerary-day">
-                                                    Part
-                                                    <span class="number">03</span>
-                                                </div>
-                                                <div class="itinerary-header">
-                                                    <h4>Visiting the Pyramids</h4>
-                                                    <p class="font-md">Visit the Pyramids and there you see the great Pyramid.</p>
-                                                    <div class="image"><img src="images/itinerary-sq/03.jpg" alt="images" /></div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div id="bootstarp-toggle-three-2" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <p class="font-lg">
-                                                After that we will visit the Pyramids and there you see the great Pyramid of Cheops which is one of the world wonders, the Pyramid of Chephren (you have the chance to visit it from inside), and the smallest one of Mecarinus, the valley temple of Chephren, as well as, the great Sphinx and a panoramic view to see the three pyramids together.
-                                            </p>
-                                            <ul class="list-bullet-circle font-lg">
-                                                <li>If you are interested to have a Camel ride it is a pleasure to arrange this for you.</li>
-                                                <li>Preference imprudence contrasted to remarkably</li>
-                                                <li>Taken now you him trees tears any</li>
-                                                <li>Her object giving end sister except oppose</li>
-                                            </ul>
-                                            <p class="font-lg">It is a summary to all of Cairo, so if you want a quick tour, this one is exactly what you need. .</p>
-                                            <p class="font-md">Tickets and transportations are provided.</p>
-                                            <div class="sumi-gallery-wrapper sumi-gallery-size-sm clearfix mt-25">
-                                                <img data-sgallery="group1tty" title="lightbox image caption 1" data-full="images/requested-light-box/01.jpg" data-thumb="images/requested-light-box/01.jpg" src="images/requested-light-box/01.jpg" alt="images">
-                                                <img data-sgallery="group1tty" title="lightbox image caption 1" data-full="images/requested-light-box/02.jpg" data-thumb="images/requested-light-box/02.jpg" src="images/requested-light-box/02.jpg" alt="images">
-                                                <img data-sgallery="group1tty" title="lightbox image caption 1" data-full="images/requested-light-box/03.jpg" data-thumb="images/requested-light-box/03.jpg" src="images/requested-light-box/03.jpg" alt="images">
-                                                <img data-sgallery="group1tty" title="lightbox image caption 1" data-full="images/requested-light-box/04.jpg" data-thumb="images/requested-light-box/04.jpg" src="images/requested-light-box/04.jpg" alt="images">
-                                                <img data-sgallery="group1tty" title="lightbox image caption 1" data-full="images/requested-light-box/05.jpg" data-thumb="images/requested-light-box/05.jpg" src="images/requested-light-box/05.jpg" alt="images">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end of panel -->
-
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#" href="#bootstarp-toggle-four-2" class="clearfix">
-                                                <div class="itinerary-day">
-                                                    Part
-                                                    <span class="number">04</span>
-                                                </div>
-                                                <div class="itinerary-header">
-                                                    <h4>Booking a Dinner </h4>
-                                                    <p class="font-md">Booking a Dinner Cruise or enjoy a sound and light show (optional).</p>
-                                                    <div class="image"><img src="images/itinerary-sq/04.jpg" alt="images" /></div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div id="bootstarp-toggle-four-2" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <p class="font-lg">Booking a Dinner Cruise or enjoy a sound and light show (optional).</p>
-                                            <p class="font-lg">If you want to spend the evening outside the hotel, you can book Sound&Light show or have a Dinner cruise which is a unique experience in a 5* boat with an interesting program including oriental Egyptian Dancing, Folkloric show & open buffet with a delicious Egyptian.</p>
-                                            <p class="font-md">Tickets and transportations are provided.</p>
-                                            <div class="sumi-gallery-wrapper sumi-gallery-size-sm clearfix mt-25">
-                                                <img data-sgallery="group1ttg" title="lightbox image caption 1" data-full="images/requested-light-box/01.jpg" data-thumb="images/requested-light-box/01.jpg" src="images/requested-light-box/01.jpg" alt="images">
-                                                <img data-sgallery="group1ttg" title="lightbox image caption 1" data-full="images/requested-light-box/02.jpg" data-thumb="images/requested-light-box/02.jpg" src="images/requested-light-box/02.jpg" alt="images">
-                                                <img data-sgallery="group1ttg" title="lightbox image caption 1" data-full="images/requested-light-box/03.jpg" data-thumb="images/requested-light-box/03.jpg" src="images/requested-light-box/03.jpg" alt="images">
-                                                <img data-sgallery="group1ttg" title="lightbox image caption 1" data-full="images/requested-light-box/04.jpg" data-thumb="images/requested-light-box/04.jpg" src="images/requested-light-box/04.jpg" alt="images">
-                                                <img data-sgallery="group1ttg" title="lightbox image caption 1" data-full="images/requested-light-box/05.jpg" data-thumb="images/requested-light-box/05.jpg" src="images/requested-light-box/05.jpg" alt="images">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end of panel -->
 
                             </div>
 
@@ -485,7 +381,7 @@
                                         <h4>Cancellation policy</h4>
                                     </div>
                                     <div class="col-xs-12 col-sm-8 col-md-9">
-                                        <p class="font-lg">Refunds will be sent back to the original payment method used in making the booking. Depending on the bank's processing time, it can take 10 business days for the refunds to reflect in your bank account or card balance.</a>.</p>
+                                        <p class="font-lg">Refunds will be sent back to the original payment method used in making the booking. Depending on the bank's processing time, it can take 10 business days for the refunds to reflect in your bank account or card balance.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1303,7 +1199,10 @@
     <script type="text/javascript" src="js/moment.min.js"></script>
     <script type="text/javascript" src="js/jquery.daterangepicker.js"></script>
     <script type="text/javascript" src="js/customs-datepicker.js"></script>
-
+    <script>
+        
+       
+    </script>
 
     <script>
         var stickyHeaders = (function () {

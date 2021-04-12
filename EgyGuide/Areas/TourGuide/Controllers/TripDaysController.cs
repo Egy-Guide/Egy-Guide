@@ -37,11 +37,12 @@ namespace EgyGuide.Areas.TourGuide.Controllers
         [HttpPost]
         public void SaveList(TripDaysDetail[] ItemList)
         {
+            //here there is an exception, must edit it.
             var lastRecord = _db.TripDetails.OrderByDescending(i => i.TripId).FirstOrDefault();
+
             var count = lastRecord.Days;
 
-            string webRootPath = _hostEnvironment.WebRootPath;
-            var files = HttpContext.Request.Form.Files;
+            
 
             for (int i = 0; i < count; i++)
             {
@@ -93,13 +94,14 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
                return RedirectToAction("OfferedCreateDone","TripDays");
             }
-            else
-            {
+            return View(tripDays);
+            //else
+            //{
 
-                var lastRows = _db.TripDaysDetails.Where(x => x.TripId == lastRecord.TripId);
-                _unit.TripDays.Remove(lastRecord.TripId);
-                return View(tripDays);
-            }
+            //    var lastRows = _db.TripDaysDetails.Where(x => x.TripId == lastRecord.TripId);
+            //    _unit.TripDays.Remove(lastRecord.TripId);
+            //    return View(tripDays);
+            //}
         }
 
 

@@ -1472,3 +1472,4 @@ C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.pdb
 C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.genruntimeconfig.cache
 C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\TripDays\TripDays.cshtml.g.cs
 C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\TripDays\OfferedCreateDone.cshtml.g.cs
+C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\bin\Debug\net5.0\HtmlAgilityPack.dll
