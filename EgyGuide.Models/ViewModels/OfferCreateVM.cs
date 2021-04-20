@@ -19,8 +19,9 @@ namespace EgyGuide.Models.ViewModels
         public IEnumerable<Included> Included { get; set; }
         public IEnumerable<Excluded> Excluded { get; set; }
         public IEnumerable<SelectListItem> CityList { get; set; }
-       
-        
+        public string City { get; set; }
+
+
 
     }
 }

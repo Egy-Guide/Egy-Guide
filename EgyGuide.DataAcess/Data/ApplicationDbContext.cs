@@ -28,6 +28,9 @@ namespace EgyGuide.Data
         public DbSet<TripDaysDetail> TripDaysDetails { get; set; }
         public DbSet<Included> Includeds { get; set; }
         public DbSet<Excluded> Excludeds { get; set; }
+        public DbSet<Requested> Requested { get; set; }
+        public DbSet<RequestedSelectedStyle> RequestedSelectedStyle { get; set; }
+        public DbSet<RequestedInfo> RequestedInfo { get; set; }
 
 
     }

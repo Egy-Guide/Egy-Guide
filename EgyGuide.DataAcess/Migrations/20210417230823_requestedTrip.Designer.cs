@@ -4,14 +4,16 @@ using EgyGuide.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EgyGuide.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210417230823_requestedTrip")]
+    partial class requestedTrip
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,24 +222,6 @@ namespace EgyGuide.DataAccess.Migrations
                     b.HasIndex("CityId");
 
                     b.ToTable("Requested");
-                });
-
-            modelBuilder.Entity("EgyGuide.Models.RequestedInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TripId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RequestedInfo");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.RequestedSelectedStyle", b =>
@@ -652,21 +636,6 @@ namespace EgyGuide.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("RequestedRequestedInfo", b =>
-                {
-                    b.Property<int>("RequestedInfoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RequestedTripId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RequestedInfoId", "RequestedTripId");
-
-                    b.HasIndex("RequestedTripId");
-
-                    b.ToTable("RequestedRequestedInfo");
-                });
-
             modelBuilder.Entity("EgyGuide.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -871,21 +840,6 @@ namespace EgyGuide.DataAccess.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RequestedRequestedInfo", b =>
-                {
-                    b.HasOne("EgyGuide.Models.RequestedInfo", null)
-                        .WithMany()
-                        .HasForeignKey("RequestedInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EgyGuide.Models.Requested", null)
-                        .WithMany()
-                        .HasForeignKey("RequestedTripId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -11,6 +11,7 @@ namespace EgyGuide.DataAccess.Repository.IRepository
         IOfferCreateRepository OfferCreate { get; }
         IApplicationUserRepository ApplicationUser { get; }
         ITripDaysRepository TripDays { get; }
+        IRequestedRepository Requested { get; }
         void Save();
     }
 }

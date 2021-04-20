@@ -27,15 +27,18 @@ namespace EgyGuide.Areas.Tourist.Controllers
             var included = _db.Includeds.Where(i => i.TripId == id);
             var images = _db.Galleries.Where(i => i.TripId == id);
             var daysDetails = _db.TripDaysDetails.Where(t => t.TripId == id);
+            var trip = _unit.OfferCreate.GetFirstOrDefault
+                (u => u.TripId == id, includeProperties: "City,SelectedImages,Included,Excluded");
+            var city = _db.Cities.SingleOrDefault(s => s.CityId == trip.CityId).Name;
             OfferCreateVM tripVM = new OfferCreateVM()
             {
-                TripDetail = _unit.OfferCreate.GetFirstOrDefault
-                (u => u.TripId == id, includeProperties: "City,SelectedImages,Included,Excluded"),
+                TripDetail = trip,
                 TripStyles = _db.TripStyles.Where(t=> selectedStyles.Contains(t.StyleId)),
                 Included = included,
                 Galleries = images,
-                TripDaysDetail = daysDetails
-        };
+                TripDaysDetail = daysDetails,
+                City = city
+            };
 
             return View(tripVM);
         }

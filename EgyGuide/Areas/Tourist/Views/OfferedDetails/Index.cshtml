@@ -34,9 +34,9 @@
 
             <div class="breadcrumb-wrapper text-left">
                 <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Page</a></li>
-                    <li class="active">Result page grid</li>
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Offered" asp-action="Index">Offered</a></li>
+                    <li class="active">@Model.City</li>
                 </ol>
             </div>
 

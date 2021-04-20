@@ -17,11 +17,13 @@ namespace EgyGuide.DataAccess.Repository
             OfferCreate = new OfferCreateRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
             TripDays = new TripDaysRepository(_db);
+            Requested = new RequestedRepository(_db);
         }
 
         public IOfferCreateRepository OfferCreate { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
         public ITripDaysRepository TripDays { get; private set; }
+        public IRequestedRepository Requested { get; private set; }
         public void Dispose()
         {
             _db.Dispose();
