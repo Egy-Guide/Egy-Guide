@@ -278,24 +278,8 @@
                         <div class="sidebar-module">
                             <h4 class="sidebar-title">Latest Posts</h4>
                             <div class="sidebar-module-inner">
-
-                                <ul class="sidebar-post">
-                                    @foreach (var lastPost in latestPosts)
-                                    {
-                                        <li class="clearfix">
-                                            <a href="/blog-single?id=@lastPost.Id">
-                                                <div class="image">
-                                                    <img src="@lastPost.ImageURL" alt="Popular Post" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>@lastPost.Title</h6>
-                                                    <p class="recent-post-sm-meta"><i class="fa fa-clock-o mr-5"></i>@lastPost.Date.ToString("dd/M/yyyy")</p>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    }
-                                </ul>
-
+                                <!-- LatestPosts -->
+                                <partial name="LatestPosts">
                             </div>
                         </div>
 
@@ -304,24 +288,8 @@
                         <div class="sidebar-module">
                             <h4 class="sidebar-title">Popular Posts</h4>
                             <div class="sidebar-module-inner">
-
-                                <ul class="sidebar-post">
-                                    @foreach (var popularPost in popularPosts)
-                                    {
-                                        <li class="clearfix">
-                                            <a href="/blog-single?id=@popularPost.Id">
-                                                <div class="image">
-                                                    <img src="@popularPost.ImageURL" alt="Popular Post" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>@popularPost.Title</h6>
-                                                    <p class="recent-post-sm-meta"><i class="fa fa-comments mr-5"></i>@popularPost.Views views</p>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    }
-                                </ul>
-
+                                <!-- PopularPosts -->
+                                <partial name="PopularPosts">
                             </div>
                         </div>
 
@@ -330,13 +298,8 @@
                         <div class="sidebar-module">
                             <h4 class="sidebar-title">Archives</h4>
                             <div class="sidebar-module-inner">
-                                <ul class="sidebar-archives">
-                                    <li><a href="#">January 2015<span>(25)</span></a></li>
-                                    <li class="active"><a href="#">February 2015<span>(2)</span></a></li>
-                                    <li><a href="#">March 2015<span>(14)</span></a></li>
-                                    <li><a href="#">April 2015<span>(157)</span></a></li>
-                                    <li><a href="#">June 2015<span>(87)</span></a></li>
-                                </ul>
+                                <!-- Archives -->
+                                <partial name="ArchiveSidebar">
                             </div>
                         </div>
 

@@ -8,8 +8,6 @@
 
     int maxDescriptionWords = 50;
 
-    var archives = Model.Blogs.GroupBy(b => b.Date.ToString("MMMM yyyy"));
-
 }
 
 <!-- start breadcrumb -->
@@ -61,11 +59,16 @@
                             </div>
                         }
                         <!-- end Blog Item -->
+                        
 
                         <div class="pager-wrapper">
 
                             <nav class="pager-right">
-                                <ul class="pagination">
+                                <ul page-model="@Model.PagingInfo" page-enabled="true" 
+                                    page-class-selected="active" class="pagination">                            
+                                </ul>
+
+                                @*<ul class="pagination">
                                     <li>
                                         <a href="#" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
@@ -83,7 +86,7 @@
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
-                                </ul>
+                                </ul>*@
                             </nav>
 
                         </div>

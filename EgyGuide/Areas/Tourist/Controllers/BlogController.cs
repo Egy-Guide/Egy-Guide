@@ -37,13 +37,26 @@ namespace EgyGuide.Areas.Tourist.Controllers
         public BlogIndexVM BlogIndexVM { get; set; }
 
         [Route("blog")]
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
+
+
             BlogIndexVM = new BlogIndexVM()
             {
                 Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category,ApplicationUser")
                                         .OrderByDescending(b => b.Date),
                 Categories = _unitOfWork.Category.GetAll()
+            };
+
+            var count = BlogIndexVM.Blogs.Count();
+            BlogIndexVM.Blogs = BlogIndexVM.Blogs.Skip((page - 1) * 2).Take(2);
+
+            BlogIndexVM.PagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                ItemsPerPage = 2,
+                TotalItems = count,
+                UrlParam = "/blog?page=:"
             };
 
             return View(BlogIndexVM);

@@ -12,5 +12,6 @@ namespace EgyGuide.Models.ViewModels
         public Blog Blog { get; set; }
         public IEnumerable<Blog> Blogs { get; set; }
         public IEnumerable<Category> Categories { get; set; }
+        public PagingInfo PagingInfo { get; set; }
     }
 }
