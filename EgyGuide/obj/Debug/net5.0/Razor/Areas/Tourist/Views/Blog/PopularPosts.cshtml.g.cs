@@ -27,7 +27,7 @@ using EgyGuide.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4db6b4371000d3dd786bdb7dbf773c43f45e4e4a", @"/Areas/Tourist/Views/Blog/PopularPosts.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a1e80ebd7dd51bbb657102558f1851d10e8cba3b", @"/Areas/Tourist/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"da94f91bf55f607904a0334e49f022a705c8c3a4", @"/Areas/Tourist/Views/_ViewImports.cshtml")]
     public class Areas_Tourist_Views_Blog_PopularPosts : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

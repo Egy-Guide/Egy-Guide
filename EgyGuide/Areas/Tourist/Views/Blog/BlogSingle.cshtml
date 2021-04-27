@@ -1,4 +1,6 @@
-﻿@model EgyGuide.Models.ViewModels.BlogIndexVM
+﻿@using Microsoft.AspNetCore.Identity
+@model EgyGuide.Models.ViewModels.BlogIndexVM
+@inject SignInManager<IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "BlogSingle";
@@ -13,7 +15,7 @@
 
 <!-- start breadcrumb -->
 <partial name="~/Views/Shared/Breadcrumb.cshtml">
-<!-- end breadcrumb -->
+    <!-- end breadcrumb -->
 
     <div class="pt-50 pb-50">
 
@@ -34,7 +36,7 @@
                             <div class="blog-content">
                                 <h3>@Model.Blog.Title</h3>
                                 <ul class="blog-meta clearfix">
-                                    <li>by <a href="#">Admin</a></li>
+                                    <li>by <a href="#">@String.Format("{0} {1}", Model.Blog.ApplicationUser.FirstName, Model.Blog.ApplicationUser.LastName)</a></li>
                                     <li>@Model.Blog.Date</li>
                                     <li>in <a href="#">@Model.Blog.Category.Name</a></li>
                                     <li>@Model.Blog.Views Views comments</li>
@@ -246,30 +248,39 @@
 
                     <aside class="sidebar-wrapper">
 
-                        <div class="sidebar-module">
-                            <div class="sidebar-module-inner">
-                                <div class="sidebar-mini-search">
-                                    <a asp-action="BlogCreate" asp-route-id="@Model.Blog.Id" class="btn btn-success btn-lgg btn-border">
-                                        Edit
-                                    </a>
-                                    <a onclick="Delete(@Model.Blog.Id)" class="btn btn-danger btn-lgg btn-border">
-                                        Delete
-                                    </a>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <div class="sidebar-module">
+                                <div class="sidebar-module-inner">
+                                    <div class="sidebar-mini-search">
+                                        <a asp-action="BlogCreate" asp-route-id="@Model.Blog.Id" class="btn btn-success btn-lgg btn-border">
+                                            Edit
+                                        </a>
+                                        <a onclick="Delete(@Model.Blog.Id)" class="btn btn-danger btn-lgg btn-border">
+                                            Delete
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="sidebar-module">
+                                <div class="sidebar-module-inner">
+                                    <div class="sidebar-mini-search">
+                                        <a asp-controller="Blog" asp-action="BlogCreate" class="btn btn-primary btn-lgg btn-block btn-border">Create Blog</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
 
                         <div class="clear"></div>
 
                         <div class="sidebar-module">
                             <h4 class="sidebar-title">Categories</h4>
                             <div class="sidebar-module-inner">
-                                <ul class="sidebar-category">
-                                    @foreach (var category in Model.Categories)
-                                    {
-                                        <li><a href="#">@category.Name<span>(@Model.Blogs.Count(b => b.Category.Name == category.Name))</span></a></li>
-                                    }
-                                </ul>
+                                <!-- Categories -->
+                                <partial name="CategorySidebar">
                             </div>
                         </div>
 
@@ -313,26 +324,26 @@
 
     </div>
 
-@section Scripts{ 
-    <script>
-        function Delete(id) {
-            var isConfirmed = confirm("Are you sure to delete?")
+    @section Scripts{
+        <script>
+            function Delete(id) {
+                var isConfirmed = confirm("Are you sure to delete?")
 
-            if (isConfirmed) {
-                $.ajax({
-                    url: "/Tourist/Blog/Delete?id=" + id,
-                    type: "DELETE",
-                    success: function (data) {
-                        if (data) {
-                            alert("Deleted Done..")
-                            window.location.replace("/blog");
-                        }                            
-                        else
-                            alert("OOH! Problem has occured")
-                    }
-                })
+                if (isConfirmed) {
+                    $.ajax({
+                        url: "/Tourist/Blog/Delete?id=" + id,
+                        type: "DELETE",
+                        success: function (data) {
+                            if (data) {
+                                alert("Deleted Done..")
+                                window.location.replace("/blog");
+                            }
+                            else
+                                alert("OOH! Problem has occured")
+                        }
+                    })
+                }
+
             }
-           
-        }
-    </script>
-} 
+        </script>
+    }

@@ -5,9 +5,6 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Index";    
-
-    int maxDescriptionWords = 50;
-
 }
 
 <!-- start breadcrumb -->
@@ -25,71 +22,12 @@
                     <div class="blog-wrapper">
 
                         <!-- start Blog Item -->
-                        @foreach (var blog in Model.Blogs)
-                        {
-                            <div class="blog-item">
-
-                                <div class="blog-media">
-                                    <div class="overlay-box">
-                                        <a class="blog-image" asp-controller="Blog" asp-action="BlogSingle" asp-route-id="@blog.Id">
-                                            <img src="@blog.ImageURL" alt="" />
-                                            <div class="image-overlay">
-                                                <div class="overlay-content">
-                                                    <div class="overlay-icon"><i class="pe-7s-link"></i></div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="blog-content">
-                                    <h3><a href="blog-single.html" class="inverse">@blog.Title</a></h3>
-                                    <ul class="blog-meta">
-                                        <li>by <a href="#">@String.Format("{0} {1}", blog.ApplicationUser.FirstName, blog.ApplicationUser.LastName)</a></li>
-                                        <li>by @blog.Date</li>
-                                        <li>in <a href="#">@blog.Category.Name</a>, <a href="#">Backpack</a></li>
-                                        <li>32 comments</li>
-                                    </ul>
-                                    <div class="blog-entry" style="color: none;">                                       
-                                        @SD.SubstringByWords(SD.StripHtml(blog.Descripition), maxDescriptionWords).                                 
-                                    </div>
-                                    <a asp-controller="Blog" asp-action="BlogSingle"  asp-route-id="@blog.Id" class="btn-blog">Read More <i class="fa fa-long-arrow-right"></i></a>
-                                </div>
-
-                            </div>
-                        }
+                        <partial name="BlogItems">
                         <!-- end Blog Item -->
                         
-
-                        <div class="pager-wrapper">
-
-                            <nav class="pager-right">
-                                <ul page-model="@Model.PagingInfo" page-enabled="true" 
-                                    page-class-selected="active" class="pagination">                            
-                                </ul>
-
-                                @*<ul class="pagination">
-                                    <li>
-                                        <a href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><span>...</span></li>
-                                    <li><a href="#">11</a></li>
-                                    <li><a href="#">12</a></li>
-                                    <li><a href="#">13</a></li>
-                                    <li>
-                                        <a href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>*@
-                            </nav>
-
-                        </div>
+                        <!-- Pagination -->
+                        <partial name="~/Views/Shared/Pagination.cshtml">
+                        <!-- End Pagination -->
 
                     </div>
 
@@ -112,12 +50,8 @@
                         <div class="sidebar-module">
                             <h4 class="sidebar-title">Categories</h4>
                             <div class="sidebar-module-inner">
-                                <ul class="sidebar-category">
-                                    @foreach (var category in Model.Categories)
-                                    {
-                                        <li><a href="#">@category.Name<span>(@Model.Blogs.Count(b => b.Category.Name == category.Name))</span></a></li>
-                                    }
-                                </ul>
+                                <!-- Categories -->
+                                <partial name="CategorySidebar">
                             </div>
                         </div>
 
