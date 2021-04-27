@@ -31,26 +31,24 @@ namespace EgyGuide.Areas.Tourist.Controllers
             _hostEnvironment = hostEnvironment;
             _userManager = userManager;
         }
+
         [BindProperty]
         public BlogVM BlogVM { get; set; }
-        [BindProperty]
-        public BlogIndexVM BlogIndexVM { get; set; }
 
         [Route("blog")]
         public IActionResult Index(int page = 1)
         {
 
-
-            BlogIndexVM = new BlogIndexVM()
+            BlogVM = new BlogVM()
             {
                 Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category,ApplicationUser")
-                                        .OrderByDescending(b => b.Date),
+                                        .OrderByDescending(b => b.Date)
             };
 
-            var count = BlogIndexVM.Blogs.Count();
-            BlogIndexVM.Blogs = BlogIndexVM.Blogs.Skip((page - 1) * 2).Take(2);
+            var count = BlogVM.Blogs.Count();
+            BlogVM.Blogs = BlogVM.Blogs.Skip((page - 1) * 2).Take(2);
 
-            BlogIndexVM.PagingInfo = new PagingInfo
+            BlogVM.PagingInfo = new PagingInfo
             {
                 CurrentPage = page,
                 ItemsPerPage = 2,
@@ -58,24 +56,24 @@ namespace EgyGuide.Areas.Tourist.Controllers
                 UrlParam = "/blog?page=:"
             };
 
-            return View(BlogIndexVM);
+            return View(BlogVM);
         }
 
         [Route("blog/archive")]
         public IActionResult Archive(DateTime date, int page = 1)
         {            
-            BlogIndexVM = new BlogIndexVM()
+            BlogVM = new BlogVM()
             {
                 Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category,ApplicationUser")
                                         .Where(b => b.Date.Year == date.Year)
                                         .Where(b => b.Date.Month == date.Month)
-                                        .OrderByDescending(b => b.Date),
+                                        .OrderByDescending(b => b.Date)
             };
 
-            var count = BlogIndexVM.Blogs.Count();
-            BlogIndexVM.Blogs = BlogIndexVM.Blogs.Skip((page - 1) * 2).Take(2);
+            var count = BlogVM.Blogs.Count();
+            BlogVM.Blogs = BlogVM.Blogs.Skip((page - 1) * 2).Take(2);
 
-            BlogIndexVM.PagingInfo = new PagingInfo
+            BlogVM.PagingInfo = new PagingInfo
             {
                 CurrentPage = page,
                 ItemsPerPage = 2,
@@ -83,22 +81,22 @@ namespace EgyGuide.Areas.Tourist.Controllers
                 UrlParam = "/blog/archive?date=" + date.ToString("MMMM yyyy") + "&page=:"
             };
 
-            return View(BlogIndexVM);
+            return View(BlogVM);
         }
         [Route("blog/category")]
         public IActionResult Category(string category, int page = 1)
         {
-            BlogIndexVM = new BlogIndexVM()
+            BlogVM = new BlogVM()
             {
                 Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category,ApplicationUser")
                                         .Where(b => b.Category.Name == category)
-                                        .OrderByDescending(b => b.Date),
+                                        .OrderByDescending(b => b.Date)
             };
 
-            var count = BlogIndexVM.Blogs.Count();
-            BlogIndexVM.Blogs = BlogIndexVM.Blogs.Skip((page - 1) * 2).Take(2);
+            var count = BlogVM.Blogs.Count();
+            BlogVM.Blogs = BlogVM.Blogs.Skip((page - 1) * 2).Take(2);
 
-            BlogIndexVM.PagingInfo = new PagingInfo
+            BlogVM.PagingInfo = new PagingInfo
             {
                 CurrentPage = page,
                 ItemsPerPage = 2,
@@ -106,7 +104,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
                 UrlParam = "/blog/category?category=" + category + "&page=:"
             };
 
-            return View(BlogIndexVM);
+            return View(BlogVM);
         }
 
         [Route("blog-single")]
@@ -115,10 +113,9 @@ namespace EgyGuide.Areas.Tourist.Controllers
             if (id == 0)
                 return RedirectToAction(nameof(Index));
 
-            BlogIndexVM blogIndexVM = new BlogIndexVM()
+            BlogVM blogIndexVM = new BlogVM()
             {
-                Blog = _unitOfWork.Blog.GetFirstOrDefault(b => b.Id == id, includeProperties: "Category,ApplicationUser"),
-                Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category"),
+                Blog = _unitOfWork.Blog.GetFirstOrDefault(b => b.Id == id, includeProperties: "Category,ApplicationUser")
             };
 
             blogIndexVM.Blog.Views++;
@@ -205,7 +202,12 @@ namespace EgyGuide.Areas.Tourist.Controllers
                         {
                             string imagePath = Path.Combine(rootPath, BlogVM.Blog.ImageURL.TrimStart('\\'));
                             if (System.IO.File.Exists(imagePath))
+                            {
+                                GC.Collect();
+                                GC.WaitForPendingFinalizers();
                                 System.IO.File.Delete(imagePath);
+                            }
+
                         }
 
                         UploadImage(rootPath, image);
@@ -260,8 +262,8 @@ namespace EgyGuide.Areas.Tourist.Controllers
 
             // Upload image to physical storage
             FileStream fileStream = new FileStream(imageURL, FileMode.Create);
-            image[0].CopyToAsync(fileStream);
-
+            image[0].CopyTo(fileStream);
+           
             // Upload image to Database
             BlogVM.Blog.ImageURL = @"\images\blog\" + imageName + extension;
         }        

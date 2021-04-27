@@ -1,16 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model EgyGuide.Models.ViewModels.BlogIndexVM
+@model EgyGuide.Models.ViewModels.BlogVM
 @inject SignInManager<IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "BlogSingle";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    int PostsNumber = 5;
-
-    IEnumerable<Blog> latestPosts = Model.Blogs.OrderByDescending(b => b.Id)
-                                               .Take(PostsNumber);
-    IEnumerable<Blog> popularPosts = Model.Blogs.OrderByDescending(b => b.Views)
-                                                .Take(PostsNumber);
 }
 
 <!-- start breadcrumb -->
@@ -248,7 +242,7 @@
 
                     <aside class="sidebar-wrapper">
 
-                        @if (SignInManager.IsSignedIn(User))
+                        @if (SignInManager.IsSignedIn(User) && Model.Blog.ApplicationUser.UserName == User.Identity.Name)
                         {
                             <div class="sidebar-module">
                                 <div class="sidebar-module-inner">
