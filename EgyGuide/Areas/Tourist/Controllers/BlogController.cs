@@ -201,12 +201,8 @@ namespace EgyGuide.Areas.Tourist.Controllers
                         if (BlogVM.Blog.ImageURL != null)
                         {
                             string imagePath = Path.Combine(rootPath, BlogVM.Blog.ImageURL.TrimStart('\\'));
-                            if (System.IO.File.Exists(imagePath))
-                            {
-                                GC.Collect();
-                                GC.WaitForPendingFinalizers();
-                                System.IO.File.Delete(imagePath);
-                            }
+                            if (System.IO.File.Exists(imagePath))                            
+                                System.IO.File.Delete(imagePath);                            
 
                         }
 
@@ -261,9 +257,12 @@ namespace EgyGuide.Areas.Tourist.Controllers
             string imageURL = Path.Combine(folderPath, imageName + extension);
 
             // Upload image to physical storage
-            FileStream fileStream = new FileStream(imageURL, FileMode.Create);
-            image[0].CopyTo(fileStream);
-           
+            using (var fileStream = new FileStream(imageURL, FileMode.Create))
+            {
+                image[0].CopyTo(fileStream);
+                fileStream.Dispose();
+            }                           
+
             // Upload image to Database
             BlogVM.Blog.ImageURL = @"\images\blog\" + imageName + extension;
         }        
