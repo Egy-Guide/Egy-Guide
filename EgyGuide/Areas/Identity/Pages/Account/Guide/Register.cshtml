@@ -1,5 +1,5 @@
 ﻿@page
-@model RegisterModel
+@model EgyGuide.Areas.Identity.Pages.Account.Guide.RegisterModel
 @inject UserManager<IdentityUser> UserManger 
 @using EgyGuide.Utility
 
@@ -22,42 +22,6 @@
 
             <div class="row gap-20">
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-
-                    <h4 class="text-center">Use another service to register.</h4>
-                    <hr />
-
-                    <!-- External OAuth -->
-                    <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                        @foreach (var provider in Model.ExternalLogins)
-                        {
-                            if (provider.Name.ToLower().Contains("facebook"))
-                            {
-                                <div class="col-sm-6 col-md-6">
-                                    <button type="submit" name="provider" class="btn btn-facebook btn-lg btn-block mb-5-xs" value="@provider.Name" title="@provider.DisplayName">
-                                        <i class="fa fa-facebook"></i> Register with Facebook
-                                    </button>
-                                </div>
-                            }
-
-                            if (provider.Name.ToLower().Contains("google"))
-                            {
-                                <div class="col-sm-6 col-md-6">
-                                    <button type="submit" name="provider" class="btn btn-google-plus btn-lg btn-block" value="@provider.Name" title="@provider.DisplayName">
-                                        <i class="fa fa-google"></i> Register with Google
-                                    </button>
-                                </div>
-                            }
-
-                        }
-
-                    </form>
-                    <!-- End External OAuth -->
-
-                    <div class="col-md-12">
-                        <div class="login-modal-or">
-                            <div><span>or</span></div>
-                        </div>
-                    </div>
 
                     <form autocomplete="off" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
                         <div asp-validation-summary="All" class="text-danger"></div>
@@ -120,6 +84,77 @@
                                 <input asp-for="RegisterVM.Input.City" class="form-control" type="text" placeholder="Ex: Cairo">
                             </div>
                         </div>
+
+                        <!-- Guide-User Details -->
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Service Areas</label>
+                                <input asp-for="RegisterVM.Guide.ServiceArea" class="form-control" type="text" placeholder="Ex: Dahab,Sharm El-Sheikh,Cairo">
+                                <span asp-validation-for="RegisterVM.Guide.ServiceArea" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Languages</label>
+                                <input asp-for="RegisterVM.Guide.Language" class="form-control" type="text" placeholder="Ex: Arabic,English,French">
+                                <span asp-validation-for="RegisterVM.Guide.Language" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Year Experience</label>
+                                <input asp-for="RegisterVM.Guide.YearExperience" class="form-control" type="text" placeholder="Year Experience">
+                                <span asp-validation-for="RegisterVM.Guide.YearExperience" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Identity Card <span class="text-danger">(Secret)</span></label>
+                                <input asp-for="RegisterVM.Guide.IdentityImage" class="form-control" type="file">
+                                <span asp-validation-for="RegisterVM.Guide.IdentityImage" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Facebook Profile Link <span class="text-success">(Option)</span></label>
+                                <input asp-for="RegisterVM.Guide.FacebookProfile" class="form-control" type="text" placeholder="https://www.facebook.com/yourprofile">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Twitter Profile Link <span class="text-success">(Option)</span></label>
+                                <input asp-for="RegisterVM.Guide.TwitterProfile" class="form-control" type="text" placeholder="https://www.twitter.com/yourprofile">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Instagram Profile Link <span class="text-success">(Option)</span></label>
+                                <input asp-for="RegisterVM.Guide.InstagramProfile" class="form-control" type="text" placeholder="https://www.instagram.com/yourprofile">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Youtube Profile Link <span class="text-success">(Option)</span></label>
+                                <input asp-for="RegisterVM.Guide.YoutubeProfile" class="form-control" type="text" placeholder="https://www.youtube.com/user/yourchannel">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Remark <span class="text-success">(Optional)</span></label>
+                                <input asp-for="RegisterVM.Guide.Remark" class="form-control" type="text" placeholder="Ex: Certified from Ministry of Tourism">
+                            </div>
+                        </div>
+
+                        <input asp-for="RegisterVM.Input.Role" value="@SD.Role_User_Suspended_Guide" type="hidden">
+                        <!-- End Guide-User Details -->
 
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group">

@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
-namespace EgyGuide.Areas.Identity.Pages.Account
+namespace EgyGuide.Areas.Identity.Pages.Account.Guide
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -85,23 +85,48 @@ namespace EgyGuide.Areas.Identity.Pages.Account
                 };                
 
                 // Add new user.
-                var result = await _userManager.CreateAsync(user, RegisterVM.Input.Password);                  
+                var result = await _userManager.CreateAsync(user, RegisterVM.Input.Password);
+
+                // Add new guide.
+                if (RegisterVM.Guide != null)
+                {
+                    // Locked the new guide for revising.
+                    var futureDateLocked = DateTime.Now.AddYears(1000);
+                    await _userManager.SetLockoutEndDateAsync(user, futureDateLocked);
+
+                    RegisterVM.Guide.UserId = await _userManager.GetUserIdAsync(user);         
+
+                    #region Upload Identity Card
+
+                    string rootPath = _hostEnviroment.WebRootPath;
+                    var image = RegisterVM.Guide.IdentityImage;
+
+                    if (image != null)
+                    {
+                        string folderPath = Path.Combine(rootPath, @"images\guide-identity");
+                        string imageName = Guid.NewGuid().ToString();
+                        string extension = Path.GetExtension(image.FileName);
+
+                        string imageURL = Path.Combine(folderPath, imageName + extension);
+
+                        FileStream fileStream = new FileStream(imageURL, FileMode.Create);
+                        await image.CopyToAsync(fileStream);
+
+                        RegisterVM.Guide.IdentityCardUrl = imageURL;
+
+                    }
+
+                    #endregion
+
+                    _unitOfWork.GuideUser.Add(RegisterVM.Guide);
+                }                    
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    //if (!await _roleManager.RoleExistsAsync(SD.Role_User_Admin))
-                    //    await _roleManager.CreateAsync(new IdentityRole (SD.Role_User_Admin));
-
-                    //if (!await _roleManager.RoleExistsAsync(SD.Role_User_Tourist))
-                    //    await _roleManager.CreateAsync(new IdentityRole(SD.Role_User_Tourist));
-
-                    //if (!await _roleManager.RoleExistsAsync(SD.Role_User_Suspended_Guide))
-                    //    await _roleManager.CreateAsync(new IdentityRole(SD.Role_User_Suspended_Guide));
-
-                    // Add default role to user (Tourist).
-                    await _userManager.AddToRoleAsync(user, SD.Role_User_Tourist);
+                    // Add role to Suspended Guide.                    
+                    await _userManager.AddToRoleAsync(user, SD.Role_User_Suspended_Guide);
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -116,13 +141,15 @@ namespace EgyGuide.Areas.Identity.Pages.Account
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
+                        // EmailService
                         return RedirectToPage("RegisterConfirmation", new { email = RegisterVM.Input.Email, returnUrl = returnUrl });
                     }
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
 
-                        return LocalRedirect(returnUrl);
+                        // This for the new guide                        
+                        return RedirectToPage("RegisterConfirmation");
                     }
                 }
                 foreach (var error in result.Errors)

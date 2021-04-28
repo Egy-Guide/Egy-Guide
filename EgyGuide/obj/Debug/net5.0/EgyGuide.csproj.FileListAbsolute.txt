@@ -1035,3 +1035,5 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\Ca
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\CategorySidebar.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Blog\BlogItems.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\Pagination.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Guide\Register.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Guide\RegisterConfirmation.cshtml.g.cs
