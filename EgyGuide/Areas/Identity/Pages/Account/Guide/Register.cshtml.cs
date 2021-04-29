@@ -109,8 +109,11 @@ namespace EgyGuide.Areas.Identity.Pages.Account.Guide
 
                         string imageURL = Path.Combine(folderPath, imageName + extension);
 
-                        FileStream fileStream = new FileStream(imageURL, FileMode.Create);
-                        await image.CopyToAsync(fileStream);
+                        using (var fileStream = new FileStream(imageURL, FileMode.Create))
+                        {
+                            await image.CopyToAsync(fileStream);
+                            await fileStream.DisposeAsync();
+                        }                         
 
                         RegisterVM.Guide.IdentityCardUrl = imageURL;
 

@@ -4,8 +4,8 @@
 @using EgyGuide.Utility
 
 @{
-    ViewData["Title"] = "Register";
     ViewData["AddClassToBodyTag"] = "transparent-header";
+    ViewData["Title"] = "Register";
     ViewData["HeaderTitle"] = "create your account for free";
 }
 
@@ -58,7 +58,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label>Nationality</label>
                                 <select asp-for="RegisterVM.Input.Nationality" class="selectpicker show-tick form-control">
@@ -68,7 +68,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label>Country</label>
                                 <select asp-for="RegisterVM.Input.Country" class="selectpicker show-tick form-control">
@@ -78,18 +78,27 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label>City</label>
                                 <input asp-for="RegisterVM.Input.City" class="form-control" type="text" placeholder="Ex: Cairo">
+                                <span asp-validation-for="RegisterVM.Input.City" class="text-danger"></span>
                             </div>
                         </div>
 
                         <!-- Guide-User Details -->
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label>Year Experience</label>
+                                <input asp-for="RegisterVM.Guide.YearExperience" class="form-control form-spin" value="1" type="text">
+                                <span asp-validation-for="RegisterVM.Guide.YearExperience" class="text-danger"></span>
+                            </div>
+                        </div>
+
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group">
                                 <label>Service Areas</label>
-                                <input asp-for="RegisterVM.Guide.ServiceArea" class="form-control" type="text" placeholder="Ex: Dahab,Sharm El-Sheikh,Cairo">
+                                <input asp-for="RegisterVM.Guide.ServiceArea" class="form-control tokenfield" type="text" value="Cairo, Dahab" placeholder="Up to 10">
                                 <span asp-validation-for="RegisterVM.Guide.ServiceArea" class="text-danger"></span>
                             </div>
                         </div>
@@ -97,51 +106,44 @@
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group">
                                 <label>Languages</label>
-                                <input asp-for="RegisterVM.Guide.Language" class="form-control" type="text" placeholder="Ex: Arabic,English,French">
+                                <input asp-for="RegisterVM.Guide.Language" class="form-control tokenfield" type="text" value="Arabic, English" placeholder="Up to 10">
                                 <span asp-validation-for="RegisterVM.Guide.Language" class="text-danger"></span>
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <label>Year Experience</label>
-                                <input asp-for="RegisterVM.Guide.YearExperience" class="form-control" type="text" placeholder="Year Experience">
-                                <span asp-validation-for="RegisterVM.Guide.YearExperience" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-12">
-                            <div class="form-group">
+                        <div class="col-sm-12 col-md-12">                                
+                            <div class="form-group bootstrap-fileinput-style-01">
                                 <label>Identity Card <span class="text-danger">(Secret)</span></label>
-                                <input asp-for="RegisterVM.Guide.IdentityImage" class="form-control" type="file">
+                                <input id="form-photos" asp-for="RegisterVM.Guide.IdentityImage" type="file">
+                                <span class="font12 font-italic">** only jpg, png, tiff are allowed</span>
                                 <span asp-validation-for="RegisterVM.Guide.IdentityImage" class="text-danger"></span>
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
                             <div class="form-group">
-                                <label>Facebook Profile Link <span class="text-success">(Option)</span></label>
+                                <label>Facebook Profile Link <span class="text-success">(Optional)</span></label>
                                 <input asp-for="RegisterVM.Guide.FacebookProfile" class="form-control" type="text" placeholder="https://www.facebook.com/yourprofile">
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
                             <div class="form-group">
-                                <label>Twitter Profile Link <span class="text-success">(Option)</span></label>
+                                <label>Twitter Profile Link <span class="text-success">(Optional)</span></label>
                                 <input asp-for="RegisterVM.Guide.TwitterProfile" class="form-control" type="text" placeholder="https://www.twitter.com/yourprofile">
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
                             <div class="form-group">
-                                <label>Instagram Profile Link <span class="text-success">(Option)</span></label>
+                                <label>Instagram Profile Link <span class="text-success">(Optional)</span></label>
                                 <input asp-for="RegisterVM.Guide.InstagramProfile" class="form-control" type="text" placeholder="https://www.instagram.com/yourprofile">
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
                             <div class="form-group">
-                                <label>Youtube Profile Link <span class="text-success">(Option)</span></label>
+                                <label>Youtube Profile Link <span class="text-success">(Optional)</span></label>
                                 <input asp-for="RegisterVM.Guide.YoutubeProfile" class="form-control" type="text" placeholder="https://www.youtube.com/user/yourchannel">
                             </div>
                         </div>
@@ -189,10 +191,10 @@
                             <button type="submit" class="btn btn-primary btn-lg">Register</button>
                         </div>
                     </form>
-                </div>                
+                </div>
             </div>
 
-        </div>        
+        </div>
         <!-- end Register Modal -->
 
     </div>
@@ -201,4 +203,11 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/bootstrap-tokenfield.js"></script>
+    <script type="text/javascript" src="~/js/typeahead.bundle.min.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap3-wysihtml5.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.bootstrap-touchspin.js"></script>
+    <script type="text/javascript" src="~/js/customs-dashboard-guide-info.js"></script>
+    <script type="text/javascript" src="~/js/fileinput.min.js"></script>
+    <script type="text/javascript" src="~/js/customs-fileinput.js"></script>
 }

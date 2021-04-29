@@ -1,5 +1,10 @@
-﻿<ol class="breadcrumb">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Page</a></li>
-    <li class="active">Result page grid</li>
+﻿@{ 
+    var links = (Context.Request.Path.Value).ToString().TrimStart('/').Split("/").ToList();
+}
+
+<ol class="breadcrumb" style="text-transform:capitalize">
+    @foreach (var link in links)
+    {
+        <li><a>@link</a></li>
+    }
 </ol>

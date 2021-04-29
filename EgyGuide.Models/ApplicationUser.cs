@@ -17,12 +17,12 @@ namespace EgyGuide.Models
         [Required]
         public string LastName { get; set; }
         [Required]
+        public string City { get; set; }
+        [Required]
         public string Country { get; set; }
         [Required]
         public string Nationality { get; set; }
         public string ImageUrl { get; set; }
-        
-        public string City { get; set; }
        
         [Column(TypeName = "text")]
         public string Brief { get; set; }
