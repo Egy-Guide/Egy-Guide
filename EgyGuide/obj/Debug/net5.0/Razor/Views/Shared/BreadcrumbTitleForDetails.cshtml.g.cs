@@ -27,7 +27,7 @@ using EgyGuide.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4fe2461d9eb0d6a2e9073b9b3b548bf569552655", @"/Views/Shared/BreadcrumbTitleForDetails.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"da94f91bf55f607904a0334e49f022a705c8c3a4", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"311a2a442e1cf4ea2f8e62aef0c024c74e5803e3", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_BreadcrumbTitleForDetails : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

@@ -57,6 +57,7 @@ jQuery(function($) {
 		browseIcon: '',
 		removeLabel: 'Remove',
 		removeIcon: '',
+		showUpload: false,
 		uploadLabel: 'Upload',
 		uploadIcon: '',
 		autoReplace: false,
@@ -81,7 +82,7 @@ jQuery(function($) {
 
 	
 	
-})(jQuery);
+});
 
 
 

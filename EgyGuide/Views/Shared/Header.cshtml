@@ -1,4 +1,8 @@
-﻿<!-- start breadcrumb -->
+﻿@{ 
+    var links = (Context.Request.Path.Value).ToString().TrimStart('/').Split("/").ToList();
+}
+
+<!-- start breadcrumb -->
 
 <div class="breadcrumb-image-bg" style="background-image:url('images/breadcrumb-bg.jpg');">
     <div class="container">
@@ -20,10 +24,11 @@
 
         <div class="breadcrumb-wrapper">
 
-            <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Page</a></li>
-                <li class="active">Result page grid</li>
+            <ol class="breadcrumb" style="text-transform:capitalize">
+                @foreach (var link in links)
+                {
+                    <li><a href="#">@link</a></li>
+                }
             </ol>
 
         </div>

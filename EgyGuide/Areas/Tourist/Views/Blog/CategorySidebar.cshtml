@@ -1,0 +1,16 @@
+﻿@inject EgyGuide.DataAccess.Repository.IRepository.IUnitOfWork _unitOfWork
+
+@{
+    var categories = _unitOfWork.Category.GetAll();
+}
+
+<ul class="sidebar-category">
+    @foreach (var category in categories)
+    {      
+        <li>
+            <a asp-area="Tourist" asp-controller="Blog" asp-action="Category" asp-route-category="@category.Name">
+                @category.Name<span>(@_unitOfWork.Blog.GetAll().Count(b => b.Category.Name == category.Name))</span>
+            </a>
+        </li>
+    }
+</ul>

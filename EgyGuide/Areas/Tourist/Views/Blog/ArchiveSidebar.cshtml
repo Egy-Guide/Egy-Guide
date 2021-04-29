@@ -1,0 +1,15 @@
+﻿@inject EgyGuide.DataAccess.Repository.IRepository.IUnitOfWork _unitOfWork
+
+@{
+    var archives = _unitOfWork.Blog.GetAll()
+                                   .OrderByDescending(b => b.Date)
+                                   .GroupBy(b => b.Date.ToString("MMMM yyyy"))                                   
+                                   .Take(5);
+}
+
+<ul class="sidebar-archives">
+    @foreach (var archive in archives)
+    {
+        <li><a asp-action="Archive" asp-route-date="@archive.Key">@archive.Key <span>(@archive.Count())</span></a></li>
+    }
+</ul>

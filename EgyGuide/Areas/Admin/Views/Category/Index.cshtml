@@ -1,0 +1,62 @@
+﻿@model IEnumerable<EgyGuide.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<div class="padding-30">
+    <a asp-controller="Category" asp-action="CategoryCreate" class="btn btn-primary">Create</a>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <a asp-action="CategoryCreate" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                    <button onclick="Delete(@item.Id)" class="btn btn-danger">Delete</button>
+                </td>               
+            </tr>
+        }
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        function Delete(id) {
+            $.ajax({
+                url: '/Admin/Category/Delete/' + id,
+                type: 'DELETE',
+                success: function (data) {
+                    if (data)
+                        alert("Deleted")
+                    else
+                        alert("Not Deleted")
+                }
+            });
+        }
+    </script>
+}
