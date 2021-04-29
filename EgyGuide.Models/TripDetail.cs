@@ -37,11 +37,10 @@ namespace EgyGuide.Models
         public DateTime MeetingDate { get; set; }
         [Required]
         public string Price { get; set; }
-        [Required]
+        
         [Column(TypeName = "text")]
+        [Required]
         public string Description { get; set; }
-
-        public string SelectedTags { get; set; }
 
         public string SelcetedStyles { get; set; }
         [Required]

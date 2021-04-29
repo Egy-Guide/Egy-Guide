@@ -113,6 +113,10 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
                 var key3 = "excluded";
                 var dataExcluded = HttpContext.Session.GetString(key3);
+                
+                var files = HttpContext.Request.Form.Files;
+                string webRootPath = _hostEnvironment.WebRootPath;
+
 
                 if (tripVM.TripDetail.TripId == 0 )
                 {
@@ -137,11 +141,32 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 }
                 else
                 {
-                    _unit.OfferCreate.Update(tripVM.TripDetail);
-                    _unit.Save();
+                    if (tripVM.TripDetail.TripId != 0)
+                    {
+                        tripVM.TripDetail = _unit.OfferCreate.Get(tripVM.TripDetail.TripId);
+                        tripVM.Galleries = _db.Galleries.Where(i => i.TripId == tripVM.TripDetail.TripId);
+                        //update images
+                        if (files.Count > 0)
+                        {
+                            foreach (var image in tripVM.Galleries)
+                            {
+                                if(image.URL != null)
+                                {
+                                    string imagePath = Path.Combine(webRootPath, image.URL.TrimStart('\\'));
+                                    if (System.IO.File.Exists(imagePath))
+                                    {
+                                        GC.Collect();
+                                        GC.WaitForPendingFinalizers();
+                                        System.IO.File.Delete(imagePath);
+                                    }
+                                }
+                            }
+                    }
+                        UploadImages();
+                        _unit.OfferCreate.Update(tripVM.TripDetail);
+                        _unit.Save();
+                    }
                 }
-
-
 
                 return RedirectToAction("TripDays","TripDays",new { area="TourGuide"});
             }
@@ -149,17 +174,17 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             {
                
                 var cityList = await _db.Cities.ToListAsync();
+                
                 tripVM.CityList = cityList.Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.CityId.ToString()
                 });
-
-                if (tripVM.TripDetail.TripId != 0)
-                {
-                    tripVM.TripDetail = _unit.OfferCreate.Get(tripVM.TripDetail.TripId);
-                }
                 
+                tripVM.TripStyles = _db.TripStyles;
+
+
+
             }
             return View(tripVM);
         }
@@ -180,6 +205,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 Place.PlaceName = place;
                 Place.TripId = lastRecord.TripId;
                 _db.Places.Add(Place);
+                
 
             }
         }

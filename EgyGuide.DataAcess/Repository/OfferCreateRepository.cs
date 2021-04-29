@@ -33,7 +33,7 @@ namespace EgyGuide.DataAccess.Repository
                 objFromDb.MeetingDate = tripDetail.MeetingDate;
                 objFromDb.Price = tripDetail.Price;
                 objFromDb.Description = tripDetail.Description;
-                objFromDb.SelectedTags = tripDetail.SelectedTags;
+                
                 
                 objFromDb.SelectedLanguages = tripDetail.SelectedLanguages;
                 objFromDb.MaxTravellers = tripDetail.MaxTravellers;

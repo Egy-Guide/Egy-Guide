@@ -23,6 +23,10 @@ namespace EgyGuide.Areas.Tourist.Controllers
         }
         public IActionResult Index(int id)
         {
+            if(id == 0)
+            {
+                return RedirectToAction("Index", "Offered");
+            }
             var selectedStyles = _db.SelectedStyles.Where(s => s.TripId == id).Select(s=>s.StyleId);
             var included = _db.Includeds.Where(i => i.TripId == id);
             var images = _db.Galleries.Where(i => i.TripId == id);

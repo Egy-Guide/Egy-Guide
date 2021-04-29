@@ -306,27 +306,27 @@
                         <div class="itinerary-toggle-wrapper mb-40">
 
                             <div class="panel-group bootstrap-toggle">
-                            @foreach (var day in Model.TripDaysDetail)
+                            @foreach (var day in Model.TripDaysDetail.Select((value,i) =>  ( i, value)))
                             {
                                 <div class="panel">
                                     <div class="panel-heading">
                                         <div class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#" href="#bootstarp-toggle-one-2">
+                                            <a data-toggle="collapse" data-parent="#" href="#bootstarp-toggle-@day.i-2">
                                                 <div class="itinerary-day">
                                                     Day
-                                                    <span class="number">@day.DayNum</span>
+                                                    <span class="number">@day.value.DayNum </span>
                                                 </div>
                                                 <div class="itinerary-header">
-                                                    <h4>Vist National Museum</h4>
-                                                    <p class="font-md">@day.Title</p>
+                                                    <h4>@day.value.Title</h4>
+                                                    <p class="font-md">@day.value.Remark</p>
                                                     <div class="image"><img src="images/itinerary-sq/01.jpg" alt="images" /></div>
                                                 </div>
                                             </a>
                                         </div>
                                     </div>
-                                    <div id="bootstarp-toggle-one-2" class="panel-collapse collapse">
+                                    <div id="bootstarp-toggle-@day.i-2" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            <p class="font-lg">@SD.StripHtml(day.Description). </p>
+                                            <p class="font-lg">@SD.StripHtml(day.value.Description). </p>
 
 
                                         </div>
