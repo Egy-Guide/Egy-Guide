@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
 {
     [Area("Tourist")]
     [Route("offered")]
+    [Authorize]
     public class OfferedController : Controller
     {
         public IActionResult Index()

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj": {}
+    "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj": {
+    "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj",
+        "projectUniqueName": "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj",
         "projectName": "EgyGuide.Models",
-        "projectPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj",
-        "packagesPath": "C:\\Users\\M&G\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Models\\obj\\",
+        "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj",
+        "packagesPath": "C:\\Users\\Sully\\.nuget\\packages\\",
+        "outputPath": "E:\\project\\Egy-Guide\\EgyGuide.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\M&G\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sully\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +39,24 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.Facebook": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.AspNetCore.Mvc.ViewFeatures": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -54,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
