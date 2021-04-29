@@ -125,19 +125,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sully\\.nuget\\packages\\": {}
+    "C:\\Users\\M&G\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
+      "projectUniqueName": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
       "projectName": "EgyGuide.Utility",
-      "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
-      "packagesPath": "C:\\Users\\Sully\\.nuget\\packages\\",
-      "outputPath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\obj\\",
+      "projectPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
+      "packagesPath": "C:\\Users\\M&G\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Utility\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Sully\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\M&G\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -191,16 +191,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file E:\\project\\Egy-Guide\\EgyGuide.Utility\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

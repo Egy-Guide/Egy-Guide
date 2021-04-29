@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "+ioGIruFQI8R9rUvgdOXgrffYTG3G0JNgrPpPtSj09iKRq6kT/jXo4G6UxQMgzzVEkwsXAnFh+bx678Gkrrfhw==",
+  "dgSpecHash": "yps4GGS4z/lPKD4lzN/8Bk0saTGPHSn2Nlq5G5LKkT83IpbTQhpz2cVsxALBWojTDP2+hJcBn/HmLwKZN/UZCA==",
   "success": true,
-  "projectFilePath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
+  "projectFilePath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Sully\\.nuget\\packages\\htmlagilitypack\\1.11.30\\htmlagilitypack.1.11.30.nupkg.sha512",
-    "C:\\Users\\Sully\\.nuget\\packages\\microsoft.aspnetcore.authentication.facebook\\5.0.4\\microsoft.aspnetcore.authentication.facebook.5.0.4.nupkg.sha512",
-    "C:\\Users\\Sully\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\5.0.4\\microsoft.aspnetcore.authentication.google.5.0.4.nupkg.sha512"
+    "C:\\Users\\M&G\\.nuget\\packages\\htmlagilitypack\\1.11.30\\htmlagilitypack.1.11.30.nupkg.sha512",
+    "C:\\Users\\M&G\\.nuget\\packages\\microsoft.aspnetcore.authentication.facebook\\5.0.4\\microsoft.aspnetcore.authentication.facebook.5.0.4.nupkg.sha512",
+    "C:\\Users\\M&G\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\5.0.4\\microsoft.aspnetcore.authentication.google.5.0.4.nupkg.sha512"
   ],
   "logs": []
 }
