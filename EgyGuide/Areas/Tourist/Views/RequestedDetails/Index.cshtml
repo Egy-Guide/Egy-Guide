@@ -1,4 +1,5 @@
-﻿
+﻿@model EgyGuide.Models.ViewModels.RequestedVM
+@using EgyGuide.Utility
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +7,7 @@
 
 <!-- start breadcrumb -->
 <partial name="~/Views/Shared/Breadcrumb.cshtml">
-<!-- end breadcrumb -->
+    <!-- end breadcrumb -->
 
     <div class="user-profile-wrapper">
 
@@ -69,7 +70,7 @@
                                                 </div>
                                                 <div class="col-xss-6 col-xs-6 col-sm-6 col-md-12 text-right text-left-sm">
                                                     <div class="user-header-price mt-5-sm">
-                                                        <span class="block-sm">My budget</span> <span class="text-primary number">USD658.00</span>
+                                                        <span class="block-sm">My budget</span> <span class="text-primary number">@Model.Requested.Budget</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -125,9 +126,9 @@
                 <div class="col-xs-12 col-sm-7 col-md-8 mt-20">
                     <h4 class="section-title">My requested trip:</h4>
 
-                    <h3 class="font-lg mb-20">Need expert guide to bring me to Bangkok for 3 days 2 nights</h3>
+                    <h3 class="font-lg mb-20">@Model.Requested.Title</h3>
 
-                    <p class="lead">Goodness doubtful material has denoting suitable she two. Dear mean she way and poor bred they come. He otherwise me incommode explained so in remaining. Polite barton in it warmly do county length. Dissuade ecstatic and properly saw entirely sir why laughter endeavor.</p>
+
 
                     <div class="bt mt-30 mb-30"></div>
 
@@ -139,7 +140,7 @@
                                     <h5><i class="ti-timer text-primary mr-5"></i> Duration</h5>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 mt-xs">
-                                    3 days &amp; 2 nights
+                                    @Model.Requested.Days days &amp; @Model.Requested.Nights nights
                                 </div>
                             </div>
                         </li>
@@ -150,7 +151,7 @@
                                     <h5><i class="ti-location-pin text-primary mr-5"></i> Location</h5>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 mt-xs">
-                                    Bangkok, Thailand
+                                    @Model.Requested.City.Name
                                 </div>
                             </div>
                         </li>
@@ -161,7 +162,7 @@
                                     <h5><i class="ti-user text-primary mr-5"></i> Travellers</h5>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 mt-xs">
-                                    3
+                                    @Model.Requested.NumTravellers
                                 </div>
                             </div>
                         </li>
@@ -172,52 +173,38 @@
                                     <h5><i class="ti-flag-alt text-primary mr-5"></i> Speaking </h5>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 mt-xs">
-                                    English, Thai, Malay
+                                    @Model.Requested.SelectedLanguages
                                 </div>
                             </div>
                         </li>
 
-                        <li>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6">
-                                    <h5><i class="ti-briefcase text-primary mr-5"></i> Porpose </h5>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 mt-xs">
-                                    Import/export Business
-                                </div>
-                            </div>
-                        </li>
+
 
                     </ul>
 
                     <div class="mb-30"></div>
 
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim.
+                        @SD.StripHtml(Model.Requested.Description)
                     </p>
 
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim.
-                    </p>
-
-                    <div class="bt mt-30 mb-30"></div>
-
-                    <h4>Other information</h4>
-
-                    <ul class="list-bullet-circle">
-                        <li>I need <strong>halal food</strong> </li>
-                        <li>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</li>
-                        <li>Certain it waiting no entered is. Passed her indeed uneasy shy polite appear denied</li>
-                        <li>Satisfaction guarantee</li>
-                    </ul>
 
 
+
+                    @if (Model.RequestedInfos != null)
+                    {
+                        <div class="bt mt-30 mb-30"></div>
+                        <h4>Other information</h4>
+
+                        <ul class="list-bullet-circle">
+                            @foreach (var info in Model.RequestedInfos)
+                            {
+                                <li>@info.Title </li>
+
+                            }
+                        </ul>
+
+                    }
 
                     <div class="bt mt-30 mb-20"></div>
 
@@ -646,12 +633,12 @@
 
     </div>
 
-@section Scripts{ 
-<script src="js/jquery.stickit.js"></script>
-<script src="js/bootstrap-tokenfield.js"></script>
-<script src="js/typeahead.bundle.min.js"></script>
-<script src="js/jquery.sumogallery.js"></script>
-<script src="js/images-grid.js"></script>
-<script src="js/jquery.bootstrap-touchspin.js"></script>
-<script src="js/customs-detail.js"></script>
-}
+    @section Scripts{
+        <script src="js/jquery.stickit.js"></script>
+        <script src="js/bootstrap-tokenfield.js"></script>
+        <script src="js/typeahead.bundle.min.js"></script>
+        <script src="js/jquery.sumogallery.js"></script>
+        <script src="js/images-grid.js"></script>
+        <script src="js/jquery.bootstrap-touchspin.js"></script>
+        <script src="js/customs-detail.js"></script>
+    }
