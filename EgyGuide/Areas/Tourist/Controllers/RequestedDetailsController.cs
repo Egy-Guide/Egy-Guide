@@ -1,4 +1,5 @@
-﻿using EgyGuide.Data;
+﻿
+using EgyGuide.DataAccess.Data;
 using EgyGuide.DataAccess.Repository.IRepository;
 using EgyGuide.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;

@@ -47,11 +47,27 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.Facebook": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.2, )"
             },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
               "version": "[5.0.2, )"
             },
@@ -115,13 +131,17 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.Facebook": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
             "Microsoft.AspNetCore.Mvc.ViewFeatures": {
               "target": "Package",
               "version": "[2.2.0, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[5.0.2, )"
             },
             "Microsoft.Extensions.Identity.Stores": {
               "target": "Package",
@@ -186,6 +206,14 @@
             "HtmlAgilityPack": {
               "target": "Package",
               "version": "[1.11.32, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Facebook": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[5.0.4, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -257,6 +285,18 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.33, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Facebook": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.2, )"

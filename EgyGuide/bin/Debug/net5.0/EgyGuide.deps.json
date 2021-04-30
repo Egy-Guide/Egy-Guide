@@ -36,6 +36,9 @@
           "EgyGuide.DataAccess": "1.0.0",
           "EgyGuide.Models": "1.0.0",
           "EgyGuide.Utility": "1.0.0",
+          "HtmlAgilityPack": "1.11.33",
+          "Microsoft.AspNetCore.Authentication.Facebook": "5.0.5",
+          "Microsoft.AspNetCore.Authentication.Google": "5.0.5",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "5.0.2",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.2",
           "Microsoft.AspNetCore.Identity.UI": "5.0.2",
@@ -328,11 +331,11 @@
           "EgyGuide.dll": {}
         }
       },
-      "HtmlAgilityPack/1.11.32": {
+      "HtmlAgilityPack/1.11.33": {
         "runtime": {
           "lib/netstandard2.0/HtmlAgilityPack.dll": {
-            "assemblyVersion": "1.11.32.0",
-            "fileVersion": "1.11.32.0"
+            "assemblyVersion": "1.11.33.0",
+            "fileVersion": "1.11.33.0"
           }
         },
         "compile": {
@@ -371,6 +374,28 @@
           "Microsoft.AspNetCore.Authentication.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Http": "2.2.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.2.0"
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.Facebook/5.0.5": {
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Authentication.Facebook.dll": {
+            "assemblyVersion": "5.0.5.0",
+            "fileVersion": "5.0.521.16708"
+          }
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Authentication.Facebook.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.Google/5.0.5": {
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "assemblyVersion": "5.0.5.0",
+            "fileVersion": "5.0.521.16708"
+          }
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Authentication.Google.dll": {}
         }
       },
       "Microsoft.AspNetCore.Authorization/2.2.0": {
@@ -2544,8 +2569,12 @@
         "dependencies": {
           "EgyGuide.Models": "1.0.0",
           "EgyGuide.Utility": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.Facebook": "5.0.5",
+          "Microsoft.AspNetCore.Authentication.Google": "5.0.5",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.2",
+          "Microsoft.AspNetCore.Identity.UI": "5.0.2",
           "Microsoft.EntityFrameworkCore": "5.0.2",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.2"
         },
         "runtime": {
@@ -2557,8 +2586,9 @@
       },
       "EgyGuide.Models/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.Facebook": "5.0.5",
+          "Microsoft.AspNetCore.Authentication.Google": "5.0.5",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "2.2.0",
-          "Microsoft.EntityFrameworkCore": "5.0.2",
           "Microsoft.Extensions.Identity.Stores": "5.0.2"
         },
         "runtime": {
@@ -2570,7 +2600,9 @@
       },
       "EgyGuide.Utility/1.0.0": {
         "dependencies": {
-          "HtmlAgilityPack": "1.11.32",
+          "HtmlAgilityPack": "1.11.33",
+          "Microsoft.AspNetCore.Authentication.Facebook": "5.0.5",
+          "Microsoft.AspNetCore.Authentication.Google": "5.0.5",
           "Microsoft.EntityFrameworkCore": "5.0.2"
         },
         "runtime": {
@@ -4244,12 +4276,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "HtmlAgilityPack/1.11.32": {
+    "HtmlAgilityPack/1.11.33": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-c5eNfxPDvQSh7YClPuo+xkD1d5F4Qms4g+MG1UktytdHk/mvCFsbopLIsk+AKqByPmPvSl/xVmyogRBejf0DyQ==",
-      "path": "htmlagilitypack/1.11.32",
-      "hashPath": "htmlagilitypack.1.11.32.nupkg.sha512"
+      "sha512": "sha512-ccsOdeRuObzQNy3FGLHd0MTmPvEu9nKUYDAqLham1XD3azbU+gcyRF6Hu87A68b7WqGpCdBZiLU7CwJVVmTb6A==",
+      "path": "htmlagilitypack/1.11.33",
+      "hashPath": "htmlagilitypack.1.11.33.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",
@@ -4278,6 +4310,20 @@
       "sha512": "sha512-XlVJzJ5wPOYW+Y0J6Q/LVTEyfS4ssLXmt60T0SPP+D8abVhBTl+cgw2gDHlyKYIkcJg7btMVh383NDkMVqD/fg==",
       "path": "microsoft.aspnetcore.authentication.core/2.2.0",
       "hashPath": "microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.Facebook/5.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-I8YwaHFBVTmGkXp5jgVESfpeYOCF+9Cqtgt8TGCNjl7FbsB3W5vo7gqtOA1fPgQYn5iA03qrA8VDkQHW3AaVAw==",
+      "path": "microsoft.aspnetcore.authentication.facebook/5.0.5",
+      "hashPath": "microsoft.aspnetcore.authentication.facebook.5.0.5.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.Google/5.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6S5xW1Nxex6LmO+QKFSxw4oGT0Z2jBtRVOZfyjiatLgMX4mjRSqXEqyHvqADvmSEg5yEGdVSR/A3j4jbOhm6ag==",
+      "path": "microsoft.aspnetcore.authentication.google/5.0.5",
+      "hashPath": "microsoft.aspnetcore.authentication.google.5.0.5.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authorization/2.2.0": {
       "type": "package",

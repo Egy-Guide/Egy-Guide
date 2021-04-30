@@ -13,6 +13,7 @@ namespace EgyGuide.DataAccess.Repository.IRepository
         ICategoryRepository Category { get; }
         IBlogRepository Blog { get; }
         ITripDaysRepository TripDays { get; }
+        IOfferCreateRepository OfferCreate { get; }
         IRequestedRepository Requested { get; }
         void Save();
     }

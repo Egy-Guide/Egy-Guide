@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EgyGuide.DataAccess.Repository.IRepository;
-using EgyGuide.Data;
+using EgyGuide.DataAccess;
+using EgyGuide.DataAccess.Data;
 
 namespace EgyGuide.DataAccess.Repository
 {
