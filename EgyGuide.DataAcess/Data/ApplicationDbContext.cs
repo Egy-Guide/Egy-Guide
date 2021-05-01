@@ -21,9 +21,7 @@ namespace EgyGuide.DataAccess.Data
 
        
         public DbSet<City> Cities { get; set; }
-        public DbSet<Gallery> Galleries { get; set; }
-        public DbSet<Guide> Guides { get; set; }
-   
+        public DbSet<Gallery> Galleries { get; set; }   
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Place> Places { get; set; }
         
@@ -37,8 +35,6 @@ namespace EgyGuide.DataAccess.Data
         public DbSet<Requested> Requested { get; set; }
         public DbSet<RequestedSelectedStyle> RequestedSelectedStyle { get; set; }
         public DbSet<RequestedInfo> RequestedInfo { get; set; }
-
-
         public DbSet<GuideUser> GuideUsers { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Category> Categories { get; set; }

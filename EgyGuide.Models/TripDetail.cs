@@ -13,11 +13,10 @@ namespace EgyGuide.Models
     {
         [Key]
         public int TripId { get; set; }
-        
-        //public int GuideId { get; set; }
-        //[ForeignKey("GuideId")]
-        //public Guide Guide { get; set; }
-       
+        public int GuideId { get; set; }
+        [ForeignKey("GuideId")]
+        public GuideUser GuideUser { get; set; }
+
         [Required]
         public int CityId { get; set; }
         [ForeignKey("CityId")]
@@ -51,11 +50,7 @@ namespace EgyGuide.Models
 
         public ICollection<Included> Included { get; set; }
         
-        
         public List<Gallery> SelectedImages { get; set; }
-        
-
-
 
     }
 }
