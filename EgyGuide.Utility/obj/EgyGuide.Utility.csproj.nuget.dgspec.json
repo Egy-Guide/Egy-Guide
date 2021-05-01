@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {}
+    "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {}
   },
   "projects": {
-    "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {
+    "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
+        "projectUniqueName": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
         "projectName": "EgyGuide.Utility",
-        "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
-        "packagesPath": "C:\\Users\\Sully\\.nuget\\packages\\",
-        "outputPath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\obj\\",
+        "projectPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj",
+        "packagesPath": "C:\\Users\\M&G\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Utility\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Sully\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\M&G\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -42,7 +42,7 @@
           "dependencies": {
             "HtmlAgilityPack": {
               "target": "Package",
-              "version": "[1.11.30, )"
+              "version": "[1.11.32, )"
             },
             "Microsoft.AspNetCore.Authentication.Facebook": {
               "target": "Package",
@@ -51,6 +51,10 @@
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
               "version": "[5.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             }
           },
           "imports": [
@@ -68,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

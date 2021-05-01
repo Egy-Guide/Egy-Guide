@@ -18,6 +18,8 @@ namespace EgyGuide.DataAccess.Repository
             GuideUser = new GuideUserRepository(_db);
             Category = new CategoryRepository(_db);
             Blog = new BlogRepository(_db);
+            TripDays = new TripDaysRepository(_db);
+            Requested = new RequestedRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -25,6 +27,9 @@ namespace EgyGuide.DataAccess.Repository
         public ICategoryRepository Category { get; private set; }
         public IBlogRepository Blog { get; private set; }
 
+        public ITripDaysRepository TripDays { get; private set; }
+        public IOfferCreateRepository OfferCreate { get; private set; }
+        public IRequestedRepository Requested { get; private set; }
         public void Dispose()
         {
             _db.Dispose();

@@ -51,6 +51,13 @@ namespace EgyGuide
                 options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
             });
             services.AddControllersWithViews();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+
+            });
             services.AddRazorPages();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
@@ -73,7 +80,7 @@ namespace EgyGuide
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();            
 

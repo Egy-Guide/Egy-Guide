@@ -92,7 +92,7 @@ namespace EgyGuide.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     //if (!await _roleManager.RoleExistsAsync(SD.Role_User_Admin))
-                    //    await _roleManager.CreateAsync(new IdentityRole (SD.Role_User_Admin));
+                    //    await _roleManager.CreateAsync(new IdentityRole(SD.Role_User_Admin));
 
                     //if (!await _roleManager.RoleExistsAsync(SD.Role_User_Tourist))
                     //    await _roleManager.CreateAsync(new IdentityRole(SD.Role_User_Tourist));

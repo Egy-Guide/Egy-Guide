@@ -22,11 +22,11 @@
           "EgyGuide.DataAccess.dll": {}
         }
       },
-      "HtmlAgilityPack/1.11.30": {
+      "HtmlAgilityPack/1.11.32": {
         "runtime": {
           "lib/netstandard2.0/HtmlAgilityPack.dll": {
-            "assemblyVersion": "1.11.30.0",
-            "fileVersion": "1.11.30.0"
+            "assemblyVersion": "1.11.32.0",
+            "fileVersion": "1.11.32.0"
           }
         }
       },
@@ -1613,9 +1613,10 @@
       },
       "EgyGuide.Utility/1.0.0": {
         "dependencies": {
-          "HtmlAgilityPack": "1.11.30",
+          "HtmlAgilityPack": "1.11.32",
           "Microsoft.AspNetCore.Authentication.Facebook": "5.0.4",
-          "Microsoft.AspNetCore.Authentication.Google": "5.0.4"
+          "Microsoft.AspNetCore.Authentication.Google": "5.0.4",
+          "Microsoft.EntityFrameworkCore": "5.0.2"
         },
         "runtime": {
           "EgyGuide.Utility.dll": {}
@@ -1629,12 +1630,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "HtmlAgilityPack/1.11.30": {
+    "HtmlAgilityPack/1.11.32": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-IuOSVuuHCJKrnAjNe5rZnZCyR/NpXL6ExEL7UiM8h4fnhbt8tLqIKol9q5Lv0uoxWO8fl9Uq+1kpGfMDUdr5zA==",
-      "path": "htmlagilitypack/1.11.30",
-      "hashPath": "htmlagilitypack.1.11.30.nupkg.sha512"
+      "sha512": "sha512-c5eNfxPDvQSh7YClPuo+xkD1d5F4Qms4g+MG1UktytdHk/mvCFsbopLIsk+AKqByPmPvSl/xVmyogRBejf0DyQ==",
+      "path": "htmlagilitypack/1.11.32",
+      "hashPath": "htmlagilitypack.1.11.32.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
       "type": "package",
