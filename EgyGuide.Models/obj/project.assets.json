@@ -6548,19 +6548,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\M&G\\.nuget\\packages\\": {}
+    "C:\\Users\\Sully\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj",
+      "projectUniqueName": "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj",
       "projectName": "EgyGuide.Models",
-      "projectPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj",
-      "packagesPath": "C:\\Users\\M&G\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Models\\obj\\",
+      "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj",
+      "packagesPath": "C:\\Users\\Sully\\.nuget\\packages\\",
+      "outputPath": "E:\\project\\Egy-Guide\\EgyGuide.Models\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\M&G\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Sully\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6618,7 +6618,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
