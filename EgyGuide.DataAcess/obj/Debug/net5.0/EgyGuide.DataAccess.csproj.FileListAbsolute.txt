@@ -32,11 +32,6 @@ C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide
 C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.dll
 C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\ref\EgyGuide.DataAccess.dll
 C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.pdb
-E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.csprojAssemblyReference.cache
-E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
-E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.AssemblyInfoInputs.cache
-E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.AssemblyInfo.cs
-E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.csproj.CoreCompileInputs.cache
 E:\project\Egy-Guide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.DataAccess.deps.json
 E:\project\Egy-Guide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.DataAccess.dll
 E:\project\Egy-Guide\EgyGuide.DataAcess\bin\Debug\net5.0\ref\EgyGuide.DataAccess.dll
@@ -45,6 +40,11 @@ E:\project\Egy-Guide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.Models.dll
 E:\project\Egy-Guide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.Utility.dll
 E:\project\Egy-Guide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.Models.pdb
 E:\project\Egy-Guide\EgyGuide.DataAcess\bin\Debug\net5.0\EgyGuide.Utility.pdb
+E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.csprojAssemblyReference.cache
+E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.AssemblyInfoInputs.cache
+E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.AssemblyInfo.cs
+E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.csproj.CoreCompileInputs.cache
 E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.csproj.CopyComplete
 E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\EgyGuide.DataAccess.dll
 E:\project\Egy-Guide\EgyGuide.DataAcess\obj\Debug\net5.0\ref\EgyGuide.DataAccess.dll

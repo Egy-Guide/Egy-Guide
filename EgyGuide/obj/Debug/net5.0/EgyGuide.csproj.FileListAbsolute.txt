@@ -1039,14 +1039,6 @@ C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.dll
 C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\ref\EgyGuide.dll
 C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.pdb
 C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.genruntimeconfig.cache
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.csprojAssemblyReference.cache
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.GeneratedMSBuildEditorConfig.editorconfig
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.AssemblyInfoInputs.cache
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.AssemblyInfo.cs
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.csproj.CoreCompileInputs.cache
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.MvcApplicationPartsAssemblyInfo.cache
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.RazorAssemblyInfo.cache
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.RazorAssemblyInfo.cs
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\appsettings.Development.json
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\appsettings.json
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\EgyGuide.StaticWebAssets.xml
@@ -1464,6 +1456,15 @@ E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\EgyGuide.Utility.dll
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\EgyGuide.DataAccess.pdb
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\EgyGuide.Models.pdb
 E:\project\Egy-Guide\EgyGuide\bin\Debug\net5.0\EgyGuide.Utility.pdb
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.csprojAssemblyReference.cache
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.GeneratedMSBuildEditorConfig.editorconfig
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.AssemblyInfoInputs.cache
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.AssemblyInfo.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.csproj.CoreCompileInputs.cache
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.MvcApplicationPartsAssemblyInfo.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.MvcApplicationPartsAssemblyInfo.cache
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.RazorAssemblyInfo.cache
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.RazorAssemblyInfo.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\staticwebassets\EgyGuide.StaticWebAssets.Manifest.cache
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\staticwebassets\EgyGuide.StaticWebAssets.xml
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\scopedcss\bundle\EgyGuide.styles.css
@@ -1591,3 +1592,4 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.dll
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\ref\EgyGuide.dll
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.pdb
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.genruntimeconfig.cache
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\NotFoundAlert.cshtml.g.cs

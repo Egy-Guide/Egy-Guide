@@ -19,6 +19,7 @@ namespace EgyGuide.DataAccess.Repository
             Category = new CategoryRepository(_db);
             Blog = new BlogRepository(_db);
             TripDays = new TripDaysRepository(_db);
+            OfferCreate = new OfferCreateRepository(_db);
             Requested = new RequestedRepository(_db);
         }
 
