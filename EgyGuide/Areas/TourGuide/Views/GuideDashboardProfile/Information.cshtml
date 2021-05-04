@@ -1,0 +1,216 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard - Guide Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="~/Views/Shared/Breadcrumb.cshtml">
+<partial name="~/Views/Shared/TourGuide/UserProfileWrapper.cshtml">
+
+<div class="pt-30 pb-50">
+
+    <div class="container">
+
+        <div class="row">
+
+            <partial name="~/Views/Shared/TourGuide/DashboardSidebarMenu.cshtml">
+
+            <div class="col-xs-12 col-sm-8 col-md-9 mt-20">
+
+                <div class="dashboard-wrapper">
+
+                    <h4 class="section-title">Guide Information</h4>
+                    <p class="mmt-15 mb-20"> Prepared interest proposal it he exercise. My wishing an in attempt ferrars. Visited eat you why service looking engaged. At place no walls hopes rooms fully in. Roof hope shy tore leaf joy paid boy.</p>
+
+                    <form class="post-form-wrapper">
+
+                        <div class="row gap-20">
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>Short Introduction</label>
+                                    <textarea class="form-control" placeholder="Enter Text ..." rows="6"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" placeholder="Ex: Salah Salem st">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Province/State</label>
+                                    <input type="text" class="form-control" placeholder="Ex: Giza">
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Zip Code</label>
+                                    <input type="text" class="form-control" placeholder="Ex: 35214">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Born</label>
+                                    <div class="row gap-5">
+                                        <div class="col-xs-3 col-sm-3">
+                                            <select class="selectpicker form-control" data-live-search="false">
+                                                <option value="0">day</option>
+                                                <option value="1">01</option>
+                                                <option value="2" selected>02</option>
+                                                <option value="3">03</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-5 col-sm-5">
+                                            <select class="selectpicker form-control" data-live-search="false">
+                                                <option value="0">month</option>
+                                                <option value="1">Jan</option>
+                                                <option value="2" selected>Feb</option>
+                                                <option value="3">Mar</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4">
+                                            <select class="selectpicker form-control" data-live-search="false">
+                                                <option value="0">year</option>
+                                                <option value="1">1985</option>
+                                                <option value="2" selected>1986</option>
+                                                <option value="3">1987</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-4 col-md-3">
+
+                                <div class="form-group">
+                                    <label>Private Transportation</label>
+                                    <div class="radio-wrapper">
+                                        <div class="radio-inline">
+                                            <input id="private_transportation-1" name="private_transportation" type="radio" class="radio" />
+                                            <label class="" for="private_transportation-1">Yes</label>
+                                        </div>
+                                        <div class="radio-inline">
+                                            <input id="private_transportation-2" name="private_transportation" type="radio" class="radio" />
+                                            <label class="" for="private_transportation-2">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-4 col-md-3">
+
+                                <div class="form-group">
+                                    <label>Public Transportation</label>
+                                    <div class="radio-wrapper">
+                                        <div class="radio-inline">
+                                            <input id="public_transportation-1" name="public_transportation" type="radio" class="checkbox" />
+                                            <label class="" for="public_transportation-1">Yes</label>
+                                        </div>
+                                        <div class="radio-inline">
+                                            <input id="public_transportation-2" name="public_transportation" type="radio" class="checkbox" />
+                                            <label class="" for="public_transportation-2">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>Special remark</label>
+                                    <textarea class="form-control" placeholder="Enter Text ..." rows="6"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>More detail</label>
+                                    <textarea class="form-control editor" placeholder="Enter Text ..." rows="6"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>Certificate</label>
+                                    <input type="file" name="form-photos" multiple id="form-photos">
+                                    <span class="font12 font-italic">** only jpg, png, tiff are allowed</span>
+                                </div>
+
+                            </div>
+
+                            <div class="clear mb-10"></div>
+
+                            <div class="col-sm-12">
+                                <a href="#" class="btn btn-primary">Save</a>
+                                <a href="#" class="btn btn-primary btn-border">Cancel</a>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{ 
+    <!-- Dashboard Guide Information JS -->
+    <script src="~/js/bootstrap-tokenfield.js"></script>
+    <script src="~/js/typeahead.bundle.min.js"></script>
+    <script src="~/js/bootstrap3-wysihtml5.min.js"></script>
+    <script src="~/js/jquery.bootstrap-touchspin.js"></script>
+    <script src="~/js/customs-dashboard-guide-info.js"></script>
+    <script src="~/js/fileinput.min.js"></script>
+    <script src="~/js/customs-fileinput.js"></script>
+    <script src="https://cdn.tiny.cloud/1/i54fe6u5lagl1he8pqydwfq525q0iiqncl244x4bzlp7acjm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea.editor',
+            plugins: 'lists',
+            manubar: 'file edit format',
+        });
+
+    </script>
+}

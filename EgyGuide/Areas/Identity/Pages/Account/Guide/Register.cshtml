@@ -81,7 +81,7 @@
                         <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label>City</label>
-                                <input asp-for="RegisterVM.Input.City" class="form-control" type="text" placeholder="Ex: Cairo">
+                                <input asp-for="RegisterVM.Input.City" class="form-control" type="text" placeholder="City">
                                 <span asp-validation-for="RegisterVM.Input.City" class="text-danger"></span>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group">
                                 <label>Service Areas</label>
-                                <input asp-for="RegisterVM.Guide.ServiceArea" class="form-control tokenfield" type="text" value="Cairo, Dahab" placeholder="Up to 10">
+                                <input asp-for="RegisterVM.Guide.ServiceArea" class="form-control" type="text" placeholder="Cairo, Alexandria, Dahab">
                                 <span asp-validation-for="RegisterVM.Guide.ServiceArea" class="text-danger"></span>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group">
                                 <label>Languages</label>
-                                <input asp-for="RegisterVM.Guide.Language" class="form-control tokenfield" type="text" value="Arabic, English" placeholder="Up to 10">
+                                <input asp-for="RegisterVM.Guide.Language" class="form-control" type="text" placeholder="Arabic, English, French">
                                 <span asp-validation-for="RegisterVM.Guide.Language" class="text-danger"></span>
                             </div>
                         </div>

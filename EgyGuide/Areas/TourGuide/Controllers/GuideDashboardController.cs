@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace EgyGuide.Areas.TourGuide.Controllers
 {
     [Area("TourGuide")]
-    [Route("guide-details-setting-my-tours")]
-    public class GuideSettingForToursController : Controller
+    [Route("guide/dashboard")]
+    public class GuideDashboardController : Controller
     {
         public IActionResult Index()
         {

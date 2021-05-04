@@ -11,7 +11,7 @@ jQuery(function($) {
 		dropZoneTitle: '<i class="fa fa-photo"></i><span>Upload Photo</span>',
 		uploadUrl: '/',
 		maxFileCount: 1,
-		showUpload: true,
+		showUpload: false,
 		browseLabel: 'Browse',
 		browseIcon: '',
 		removeLabel: 'Remove',
@@ -23,7 +23,7 @@ jQuery(function($) {
 		allowedFileTypes: ['image' ],
 		allowedFileExtensions: ['jpg', 'gif', 'png', 'tiff'],
 			initialPreview: [
-				'<img src="images/man/01.jpg" class="file-preview-image" alt="The Moon" title="The Moon">',
+				'<img src="/images/man/01.jpg" class="file-preview-image" alt="The Moon" title="The Moon">',
 		],
 		overwriteInitial: true,
 	});
@@ -32,7 +32,7 @@ jQuery(function($) {
 		dropZoneTitle: '<i class="fa fa-photo"></i><span>Upload Photo</span>',
 		uploadUrl: '/',
 		maxFileCount: 1,
-		showUpload: true,
+		showUpload: false,
 		browseLabel: 'Browse',
 		browseIcon: '',
 		removeLabel: 'Remove',
@@ -44,7 +44,7 @@ jQuery(function($) {
 		allowedFileTypes: ['image' ],
 		allowedFileExtensions: ['gif', 'png'],
 			initialPreview: [
-				'<img src="images/brands/06.png" class="file-preview-image" alt="The Moon" title="The Moon">',
+				'<img src="/images/brands/06.png" class="file-preview-image" alt="The Moon" title="The Moon">',
 		],
 		overwriteInitial: true,
 	});

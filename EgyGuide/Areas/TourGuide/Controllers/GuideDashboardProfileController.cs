@@ -7,10 +7,17 @@ using System.Threading.Tasks;
 namespace EgyGuide.Areas.TourGuide.Controllers
 {
     [Area("TourGuide")]
-    [Route("guide-details-setting-my-wishlist")]
-    public class GuideSettingWishListController : Controller
+    [Route("guide/dashboard")]
+    public class GuideDashboardProfileController : Controller
     {
+        [Route("edit-profile")]
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Route("information")]
+        public IActionResult Information()
         {
             return View();
         }

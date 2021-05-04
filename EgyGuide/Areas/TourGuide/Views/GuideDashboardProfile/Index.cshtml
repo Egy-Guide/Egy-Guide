@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard - Edit Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="~/Views/Shared/Breadcrumb.cshtml">
+<partial name="~/Views/Shared/TourGuide/UserProfileWrapper.cshtml">
+
+<div class="pt-30 pb-50">
+
+    <div class="container">
+
+        <div class="row">
+
+            <partial name="~/Views/Shared/TourGuide/DashboardSidebarMenu.cshtml">
+
+            <div class="col-xs-12 col-sm-8 col-md-9 mt-20">
+
+                <div class="dashboard-wrapper">
+
+                    <h4 class="section-title">Edit profile</h4>
+                    <p class="mmt-15 mb-20">Interested astonished he at cultivated or me. Nor brought one invited she produce her.</p>
+
+                    <form class="post-form-wrapper">
+
+                        <div class="row gap-20">
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>Photo</label>
+                                    <input type="file" name="form-register-photo" id="form-register-photo">
+                                    <span class="font12 font-italic">** photo must not bigger than 250kb</span>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" placeholder="First Name">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" placeholder="Last Name">
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" placeholder="Email">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="text" class="form-control" placeholder="Phone Number">
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group">
+                                    <label>Nationality</label>
+                                    <select class="selectpicker show-tick form-control">
+                                        <partial name="~/Views/Shared/Country.cshtml" />
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <select class="selectpicker show-tick form-control">
+                                        <partial name="~/Views/Shared/Country.cshtml" />
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" placeholder="City">
+                                </div>
+
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+
+                                <div class="form-group form-spin-group">
+                                    <label>Years of Experience</label>
+                                    <input type="text" class="form-control form-spin" value="1" />
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group">
+                                    <label>Price / Hour (<span class="text-danger">USD</span>)</label>
+                                    <input type="number" min="1" class="form-control" placeholder="Ex: 115" />
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group">
+                                    <label>Service Areas</label>
+                                    <input type="text" class="form-control" placeholder="Cairo, Alexandria, Dahab" />
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group">
+                                    <label>Languages</label>
+                                    <input type="text" class="form-control" placeholder="Arabic, English, French" />
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Facebook</label>
+                                    <input type="text" class="form-control" placeholder="https://www.facebook.com/yourprofile">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Twitter</label>
+                                    <input type="text" class="form-control" placeholder="https://www.twitter.com/yourprofile">
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Instagram</label>
+                                    <input type="text" class="form-control" placeholder="https://www.instagram.com/yourprofile ">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Youtube</label>
+                                    <input type="text" class="form-control" placeholder="https://www.youtube.com/user/yourchannel">
+                                </div>
+
+                            </div>
+
+                            <div class="clear mb-10"></div>
+
+                            <div class="col-sm-12">
+                                <a href="#" class="btn btn-primary">Save</a>
+                                <a href="#" class="btn btn-primary btn-border">Cancel</a>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+    <partial name="~/Views/Shared/TourGuide/UserProfileScripts.cshtml">
+    <!-- Dashboard Edit Profile Page JS -->
+    <script src="~/js/fileinput.min.js"></script>
+    <script src="~/js/customs-fileinput.js"></script>
+    <script src="~/js/bootstrap3-wysihtml5.min.js"></script>
+}

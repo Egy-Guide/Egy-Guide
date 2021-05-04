@@ -12,7 +12,7 @@
                     <div class="inner-top">
 
                         <div class="image">
-                            <img src="images/man/01.jpg" alt="image" />
+                            <img src="~/images/man/01.jpg" alt="image" />
                         </div>
 
                         <div class="GridLex-gap-20">
@@ -24,8 +24,6 @@
                                     <div class="GridLex-inner">
                                         <div class="heading clearfix">
                                             <h3>Omar Abdulla</h3>
-                                            <span class="label label-success"><i class="fa fa-check mr-3"></i> Verified</span>
-                                            <span class="label label-info"><i class="fa fa-trophy mr-3"></i> Certified Guide</span>
                                         </div>
                                         <ul class="user-meta">
                                             <li><i class="fa fa-map-marker"></i> 264, Carson Street Lexington, KY 40539 <span class="mh-5 text-muted">|</span> <i class="fa fa-phone"></i> +4 8547 985</li>
@@ -87,13 +85,13 @@
                     <div class="inner-bottom">
 
                         <ul class="user-header-menu">
-                            <li><a asp-controller="GuideDetails" asp-action="Index">Profile</a></li>
-                            <li><a asp-controller="GuideDetailsOffer" asp-action="Index">Tours <span>12</span></a></li>
-                            <li><a asp-controller="GuideDetailsGallery" asp-action="Index">Gallery</a></li>
+                            <li><a asp-controller="GuideProfile" asp-action="Index">Profile</a></li>
+                            <li><a asp-controller="GuideProfile" asp-action="Tours">Tours <span>12</span></a></li>
+                            <li><a asp-controller="GuideProfile" asp-action="Gallery">Gallery</a></li>
                             <li><a asp-controller="GuideDetailsReviews" asp-action="Index">Reviews</a></li>
                             <li><a asp-controller="GuideDetailsFollowing" asp-action="Index">Followings <span>25</span></a></li>
                             <li><a asp-controller="GuideDetailsFollower" asp-action="Index">Followers <span>8</span></a></li>
-                            <li><a asp-controller="GuideSetting" asp-action="Index">Dashboard</a></li>
+                            <li><a asp-controller="GuideDashboard" asp-action="Index">Dashboard</a></li>
                         </ul>
 
                     </div>
