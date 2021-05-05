@@ -14,12 +14,28 @@ namespace EgyGuide.DataAccess.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Category>().HasData(
+                new { Id = 1, Name = "Business", },
+                new { Id = 2, Name = "Commerce", },
+                new { Id = 3, Name = "Adventure", }
+            );
+
+            builder.Entity<City>().HasData(
+                new { CityId = 1, Name = "Alexandria", },
+                new { CityId = 2, Name = "Cairo", }
+            );
+
+            base.OnModelCreating(builder);
+        }
+
         //protected override void OnModelCreating(ModelBuilder builder)
         //{
         //    builder.Entity<Follower>().HasKey(f => new { f.UserId, f.FollowerId });
         //}
 
-       
+
         public DbSet<City> Cities { get; set; }
         public DbSet<Gallery> Galleries { get; set; }   
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }

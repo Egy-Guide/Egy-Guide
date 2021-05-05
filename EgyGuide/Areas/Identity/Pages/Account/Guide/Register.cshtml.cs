@@ -91,8 +91,8 @@ namespace EgyGuide.Areas.Identity.Pages.Account.Guide
                 if (RegisterVM.Guide != null)
                 {
                     // Locked the new guide for revising.
-                    var futureDateLocked = DateTime.Now.AddYears(1000);
-                    await _userManager.SetLockoutEndDateAsync(user, futureDateLocked);
+                    //var futureDateLocked = DateTime.Now.AddYears(1000);
+                    //await _userManager.SetLockoutEndDateAsync(user, futureDateLocked);
 
                     RegisterVM.Guide.UserId = await _userManager.GetUserIdAsync(user);         
 
