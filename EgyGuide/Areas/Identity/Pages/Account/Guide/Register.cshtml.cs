@@ -129,7 +129,7 @@ namespace EgyGuide.Areas.Identity.Pages.Account.Guide
                     _logger.LogInformation("User created a new account with password.");
 
                     // Add role to Suspended Guide.                    
-                    await _userManager.AddToRoleAsync(user, SD.Role_User_Suspended_Guide);
+                    await _userManager.AddToRoleAsync(user, SD.Role_User_Tour_Guide);
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
