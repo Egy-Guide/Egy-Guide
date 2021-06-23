@@ -1,4 +1,5 @@
 ﻿using EgyGuide.DataAccess.Data;
+using EgyGuide.DataAccess.Repository.IRepository;
 using EgyGuide.Models;
 using System;
 using System.Collections.Generic;
@@ -6,18 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EgyGuide.DataAccess.Repository.IRepository
+namespace EgyGuide.DataAccess.Repository
 {
-    public class GuideUserRepository : Repository<GuideUser>, IGuideUserRepository 
+    public class UserGalleryRepository : Repository<UserGallery>, IUserGalleryRepository
     {
         private readonly ApplicationDbContext _db;
-        public GuideUserRepository(ApplicationDbContext db) : base(db)
+        public UserGalleryRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
-        public void Update(GuideUser guideUser)
-        {
 
-        }
+
     }
 }

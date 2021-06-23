@@ -128,6 +128,8 @@ namespace EgyGuide.Areas.Tourist.Controllers
         [Route("blog-create")]
         public IActionResult BlogCreate(int? id)
         {
+            string userId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == _userManager.GetUserId(User)).Id;
+
             BlogVM = new BlogVM()
             {
                 Blog = new Blog(),
@@ -145,7 +147,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
             // This for Update
             BlogVM.Blog = _unitOfWork.Blog.Get(id.GetValueOrDefault());
 
-            if (BlogVM.Blog == null)
+            if ((BlogVM.Blog == null) || (BlogVM.Blog.UserId != userId))
                 return NotFound();
 
             return View(BlogVM);

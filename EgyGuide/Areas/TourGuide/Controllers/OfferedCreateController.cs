@@ -20,6 +20,7 @@ using System.Threading.Tasks;
 namespace EgyGuide.Areas.TourGuide.Controllers
 {
     [Area("TourGuide")]
+
     [Authorize(Roles = SD.Role_User_Tour_Guide)]
     public class OfferedCreateController : Controller
     {
@@ -237,12 +238,14 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 var uploads = Path.Combine(webRootPath, @"Trips/gallery");
                 var fileName = Guid.NewGuid().ToString();
                 var extension = Path.GetExtension(files[i].FileName);
-                string fullPath = uploads + fileName + extension;
-                if (System.IO.File.Exists(fullPath))
-                {
-                    System.IO.File.Delete(fullPath);
+                string fullPath = Path.Combine(uploads, fileName + extension);
 
+                using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                {
+                    files[i].CopyTo(fileStream);
+                    fileStream.Dispose();
                 }
+
                 var gallery = new Gallery()
                 {
 

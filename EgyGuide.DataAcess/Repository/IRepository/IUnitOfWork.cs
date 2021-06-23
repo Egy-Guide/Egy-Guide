@@ -10,6 +10,7 @@ namespace EgyGuide.DataAccess.Repository.IRepository
     {
         IApplicationUserRepository ApplicationUser { get; }
         IGuideUserRepository GuideUser { get; }
+        IGuideUserDetailsRepository GuideUserDetails { get; }
         ICategoryRepository Category { get; }
         IBlogRepository Blog { get; }
         ITripDaysRepository TripDays { get; }

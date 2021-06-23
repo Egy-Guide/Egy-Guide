@@ -17,6 +17,20 @@ namespace EgyGuide.DataAccess.Repository
             _db = db;
         }
 
+        public void Update(ApplicationUser applicationUser)
+        {
+            var objFromDb = _db.ApplicationUsers.FirstOrDefault(u => u.Id == applicationUser.Id);
 
+            if (objFromDb != null)
+            {
+                objFromDb.FirstName = applicationUser.FirstName;
+                objFromDb.LastName = applicationUser.LastName;
+                objFromDb.Email = applicationUser.Email;
+                objFromDb.PhoneNumber = applicationUser.PhoneNumber;
+                objFromDb.Nationality = applicationUser.Nationality;
+                objFromDb.Country = applicationUser.Country;
+                objFromDb.City = applicationUser.City;
+            }
+        }
     }
 }

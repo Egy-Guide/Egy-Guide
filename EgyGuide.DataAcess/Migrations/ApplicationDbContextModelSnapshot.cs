@@ -191,6 +191,53 @@ namespace EgyGuide.DataAccess.Migrations
                     b.ToTable("GuideUsers");
                 });
 
+            modelBuilder.Entity("EgyGuide.Models.GuideUserDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CertificateUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GuideId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Introduction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MoreDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrivateTransportation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublicTransportation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SpecialRemark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GuideId");
+
+                    b.ToTable("GuideUsersDetails");
+                });
+
             modelBuilder.Entity("EgyGuide.Models.Included", b =>
                 {
                     b.Property<int>("Id")
@@ -482,6 +529,26 @@ namespace EgyGuide.DataAccess.Migrations
                     b.HasKey("StyleId");
 
                     b.ToTable("TripStyles");
+                });
+
+            modelBuilder.Entity("EgyGuide.Models.UserGallery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserGalleries");
                 });
 
             modelBuilder.Entity("ExcludedTripDetail", b =>
@@ -799,6 +866,17 @@ namespace EgyGuide.DataAccess.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
+            modelBuilder.Entity("EgyGuide.Models.GuideUserDetails", b =>
+                {
+                    b.HasOne("EgyGuide.Models.GuideUser", "GuideUser")
+                        .WithMany()
+                        .HasForeignKey("GuideId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GuideUser");
+                });
+
             modelBuilder.Entity("EgyGuide.Models.Place", b =>
                 {
                     b.HasOne("EgyGuide.Models.TripDetail", "TripDetail")
@@ -881,6 +959,15 @@ namespace EgyGuide.DataAccess.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("City");
+                });
+
+            modelBuilder.Entity("EgyGuide.Models.UserGallery", b =>
+                {
+                    b.HasOne("EgyGuide.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("ExcludedTripDetail", b =>

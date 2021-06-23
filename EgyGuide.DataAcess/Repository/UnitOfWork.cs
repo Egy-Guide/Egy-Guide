@@ -16,6 +16,7 @@ namespace EgyGuide.DataAccess.Repository
             _db = db;
             ApplicationUser = new ApplicationUserRepository(_db);
             GuideUser = new GuideUserRepository(_db);
+            GuideUserDetails = new GuideUserDetailsRepository(_db);
             Category = new CategoryRepository(_db);
             Blog = new BlogRepository(_db);
             TripDays = new TripDaysRepository(_db);
@@ -25,6 +26,7 @@ namespace EgyGuide.DataAccess.Repository
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
         public IGuideUserRepository GuideUser { get; private set; }
+        public IGuideUserDetailsRepository GuideUserDetails { get; private set; }
         public ICategoryRepository Category { get; private set; }
         public IBlogRepository Blog { get; private set; }
 
