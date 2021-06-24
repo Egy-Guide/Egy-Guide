@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Dashboard - Edit Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string guideUrl = Model.GuideUser.ApplicationUser.ImageUrl != null ? Model.GuideUser.ApplicationUser.ImageUrl : "/images/avatar.jpg";
+
     ViewData["NationalityItemValue"] = Model.GuideUser.ApplicationUser.Nationality;
     ViewData["CountryItemValue"] = Model.GuideUser.ApplicationUser.Country;
 }
@@ -249,10 +251,33 @@
             document.getElementById("CountryList").options[itemNo].selected = true;
         }
     </script>
+
     <partial name="_ValidationScriptsPartial" />
     <partial name="~/Views/Shared/TourGuide/UserProfileScripts.cshtml">
     <!-- Dashboard Edit Profile Page JS -->
     <script src="~/js/fileinput.min.js"></script>
-    <script src="~/js/customs-fileinput.js"></script>
     <script src="~/js/bootstrap3-wysihtml5.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#form-register-photo").fileinput({
+                dropZoneTitle: '<i class="fa fa-photo"></i><span>Upload Photo</span>',
+                uploadUrl: '/',
+                maxFileCount: 1,
+                showUpload: false,
+                browseLabel: 'Browse',
+                browseIcon: '',
+                removeLabel: 'Remove',
+                removeIcon: '',
+                autoReplace: true,
+                showCaption: false,
+                allowedFileTypes: ['image'],
+                allowedFileExtensions: ['jpg', 'gif', 'png', 'tiff'],
+                initialPreview: [
+                    '<img src="@guideUrl" class="file-preview-image" alt="Avatar">',
+                ],
+                overwriteInitial: true,
+            });
+        })
+    </script>
 }

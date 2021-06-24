@@ -1530,7 +1530,6 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\Guide
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\GuideProfile\Gallery.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\GuideProfile\Index.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\GuideProfile\Tours.cshtml.g.cs
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\GuideSettingChangePassword\Index.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\GuideSettingInformation\Index.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\GuideSettingProfile\Index.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\OfferedCreate\Index.cshtml.g.cs
