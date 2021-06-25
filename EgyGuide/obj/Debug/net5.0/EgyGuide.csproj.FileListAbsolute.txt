@@ -1507,7 +1507,6 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Accoun
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_StatusMessage.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ResendEmailConfirmation.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ResetPassword.cshtml.g.cs
@@ -1593,3 +1592,4 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.dll
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\ref\EgyGuide.dll
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.pdb
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.genruntimeconfig.cache
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs

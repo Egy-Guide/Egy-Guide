@@ -58,10 +58,16 @@ namespace EgyGuide.Areas.Identity.Pages.Account.Guide
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
+            // Check user signed in
+            if (User.Identity.IsAuthenticated)
+                return LocalRedirect("~/");
+
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
