@@ -2,8 +2,7 @@
 
 @{
     int PostsNumber = 5;
-    IEnumerable<Blog> latestPosts = _unitOfWork.Blog.GetAll().OrderByDescending(b => b.Id)
-                                               .Take(PostsNumber);
+    IEnumerable<Blog> latestPosts = _unitOfWork.Blog.GetAll(b => b.Status == "active").OrderByDescending(b => b.Date).Take(PostsNumber);
 }
 
 <ul class="sidebar-post">
