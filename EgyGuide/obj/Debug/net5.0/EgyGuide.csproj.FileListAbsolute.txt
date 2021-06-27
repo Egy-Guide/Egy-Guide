@@ -1535,8 +1535,6 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\Guide
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\GuideSettingProfile\Index.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\OfferedCreate\Index.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\OfferedCreate\OfferedCreateDone.cshtml.g.cs
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\OfferedPayment\Index.cshtml.g.cs
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\OfferedPayment\OfferedPaymentDone.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\TripDays\OfferedCreateDone.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\TripDays\TripDays.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\_ViewImports.cshtml.g.cs
@@ -1599,3 +1597,5 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Tourist
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\UserProfileWrapper.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\TouristDashboard\Index.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\TouristDashboardProfile\Index.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Booking\BookingConfirmation.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\Booking\Index.cshtml.g.cs
