@@ -1,6 +1,8 @@
 ﻿using EgyGuide.DataAccess.Repository.IRepository;
 using EgyGuide.Models;
 using EgyGuide.Models.ViewModels;
+using EgyGuide.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +16,7 @@ using System.Threading.Tasks;
 namespace EgyGuide.Areas.TourGuide.Controllers
 {
     [Area("TourGuide")]
+    [Authorize(Roles = SD.Role_User_Tour_Guide)]
     public class GuideDashboardProfileController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -78,7 +81,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                             System.IO.File.Delete(imagePath);
                     }
 
-                    UploadImage(rootPath, image, "guide-profile-images");
+                    GuideUserVM.GuideUser.ApplicationUser.ImageUrl = UploadImage(rootPath, image, "guide-profile-images");
                 }
 
                 else
@@ -138,7 +141,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 if (GuideUserVM.GuideUserDetails.Id == 0)
                 {
                     if (image != null)
-                        UploadImage(rootPath, image, "guide-certificates");
+                        GuideUserVM.GuideUserDetails.CertificateUrl = UploadImage(rootPath, image, "guide-certificates");
 
                     GuideUserVM.GuideUserDetails.GuideId = _unitOfWork.GuideUser.GetFirstOrDefault(g => g.UserId == CurrentUserId).Id;
                     _unitOfWork.GuideUserDetails.Add(GuideUserVM.GuideUserDetails);
@@ -167,7 +170,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
                         }
 
-                        UploadImage(rootPath, image, "guide-certificates");
+                        GuideUserVM.GuideUserDetails.CertificateUrl = UploadImage(rootPath, image, "guide-certificates");
                     }
 
                     _unitOfWork.GuideUserDetails.Update(GuideUserVM.GuideUserDetails);
@@ -182,7 +185,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             return View();
         }
 
-        public void UploadImage(string rootPath, IFormFile image, string folderName)
+        public string UploadImage(string rootPath, IFormFile image, string folderName)
         {
             // The folder path where the images will be uploded
             string folderPath = Path.Combine(rootPath, @"images\" + folderName);
@@ -201,7 +204,8 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             }
 
             // Upload image to Database
-            GuideUserVM.GuideUserDetails.CertificateUrl = @"/images/" + folderName + @"/" + imageName + extension;
+            string imgSrc = @"/images/" + folderName + @"/" + imageName + extension;
+            return imgSrc;
         }
     }
 }

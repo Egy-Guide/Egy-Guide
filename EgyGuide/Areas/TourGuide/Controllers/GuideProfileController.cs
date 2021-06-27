@@ -1,5 +1,6 @@
 ﻿using EgyGuide.DataAccess.Repository.IRepository;
 using EgyGuide.Models.ViewModels;
+using EgyGuide.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 {
     [Area("TourGuide")]
     [Route("guide/profile")]
-    [Authorize(Roles = "Tour Guide")]
+    [Authorize(Roles = SD.Role_User_Tour_Guide)]
     public class GuideProfileController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -33,6 +34,9 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             {
                 GuideUser = _unitOfWork.GuideUser.GetFirstOrDefault(u => u.UserId == _userManager.GetUserId(User), includeProperties: "ApplicationUser"),
             };
+
+            if (GuideUserVM.GuideUser == null)
+                return NotFound();
 
             GuideUserVM.GuideUserDetails = _unitOfWork.GuideUserDetails.GetFirstOrDefault(u => u.GuideId == GuideUserVM.GuideUser.Id);
 

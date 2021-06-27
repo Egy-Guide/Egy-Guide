@@ -30,6 +30,8 @@ namespace EgyGuide.DataAccess.Repository
                 objFromDb.Nationality = applicationUser.Nationality;
                 objFromDb.Country = applicationUser.Country;
                 objFromDb.City = applicationUser.City;
+                objFromDb.Brief = applicationUser.Brief;
+                objFromDb.ImageUrl = applicationUser.ImageUrl;
             }
         }
     }

@@ -1471,6 +1471,7 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\scopedcss\bundle\EgyGuide.styles.
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.TagHelpers.input.cache
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.TagHelpers.output.cache
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.RazorCoreGenerate.cache
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Admin\Views\Blog\Index.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Admin\Views\Category\CategoryCreate.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Admin\Views\Category\Index.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Admin\Views\_ViewImports.cshtml.g.cs
@@ -1507,6 +1508,7 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Accoun
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_StatusMessage.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ResendEmailConfirmation.cshtml.g.cs
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ResetPassword.cshtml.g.cs
@@ -1592,5 +1594,8 @@ E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.dll
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\ref\EgyGuide.dll
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.pdb
 E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.genruntimeconfig.cache
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
-E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Admin\Views\Blog\Index.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\TouristProfile\Index.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\TouristProfile\Tours.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Views\Shared\UserProfileWrapper.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\TouristDashboard\Index.cshtml.g.cs
+E:\project\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\TouristDashboardProfile\Index.cshtml.g.cs

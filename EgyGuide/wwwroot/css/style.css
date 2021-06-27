@@ -3506,7 +3506,9 @@ a.review-load-more:hover {
  * User Profile
  */
 
-.user-profile-wrapper {}
+.user-profile-wrapper {
+	min-height: 156px;
+}
 
 .user-header {
 	position: relative;
