@@ -68,6 +68,11 @@ namespace EgyGuide.DataAccess.Repository
             return query.FirstOrDefault();
         }
 
+        public bool Any()
+        {
+            return dbSet.Any();
+        }
+
         public void Remove(int id)
         {
             T entity = dbSet.Find(id);

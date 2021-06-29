@@ -1,0 +1,65 @@
+﻿@model EgyGuide.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "User Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="~/Views/Shared/Breadcrumb.cshtml">
+<partial name="~/Views/Shared/UserProfileWrapper.cshtml">
+
+<div class="pt-30 pb-50">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-7 col-md-8 mt-20">
+                <h4 class="section-title">Profile:</h4>
+
+                @if (Model.Brief != null)
+                {
+                    <p class="lead">
+                        @Model.Brief
+                    </p>
+
+                    <div class="bt mt-30 mb-30"></div>
+                }
+
+                <ul class="featured-list-with-h">
+
+                    <li>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <h5><i class="ti-world text-primary mr-5"></i> Nationality</h5>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 mt-sm">
+                                <span class="pl-sm">@Model.Nationality</span>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <h5><i class="ti-map-alt text-primary mr-5"></i> Base Location</h5>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 mt-sm">
+                                <span class="pl-sm">@Model.City, @Model.Country</span>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{ 
+    <partial name="~/Views/Shared/TourGuide/UserProfileScripts.cshtml">
+}

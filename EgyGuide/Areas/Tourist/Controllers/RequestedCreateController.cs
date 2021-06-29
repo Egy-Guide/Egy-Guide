@@ -4,6 +4,7 @@ using EgyGuide.DataAccess.Repository.IRepository;
 using EgyGuide.Models;
 using EgyGuide.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -18,12 +19,18 @@ namespace EgyGuide.Areas.Tourist.Controllers
     public class RequestedCreateController : Controller
     {
         private readonly IUnitOfWork _unit;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ApplicationDbContext _db;
         [BindProperty]
         public RequestedVM requestedVM { get; set; }
-        public RequestedCreateController(ApplicationDbContext db, IUnitOfWork unit)
+        public RequestedCreateController(
+            ApplicationDbContext db,
+            UserManager<IdentityUser> userManager,
+            IUnitOfWork unit
+        )
         {
             _unit = unit;
+            _userManager = userManager;
             _db = db;
         }
         [Route("requested-create")]
@@ -85,6 +92,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
 
                 if (requestedVM.Requested.TripId == 0)
                 {
+                    requestedVM.Requested.UserId = _userManager.GetUserId(User);
 
                     //save the data from view into trip table
                     requestedVM.Requested.SelcetedStyles = dataFromView;

@@ -2,9 +2,19 @@
 @model AccessDeniedModel
 @{
     ViewData["Title"] = "Access denied";
+    ViewData["HeaderTitle"] = "Ops! Access Denied";
+    ViewData["AddClassToBodyTag"] = "transparent-header";
+
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
-</header>
+<!-- start breadcrumb -->
+<partial name="~/Views/Shared/BreadcrumbHeader.cshtml">
+<!-- end breadcrumb -->
+
+<div class="pt-30 pb-50">
+    <div class="container">
+        <div class="alert alert-danger" role="alert" style="text-align: center">
+            <strong>You do not have access to this resource.</strong>
+        </div>
+    </div>
+</div>

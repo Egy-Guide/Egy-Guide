@@ -3,8 +3,11 @@ using EgyGuide.DataAccess.Data;
 using EgyGuide.DataAccess.Repository.IRepository;
 using EgyGuide.Models;
 using EgyGuide.Models.ViewModels;
+using EgyGuide.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -17,19 +20,28 @@ using System.Threading.Tasks;
 namespace EgyGuide.Areas.TourGuide.Controllers
 {
     [Area("TourGuide")]
+
+    [Authorize(Roles = SD.Role_User_Tour_Guide)]
     public class OfferedCreateController : Controller
     {
         private readonly IUnitOfWork _unit;
         private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ApplicationDbContext _db;
 
         [BindProperty]
         public OfferCreateVM tripVM { get; set; }
 
-        public OfferedCreateController(IUnitOfWork unit, IWebHostEnvironment hostEnvironment, ApplicationDbContext db)
+        public OfferedCreateController(
+            IUnitOfWork unit,
+            IWebHostEnvironment hostEnvironment,
+            UserManager<IdentityUser> userManager,
+            ApplicationDbContext db
+        )
         {
             _unit = unit;
             _hostEnvironment = hostEnvironment;
+            _userManager = userManager;
             _db = db;
 
         }
@@ -121,6 +133,8 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
                 if (tripVM.TripDetail.TripId == 0 )
                 {
+
+                    tripVM.TripDetail.GuideId = _userManager.GetUserId(User);
                    
                     //save the data from view into trip table
                     tripVM.TripDetail.SelcetedStyles = dataFromView;
@@ -224,12 +238,14 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 var uploads = Path.Combine(webRootPath, @"Trips/gallery");
                 var fileName = Guid.NewGuid().ToString();
                 var extension = Path.GetExtension(files[i].FileName);
-                string fullPath = uploads + fileName + extension;
-                if (System.IO.File.Exists(fullPath))
-                {
-                    System.IO.File.Delete(fullPath);
+                string fullPath = Path.Combine(uploads, fileName + extension);
 
+                using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                {
+                    files[i].CopyTo(fileStream);
+                    fileStream.Dispose();
                 }
+
                 var gallery = new Gallery()
                 {
 
