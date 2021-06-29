@@ -9,9 +9,9 @@
 
     if (Model.TripDetail.TripId != 0)
         title = "Update";
-    
-    
-   
+
+
+
 }
 
 
@@ -330,7 +330,7 @@
 
                                 @foreach (var day in Model.TripDaysDetail)
                                 {
-                                    
+
                                     <div class="itinerary-form-item">
 
                                         <div class="content clearfix">
@@ -441,10 +441,17 @@
 
 @{
     var token = antiforgery.GetAndStoreTokens(Context);
-    var count = Model.TripDaysDetail.ToList().Count();
-    var id = Model.TripDetail.TripId;
-    var encluded = Model.Included.ToList();
-    var excluded = Model.Excluded.ToList();
+    int count = 0, encluded = 0,  excluded = 0, id=0;
+
+    if (Model.TripDaysDetail != null)
+    {
+        count = Model.TripDaysDetail.ToList().Count();
+        id = Model.TripDetail.TripId;
+        encluded = Model.Included.ToList().Count();
+        excluded = Model.Excluded.ToList().Count();
+    }
+
+
 }
 
 @section Scripts{
@@ -533,9 +540,9 @@
             if (@id != 0) {
                 //update encluded
                 var updateEncluded = [];
-                for (var i = 0; i < @encluded.Count(); i++) {
+                for (var i = 0; i < @encluded; i++) {
                     var value = document.getElementById("encluded+" + i).value;
-                   
+
                     if (value != "") {
                         updateEncluded.push(value);
                     }
@@ -560,9 +567,9 @@
             if (@id != 0) {
                 //update excluded
                 var updateExcluded = [];
-                for (var i = 0; i < @excluded.Count(); i++) {
+                for (var i = 0; i < @excluded; i++) {
                     var value = document.getElementById("excluded+" + i).value;
-                    
+
                     if (value != "") {
                         updateExcluded.push(value);
                     }
