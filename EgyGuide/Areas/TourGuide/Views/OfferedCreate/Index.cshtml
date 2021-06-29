@@ -9,7 +9,9 @@
 
     if (Model.TripDetail.TripId != 0)
         title = "Update";
-
+    
+    
+   
 }
 
 
@@ -250,14 +252,14 @@
                             else
                             {
                                 <div class="row gap-15 mt-25">
-                                    @{var ss = Model.Included.ToList();
+                                    @{var enc = Model.Included.ToList();
                                     }
-                                    @for (var i = 0; i < ss.Count(); i++)
+                                    @for (var i = 0; i < enc.Count(); i++)
                                     {
                                         <div class="col-xs-12 col-xs-6 col-md-4">
                                             <div class="form-group">
 
-                                                <input id="encluded+@i" asp-for="@ss[i].Title" type="text" class="form-control">
+                                                <input id="encluded+@i" asp-for="@enc[i].Title" type="text" class="form-control">
                                             </div>
                                         </div>
                                     }
@@ -441,7 +443,8 @@
     var token = antiforgery.GetAndStoreTokens(Context);
     var count = Model.TripDaysDetail.ToList().Count();
     var id = Model.TripDetail.TripId;
-    
+    var encluded = Model.Included.ToList();
+    var excluded = Model.Excluded.ToList();
 }
 
 @section Scripts{
@@ -450,6 +453,7 @@
         //function to send checkboxes data to controller
         var saveList = function () {
 
+            //save styles
             var arrItem = [];
             var commaSeperatedIds = "";
             $("#ItemList input[type=checkbox]").each(function (index, val) {
@@ -476,73 +480,130 @@
                 })
             }
 
+            if (@id == 0) {
+                //save encluded
+                var arrTextBoxesEncluded = [];
+                for (var i = 0; i <= 6; i++) {
+                    var value = document.getElementById(i).value;
+                    if (value != "") {
+                        arrTextBoxesEncluded.push(value);
+                    }
+                }
 
-            var arrTextBoxesEncluded = [];
-            for (var i = 0; i <= 6; i++) {
-                var value = document.getElementById(i).value;
-                if (value != "") {
-                    arrTextBoxesEncluded.push(value);
+                var string = arrTextBoxesEncluded.toString();
+
+                if (arrTextBoxesEncluded.length != 0) {
+
+                    $.ajax({
+                        url: "/TourGuide/OfferedCreate/SaveEncluded",
+                        type: "POST",
+                        headers: { '@token.HeaderName': '@token.RequestToken' },
+                        data: { ItemList: string },
+                        success: function (response) {
+                            //
+                        }
+                    })
                 }
             }
 
-            var string = arrTextBoxesEncluded.toString();
-
-            if (arrTextBoxesEncluded.length != 0) {
-
-                $.ajax({
-                    url: "/TourGuide/OfferedCreate/SaveEncluded",
-                    type: "POST",
-                    headers: { '@token.HeaderName': '@token.RequestToken' },
-                    data: { ItemList: string },
-                    success: function (response) {
-                        //
+            if (@id == 0) {
+                //save excluded
+                var arrTextBoxesExcluded = [];
+                for (var i = 7; i <= 13; i++) {
+                    var value = document.getElementById(i).value;
+                    if (value != "") {
+                        arrTextBoxesExcluded.push(value);
                     }
-                })
+                }
+
+                var string = arrTextBoxesExcluded.toString();
+                if (arrTextBoxesExcluded.length != 0) {
+
+                    $.ajax({
+                        url: "/TourGuide/OfferedCreate/SaveExecluded",
+                        type: "POST",
+                        headers: { '@token.HeaderName': '@token.RequestToken' },
+                        data: { ItemList: string },
+                        success: function (response) {
+                            //
+                        }
+                    })
+                }
             }
+            if (@id != 0) {
+                //update encluded
+                var updateEncluded = [];
+                for (var i = 0; i < @encluded.Count(); i++) {
+                    var value = document.getElementById("encluded+" + i).value;
+                   
+                    if (value != "") {
+                        updateEncluded.push(value);
+                    }
+                }
 
+                var stringEnc = updateEncluded.toString();
 
-            var arrTextBoxesExcluded = [];
-            for (var i = 7; i <= 13; i++) {
-                var value = document.getElementById(i).value;
-                if (value != "") {
-                    arrTextBoxesExcluded.push(value);
+                if (updateEncluded.length != 0) {
+
+                    $.ajax({
+                        url: "/TourGuide/OfferedCreate/UpdateEncluded",
+                        type: "POST",
+                        headers: { '@token.HeaderName': '@token.RequestToken' },
+                        data: { ItemList: stringEnc, id:@id },
+                        success: function (response) {
+                            //
+                        }
+                    })
                 }
             }
 
-            var string = arrTextBoxesExcluded.toString();
-            if (arrTextBoxesExcluded.length != 0) {
-
-                $.ajax({
-                    url: "/TourGuide/OfferedCreate/SaveExecluded",
-                    type: "POST",
-                    headers: { '@token.HeaderName': '@token.RequestToken' },
-                    data: { ItemList: string },
-                    success: function (response) {
-                        //
-                    }
-                })
-            }
-
-            var matrix = new Array();
-            for (var i = 1; i <= @count ; i++) {
-                var titleday = document.getElementById("titleday+" + i).value;
-                var remarkday = document.getElementById("remarkday+" + i).value;
-                var timeFromday = document.getElementById("timefromday+" + i).value;
-                var timeToday = document.getElementById("timetoday+" + i).value;
-                var descriptionday = document.getElementById("descriptionday+" + i).value;
-                if (titleday && remarkday && descriptionday != null) {
-                    matrix.push({ Title: titleday, TimeFrom: timeFromday, TimeTo: timeToday, Remark: remarkday, Description: descriptionday });
+            if (@id != 0) {
+                //update excluded
+                var updateExcluded = [];
+                for (var i = 0; i < @excluded.Count(); i++) {
+                    var value = document.getElementById("excluded+" + i).value;
                     
+                    if (value != "") {
+                        updateExcluded.push(value);
+                    }
+                }
 
+                var stringExc = updateExcluded.toString();
+
+                if (updateExcluded.length != 0) {
+
+                    $.ajax({
+                        url: "/TourGuide/OfferedCreate/UpdateExcluded",
+                        type: "POST",
+                        headers: { '@token.HeaderName': '@token.RequestToken' },
+                        data: { ItemList: stringExc, id:@id },
+                        success: function (response) {
+                            //
+                        }
+                    })
                 }
             }
-            
-            
-            
+
+            //update trip days details
+            if (@count > 0) {
+                var matrix = new Array();
+                for (var i = 1; i <= @count ; i++) {
+                    var titleday = document.getElementById("titleday+" + i).value;
+                    var remarkday = document.getElementById("remarkday+" + i).value;
+                    var timeFromday = document.getElementById("timefromday+" + i).value;
+                    var timeToday = document.getElementById("timetoday+" + i).value;
+                    var descriptionday = document.getElementById("descriptionday+" + i).value;
+                    if (titleday && remarkday && descriptionday != null) {
+                        matrix.push({ Title: titleday, TimeFrom: timeFromday, TimeTo: timeToday, Remark: remarkday, Description: descriptionday });
+
+
+                    }
+                }
+
 
                 if (matrix.length != 0) {
                     $.ajax({
-                        url: "/TourGuide/OfferedCreate/Test",
+                        url: "/TourGuide/OfferedCreate/UpdateTripDays",
                         type: "POST",
                         headers: { '@token.HeaderName': '@token.RequestToken' },
                         data: { ItemList: matrix, id: @id },
@@ -550,9 +611,9 @@
                             //
                         }
                     });
+                }
+
             }
-
-
 
         }
 

@@ -80,6 +80,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             tripVM.Excluded = _db.Excludeds.Where(i => i.TripId == tripVM.TripDetail.TripId);
             tripVM.Galleries = _db.Galleries.Where(i => i.TripId == tripVM.TripDetail.TripId);
             tripVM.TripDaysDetail = _db.TripDaysDetails.Where(i => i.TripId == tripVM.TripDetail.TripId);
+            
             if (tripVM.TripDetail == null || tripVM.TripDetail.GuideId != userId)
             {
                 return NotFound();
@@ -89,7 +90,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public void Test(TripDaysDetail[] ItemList , int id)
+        public void UpdateTripDays(TripDaysDetail[] ItemList , int id)
         {
             
             if (ItemList != null)
@@ -104,6 +105,59 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                     objFromDb.Title = tripDays.Title;
                     objFromDb.Remark = tripDays.Remark;
                     objFromDb.Description = tripDays.Description;
+                }
+                _unit.Save();
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public void UpdateEncluded(string ItemList, int id)
+        {
+            // save the value into session to can use it again in other functions
+            //must initialze a key
+
+            if (ItemList != null && id != 0)
+            {
+                var data = ItemList.Split(",");
+                var dataList = data.ToList();
+                var count = dataList.Count();
+                var iterator = 0;
+                var includeds = _db.Includeds.Where(e => e.TripId == id);
+                foreach (var included in includeds)
+                {
+                    if (iterator < count)
+                    {
+                        included.Title = dataList[iterator];
+                        iterator++;
+                    }
+                }
+                _unit.Save();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public void UpdateExcluded(string ItemList, int id)
+        {
+            // save the value into session to can use it again in other functions
+            //must initialze a key
+
+            if (ItemList != null && id != 0)
+            {
+                var data = ItemList.Split(",");
+                var dataList = data.ToList();
+                var count = dataList.Count();
+                var iterator = 0;
+                var excludeds = _db.Excludeds.Where(e => e.TripId == id);
+                foreach (var excluded in excludeds)
+                {
+                    if (iterator < count)
+                    {
+                        excluded.Title = dataList[iterator];
+                        iterator++;
+                    }
                 }
                 _unit.Save();
             }
@@ -433,7 +487,8 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             }
         }
 
-      
+       
+
         #region API CALLS
 
         [HttpGet]
