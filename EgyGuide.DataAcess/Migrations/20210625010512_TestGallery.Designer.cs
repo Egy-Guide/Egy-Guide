@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EgyGuide.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210501033243_SharedTables")]
-    partial class SharedTables
+    [Migration("20210625010512_TestGallery")]
+    partial class TestGallery
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -419,8 +419,8 @@ namespace EgyGuide.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("GuideId")
-                        .HasColumnType("int");
+                    b.Property<string>("GuideId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("MaxTravellers")
                         .HasColumnType("int");
@@ -785,11 +785,9 @@ namespace EgyGuide.DataAccess.Migrations
 
             modelBuilder.Entity("EgyGuide.Models.Gallery", b =>
                 {
-                    b.HasOne("EgyGuide.Models.TripDetail", "TripDetail")
+                    b.HasOne("EgyGuide.Models.TripDetail", null)
                         .WithMany("SelectedImages")
                         .HasForeignKey("TripDetailTripId");
-
-                    b.Navigation("TripDetail");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.GuideUser", b =>
@@ -876,15 +874,13 @@ namespace EgyGuide.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EgyGuide.Models.GuideUser", "GuideUser")
+                    b.HasOne("EgyGuide.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("GuideId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GuideId");
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("City");
-
-                    b.Navigation("GuideUser");
                 });
 
             modelBuilder.Entity("ExcludedTripDetail", b =>

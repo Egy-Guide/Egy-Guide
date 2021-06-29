@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace EgyGuide.Models
 {
@@ -7,9 +8,9 @@ namespace EgyGuide.Models
         [Key]
         public int Id { get; set; }
         public int TripId { get; set; }
-        public TripDetail TripDetail { get; set; }
         public string URL { get; set; }
+        public ICollection<TripDetail> TripDetails { get; set; }
 
-      
+
     }
 }

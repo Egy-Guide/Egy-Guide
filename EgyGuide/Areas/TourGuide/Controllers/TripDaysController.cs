@@ -38,6 +38,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public void SaveList(TripDaysDetail[] ItemList)
@@ -102,8 +103,8 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             var count = lastRecord.Days;
             if (ModelState.IsValid)
             {
-
-               return RedirectToAction("OfferedCreateDone","TripDays");
+               
+                return RedirectToAction("OfferedCreateDone","TripDays");
             }
             return View(tripDays);
             //else

@@ -21,10 +21,11 @@ namespace EgyGuide.DataAccess.Repository
         public void Update(TripDetail tripDetail)
         {
             var objFromDb = _db.TripDetails.FirstOrDefault(s => s.TripId == tripDetail.TripId);
+            var includeds = _db.Includeds.Where(i => i.TripId == tripDetail.TripId);
             if (objFromDb != null)
             {
                 
-                objFromDb.City = tripDetail.City;
+                objFromDb.CityId = tripDetail.CityId;
                 objFromDb.Title = tripDetail.Title;
                 objFromDb.SelectedPlaces = tripDetail.SelectedPlaces;
                 objFromDb.Days = tripDetail.Days;
@@ -35,11 +36,11 @@ namespace EgyGuide.DataAccess.Repository
                 objFromDb.Price = tripDetail.Price;
                 objFromDb.Description = tripDetail.Description;
                 
-                
                 objFromDb.SelectedLanguages = tripDetail.SelectedLanguages;
+                objFromDb.SelcetedStyles = tripDetail.SelcetedStyles;
                 objFromDb.MaxTravellers = tripDetail.MaxTravellers;
-               
-
+                
+                
 
                 _db.SaveChanges();
             }

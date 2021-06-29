@@ -29,6 +29,7 @@ namespace EgyGuide.DataAccess.Repository
         public IBlogRepository Blog { get; private set; }
 
         public ITripDaysRepository TripDays { get; private set; }
+
         public IOfferCreateRepository OfferCreate { get; private set; }
         public IRequestedRepository Requested { get; private set; }
         public void Dispose()

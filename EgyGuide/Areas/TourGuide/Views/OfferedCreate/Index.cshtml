@@ -1,5 +1,6 @@
 ﻿@model EgyGuide.Models.ViewModels.OfferCreateVM
-
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
 @{ ViewData["Title"] = "Tour";
     ViewData["AddClassToBodyTag"] = "transparent-header";
     ViewData["AddToBreadcrumbHeaderHereBox"] = "pb-100 no-bg";
@@ -45,6 +46,7 @@
 
 
                     <form id="form-detail" class="form" method="post" enctype="multipart/form-data">
+
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                         <div class="create-tour-inner">
@@ -81,7 +83,7 @@
                                         <div class="col-xsw-12 col-xs-6 col-sm-6 col-md-6">
                                             <div class="form-group form-spin-group">
                                                 <label asp-for="TripDetail.Days">How many days?</label>
-                                                <input id="days" asp-for="TripDetail.Days" type="text" class="form-control form-spin" value="1" />
+                                                <input id="days" asp-for="TripDetail.Days" type="text" class="form-control form-spin" />
                                                 <span asp-validation-for="TripDetail.Days" class="text-danger"></span>
                                             </div>
                                         </div>
@@ -89,7 +91,7 @@
                                         <div class="col-xsw-12 col-xs-6 col-sm-6 col-md-6">
                                             <div class="form-group form-spin-group">
                                                 <label asp-for="TripDetail.Nights">How many nights?</label>
-                                                <input asp-for="TripDetail.Nights" type="text" class="form-control form-spin" value="0" />
+                                                <input asp-for="TripDetail.Nights" type="text" class="form-control form-spin" />
                                                 <span asp-validation-for="TripDetail.Nights" class="text-danger"></span>
                                             </div>
                                         </div>
@@ -189,7 +191,7 @@
 
                                     <div class="form-group">
                                         <label asp-for="TripDetail.MeetingDate">Date</label>
-                                        <input asp-for="TripDetail.MeetingDate" type="time" class="form-control" />
+                                        <input asp-for="TripDetail.MeetingDate" type="datetime-local" class="form-control" />
                                         <span asp-validation-for="TripDetail.MeetingDate" class="text-danger"></span>
 
                                     </div>
@@ -200,7 +202,7 @@
 
                                     <div class="form-group form-spin-group">
                                         <label asp-for="TripDetail.MaxTravellers">Maximum travellers</label>
-                                        <input asp-for="TripDetail.MaxTravellers" type="text" class="form-control form-spin" value="1" />
+                                        <input asp-for="TripDetail.MaxTravellers" type="text" class="form-control form-spin" />
                                         <span asp-validation-for="TripDetail.MaxTravellers" class="text-danger"></span>
                                     </div>
 
@@ -210,7 +212,7 @@
 
                                     <div class="form-group">
                                         <label asp-for="TripDetail.SelectedLanguages">Languages:</label>
-                                        <input asp-for="TripDetail.SelectedLanguages" type="text" class="form-control" id="autocompleteTagging2" value="" placeholder="Engilsh-French" />
+                                        <input asp-for="TripDetail.SelectedLanguages" type="text" class="form-control" placeholder="Engilsh-French" />
                                         <span asp-validation-for="TripDetail.SelectedLanguages" class="text-danger"></span>
                                     </div>
 
@@ -220,7 +222,7 @@
 
                                     <div class="form-group">
                                         <label asp-for="TripDetail.Transport">Transport:</label>
-                                        <input asp-for="TripDetail.Transport" type="text" class="form-control" id="autocompleteTagging2" value="" placeholder="Train-Car" />
+                                        <input asp-for="TripDetail.Transport" type="text" class="form-control" placeholder="Train-Car" />
                                         <span asp-validation-for="TripDetail.Transport" class="text-danger"></span>
                                     </div>
 
@@ -231,34 +233,68 @@
                             <div class="mb-40"></div>
 
                             <h4 class="section-title">What's encluded?</h4>
+                            @if (Model.TripDetail.TripId == 0)
+                            {
+                                <div class="row gap-15 mt-25">
+                                    @for (var i = 0; i <= 6; i++)
+                                    {
+                                        <div class="col-xs-12 col-xs-6 col-md-4">
+                                            <div class="form-group">
 
-                            <div class="row gap-15 mt-25">
-                                @for (var i = 0; i <= 6; i++)
-                                {
-                                    <div class="col-xs-12 col-xs-6 col-md-4">
-                                        <div class="form-group">
-
-                                            <input id="@i" asp-for="TripDetail.Included" type="text" class="form-control">
+                                                <input id="@i" asp-for="TripDetail.Included" type="text" class="form-control">
+                                            </div>
                                         </div>
-                                    </div>
-                                }
-                            </div>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="row gap-15 mt-25">
+                                    @{var ss = Model.Included.ToList();
+                                    }
+                                    @for (var i = 0; i < ss.Count(); i++)
+                                    {
+                                        <div class="col-xs-12 col-xs-6 col-md-4">
+                                            <div class="form-group">
 
+                                                <input id="encluded+@i" asp-for="@ss[i].Title" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
                             <div class="mb-40"></div>
 
                             <h4 class="section-title">What's excluded?</h4>
-
-                            <div class="row gap-15 mt-25">
-                                @for (var i = 7; i <= 13; i++)
-                                {
-                                    <div class="col-xs-12 col-xs-6 col-md-4">
-                                        <div class="form-group">
-                                            <input id="@i" asp-for="TripDetail.Excluded" type="text" class="form-control">
+                            @if (Model.TripDetail.TripId == 0)
+                            {
+                                <div class="row gap-15 mt-25">
+                                    @for (var i = 7; i <= 13; i++)
+                                    {
+                                        <div class="col-xs-12 col-xs-6 col-md-4">
+                                            <div class="form-group">
+                                                <input id="@i" asp-for="TripDetail.Excluded" value="" type="text" class="form-control">
+                                            </div>
                                         </div>
-                                    </div>
-                                }
-                            </div>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="row gap-15 mt-25">
+                                    @{var ex = Model.Excluded.ToList();
+                                    }
+                                    @for (var i = 0; i < ex.Count(); i++)
+                                    {
+                                        <div class="col-xs-12 col-xs-6 col-md-4">
+                                            <div class="form-group">
 
+                                                <input id="excluded+@i" asp-for="@ex[i].Title" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
                             <div class="mb-30"></div>
 
                             <h4 class="section-title">Gallery</h4>
@@ -267,15 +303,111 @@
                             <div class="row gap-20">
                                 <div class="col-sm-12 col-md-12">
                                     <div class="form-group bootstrap-fileinput-style-01">
-                                        <input id="form-photos" name="file" type="file" multiple>
+                                        @if (Model.TripDetail.TripId != 0)
+                                        {
+                                            foreach (var image in Model.Galleries)
+                                            {
+                                                <img src="@image.URL" width="150px" height="150px" />
+                                            }
+                                        }
+                                        <input asp-for="TripDetail.SelectedImages" id="form-photos" name="file" type="file" multiple>
+
                                         <span class="font12 font-italic">** only jpg, png, tiff are allowed</span>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
+                        @if (Model.TripDetail.TripId != 0)
+                        {
+                            <div class="mb-40"></div>
+
+                            <h4 class="section-title">Itinerary</h4>
+                            <p>Compliment interested discretion estimating on stimulated apartments oh. Dear so sing when in find read of call. As distrusts behaviour abilities defective uncommonly.</p>
+                            <div id="days-details" class="itinerary-form-wrapper">
+
+                                @foreach (var day in Model.TripDaysDetail)
+                                {
+                                    
+                                    <div class="itinerary-form-item">
+
+                                        <div class="content clearfix">
+
+                                            <div class="row gap-20">
+
+                                                <div class="col-xss-12 col-xs-2 col-sm-2 col-md-1">
+
+                                                    <div class="day">
+                                                        <h6 class="text-uppercase mb-0 mt-5 text-muted">Day</h6>
+                                                        <span class="text-primary block number spacing-1">@day.DayNum</span>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-xss-12 col-xs-10 col-sm-10 col-md-11">
+
+                                                    <div class="row gap-20">
+
+                                                        <div class="col-xs-12 col-sm-5 col-md-3">
+
+                                                            <div class="form-group form-group-sm">
+                                                                <label>Time from</label>
+                                                                <input id="timefromday+@day.DayNum" asp-for="@day.TimeFrom" type="datetime-local" class="form-control" />
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="col-xs-12 col-sm-5 col-md-3">
+
+                                                            <div class="form-group form-group-sm">
+                                                                <label>Time to</label>
+                                                                <input id="timetoday+@day.DayNum" asp-for="@day.TimeTo" type="datetime-local" class="form-control" />
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row gap-20">
+
+                                                        <div class="col-xs-12 col-sm-6">
+
+                                                            <div class="form-group">
+                                                                <label>Title:</label>
+                                                                <input id="titleday+@day.DayNum" asp-for="@day.Title" type="text" class="form-control" />
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label>Remark:</label>
+                                                                <input id="remarkday+@day.DayNum" asp-for="@day.Remark" type="text" class="form-control" />
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="col-xs-12 col-sm-6">
+
+                                                            <div class="form-group">
+                                                                <label>Brief Description:</label>
+                                                                <textarea id="descriptionday+@day.DayNum" asp-for="@day.Description" class="form-control" rows="5"></textarea>
+                                                            </div>
+
+                                                        </div>
 
 
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                }
+
+                            </div>
+                        }
                         <div class="mb-50">
 
                             <div class="checkbox-block font-icon-checkbox">
@@ -305,6 +437,12 @@
 
 
 
+@{
+    var token = antiforgery.GetAndStoreTokens(Context);
+    var count = Model.TripDaysDetail.ToList().Count();
+    var id = Model.TripDetail.TripId;
+    
+}
 
 @section Scripts{
 
@@ -324,18 +462,20 @@
                     arrItem.push(currentCheckboxId);
                 }
             })
-            console.log(arrItem);
+
             if (arrItem.length != 0) {
                 commaSeperatedIds = arrItem.toString();
                 $.ajax({
                     url: "/TourGuide/OfferedCreate/SaveList",
                     type: "POST",
+                    headers: { '@token.HeaderName': '@token.RequestToken' },
                     data: { ItemList: commaSeperatedIds },
                     success: function (response) {
                         //
                     }
                 })
             }
+
 
             var arrTextBoxesEncluded = [];
             for (var i = 0; i <= 6; i++) {
@@ -352,6 +492,7 @@
                 $.ajax({
                     url: "/TourGuide/OfferedCreate/SaveEncluded",
                     type: "POST",
+                    headers: { '@token.HeaderName': '@token.RequestToken' },
                     data: { ItemList: string },
                     success: function (response) {
                         //
@@ -368,18 +509,50 @@
                 }
             }
 
-            var stringEx = arrTextBoxesExcluded.toString();
+            var string = arrTextBoxesExcluded.toString();
             if (arrTextBoxesExcluded.length != 0) {
 
                 $.ajax({
                     url: "/TourGuide/OfferedCreate/SaveExecluded",
                     type: "POST",
+                    headers: { '@token.HeaderName': '@token.RequestToken' },
                     data: { ItemList: string },
                     success: function (response) {
                         //
                     }
                 })
             }
+
+            var matrix = new Array();
+            for (var i = 1; i <= @count ; i++) {
+                var titleday = document.getElementById("titleday+" + i).value;
+                var remarkday = document.getElementById("remarkday+" + i).value;
+                var timeFromday = document.getElementById("timefromday+" + i).value;
+                var timeToday = document.getElementById("timetoday+" + i).value;
+                var descriptionday = document.getElementById("descriptionday+" + i).value;
+                if (titleday && remarkday && descriptionday != null) {
+                    matrix.push({ Title: titleday, TimeFrom: timeFromday, TimeTo: timeToday, Remark: remarkday, Description: descriptionday });
+                    
+
+                }
+            }
+            
+            
+            
+
+                if (matrix.length != 0) {
+                    $.ajax({
+                        url: "/TourGuide/OfferedCreate/Test",
+                        type: "POST",
+                        headers: { '@token.HeaderName': '@token.RequestToken' },
+                        data: { ItemList: matrix, id: @id },
+                        success: function (response) {
+                            //
+                        }
+                    });
+            }
+
+
 
         }
 
