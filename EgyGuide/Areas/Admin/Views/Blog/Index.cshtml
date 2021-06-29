@@ -1,0 +1,93 @@
+﻿@model IEnumerable<EgyGuide.Models.Blog>
+
+@{
+    ViewData["Title"] = "Admin - Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 80%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<div class="padding-30">
+    <h2>Panel - Blogs</h2>
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Views</th>
+            <th>Status</th>
+            <th style="width:30%"></th>
+        </tr>
+
+        @foreach (var blog in Model)
+        {
+            <tr>
+                <td>@blog.Id</td>
+                <td>@blog.Title</td>
+                <td>@blog.Date</td>
+                <td>@blog.Descripition</td>
+                <td>@blog.Views</td>
+                <td>@blog.Status</td>
+                <td>
+                    @if (blog.Status == "active")
+                    {
+                        <button class="btn btn-success">Active</button>
+                        <form asp-controller="Blog" asp-action="Unactive" asp-route-id="@blog.Id" class="inline-block">
+                            <button type="submit" class="btn btn-default">Unactive</button>
+                        </form>
+                        <a onclick="Delete(@blog.Id)" class="btn btn-danger">Delete</a>
+                    }
+                    else if (blog.Status == "unactive")
+                    {
+                        <form asp-controller="Blog" asp-action="Active" asp-route-id="@blog.Id" class="inline-block">
+                            <button class="btn btn-default">Active</button>
+                        </form>
+                        <button type="submit" class="btn btn-success">Unactive</button>
+                        <a onclick="Delete(@blog.Id)" class="btn btn-danger">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        function Delete(id) {
+            var isConfirmed = confirm("Are you sure to delete?")
+
+            if (isConfirmed) {
+                $.ajax({
+                    url: "/Admin/Blog/Delete?id=" + id,
+                    type: "DELETE",
+                    success: function (data) {
+                        if (data) {
+                            alert("Deleted Done..")
+                            window.location.replace("/admin/blog");
+                        }
+                        else
+                            alert("OOH! Problem has occured")
+                    }
+                })
+            }
+
+        }
+    </script>
+}

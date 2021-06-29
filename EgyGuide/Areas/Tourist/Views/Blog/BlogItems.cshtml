@@ -1,40 +1,47 @@
 ﻿@model EgyGuide.Models.ViewModels.BlogVM
 @using EgyGuide.Utility
 
-@{ 
+@{
     int maxDescriptionWords = 50;
 }
 
-@foreach (var blog in Model.Blogs)
+@if (Model.Blogs.Any())
 {
-    <div class="blog-item">
+    @foreach (var blog in Model.Blogs)
+    {
+        <div class="blog-item">
 
-        <div class="blog-media">
-            <div class="overlay-box">
-                <a class="blog-image" asp-controller="Blog" asp-action="BlogSingle" asp-route-id="@blog.Id">
-                    <img src="@blog.ImageURL" alt="" />
-                    <div class="image-overlay">
-                        <div class="overlay-content">
-                            <div class="overlay-icon"><i class="pe-7s-link"></i></div>
+            <div class="blog-media">
+                <div class="overlay-box">
+                    <a class="blog-image" asp-controller="Blog" asp-action="BlogSingle" asp-route-id="@blog.Id">
+                        <img src="@blog.ImageURL" alt="" />
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <div class="overlay-icon"><i class="pe-7s-link"></i></div>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
-        </div>
 
-        <div class="blog-content">
-            <h3><a href="blog-single.html" class="inverse">@blog.Title</a></h3>
-            <ul class="blog-meta">
-                <li>by <a href="#">@String.Format("{0} {1}", blog.ApplicationUser.FirstName, blog.ApplicationUser.LastName)</a></li>
-                <li>by @blog.Date</li>
-                <li>in <a href="#">@blog.Category.Name</a></li>
-                <li>32 comments</li>
-            </ul>
-            <div class="blog-entry" style="color: none;">
-                @SD.SubstringByWords(SD.StripHtml(blog.Descripition), maxDescriptionWords).
+            <div class="blog-content">
+                <h3><a href="blog-single.html" class="inverse">@blog.Title</a></h3>
+                <ul class="blog-meta">
+                    <li>by <a href="#">@String.Format("{0} {1}", blog.ApplicationUser.FirstName, blog.ApplicationUser.LastName)</a></li>
+                    <li>by @blog.Date</li>
+                    <li>in <a href="#">@blog.Category.Name</a></li>
+                    <li>32 comments</li>
+                </ul>
+                <div class="blog-entry" style="color: none;">
+                    @SD.SubstringByWords(SD.StripHtml(blog.Descripition), maxDescriptionWords).
+                </div>
+                <a asp-controller="Blog" asp-action="BlogSingle" asp-route-id="@blog.Id" class="btn-blog">Read More <i class="fa fa-long-arrow-right"></i></a>
             </div>
-            <a asp-controller="Blog" asp-action="BlogSingle" asp-route-id="@blog.Id" class="btn-blog">Read More <i class="fa fa-long-arrow-right"></i></a>
-        </div>
 
-    </div>
+        </div>
+    }
+}
+else
+{
+    <partial name="~/Views/Shared/NotFoundAlert.cshtml" />
 }

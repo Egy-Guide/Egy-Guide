@@ -2,22 +2,16 @@
 using EgyGuide.DataAccess.Data;
 using EgyGuide.DataAccess.Repository.IRepository;
 using EgyGuide.Models;
-using EgyGuide.Models.ViewModels;
+using EgyGuide.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EgyGuide.Areas.TourGuide.Controllers
 {
     [Area("TourGuide")]
+    [Authorize(Roles = SD.Role_User_Tour_Guide)]
     public class TripDaysController : Controller
     {
         private readonly IUnitOfWork _unit;
@@ -63,10 +57,16 @@ namespace EgyGuide.Areas.TourGuide.Controllers
         public IActionResult TripDays(int? id)
         {
             var lastRecord = _db.TripDetails.OrderByDescending(i => i.TripId).FirstOrDefault();
-            var count = lastRecord.Days;
-            ViewData["count"] = count;
+            if (lastRecord != null)
+            {
+                var count = lastRecord.Days;
+                ViewData["count"] = count;
+            }
+            else
+            {
+                return RedirectToAction("Index", "OfferedCreate");
+            }
             
-
 
             if (id == null)
             {

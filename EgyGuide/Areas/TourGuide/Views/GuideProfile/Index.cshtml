@@ -1,0 +1,236 @@
+﻿@model EgyGuide.Models.ViewModels.GuideUserVM
+
+@{
+    ViewData["Title"] = "Guide Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="~/Views/Shared/Breadcrumb.cshtml">
+<partial name="~/Views/Shared/TourGuide/UserProfileWrapper.cshtml">
+
+<div class="pt-30 pb-50">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-7 col-md-8 mt-20">
+                <h4 class="section-title">Profile:</h4>
+
+                <p class="lead">
+                    @Model.GuideUserDetails.Introduction
+                </p>
+
+                <div class="bt mt-30 mb-30"></div>
+
+                <ul class="featured-list-with-h">
+
+                    <li>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <h5><i class="ti-user text-primary mr-5"></i> Guide Classification</h5>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 mt-sm">
+                                <span class="pl-sm">Local Guide</span>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <h5><i class="ti-world text-primary mr-5"></i> Nationality</h5>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 mt-sm">
+                                <span class="pl-sm">@Model.GuideUser.ApplicationUser.Nationality</span>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <h5><i class="ti-map-alt text-primary mr-5"></i> Base Location</h5>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 mt-sm">
+                                <span class="pl-sm">@Model.GuideUser.ApplicationUser.City, @Model.GuideUser.ApplicationUser.Country</span>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <h5><i class="ti-location-pin text-primary mr-5"></i> Service Area</h5>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 mt-sm">
+                                <span class="pl-sm">@Model.GuideUser.ServiceArea</span>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <h5><i class="ti-flag-alt text-primary mr-5"></i> Speak</h5>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 mt-sm">
+                                <span class="pl-sm">@Model.GuideUser.Language</span>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <h5><i class="ti-calendar text-primary mr-5"></i> Years of Experience</h5>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 mt-sm">
+                                <span class="pl-sm">@Model.GuideUser.YearExperience</span>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <h5><i class="ti-car text-primary mr-5"></i> Private Transportation</h5>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 mt-sm">
+                                @if (@Model.GuideUserDetails.PrivateTransportation == "Yes")
+                                {
+                                    <span class="pl-sm"><i class="ion-checkmark text-success mr-3"></i> Yes</span>
+                                }
+                                else
+                                {
+                                    <span class="pl-sm"><i class="ion-close text-danger mr-3"></i> No</span>
+                                }
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <h5><i class="ti-truck text-primary mr-5"></i> Public Transportation </h5>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 mt-sm">
+                                @if (@Model.GuideUserDetails.PublicTransportation == "Yes")
+                                {
+                                    <span class="pl-sm"><i class="ion-checkmark text-success mr-3"></i> Yes</span>
+                                }
+                                else
+                                {
+                                    <span class="pl-sm"><i class="ion-close text-danger mr-3"></i> No</span>
+                                }
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <h5><i class="ti-announcement text-primary mr-5"></i> Special remark </h5>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 mt-sm">
+                                <span class="pl-sm">@(Model.GuideUserDetails.SpecialRemark == null ? "None" : Model.GuideUserDetails.SpecialRemark)</span>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <div class="mb-30"></div>
+
+                @Html.Raw(Model.GuideUserDetails.MoreDetails)
+
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-6 mt-30">
+                        <h3 class="font-lg">Certificate:</h3>
+                        <div class="row">
+                            <div class="col-xss-12 col-xs-8 col-sm-10 col-md-9">
+                                <div class="sumi-gallery-wrapper mt-10 clearfix">
+                                    <img data-sgallery="group1rrt" title="Certificate" data-full="@Model.GuideUserDetails.CertificateUrl" data-thumb="@Model.GuideUserDetails.CertificateUrl" src="@Model.GuideUserDetails.CertificateUrl" alt="images">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="sidebar-sticky" class="col-xs-12 col-sm-5 col-md-4 mt-20">
+
+                <div class="ml-10 ml-0-xs mb-10">
+                    <a href="guide-payment.html" class="btn btn-primary btn-lgg btn-block btn-border">Book me Now</a>
+                </div>
+
+                <aside class="sidebar-wrapper with-box-shadow">
+
+                    <div class="sidebar-booking-box">
+
+                        <div class="sidebar-booking-header clearfix">
+
+                            <div class="price">
+                                Contact me
+                            </div>
+
+                        </div>
+
+                        <div class="sidebar-booking-inner">
+
+                            <form class="fast-contact-wrapper">
+
+                                <div class="row">
+
+                                    <div class="col-xss-12 col-xs-6 col-sm-12 col-md-12">
+
+                                        <div class="form-group">
+                                            <label>Your Name (required)</label>
+                                            <input type="text" class="form-control" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xss-12 col-xs-6 col-sm-12 col-md-12">
+
+                                        <div class="form-group">
+                                            <label>Your Email (required)</label>
+                                            <input type="text" class="form-control" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xss-12 col-xs-12 col-sm-12 col-md-12">
+
+                                        <div class="form-group">
+                                            <label>Message</label>
+                                            <textarea class="form-control" rows="6"></textarea>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <a href="#" class="btn btn-primary btn-block mt-5">Submit contact</a>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{ 
+    <partial name="~/Views/Shared/TourGuide/UserProfileScripts.cshtml">
+}

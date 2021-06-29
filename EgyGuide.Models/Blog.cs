@@ -28,5 +28,6 @@ namespace EgyGuide.Models
         public Category Category { get; set; }        
         public string ImageURL { get; set; }
         public int Views { get; set; }
+        public string Status { get; set; }
     }
 }

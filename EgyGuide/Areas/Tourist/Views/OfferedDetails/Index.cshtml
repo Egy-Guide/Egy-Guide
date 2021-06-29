@@ -1,7 +1,7 @@
 ﻿@model EgyGuide.Models.ViewModels.OfferCreateVM
 @using EgyGuide.Utility
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Offered Details";
     ViewData["AddClassToBodyTag"] = "transparent-header with-multiple-sticky";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -915,14 +915,14 @@
                                     <div class="form-group">
                                         <label>No. of traveller</label>
                                         <div class="form-group form-spin-group">
-                                            <input type="text" class="form-control form-spin" value="1" />
+                                            <input id="noTravellers" type="text" class="form-control form-spin" value="1" />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-xss-12 col-xs-12 col-sm-12">
                                     <div class="mt-5">
-                                        <a href="#" class="btn btn-primary btn-block">Request to Book</a>
+                                        <a onclick="getNoTravellers()" class="btn btn-primary btn-block">Request to Book</a>
                                     </div>
                                 </div>
 
@@ -1200,8 +1200,18 @@
     <script type="text/javascript" src="js/jquery.daterangepicker.js"></script>
     <script type="text/javascript" src="js/customs-datepicker.js"></script>
     <script>
-        
-       
+        function getNoTravellers() {
+            var noTravellersVal = document.getElementById("noTravellers").value
+            $.ajax({
+                url: "/Tourist/Booking/GetNoTravellers",
+                type: "POST",
+                data: { noTravellers: noTravellersVal },
+                success: function (data) {
+                    if (data.success)
+                        location.href = `/booking?id=${1}`
+                }
+            })
+        }
     </script>
 
     <script>

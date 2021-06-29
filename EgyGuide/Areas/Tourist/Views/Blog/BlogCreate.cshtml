@@ -45,7 +45,7 @@
                         <input type="hidden" asp-for="Blog.Id">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                        <div class="create-tour-inner">                           
+                        <div class="create-tour-inner">
 
                             <h4 class="section-title">@pageTitle Blog</h4>
 
@@ -72,7 +72,9 @@
                                 <div class="col-xs-6 col-sm-6">
                                     <div class="form-group">
                                         <label>Category:</label>
-                                        <select asp-for="Blog.CategoryId" asp-items="@Model.CategoryList" class="selectpicker show-tick form-control"></select>
+                                        <select asp-for="Blog.CategoryId" asp-items="@Model.CategoryList" class="selectpicker show-tick form-control">
+                                            <option value="" selected="selected">-- Select One --</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -86,15 +88,18 @@
                                     </div>
                                 }
 
+                                <div class="col-xs-12 col-sm-12 mt-10">
+                                    <h4 class="section-title">@imageTitle Image</h4>
+                                </div>
+
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group bootstrap-fileinput-style-01">
+                                        <input id="form-photos" name="files" type="file">
+                                        <span class="font12 font-italic">** only jpg, png, tiff are allowed</span>
+                                    </div>
+                                </div>
+
                             </div>
-
-                            <div class="mb-10"></div>
-
-                            <h4 class="section-title">@imageTitle Image</h4>
-
-                            <div>
-                                <input name="files" type="file">
-                            </div>                      
 
                         </div>
 
@@ -125,16 +130,17 @@
 <script src="js/customs-create.js"></script>
 
 <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/i54fe6u5lagl1he8pqydwfq525q0iiqncl244x4bzlp7acjm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            manubar: 'file edit format',
+            height: '280'
+        });
 
-<script src="https://cdn.tiny.cloud/1/i54fe6u5lagl1he8pqydwfq525q0iiqncl244x4bzlp7acjm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script>
-    tinymce.init({
-        selector: 'textarea',
-        plugins: 'lists',
-        manubar: 'file edit format',
-        height: '480'
-    });
+    </script>
 
-</script>
-
+    <script src="~/js/fileinput.min.js"></script>
+    <script src="~/js/customs-fileinput.js"></script>
 }

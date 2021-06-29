@@ -1,0 +1,219 @@
+﻿@model EgyGuide.Models.ViewModels.GuideUserVM
+
+@{
+    ViewData["Title"] = "Dashboard - Guide Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string certificateUrl = Model.GuideUserDetails.CertificateUrl != null ? Model.GuideUserDetails.CertificateUrl : "/images/certificate.jpg";
+}
+
+<partial name="~/Views/Shared/Breadcrumb.cshtml">
+<partial name="~/Views/Shared/TourGuide/UserProfileWrapper.cshtml">
+
+<div class="pt-30 pb-50">
+
+    <div class="container">
+
+        <div class="row">
+
+            <partial name="~/Views/Shared/TourGuide/DashboardSidebarMenu.cshtml">
+
+            <div class="col-xs-12 col-sm-8 col-md-9 mt-20">
+
+                <div class="dashboard-wrapper">
+
+                    <h4 class="section-title">Guide Information</h4>
+
+                    <form class="post-form-wrapper" method="post" enctype="multipart/form-data">
+                        @if (Model.GuideUserDetails != null)
+                        {
+                            <input type="hidden" asp-for="GuideUserDetails.Id" />
+                        }
+
+                        <div class="row gap-20">
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>Short Introduction</label>
+                                    <textarea asp-for="GuideUserDetails.Introduction" class="form-control" placeholder="Enter Text ..." rows="6"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input asp-for="GuideUserDetails.Street" type="text" class="form-control" placeholder="Ex: Salah Salem st">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Province/State</label>
+                                    <input asp-for="GuideUserDetails.State" type="text" class="form-control" placeholder="Ex: Giza">
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Zip Code</label>
+                                    <input asp-for="GuideUserDetails.ZipCode" type="text" class="form-control" placeholder="Ex: 35214">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Born</label>
+                                    <div class="row gap-5">
+                                        <input asp-for="GuideUserDetails.Birthday" type="date" class="form-control">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-4 col-md-3">
+
+                                <div class="form-group">
+                                    <label>Private Transportation</label>
+                                    <div class="radio-wrapper">
+                                        <div class="radio-inline">
+                                            <input asp-for="GuideUserDetails.PrivateTransportation" id="private_transportation-1" value="Yes" type="radio" class="radio" />
+                                            <label class="" for="private_transportation-1">Yes</label>
+                                        </div>
+                                        <div class="radio-inline">
+                                            <input asp-for="GuideUserDetails.PrivateTransportation" id="private_transportation-2" value="No" type="radio" class="radio" />
+                                            <label class="" for="private_transportation-2">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-4 col-md-3">
+
+                                <div class="form-group">
+                                    <label>Public Transportation</label>
+                                    <div class="radio-wrapper">
+                                        <div class="radio-inline">
+                                            <input asp-for="GuideUserDetails.PublicTransportation" id="public_transportation-1" value="Yes" type="radio" class="checkbox" />
+                                            <label class="" for="public_transportation-1">Yes</label>
+                                        </div>
+                                        <div class="radio-inline">
+                                            <input asp-for="GuideUserDetails.PublicTransportation" id="public_transportation-2" value="No" type="radio" class="checkbox" />
+                                            <label class="" for="public_transportation-2">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>Special remark</label>
+                                    <textarea asp-for="GuideUserDetails.SpecialRemark" class="form-control" placeholder="Enter Text ..." rows="6"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>More details</label>
+                                    <textarea asp-for="GuideUserDetails.MoreDetails" class="form-control editor" placeholder="Enter Text ..." rows="6"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>Certificate</label>
+                                    <input asp-for="GuideUserDetails.CertificateImage" type="file" id="form-register-photo-2">
+                                    <span class="font12 font-italic">** only jpg, png, tiff are allowed</span>
+                                </div>
+
+                            </div>
+
+                            <div class="clear mb-10"></div>
+
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-lg btn-primary">Save</button>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{ 
+    <!-- Dashboard Guide Information JS -->
+    <script src="~/js/bootstrap-tokenfield.js"></script>
+    <script src="~/js/typeahead.bundle.min.js"></script>
+    <script src="~/js/bootstrap3-wysihtml5.min.js"></script>
+    <script src="~/js/jquery.bootstrap-touchspin.js"></script>
+    <script src="~/js/customs-dashboard-guide-info.js"></script>
+    <script src="~/js/fileinput.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/i54fe6u5lagl1he8pqydwfq525q0iiqncl244x4bzlp7acjm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea.editor',
+            plugins: 'lists',
+            manubar: 'file edit format',
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#form-register-photo-2").fileinput({
+                dropZoneTitle: '<i class="fa fa-photo"></i><span>Upload Photo</span>',
+                uploadUrl: '/',
+                maxFileCount: 1,
+                showUpload: false,
+                browseLabel: 'Browse',
+                browseIcon: '',
+                removeLabel: 'Remove',
+                removeIcon: '',
+                autoReplace: true,
+                showCaption: false,
+                allowedFileTypes: ['image'],
+                allowedFileExtensions: ['jpg', 'gif', 'png', 'tiff'],
+                initialPreview: [
+                    '<img src="@certificateUrl" class="file-preview-image" alt="Avatar">',
+                ],
+                overwriteInitial: true,
+            });
+        })
+    </script>
+    
+}

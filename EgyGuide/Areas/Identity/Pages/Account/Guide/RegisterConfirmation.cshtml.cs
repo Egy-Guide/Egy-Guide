@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EgyGuide.Areas.Identity.Pages.Account.Guide
 {
-    [Authorize(Roles = SD.Role_User_Suspended_Guide)]
+    [Authorize(Roles = SD.Role_User_Suspended_Guide + "," + SD.Role_User_Tour_Guide)]
     public class RegisterConfirmationModel : PageModel
     {
         public void OnGet()

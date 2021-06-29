@@ -22,6 +22,7 @@ namespace EgyGuide.DataAccess.Repository.IRepository
              string includeProperties = null
              );
 
+        bool Any();
         void Add(T entity);
 
         void Remove(int id);

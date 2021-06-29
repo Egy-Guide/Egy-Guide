@@ -318,26 +318,26 @@
 
     </div>
 
-    @section Scripts{
-        <script>
-            function Delete(id) {
-                var isConfirmed = confirm("Are you sure to delete?")
+@section Scripts{
+    <script>
+        function Delete(id) {
+            var isConfirmed = confirm("Are you sure to delete?")
 
-                if (isConfirmed) {
-                    $.ajax({
-                        url: "/Tourist/Blog/Delete?id=" + id,
-                        type: "DELETE",
-                        success: function (data) {
-                            if (data) {
-                                alert("Deleted Done..")
-                                window.location.replace("/blog");
-                            }
-                            else
-                                alert("OOH! Problem has occured")
+            if (isConfirmed) {
+                $.ajax({
+                    url: "/Tourist/Blog/Delete?id=" + id,
+                    type: "DELETE",
+                    success: function (data) {
+                        if (data) {
+                            alert("Deleted Done..")
+                            window.location.replace("/blog");
                         }
-                    })
-                }
-
+                        else
+                            alert("OOH! Problem has occured")
+                    }
+                })
             }
-        </script>
-    }
+
+        }
+    </script>
+}

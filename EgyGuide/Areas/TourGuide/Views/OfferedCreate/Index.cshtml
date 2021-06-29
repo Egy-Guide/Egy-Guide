@@ -7,7 +7,9 @@
     var title = "Create";
 
     if (Model.TripDetail.TripId != 0)
-        title = "Update"; }
+        title = "Update";
+
+}
 
 
 
@@ -51,17 +53,15 @@
                             <div class="row">
                                 @if (Model.TripDetail.TripId != 0)
                                 {
+                                    <input type="hidden" asp-for="TripDetail.TripId" />
+                                }
 
-                    <input type="hidden" asp-for="TripDetail.TripId" />}
                                 <div class="col-xs-12 col-sm-12">
-
                                     <div class="form-group form-group-lg">
                                         <label asp-for="TripDetail.Title">Tour name:</label>
                                         <input asp-for="TripDetail.Title" type="text" class="form-control" />
                                         <span asp-validation-for="TripDetail.Title" class="text-danger"></span>
-
                                     </div>
-
                                 </div>
 
                                 <div class="col-xs-12 col-sm-5 col-md-5">
@@ -83,17 +83,17 @@
                                                 <label asp-for="TripDetail.Days">How many days?</label>
                                                 <input id="days" asp-for="TripDetail.Days" type="text" class="form-control form-spin" value="1" />
                                                 <span asp-validation-for="TripDetail.Days" class="text-danger"></span>
-
                                             </div>
                                         </div>
+
                                         <div class="col-xsw-12 col-xs-6 col-sm-6 col-md-6">
                                             <div class="form-group form-spin-group">
                                                 <label asp-for="TripDetail.Nights">How many nights?</label>
                                                 <input asp-for="TripDetail.Nights" type="text" class="form-control form-spin" value="0" />
                                                 <span asp-validation-for="TripDetail.Nights" class="text-danger"></span>
-
                                             </div>
                                         </div>
+
                                     </div>
 
                                 </div>
@@ -102,20 +102,18 @@
 
                                     <div class="form-group">
                                         <label asp-for="TripDetail.CityId">City:</label>
-                                        @Html.DropDownListFor(m => m.TripDetail.CityId, Model.CityList, "-Select a city",
-new { @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.TripDetail.CityId, Model.CityList, "-- Select a city --", new { @class = "form-control" })
                                         <span asp-validation-for="TripDetail.CityId" class="text-danger"></span>
-
                                     </div>
 
                                 </div>
+
                                 <div class="col-xs-12 col-sm-12">
 
                                     <div class="form-group">
                                         <label asp-for="TripDetail.SelectedPlaces">Visiting Places:</label>
-                                        <input asp-for="TripDetail.SelectedPlaces" type="text" class="form-control" placeholder="ex:- Museum Pyramids" />
+                                        <input asp-for="TripDetail.SelectedPlaces" type="text" class="form-control" placeholder="Ex: Museum-Pyramids" />
                                         <span asp-validation-for="TripDetail.SelectedPlaces" class="text-danger"></span>
-
                                     </div>
 
                                 </div>
@@ -124,14 +122,11 @@ new { @class = "form-control" })
 
                                     <div class="form-group">
                                         <label>Brief Description:</label>
-                                        <textarea  asp-for="TripDetail.Description" class="form-control" rows="5" placeholder="write your tirp detials"></textarea>
+                                        <textarea asp-for="TripDetail.Description" class="form-control" rows="5" placeholder="Write your tirp detials"></textarea>
                                         <span asp-validation-for="TripDetail.Description" class="text-danger"></span>
-
                                     </div>
 
                                 </div>
-
-                               
 
                             </div>
 
@@ -145,168 +140,137 @@ new { @class = "form-control" })
 
                                     <div class="category-checkbox-wrapper clearfix mt-10 mb-15">
 
-                                        @foreach (var style in Model.TripStyles)
+                                        @if (Model.TripStyles.Any())
                                         {
-                            <div class="category-checkbox-item">
-                                <div class="checkbox-block">
+                                            @foreach (var style in Model.TripStyles)
+                                            {
+                                                <div class="category-checkbox-item">
+                                                    <div class="checkbox-block">
 
-                                    <input  id="checkbox_block-@style.StyleId" type="checkbox" class="checkbox @style.StyleId" checked="@style.IsChecked" />
-                                    <label asp-for="@style.StyleId" class="" for="checkbox_block-@style.StyleId">
-                                        <span class="category-checkbox-inner">
-                                            <span class="middle-outer">
-                                                <span class="middle-inner">
-                                                    <span class="icon">
-                                                        <i class="flaticon-travel-icons-@style.ClassName"></i>
-                                                    </span>
-                                                    @style.StyleName
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </label>
+                                                        <input id="checkbox_block-@style.StyleId" type="checkbox" class="checkbox @style.StyleId" checked="@style.IsChecked" />
+                                                        <label asp-for="@style.StyleId" class="" for="checkbox_block-@style.StyleId">
+                                                            <span class="category-checkbox-inner">
+                                                                <span class="middle-outer">
+                                                                    <span class="middle-inner">
+                                                                        <span class="icon">
+                                                                            <i class="flaticon-travel-icons-@style.ClassName"></i>
+                                                                        </span>
+                                                                        @style.StyleName
+                                                                    </span>
+                                                                </span>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <partial name="~/Views/Shared/NotFoundAlert.cshtml" />
+                                        }
+                                    </div>
                                 </div>
-                            </div>}
+                            </div>
+
+                            <div class="mb-30"></div>
+
+                            <h4 class="section-title">Trip detail</h4>
+
+                            <div class="row gap-20">
+                                <div class="col-xs-12 col-sm-5">
+                                    <div class="form-group">
+                                        <label asp-for="TripDetail.MeetingPlace">Meeting point</label>
+                                        <input asp-for="TripDetail.MeetingPlace" type="text" class="form-control" />
+                                        <span asp-validation-for="TripDetail.MeetingPlace" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-3">
+
+                                    <div class="form-group">
+                                        <label asp-for="TripDetail.MeetingDate">Date</label>
+                                        <input asp-for="TripDetail.MeetingDate" type="time" class="form-control" />
+                                        <span asp-validation-for="TripDetail.MeetingDate" class="text-danger"></span>
+
                                     </div>
 
                                 </div>
 
+                                <div class="col-xs-12 col-sm-4">
 
+                                    <div class="form-group form-spin-group">
+                                        <label asp-for="TripDetail.MaxTravellers">Maximum travellers</label>
+                                        <input asp-for="TripDetail.MaxTravellers" type="text" class="form-control form-spin" value="1" />
+                                        <span asp-validation-for="TripDetail.MaxTravellers" class="text-danger"></span>
+                                    </div>
 
-                            </div>
+                                </div>
 
+                                <div class="col-xs-12 col-sm-12">
 
+                                    <div class="form-group">
+                                        <label asp-for="TripDetail.SelectedLanguages">Languages:</label>
+                                        <input asp-for="TripDetail.SelectedLanguages" type="text" class="form-control" id="autocompleteTagging2" value="" placeholder="Engilsh-French" />
+                                        <span asp-validation-for="TripDetail.SelectedLanguages" class="text-danger"></span>
+                                    </div>
 
-                        </div>
+                                </div>
 
+                                <div class="col-xs-12 col-sm-12">
 
-                        <div class="mb-30"></div>
-
-                        <h4 class="section-title">Trip detail</h4>
-
-                        <div class="row gap-20">
-
-                            <div class="col-xs-12 col-sm-5">
-
-                                <div class="form-group">
-                                    <label asp-for="TripDetail.MeetingPlace">Meeting point</label>
-                                    <input asp-for="TripDetail.MeetingPlace" type="text" class="form-control" />
-                                    <span asp-validation-for="TripDetail.MeetingPlace" class="text-danger"></span>
+                                    <div class="form-group">
+                                        <label asp-for="TripDetail.Transport">Transport:</label>
+                                        <input asp-for="TripDetail.Transport" type="text" class="form-control" id="autocompleteTagging2" value="" placeholder="Train-Car" />
+                                        <span asp-validation-for="TripDetail.Transport" class="text-danger"></span>
+                                    </div>
 
                                 </div>
 
                             </div>
 
-                            <div class="col-xs-12 col-sm-3">
+                            <div class="mb-40"></div>
 
-                                <div class="form-group">
-                                    <label asp-for="TripDetail.MeetingDate">Date</label>
-                                    
-                                    <input asp-for="TripDetail.MeetingDate" type="time" class="form-control" />
-                                    <span asp-validation-for="TripDetail.MeetingDate" class="text-danger"></span>
+                            <h4 class="section-title">What's encluded?</h4>
 
+                            <div class="row gap-15 mt-25">
+                                @for (var i = 0; i <= 6; i++)
+                                {
+                                    <div class="col-xs-12 col-xs-6 col-md-4">
+                                        <div class="form-group">
+
+                                            <input id="@i" asp-for="TripDetail.Included" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="mb-40"></div>
+
+                            <h4 class="section-title">What's excluded?</h4>
+
+                            <div class="row gap-15 mt-25">
+                                @for (var i = 7; i <= 13; i++)
+                                {
+                                    <div class="col-xs-12 col-xs-6 col-md-4">
+                                        <div class="form-group">
+                                            <input id="@i" asp-for="TripDetail.Excluded" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="mb-30"></div>
+
+                            <h4 class="section-title">Gallery</h4>
+                            <p><strong><span style="color:red">hint***</span> The first photo will be the cover photo of the trip</strong></p>
+
+                            <div class="row gap-20">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group bootstrap-fileinput-style-01">
+                                        <input id="form-photos" name="file" type="file" multiple>
+                                        <span class="font12 font-italic">** only jpg, png, tiff are allowed</span>
+                                    </div>
                                 </div>
-
-                            </div>
-
-                            <div class="col-xs-12 col-sm-4">
-
-                                <div class="form-group form-spin-group">
-                                    <label asp-for="TripDetail.MaxTravellers">Maximum travellers</label>
-                                    <input asp-for="TripDetail.MaxTravellers" type="text" class="form-control form-spin" value="1" />
-                                    <span asp-validation-for="TripDetail.MaxTravellers" class="text-danger"></span>
-
-                                </div>
-
-                            </div>
-                            <div class="col-xs-12 col-sm-12">
-
-                                <div class="form-group">
-                                    <label asp-for="TripDetail.SelectedLanguages">Languages:</label>
-                                    <input asp-for="TripDetail.SelectedLanguages" type="text" class="form-control" id="autocompleteTagging2" value="" placeholder="Engilsh-French" />
-                                    <span asp-validation-for="TripDetail.SelectedLanguages" class="text-danger"></span>
-
-                                </div>
-
-                            </div>
-
-
-
-                            <div class="col-xs-12 col-sm-12">
-
-                                <div class="form-group">
-                                    <label asp-for="TripDetail.Transport">Transport:</label>
-                                    <input asp-for="TripDetail.Transport" type="text" class="form-control" id="autocompleteTagging2" value="" placeholder="Train-Car" />
-                                    <span asp-validation-for="TripDetail.Transport" class="text-danger"></span>
-
-                                </div>
-
-                            </div>
-
-
-                        </div>
-
-                        <div class="mb-40"></div>
-
-                        <h4 class="section-title">What's encluded?</h4>
-
-                        <div class="row gap-15 mt-25">
-                            @for (var i = 0; i <= 6; i++) {
-                                
-                            <div class="col-xs-12 col-xs-6 col-md-4">
-                                <div class="form-group">
-                                    
-                                    <input id="@i" asp-for="TripDetail.Included" type="text" class="form-control">
-                                </div>
-                            </div>
-                                    } 
-
-
-                            @*<div class="col-xs-12 col-xs-6 col-md-4">
-                <div class="add-more-form">
-                    <span>Add/remove form</span>
-                    <a href="#"><i class="ion-android-add-circle"></i></a>
-                    <a href="#"><i class="ion-android-remove-circle"></i></a>
-                </div>
-            </div>*@
-
-                        </div>
-
-                        <div class="mb-40"></div>
-
-                        <h4 class="section-title">What's excluded?</h4>
-
-                        <div class="row gap-15 mt-25">
-                            @for (var i = 7; i <= 13; i++)
-                            {
-
-                        <div class="col-xs-12 col-xs-6 col-md-4">
-                            <div class="form-group">
-                                <input id="@i" asp-for="TripDetail.Excluded" type="text" class="form-control">
-                            </div>
-                        </div>}
-
-
-
-
-                            @*<div class="col-xs-12 col-xs-6 col-md-4">
-            <div class="add-more-form">
-                <span>Add/remove form</span>
-                <a href="#"><i class="ion-android-add-circle"></i></a>
-                <a href="#"><i class="ion-android-remove-circle"></i></a>
-            </div>
-        </div>*@
-
-                        </div>
-
-                        <div class="mb-30"></div>
-
-                        <h4 class="section-title">Gallery</h4>
-                        <p><strong><span style="color:red">hint***</span> The first photo will be the cover photo of the trip</strong></p>
-                        <div class="submite-list-box">
-
-                            <div>
-                                <input  name="file" type="file" multiple class="form-control">
-                                <div class="dz-default dz-message"><span>Click or Drop Images Here</span></div>
-
                             </div>
 
                         </div>
@@ -360,6 +324,7 @@ new { @class = "form-control" })
                     arrItem.push(currentCheckboxId);
                 }
             })
+            console.log(arrItem);
             if (arrItem.length != 0) {
                 commaSeperatedIds = arrItem.toString();
                 $.ajax({
@@ -379,11 +344,11 @@ new { @class = "form-control" })
                     arrTextBoxesEncluded.push(value);
                 }
             }
-            
+
             var string = arrTextBoxesEncluded.toString();
 
             if (arrTextBoxesEncluded.length != 0) {
-                
+
                 $.ajax({
                     url: "/TourGuide/OfferedCreate/SaveEncluded",
                     type: "POST",
@@ -402,7 +367,7 @@ new { @class = "form-control" })
                     arrTextBoxesExcluded.push(value);
                 }
             }
-            
+
             var stringEx = arrTextBoxesExcluded.toString();
             if (arrTextBoxesExcluded.length != 0) {
 
@@ -415,7 +380,7 @@ new { @class = "form-control" })
                     }
                 })
             }
-            
+
         }
 
     </script>
@@ -428,14 +393,17 @@ new { @class = "form-control" })
             menubar: 'file edit format',
             height: '280'
         });
-     
-       
+
+
     </script>
-    <script src="js/jquery.bootstrap-touchspin.js"></script>
-    <script src="js/dropzone.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.ui.timepicker.js"></script>
-    <script src="js/bootstrap-tokenfield.js"></script>
-    <script src="js/typeahead.bundle.min.js"></script>
-    <script src="js/customs-create.js"></script>
+    <script src="~/js/jquery.bootstrap-touchspin.js"></script>
+    <script src="~/js/dropzone.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/jquery.ui.timepicker.js"></script>
+    <script src="~/js/bootstrap-tokenfield.js"></script>
+    <script src="~/js/typeahead.bundle.min.js"></script>
+    <script src="~/js/customs-create.js"></script>
+    <script src="~/js/fileinput.min.js"></script>
+    <script src="~/js/customs-fileinput.js"></script>
+}
 }
