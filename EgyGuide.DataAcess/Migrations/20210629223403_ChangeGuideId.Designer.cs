@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EgyGuide.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210505234441_newTest")]
-    partial class newTest
+    [Migration("20210629223403_ChangeGuideId")]
+    partial class ChangeGuideId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,9 @@ namespace EgyGuide.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -118,9 +121,6 @@ namespace EgyGuide.DataAccess.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("TripDetailTripId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TripId")
                         .HasColumnType("int");
 
@@ -128,8 +128,6 @@ namespace EgyGuide.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TripDetailTripId");
 
                     b.ToTable("Galleries");
                 });
@@ -191,6 +189,53 @@ namespace EgyGuide.DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("GuideUsers");
+                });
+
+            modelBuilder.Entity("EgyGuide.Models.GuideUserDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CertificateUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GuideId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Introduction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MoreDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrivateTransportation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublicTransportation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SpecialRemark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GuideId");
+
+                    b.ToTable("GuideUsersDetails");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.Included", b =>
@@ -419,8 +464,8 @@ namespace EgyGuide.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("GuideId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("GuideId")
+                        .HasColumnType("int");
 
                     b.Property<int>("MaxTravellers")
                         .HasColumnType("int");
@@ -486,6 +531,26 @@ namespace EgyGuide.DataAccess.Migrations
                     b.ToTable("TripStyles");
                 });
 
+            modelBuilder.Entity("EgyGuide.Models.UserGallery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserGalleries");
+                });
+
             modelBuilder.Entity("ExcludedTripDetail", b =>
                 {
                     b.Property<int>("ExcludedId")
@@ -499,6 +564,21 @@ namespace EgyGuide.DataAccess.Migrations
                     b.HasIndex("TripDetailsTripId");
 
                     b.ToTable("ExcludedTripDetail");
+                });
+
+            modelBuilder.Entity("GalleryTripDetail", b =>
+                {
+                    b.Property<int>("SelectedImagesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TripDetailsTripId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SelectedImagesId", "TripDetailsTripId");
+
+                    b.HasIndex("TripDetailsTripId");
+
+                    b.ToTable("GalleryTripDetail");
                 });
 
             modelBuilder.Entity("IncludedTripDetail", b =>
@@ -783,15 +863,6 @@ namespace EgyGuide.DataAccess.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("EgyGuide.Models.Gallery", b =>
-                {
-                    b.HasOne("EgyGuide.Models.TripDetail", "TripDetail")
-                        .WithMany("SelectedImages")
-                        .HasForeignKey("TripDetailTripId");
-
-                    b.Navigation("TripDetail");
-                });
-
             modelBuilder.Entity("EgyGuide.Models.GuideUser", b =>
                 {
                     b.HasOne("EgyGuide.Models.ApplicationUser", "ApplicationUser")
@@ -799,6 +870,17 @@ namespace EgyGuide.DataAccess.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("EgyGuide.Models.GuideUserDetails", b =>
+                {
+                    b.HasOne("EgyGuide.Models.GuideUser", "GuideUser")
+                        .WithMany()
+                        .HasForeignKey("GuideId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GuideUser");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.Place", b =>
@@ -876,13 +958,24 @@ namespace EgyGuide.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EgyGuide.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("EgyGuide.Models.GuideUser", "GuideUser")
                         .WithMany()
-                        .HasForeignKey("GuideId");
-
-                    b.Navigation("ApplicationUser");
+                        .HasForeignKey("GuideId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("City");
+
+                    b.Navigation("GuideUser");
+                });
+
+            modelBuilder.Entity("EgyGuide.Models.UserGallery", b =>
+                {
+                    b.HasOne("EgyGuide.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("ExcludedTripDetail", b =>
@@ -890,6 +983,21 @@ namespace EgyGuide.DataAccess.Migrations
                     b.HasOne("EgyGuide.Models.Excluded", null)
                         .WithMany()
                         .HasForeignKey("ExcludedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EgyGuide.Models.TripDetail", null)
+                        .WithMany()
+                        .HasForeignKey("TripDetailsTripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GalleryTripDetail", b =>
+                {
+                    b.HasOne("EgyGuide.Models.Gallery", null)
+                        .WithMany()
+                        .HasForeignKey("SelectedImagesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -979,11 +1087,6 @@ namespace EgyGuide.DataAccess.Migrations
                         .HasForeignKey("RequestedTripId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EgyGuide.Models.TripDetail", b =>
-                {
-                    b.Navigation("SelectedImages");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.TripStyle", b =>

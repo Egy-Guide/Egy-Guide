@@ -13,9 +13,9 @@ namespace EgyGuide.Models
     {
         [Key]
         public int TripId { get; set; }
-        public string GuideId { get; set; }
+        public int GuideId { get; set; }
         [ForeignKey("GuideId")]
-        public ApplicationUser ApplicationUser { get; set; }
+        public GuideUser GuideUser { get; set; }
 
         [Required]
         public int CityId { get; set; }

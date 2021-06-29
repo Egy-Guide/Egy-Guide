@@ -74,14 +74,14 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             }
 
             //this is for edit
-            string userId = _unit.ApplicationUser.GetFirstOrDefault(u => u.Id == _userManager.GetUserId(User)).Id;
+            int guideId = _unit.GuideUser.GetFirstOrDefault(g => g.UserId == _userManager.GetUserId(User)).Id;
             tripVM.TripDetail = _unit.OfferCreate.Get(id.GetValueOrDefault());
             tripVM.Included = _db.Includeds.Where(i => i.TripId == tripVM.TripDetail.TripId);
             tripVM.Excluded = _db.Excludeds.Where(i => i.TripId == tripVM.TripDetail.TripId);
             tripVM.Galleries = _db.Galleries.Where(i => i.TripId == tripVM.TripDetail.TripId);
             tripVM.TripDaysDetail = _db.TripDaysDetails.Where(i => i.TripId == tripVM.TripDetail.TripId);
             
-            if (tripVM.TripDetail == null || tripVM.TripDetail.GuideId != userId)
+            if (tripVM.TripDetail == null || tripVM.TripDetail.GuideId != guideId)
             {
                 return NotFound();
             }
@@ -217,7 +217,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 if (tripVM.TripDetail.TripId == 0 )
                 {
 
-                    tripVM.TripDetail.GuideId = _userManager.GetUserId(User);
+                    tripVM.TripDetail.GuideId = _unit.GuideUser.GetFirstOrDefault(g => g.UserId == _userManager.GetUserId(User)).Id;
                    
                     //save the data from view into trip table
                     tripVM.TripDetail.SelcetedStyles = dataFromView;

@@ -462,8 +462,8 @@ namespace EgyGuide.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("GuideId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("GuideId")
+                        .HasColumnType("int");
 
                     b.Property<int>("MaxTravellers")
                         .HasColumnType("int");
@@ -956,13 +956,15 @@ namespace EgyGuide.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EgyGuide.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("EgyGuide.Models.GuideUser", "GuideUser")
                         .WithMany()
-                        .HasForeignKey("GuideId");
-
-                    b.Navigation("ApplicationUser");
+                        .HasForeignKey("GuideId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("City");
+
+                    b.Navigation("GuideUser");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.UserGallery", b =>
