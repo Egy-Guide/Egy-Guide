@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 namespace EgyGuide.Areas.Tourist.Controllers
 {
     [Area("Tourist")]
-    [Authorize]
     public class BookingController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
