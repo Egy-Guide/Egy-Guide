@@ -1,5 +1,7 @@
 ﻿@model EgyGuide.Models.TripDaysDetail
-
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+ 
 @{ ViewData["Title"] = "Tour";
     ViewData["AddClassToBodyTag"] = "transparent-header";
     ViewData["AddToBreadcrumbHeaderHereBox"] = "pb-100 no-bg";
@@ -80,7 +82,7 @@
 
                                                         <div class="form-group form-group-sm">
                                                             <label>Time from</label>
-                                                            <input id="from+@i" asp-for="TimeFrom" type="time" class="form-control" />
+                                                            <input id="from+@i" asp-for="TimeFrom" type="datetime-local" class="form-control" />
                                                         </div>
 
                                                     </div>
@@ -89,7 +91,7 @@
 
                                                         <div class="form-group form-group-sm">
                                                             <label>Time to</label>
-                                                            <input id="to+@i" asp-for="TimeTo" type="time" class="form-control" />
+                                                            <input id="to+@i" asp-for="TimeTo" type="datetime-local" class="form-control" />
                                                         </div>
 
                                                     </div>
@@ -181,7 +183,9 @@
 </div>
 
 
-
+@{ 
+    var token = antiforgery.GetAndStoreTokens(Context);
+ }
 
 @section Scripts{
 
@@ -198,19 +202,16 @@
                 var timeTo = document.getElementById("to+" + i).value;
                 var description = document.getElementById("description+" + i).value;
 
-                if (title && remark && description != null) {
+                if (title && remark && description  != null) {
                     matrix.push({ Title:title, TimeFrom:timeFrom, TimeTo:timeTo, Remark:remark, Description:description });
                 }
 
             }
-
-            console.log(matrix);
-            
             if (matrix.length != 0) {
-
                 $.ajax({
                     url: "/TourGuide/TripDays/SaveList",
                     type: "POST",
+                    headers: { '@token.HeaderName': '@token.RequestToken' },
                     data: { ItemList: matrix },
                     success: function (response) {
                         //
@@ -218,7 +219,6 @@
                 })
             }
         }
-
         
     </script>
     <script>
@@ -231,7 +231,7 @@
             if (document.getElementById("uploadBox").value == "") {
                 swal("Error", "Please select an image", "error");
                 return false;
-            }
+            } 
             return true;
         }
     </script>

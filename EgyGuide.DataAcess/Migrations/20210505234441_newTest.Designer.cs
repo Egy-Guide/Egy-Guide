@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EgyGuide.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210505215000_EditTripDetail")]
-    partial class EditTripDetail
+    [Migration("20210505234441_newTest")]
+    partial class newTest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -44,6 +44,7 @@ namespace EgyGuide.Models
         public string SelcetedStyles { get; set; }
         [Required]
         public string SelectedLanguages { get; set; }
+        
         public int MaxTravellers { get; set; }
 
         public ICollection<Excluded> Excluded { get; set; }

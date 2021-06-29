@@ -20,7 +20,6 @@ using System.Threading.Tasks;
 namespace EgyGuide.Areas.TourGuide.Controllers
 {
     [Area("TourGuide")]
-
     [Authorize(Roles = SD.Role_User_Tour_Guide)]
     public class OfferedCreateController : Controller
     {
@@ -32,6 +31,8 @@ namespace EgyGuide.Areas.TourGuide.Controllers
         [BindProperty]
         public OfferCreateVM tripVM { get; set; }
 
+        [BindProperty]
+        public TripDaysDetail tripDays { get; set; }
         public OfferedCreateController(
             IUnitOfWork unit,
             IWebHostEnvironment hostEnvironment,
@@ -71,14 +72,95 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 //this is for create
                 return View(tripVM);
             }
+
             //this is for edit
+            string userId = _unit.ApplicationUser.GetFirstOrDefault(u => u.Id == _userManager.GetUserId(User)).Id;
             tripVM.TripDetail = _unit.OfferCreate.Get(id.GetValueOrDefault());
-            if (tripVM.TripDetail == null)
+            tripVM.Included = _db.Includeds.Where(i => i.TripId == tripVM.TripDetail.TripId);
+            tripVM.Excluded = _db.Excludeds.Where(i => i.TripId == tripVM.TripDetail.TripId);
+            tripVM.Galleries = _db.Galleries.Where(i => i.TripId == tripVM.TripDetail.TripId);
+            tripVM.TripDaysDetail = _db.TripDaysDetails.Where(i => i.TripId == tripVM.TripDetail.TripId);
+            
+            if (tripVM.TripDetail == null || tripVM.TripDetail.GuideId != userId)
             {
                 return NotFound();
             }
             return View(tripVM);
 
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public void UpdateTripDays(TripDaysDetail[] ItemList , int id)
+        {
+            
+            if (ItemList != null)
+            {
+                for(int i =0; i < ItemList.Count(); i++)
+                {
+                    tripDays = ItemList[i];
+                    var objFromDb = _unit.TripDays.Get(id);
+                    objFromDb.TimeFrom = tripDays.TimeFrom;
+                    objFromDb.TimeTo = tripDays.TimeTo;
+                    objFromDb.ImageUrl = tripDays.ImageUrl;
+                    objFromDb.Title = tripDays.Title;
+                    objFromDb.Remark = tripDays.Remark;
+                    objFromDb.Description = tripDays.Description;
+                }
+                _unit.Save();
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public void UpdateEncluded(string ItemList, int id)
+        {
+            // save the value into session to can use it again in other functions
+            //must initialze a key
+
+            if (ItemList != null && id != 0)
+            {
+                var data = ItemList.Split(",");
+                var dataList = data.ToList();
+                var count = dataList.Count();
+                var iterator = 0;
+                var includeds = _db.Includeds.Where(e => e.TripId == id);
+                foreach (var included in includeds)
+                {
+                    if (iterator < count)
+                    {
+                        included.Title = dataList[iterator];
+                        iterator++;
+                    }
+                }
+                _unit.Save();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public void UpdateExcluded(string ItemList, int id)
+        {
+            // save the value into session to can use it again in other functions
+            //must initialze a key
+
+            if (ItemList != null && id != 0)
+            {
+                var data = ItemList.Split(",");
+                var dataList = data.ToList();
+                var count = dataList.Count();
+                var iterator = 0;
+                var excludeds = _db.Excludeds.Where(e => e.TripId == id);
+                foreach (var excluded in excludeds)
+                {
+                    if (iterator < count)
+                    {
+                        excluded.Title = dataList[iterator];
+                        iterator++;
+                    }
+                }
+                _unit.Save();
+            }
         }
 
         [HttpPost]
@@ -115,7 +197,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
             if (ModelState.IsValid)
             {
-             
+               
                 //retrive the value that in the session
                 //must initialize the same key i initialized before
                 var key = "my-key";
@@ -129,6 +211,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 
                 var files = HttpContext.Request.Form.Files;
                 string webRootPath = _hostEnvironment.WebRootPath;
+                
 
 
                 if (tripVM.TripDetail.TripId == 0 )
@@ -144,42 +227,100 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
                     SavePlaces();
 
-                    SaveStyles(dataFromView);
+                    if (dataFromView != null)
+                    {
+                        SaveStyles(dataFromView);
+                    }
 
-                    SaveEncludedTexts(dataEncluded);
-                    SaveExcludedTexts(dataExcluded);
+                    if (dataEncluded != null)
+                    {
+                        SaveEncludedTexts(dataEncluded);
+                    }
+                    if (dataExcluded != null)
+                    {
+                        SaveExcludedTexts(dataExcluded);
+                    }
+                    var lastRecord = _db.TripDetails.OrderByDescending(i => i.TripId).FirstOrDefault();
 
-                    UploadImages();
-
+                    UploadImages(lastRecord.TripId);
                     _db.SaveChanges();
+
 
                 }
                 else
                 {
-                    if (tripVM.TripDetail.TripId != 0)
+                    if (tripVM.TripDetail.TripId != 0 )
                     {
-                        tripVM.TripDetail = _unit.OfferCreate.Get(tripVM.TripDetail.TripId);
-                        tripVM.Galleries = _db.Galleries.Where(i => i.TripId == tripVM.TripDetail.TripId);
                         //update images
+                        
+                        var images = _db.Galleries.Where(i => i.TripId == tripVM.TripDetail.TripId);
                         if (files.Count > 0)
                         {
-                            foreach (var image in tripVM.Galleries)
-                            {
-                                if(image.URL != null)
+                            foreach (var image in images)
                                 {
-                                    string imagePath = Path.Combine(webRootPath, image.URL.TrimStart('\\'));
-                                    if (System.IO.File.Exists(imagePath))
+                                   if(image.URL != null)
                                     {
-                                        GC.Collect();
-                                        GC.WaitForPendingFinalizers();
-                                        System.IO.File.Delete(imagePath);
+                                       string imagePath = Path.Combine(webRootPath, image.URL.TrimStart('\\'));
+                                        if (System.IO.File.Exists(imagePath))
+                                       {
+                                           System.IO.File.Delete(imagePath);
+                                       }
                                     }
                                 }
+                            if (images != null) {
+                                _db.Galleries.RemoveRange(images);
+                                
                             }
-                    }
-                        UploadImages();
+                            UploadImages(tripVM.TripDetail.TripId);
+                           
+                            
+                        }
+                        else
+                        {
+                            //here, when we want to edit the trip but not change images
+                            foreach(var image in images)
+                            {
+                                var gallery = new Gallery()
+                                {
+
+                                    URL = image.URL,
+                                    TripId = tripVM.TripDetail.TripId
+
+                                };
+                            }
+                        }
+                       
+                        //remove previous selected styles and put new
+                        tripVM.TripDetail.SelcetedStyles = dataFromView;
+                        
+                        _db.SelectedStyles.RemoveRange(_db.SelectedStyles.Where(s => s.TripId == tripVM.TripDetail.TripId));
+
+
+                        // save into selected styles table
+                        if (dataFromView != null)
+                        {
+                            
+                            var data = dataFromView.Split(',').ToList();
+
+                            foreach (var item in data)
+                            {
+                                var selectedStyle = new SelectedStyle()
+                                {
+                                    StyleId = Convert.ToInt16(item),
+                                    TripId = tripVM.TripDetail.TripId
+                                };
+                                _db.SelectedStyles.Add(selectedStyle);
+                            }
+                        }
+
+                        //update all model
                         _unit.OfferCreate.Update(tripVM.TripDetail);
                         _unit.Save();
+                        return RedirectToAction("OfferedCreateDone", "TripDays", new { area = "TourGuide" });
+                    }
+                    else
+                    {
+                        return NotFound();
                     }
                 }
 
@@ -224,9 +365,8 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
             }
         }
-        public void UploadImages()
+        public void UploadImages(int id)
         {
-            var lastRecord = _db.TripDetails.OrderByDescending(i => i.TripId).FirstOrDefault();
 
             string webRootPath = _hostEnvironment.WebRootPath;
             var files = HttpContext.Request.Form.Files;
@@ -235,28 +375,65 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
             for (var i = 0; i < files.Count; i++)
             {
-                var uploads = Path.Combine(webRootPath, @"Trips/gallery");
+                var uploads = Path.Combine(webRootPath, @"Trips\gallery");
                 var fileName = Guid.NewGuid().ToString();
                 var extension = Path.GetExtension(files[i].FileName);
-                string fullPath = Path.Combine(uploads, fileName + extension);
-
-                using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                string fullPath = uploads + fileName + extension;
+                if (System.IO.File.Exists(fullPath))
                 {
-                    files[i].CopyTo(fileStream);
-                    fileStream.Dispose();
+                    System.IO.File.Delete(fullPath);
+
+                }
+                using (var filesStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                {
+                    files[i].CopyTo(filesStreams);
+                    filesStreams.Dispose();
                 }
 
                 var gallery = new Gallery()
                 {
 
                     URL = @"\Trips\gallery\" + fileName + extension,
-                    TripId = lastRecord.TripId,
+                    TripId = id,
 
                 };
                 tripVM.TripDetail.SelectedImages.Add(gallery);
 
             }
+           
         }
+        //public void EditImages()
+        //{
+            
+        //    string webRootPath = _hostEnvironment.WebRootPath;
+        //    var files = HttpContext.Request.Form.Files;
+
+        //    tripVM.TripDetail.SelectedImages = new List<Gallery>();
+
+        //    for (var i = 0; i < files.Count; i++)
+        //    {
+        //        var uploads = Path.Combine(webRootPath, @"Trips\gallery");
+        //        var fileName = Guid.NewGuid().ToString();
+        //        var extension = Path.GetExtension(files[i].FileName);
+        //        string fullPath = Path.Combine(uploads, fileName + extension);
+                
+        //        using (var filesStreams = new FileStream(fullPath, FileMode.Create))
+        //        {
+        //            files[i].CopyTo(filesStreams);
+        //            filesStreams.Dispose();
+        //        }
+        //        var gallery = new Gallery()
+        //        {
+
+        //            URL = @"\Trips\gallery\" + fileName + extension,
+        //            TripId = tripVM.TripDetail.TripId,
+
+        //        };
+        //        tripVM.TripDetail.SelectedImages.Add(gallery);
+                
+        //    }
+            
+        //}
         public void SaveStyles(string dataFromView)
         {
             // coveret the data from view into list so i can loop through it
@@ -274,6 +451,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 _db.SelectedStyles.Add(selectedStyle);
             }
         }
+       
         public void SaveEncludedTexts(string ItemList)
         {
             var lastRecord = _db.TripDetails.OrderByDescending(i => i.TripId).FirstOrDefault();
@@ -308,8 +486,9 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
             }
         }
-        
+
        
+
         #region API CALLS
 
         [HttpGet]
@@ -343,3 +522,4 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
     }
 }
+
