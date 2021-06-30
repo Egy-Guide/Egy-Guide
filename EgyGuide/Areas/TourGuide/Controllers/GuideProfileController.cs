@@ -48,10 +48,8 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 GuideUserVM.GuideUserDetails = new GuideUserDetails()
                 {
                     GuideId = GuideUserVM.GuideUser.Id,
-                    Introduction = "None",
                     PrivateTransportation = "No",
                     PublicTransportation = "Yes",
-                    MoreDetails = "None"
                 };
 
                 _unitOfWork.GuideUserDetails.Add(GuideUserVM.GuideUserDetails);
