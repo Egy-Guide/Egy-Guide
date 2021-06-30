@@ -19,4 +19,8 @@
     <ProjectReference Include="..\EgyGuide.Utility\EgyGuide.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

@@ -34,8 +34,8 @@ namespace EgyGuide.Models
         public string YoutubeProfile { get; set; }
         public string Remark { get; set; }
 
-        [Required]
         [NotMapped]
+        [Required]
         public IFormFile IdentityImage { get; set; }
     }
 }

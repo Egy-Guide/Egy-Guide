@@ -23,7 +23,7 @@ jQuery(function($) {
 		allowedFileTypes: ['image' ],
 		allowedFileExtensions: ['jpg', 'gif', 'png', 'tiff'],
 			initialPreview: [
-				'<img src="/images/man/01.jpg" class="file-preview-image" alt="The Moon" title="The Moon">',
+				'<img src="/images/avatar.jpg" class="file-preview-image" alt="Avatar">',
 		],
 		overwriteInitial: true,
 	});
@@ -37,15 +37,10 @@ jQuery(function($) {
 		browseIcon: '',
 		removeLabel: 'Remove',
 		removeIcon: '',
-		uploadLabel: 'Upload',
-		uploadIcon: '',
 		autoReplace: true,
 		showCaption: false,
 		allowedFileTypes: ['image' ],
-		allowedFileExtensions: ['gif', 'png'],
-			initialPreview: [
-				'<img src="/images/brands/06.png" class="file-preview-image" alt="The Moon" title="The Moon">',
-		],
+		allowedFileExtensions: ['jpg', 'gif', 'png', 'tiff'],
 		overwriteInitial: true,
 	});
 
@@ -61,9 +56,9 @@ jQuery(function($) {
 		uploadLabel: 'Upload',
 		uploadIcon: '',
 		autoReplace: false,
+		showCaption: false,
 		allowedFileTypes: ['image' ],
 		allowedFileExtensions: ['jpg', 'gif', 'png', 'tiff'],
-		showCaption: false,
 	});
 	
 	$("#input-ficons-3").fileinput({

@@ -1,0 +1,210 @@
+﻿@model EgyGuide.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Dashboard - Edit Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string imgSrc = Model.ImageUrl != null ? Model.ImageUrl : "/images/avatar.jpg";
+
+    string NationalityItemValue = Model.Nationality;
+    string CountryItemValue = Model.Country;
+}
+
+<partial name="~/Views/Shared/Breadcrumb.cshtml">
+<partial name="~/Views/Shared/UserProfileWrapper.cshtml">
+
+<div class="pt-30 pb-50">
+
+    <div class="container">
+
+        <div class="row">
+
+            <partial name="~/Views/Shared/TourGuide/DashboardSidebarMenu.cshtml">
+
+            <div class="col-xs-12 col-sm-8 col-md-9 mt-20">
+
+                <div class="dashboard-wrapper">
+
+                    <h4 class="section-title">Edit profile</h4>
+
+                    <form method="post" enctype="multipart/form-data" class="post-form-wrapper">
+                        <input type="hidden" asp-for="Id" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row gap-20">
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>Photo</label>
+                                    <input asp-for="Image" type="file" id="form-register-photo">
+                                    <span class="font12 font-italic">** photo must not bigger than 250kb</span>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input asp-for="FirstName" type="text" class="form-control" placeholder="First Name">
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input asp-for="LastName" type="text" class="form-control" placeholder="Last Name">
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input asp-for="Email" type="email" class="form-control" placeholder="Email">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input asp-for="PhoneNumber" type="text" class="form-control" placeholder="Phone Number">
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group">
+                                    <label>Nationality</label>
+                                    <select id="NationalityList" class="selectpicker show-tick form-control" asp-for="Nationality">
+                                        <partial name="~/Views/Shared/Country.cshtml" />
+                                    </select>
+                                    <span asp-validation-for="Nationality" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <select id="CountryList" class="selectpicker show-tick form-control" asp-for="Country">
+                                        <partial name="~/Views/Shared/Country.cshtml" />
+                                    </select>
+                                    <span asp-validation-for="Country" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input asp-for="City" type="text" class="form-control" placeholder="City">
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col-xs-12 col-sm-10 col-md-8">
+
+                                <div class="form-group bootstrap-fileinput-style-01">
+                                    <label>Brief Description</label>
+                                    <textarea asp-for="Brief" class="form-control" placeholder="Enter Text ..." rows="6"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="clear mb-10"></div>
+
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-lg btn-primary">Save</button>
+                                @*<a href="#" class="btn btn-primary btn-border">Cancel</a>*@
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts{ 
+    <script>
+        function getIndexOfItem(itemValue) {
+            var selectList = document.getElementById("NationalityList")
+            var itemIndex = 0
+
+            for (var i = 1; i < selectList.length; i++) {
+                if (selectList.options[i].value == `${itemValue}`) {
+                    itemIndex = i
+                }
+            }
+
+            return itemIndex
+        }
+
+        document.body.onload = selectNationality(getIndexOfItem("@NationalityItemValue"))
+        document.body.onload = selectCountry(getIndexOfItem("@CountryItemValue"))
+
+        function selectNationality(itemNo) {
+            document.getElementById("NationalityList").options[itemNo].selected = true;
+        }
+
+        function selectCountry(itemNo) {
+            document.getElementById("CountryList").options[itemNo].selected = true;
+        }
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="~/Views/Shared/TourGuide/UserProfileScripts.cshtml">
+    <!-- Dashboard Edit Profile Page JS -->
+    <script src="~/js/fileinput.min.js"></script>
+    <script src="~/js/bootstrap3-wysihtml5.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#form-register-photo").fileinput({
+                dropZoneTitle: '<i class="fa fa-photo"></i><span>Upload Photo</span>',
+                uploadUrl: '/',
+                maxFileCount: 1,
+                showUpload: false,
+                browseLabel: 'Browse',
+                browseIcon: '',
+                removeLabel: 'Remove',
+                removeIcon: '',
+                autoReplace: true,
+                showCaption: false,
+                allowedFileTypes: ['image'],
+                allowedFileExtensions: ['jpg', 'gif', 'png', 'tiff'],
+                initialPreview: [
+                    '<img src="@imgSrc" class="file-preview-image" alt="Avatar">',
+                ],
+                overwriteInitial: true,
+            });
+        })
+    </script>
+}

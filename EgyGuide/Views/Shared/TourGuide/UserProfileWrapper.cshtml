@@ -1,4 +1,12 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@inject EgyGuide.DataAccess.Repository.IRepository.IUnitOfWork _unitOfWork
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    var guide = _unitOfWork.GuideUser.GetFirstOrDefault(u => u.UserId == UserManager.GetUserId(User), includeProperties: "ApplicationUser");
+    var guideDetails = _unitOfWork.GuideUserDetails.GetFirstOrDefault(u => u.GuideId == guide.Id);
+}
+
 <div class="user-profile-wrapper">
 
     <div class="user-header">
@@ -12,7 +20,14 @@
                     <div class="inner-top">
 
                         <div class="image">
-                            <img src="~/images/man/01.jpg" alt="image" />
+                            @if (guide.ApplicationUser.ImageUrl == null)
+                            {
+                                <img src="~/images/avatar.jpg" alt="image" />
+                            }
+                            else
+                            {
+                                <img src="@guide.ApplicationUser.ImageUrl" alt="image" />
+                            }
                         </div>
 
                         <div class="GridLex-gap-20">
@@ -23,18 +38,28 @@
 
                                     <div class="GridLex-inner">
                                         <div class="heading clearfix">
-                                            <h3>Omar Abdulla</h3>
+                                            <h3>@String.Format("{0} {1}", guide.ApplicationUser.FirstName, guide.ApplicationUser.LastName)</h3>
                                         </div>
                                         <ul class="user-meta">
-                                            <li><i class="fa fa-map-marker"></i> 264, Carson Street Lexington, KY 40539 <span class="mh-5 text-muted">|</span> <i class="fa fa-phone"></i> +4 8547 985</li>
+                                            @if (guideDetails != null)
+                                            {
+                                            <li>
+                                                <i class="fa fa-map-marker"></i>
+                                                @(guideDetails.Street != null ? @guideDetails.Street : "") 
+                                                @(guideDetails.State != null ? ", " + guideDetails.State : "")
+                                                @(guideDetails.ZipCode != null ? ", " + guideDetails.ZipCode + "" : "")
+                                                @(guide.ApplicationUser.Country) <span class="mh-5 text-muted">|</span>
+                                                <i class="fa fa-phone"></i> +2 @guide.ApplicationUser.PhoneNumber
+                                            </li>
+                                            }
                                             <li>
                                                 <div class="user-social inline-block">
-                                                    <a href="#"><i class="icon-social-twitter" data-toggle="tooltip" data-placement="top" title="twitter"></i></a>
-                                                    <a href="#"><i class="icon-social-facebook" data-toggle="tooltip" data-placement="top" title="facebook"></i></a>
-                                                    <a href="#"><i class="icon-social-gplus" data-toggle="tooltip" data-placement="top" title="google plus"></i></a>
-                                                    <a href="#"><i class="icon-social-instagram" data-toggle="tooltip" data-placement="top" title="instrgram"></i></a>
+                                                    <a target="_blank" href="~//@guide.TwitterProfile"><i class="icon-social-twitter" data-toggle="tooltip" data-placement="top" title="twitter"></i></a>
+                                                    <a target="_blank" href="~//@guide.FacebookProfile"><i class="icon-social-facebook" data-toggle="tooltip" data-placement="top" title="facebook"></i></a>
+                                                    <a target="_blank" href="~//@guide.YoutubeProfile"><i class="icon-social-youtube" data-toggle="tooltip" data-placement="top" title="youtube"></i></a>
+                                                    <a target="_blank" href="~//@guide.InstagramProfile"><i class="icon-social-instagram" data-toggle="tooltip" data-placement="top" title="instrgram"></i></a>
                                                 </div>
-                                                <a href="#" class="btn btn-primary btn-xs btn-border">Follow</a>
+                                                <!--<a href="#" class="btn btn-primary btn-xs btn-border">Follow</a>-->
                                             </li>
                                             <li>
                                             </li>
@@ -58,7 +83,7 @@
                                             </div>
                                             <div class="col-xss-6 col-xs-6 col-sm-6 col-md-12 text-right text-left-sm">
                                                 <div class="user-header-price mt-5-sm">
-                                                    <span class="block-sm">From</span> <span class="text-primary number">USD32.00</span> / hour
+                                                    <span class="block-sm">From</span> <span class="text-primary number">USD@(String.Format("{0:#.00}", Convert.ToDecimal(guide.PricePerHour)))</span> / hour
                                                 </div>
                                             </div>
                                         </div>
@@ -87,10 +112,10 @@
                         <ul class="user-header-menu">
                             <li><a asp-controller="GuideProfile" asp-action="Index">Profile</a></li>
                             <li><a asp-controller="GuideProfile" asp-action="Tours">Tours <span>12</span></a></li>
-                            <li><a asp-controller="GuideProfile" asp-action="Gallery">Gallery</a></li>
+                            @*<li><a asp-controller="GuideProfile" asp-action="Gallery">Gallery</a></li>*@
                             <li><a asp-controller="GuideDetailsReviews" asp-action="Index">Reviews</a></li>
-                            <li><a asp-controller="GuideDetailsFollowing" asp-action="Index">Followings <span>25</span></a></li>
-                            <li><a asp-controller="GuideDetailsFollower" asp-action="Index">Followers <span>8</span></a></li>
+                            @*<li><a asp-controller="GuideDetailsFollowing" asp-action="Index">Followings <span>25</span></a></li>
+                            <li><a asp-controller="GuideDetailsFollower" asp-action="Index">Followers <span>8</span></a></li>*@
                             <li><a asp-controller="GuideDashboard" asp-action="Index">Dashboard</a></li>
                         </ul>
 

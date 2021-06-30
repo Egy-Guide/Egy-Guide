@@ -41,7 +41,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
 
             BlogVM = new BlogVM()
             {
-                Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category,ApplicationUser")
+                Blogs = _unitOfWork.Blog.GetAll(b => b.Status == "active", includeProperties: "Category,ApplicationUser")
                                         .OrderByDescending(b => b.Date)
             };
 
@@ -64,7 +64,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
         {            
             BlogVM = new BlogVM()
             {
-                Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category,ApplicationUser")
+                Blogs = _unitOfWork.Blog.GetAll(b => b.Status == "active", includeProperties: "Category,ApplicationUser")
                                         .Where(b => b.Date.Year == date.Year)
                                         .Where(b => b.Date.Month == date.Month)
                                         .OrderByDescending(b => b.Date)
@@ -88,7 +88,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
         {
             BlogVM = new BlogVM()
             {
-                Blogs = _unitOfWork.Blog.GetAll(includeProperties: "Category,ApplicationUser")
+                Blogs = _unitOfWork.Blog.GetAll(b => b.Status == "active", includeProperties: "Category,ApplicationUser")
                                         .Where(b => b.Category.Name == category)
                                         .OrderByDescending(b => b.Date)
             };
@@ -115,8 +115,11 @@ namespace EgyGuide.Areas.Tourist.Controllers
 
             BlogVM blogIndexVM = new BlogVM()
             {
-                Blog = _unitOfWork.Blog.GetFirstOrDefault(b => b.Id == id, includeProperties: "Category,ApplicationUser")
+                Blog = _unitOfWork.Blog.GetFirstOrDefault(b => (b.Id == id && b.Status == "active"), includeProperties: "Category,ApplicationUser")
             };
+
+            if (blogIndexVM.Blog == null)
+                return RedirectToAction(nameof(Index));
 
             blogIndexVM.Blog.Views++;
             _unitOfWork.Save();
@@ -128,6 +131,8 @@ namespace EgyGuide.Areas.Tourist.Controllers
         [Route("blog-create")]
         public IActionResult BlogCreate(int? id)
         {
+            string userId = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == _userManager.GetUserId(User)).Id;
+
             BlogVM = new BlogVM()
             {
                 Blog = new Blog(),
@@ -145,7 +150,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
             // This for Update
             BlogVM.Blog = _unitOfWork.Blog.Get(id.GetValueOrDefault());
 
-            if (BlogVM.Blog == null)
+            if ((BlogVM.Blog == null) || (BlogVM.Blog.UserId != userId))
                 return NotFound();
 
             return View(BlogVM);
@@ -169,7 +174,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
                 if (BlogVM.Blog.Id == 0)
                 {
                     BlogVM.Blog.Date = DateTime.Now;
-                    //BlogVM.Blog.Views = 0;
+                    BlogVM.Blog.Status = "unactive";
 
                     // Uploaded Successfully, if the user choose an image.
                     if (image.Count > 0)

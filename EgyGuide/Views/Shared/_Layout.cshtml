@@ -1,467 +1,485 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using EgyGuide.Utility
+@inject EgyGuide.DataAccess.Repository.IRepository.IUnitOfWork _unitOfWork
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-@{ 
-	var currentUser = await UserManager.GetUserAsync(User);
+
+@{
+    ApplicationUser currentUser = SignInManager.IsSignedIn(User) ? _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == UserManager.GetUserId(User)) : null;
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - EgyGuide</title>
-	<meta name="description" content="HTML template for multiple tour agency, local agency, traveller, tour hosting based on Twitter Bootstrap 3.x.x" />
-	<meta name="keywords" content="tour agency, tour guide, travel, trip, holiday, vocation, relax, adventure, virtual tour, tour planner" />
-	<meta name="author" content="crenoveative">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EgyGuide</title>
+    <meta name="description" content="HTML template for multiple tour agency, local agency, traveller, tour hosting based on Twitter Bootstrap 3.x.x" />
+    <meta name="keywords" content="tour agency, tour guide, travel, trip, holiday, vocation, relax, adventure, virtual tour, tour planner" />
+    <meta name="author" content="crenoveative">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<!-- Fav and Touch Icons -->
-	<link rel="apple-touch-icon" sizes="144x144" href="~/images/ico/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="~/images/ico/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="~/images/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon" href="~/images/ico/apple-touch-icon-57-precomposed.png">
-	<link rel="shortcut icon" href="~/images/ico/favicon.png">
+    <!-- Fav and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="144x144" href="~/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon" href="~/images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="~/images/ico/favicon.png">
 
-	<!-- CSS Plugins -->
-	<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" media="screen" />
-	<link rel="stylesheet" href="~/css/main.css">
-	<link rel="stylesheet" href="~/css/plugin.css">
-	<link rel="stylesheet" href="~/css/dropdown.css">
+    <!-- CSS Plugins -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" href="~/css/main.css">
+    <link rel="stylesheet" href="~/css/plugin.css">
+    <link rel="stylesheet" href="~/css/dropdown.css">
 
-	<!-- CSS Custom -->
-	<link href="~/css/style.css" rel="stylesheet">
+    <!-- CSS Custom -->
+    <link href="~/css/style.css" rel="stylesheet">
 
 </head>
 <body class=@ViewData["AddClassToBodyTag"]>
-	
-	<!-- start Container Wrapper -->
-	<div class="container-wrapper">
-
-		<!-- start Header -->
-		<header id="header">
-
-			<!-- start Navbar (Header) -->
-			<nav class="navbar navbar-default navbar-fixed-top navbar-sticky-function navbar-arrow">
-
-				<div class="container">
-
-					<div class="logo-wrapper">
-						<div class="logo">
-							<a asp-area="Tourist" asp-controller="Home" asp-action="Index">
-								<img src="~/images/logo-white.png" alt="Logo" />
-							</a>
-						</div>
-					</div>
-
-					<div id="navbar" class="navbar-nav-wrapper">
-
-						<ul class="nav navbar-nav" id="responsive-menu">
-							<li><a asp-area="Tourist" asp-controller="Home" asp-action="Index">Home</a></li>
-
-							<li><a asp-area="Tourist" asp-controller="Offered" asp-action="Index">Offered Tour</a></li>
-
-							<li><a asp-area="Tourist" asp-controller="Requested" asp-action="Index">Requested Tour</a></li>
 
-							<li><a asp-area="Tourist" asp-controller="Guide" asp-action="Index">Guide</a></li>
-
-							<li><a asp-area="Tourist" asp-controller="AboutUs" asp-action="Index">About Us</a></li>
-
-						</ul>
-
-					</div>
-
-					<!--/.nav-collapse -->
-					<div class="nav-mini-wrapper">
-						<ul class="nav-mini">
-							@if (SignInManager.IsSignedIn(User))
-							{
-								<li class="nav-item">
-									<a class="text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Welcome, <b>@currentUser.UserName</b></a>
-								</li>
-								<li class="nav-item">
-									<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-										<button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-									</form>
-								</li>
-
-							}
-							else
-							{
-								<li>
-									<div class="dropdown">
-										<i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" style="color:white" title="Join"></i>
-										<div class="dropdown-content">
-											<a asp-area="Identity" asp-page="/Account/Register" style="text-transform:capitalize">
-												<i class="icon-user-follow"></i> as tourist
-											</a>
-											<a asp-area="Identity" asp-page="/Account/Guide/Register" style="text-transform:capitalize">
-												<i class="icon-user-follow">
-												</i> as guide
-											</a>
-											<a asp-area="TourGuide" asp-controller="GuideProfile" asp-action="Index" style="text-transform:capitalize">
-												<i class="icon-user-follow">
-												</i> guide profile
-											</a>
-										</div>
-									</div>
-
-								</li>
-								
-								<li>
-									<a asp-area="Identity" asp-page="/Account/Login">
-										<i class="icon-login" data-toggle="tooltip" data-placement="bottom" title="Login"></i>
-									</a>
-								</li>
-							}
-						</ul>
-					</div>
-				</div>
+    <!-- start Container Wrapper -->
+    <div class="container-wrapper">
+
+        <!-- start Header -->
+        <header id="header">
+
+            <!-- start Navbar (Header) -->
+            <nav class="navbar navbar-default navbar-fixed-top navbar-sticky-function navbar-arrow">
+
+                <div class="container">
+
+                    <div class="logo-wrapper">
+                        <div class="logo">
+                            <a asp-area="Tourist" asp-controller="Home" asp-action="Index">
+                                <img src="~/images/logo-white.png" alt="Logo" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="navbar" class="navbar-nav-wrapper">
+
+                        <ul class="nav navbar-nav" id="responsive-menu">
+                            <li><a asp-area="Tourist" asp-controller="Home" asp-action="Index">Home</a></li>
+
+                            <li><a asp-area="Tourist" asp-controller="Offered" asp-action="Index">Offered Tour</a></li>
+
+                            <li><a asp-area="Tourist" asp-controller="Requested" asp-action="Index">Requested Tour</a></li>
+
+                            <li><a asp-area="Tourist" asp-controller="Guide" asp-action="Index">Guide</a></li>
+
+                            <li><a asp-area="Tourist" asp-controller="AboutUs" asp-action="Index">About Us</a></li>
+
+                        </ul>
+
+                    </div>
+
+                    <!--/.nav-collapse -->
+                    <div class="nav-mini-wrapper">
+                        <ul class="nav-mini">
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li>
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <div style="display: flex; align-items: center;">
+                                                <img src="@currentUser.ImageUrl" width="28" height="28" class="img-circle" style="display: inline;float: left;margin-right: 6px;">
+                                                <span style="font-size:16px;font-weight:bold;text-transform:capitalize;">@currentUser.FirstName</span>
+                                                <span class="caret" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dLabel">
+                                            @if (User.IsInRole(SD.Role_User_Tour_Guide))
+                                            {
+                                                <a asp-area="TourGuide" asp-controller="GuideDashboard" asp-action="Index">Dashboard</a>
+                                                <a asp-area="TourGuide" asp-controller="GuideProfile" asp-action="Index">Profile</a>
+                                                <a asp-area="TourGuide" asp-controller="OfferedCreate" asp-action="Index">Create tour</a>
+                                            }
+                                            else if (User.IsInRole(SD.Role_User_Tourist))
+                                            {
+                                                <a asp-area="Tourist" asp-controller="TouristDashboard" asp-action="Index">Dashboard</a>
+                                                <a asp-area="Tourist" asp-controller="TouristProfile" asp-action="Index">Profile</a>
+                                            }
+                                            <div class="dropdown-divider"></div>
+                                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                                <button type="submit">Logout</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <div class="dropdown">
+                                        <i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" style="color:white" title="Join"></i>
+                                        <div class="dropdown-content">
+                                            <a asp-area="Identity" asp-page="/Account/Register">
+                                                <i class="icon-user-follow"></i> as tourist
+                                            </a>
+                                            <a asp-area="Identity" asp-page="/Account/Guide/Register">
+                                                <i class="icon-user-follow">
+                                                </i> as guide
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                                <li>
+                                    <a asp-area="Identity" asp-page="/Account/Login">
+                                        <i class="icon-login" data-toggle="tooltip" data-placement="bottom" title="Login"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="slicknav-mobile"></div>
+
+            </nav>
+            <!-- end Navbar (Header) -->
 
-				<div id="slicknav-mobile"></div>
+        </header>
+        <!-- end Header -->
+        <!-- start Main Wrapper -->
+        <div class="main-wrapper scrollspy-container">
+            @RenderBody()
+        </div>
+        <!-- end Main Wrapper -->
+        <!-- start Footer Wrapper -->
+        <div class="footer-wrapper scrollspy-footer">
 
-			</nav>
-			<!-- end Navbar (Header) -->
+            <footer class="main-footer">
 
-		</header>
-		<!-- end Header -->
-		<!-- start Main Wrapper -->
-		<div class="main-wrapper scrollspy-container">
-			@RenderBody()
-		</div>
-		<!-- end Main Wrapper -->
-		<!-- start Footer Wrapper -->
-		<div class="footer-wrapper scrollspy-footer">
+                <div class="container">
 
-			<footer class="main-footer">
+                    <div class="row">
 
-				<div class="container">
+                        <div class="col-sm-12 col-md-4">
 
-					<div class="row">
+                            <h5 class="footer-title">Egy guide</h5>
 
-						<div class="col-sm-12 col-md-4">
+                            <p class="font16">Subsribe to get our latest updates and oeffers</p>
 
-							<h5 class="footer-title">Egy guide</h5>
+                            <div class="footer-newsletter">
 
-							<p class="font16">Subsribe to get our latest updates and oeffers</p>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="enter your email " />
+                                    <button class="btn btn-primary">subsribe</button>
+                                </div>
 
-							<div class="footer-newsletter">
+                                <p class="font-italic font13">Hey, I am your guide.</p>
 
-								<div class="form-group">
-									<input class="form-control" placeholder="enter your email " />
-									<button class="btn btn-primary">subsribe</button>
-								</div>
+                            </div>
 
-								<p class="font-italic font13">Hey, I am your guide.</p>
+                        </div>
 
-							</div>
+                        <div class="col-sm-12 col-md-8">
 
-						</div>
+                            <div class="row">
 
-						<div class="col-sm-12 col-md-8">
+                                <div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-3 mt-25-sm">
+                                    <h5 class="footer-title">Support</h5>
+                                    <ul class="footer-menu">
+                                        <li><a href="#">Support</a></li>
+                                        <li><a href="#">Advertise</a></li>
+                                        <li><a href="#">Media Relations</a></li>
+                                        <li><a href="#">Affiliates</a></li>
+                                        <li><a href="#">Careers</a></li>
+                                    </ul>
+                                </div>
 
-							<div class="row">
+                                <div class="col-xs-12 col-sm-4 col-md-3 mt-25-sm">
+                                    <h5 class="footer-title">Quick links</h5>
+                                    <ul class="footer-menu">
+                                        <li><a href="#">Media Relations</a></li>
+                                        <li><a href="#">Affiliates</a></li>
+                                        <li><a href="#">Careers</a></li>
+                                        <li><a href="#">Support</a></li>
+                                        <li><a href="#">Advertise</a></li>
+                                    </ul>
+                                </div>
 
-								<div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-3 mt-25-sm">
-									<h5 class="footer-title">Support</h5>
-									<ul class="footer-menu">
-										<li><a href="#">Support</a></li>
-										<li><a href="#">Advertise</a></li>
-										<li><a href="#">Media Relations</a></li>
-										<li><a href="#">Affiliates</a></li>
-										<li><a href="#">Careers</a></li>
-									</ul>
-								</div>
+                                <div class="col-xs-12 col-sm-4 col-md-3 mt-25-sm">
 
-								<div class="col-xs-12 col-sm-4 col-md-3 mt-25-sm">
-									<h5 class="footer-title">Quick links</h5>
-									<ul class="footer-menu">
-										<li><a href="#">Media Relations</a></li>
-										<li><a href="#">Affiliates</a></li>
-										<li><a href="#">Careers</a></li>
-										<li><a href="#">Support</a></li>
-										<li><a href="#">Advertise</a></li>
-									</ul>
-								</div>
+                                    <h5 class="footer-title">Policies</h5>
+                                    <ul class="footer-menu">
+                                        <li><a href="#">Using a Tour</a></li>
+                                        <li><a href="#">Submitting a Tour</a></li>
+                                        <li><a href="#">Managing My Account</a></li>
+                                        <li><a href="#">Merchant Help</a></li>
+                                        <li><a href="#">White Label Website</a></li>
+                                    </ul>
 
-								<div class="col-xs-12 col-sm-4 col-md-3 mt-25-sm">
+                                </div>
 
-									<h5 class="footer-title">Policies</h5>
-									<ul class="footer-menu">
-										<li><a href="#">Using a Tour</a></li>
-										<li><a href="#">Submitting a Tour</a></li>
-										<li><a href="#">Managing My Account</a></li>
-										<li><a href="#">Merchant Help</a></li>
-										<li><a href="#">White Label Website</a></li>
-									</ul>
+                            </div>
 
-								</div>
+                        </div>
 
-							</div>
+                    </div>
 
-						</div>
+                </div>
 
-					</div>
+            </footer>
 
-				</div>
+            <footer class="bottom-footer">
 
-			</footer>
+                <div class="container">
 
-			<footer class="bottom-footer">
+                    <div class="row">
 
-				<div class="container">
+                        <div class="col-xs-12 col-sm-6 col-md-4">
 
-					<div class="row">
+                            <p class="copy-right">&#169; @DateTime.Now.Year Egy Guide</p>
 
-						<div class="col-xs-12 col-sm-6 col-md-4">
+                        </div>
 
-							<p class="copy-right">&#169; @DateTime.Now.Year Egy Guide</p>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
 
-						</div>
+                            <ul class="bottom-footer-menu">
+                                <li><a href="#">Cookies</a></li>
+                                <li><a asp-area="Tourist" asp-controller="Home" asp-action="Privacy">Policies</a></li>
+                                <li><a asp-area="Tourist" asp-controller="Home" asp-action="FAQ">Terms</a></li>
+                                <li><a asp-area="Tourist" asp-controller="Home" asp-action="ContactUS">Blogs</a></li>
+                            </ul>
 
-						<div class="col-xs-12 col-sm-6 col-md-4">
+                        </div>
 
-							<ul class="bottom-footer-menu">
-								<li><a href="#">Cookies</a></li>
-								<li><a asp-area="Tourist" asp-controller="Home" asp-action="Privacy">Policies</a></li>
-								<li><a asp-area="Tourist" asp-controller="Home" asp-action="FAQ">Terms</a></li>
-								<li><a asp-area="Tourist" asp-controller="Home" asp-action="ContactUS">Blogs</a></li>
-							</ul>
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <ul class="bottom-footer-menu for-social">
+                                <li><a href="#"><i class="icon-social-twitter" data-toggle="tooltip" data-placement="top" title="twitter"></i></a></li>
+                                <li><a href="https://www.facebook.com/egyguide.eg/?ref=page_internal"><i class="icon-social-facebook" data-toggle="tooltip" data-placement="top" title="facebook"></i></a></li>
+                                <li><a href="#"><i class="icon-social-google" data-toggle="tooltip" data-placement="top" title="google plus"></i></a></li>
+                                <li><a href="#"><i class="icon-social-instagram" data-toggle="tooltip" data-placement="top" title="instrgram"></i></a></li>
+                            </ul>
+                        </div>
 
-						</div>
+                    </div>
 
-						<div class="col-xs-12 col-sm-12 col-md-4">
-							<ul class="bottom-footer-menu for-social">
-								<li><a href="#"><i class="icon-social-twitter" data-toggle="tooltip" data-placement="top" title="twitter"></i></a></li>
-								<li><a href="https://www.facebook.com/egyguide.eg/?ref=page_internal"><i class="icon-social-facebook" data-toggle="tooltip" data-placement="top" title="facebook"></i></a></li>
-								<li><a href="#"><i class="icon-social-google" data-toggle="tooltip" data-placement="top" title="google plus"></i></a></li>
-								<li><a href="#"><i class="icon-social-instagram" data-toggle="tooltip" data-placement="top" title="instrgram"></i></a></li>
-							</ul>
-						</div>
+                </div>
 
-					</div>
 
-				</div>
+            </footer>
 
+        </div>
+        <!-- end Footer Wrapper -->
+    </div>
+    <!-- end Container Wrapper -->
+    <!-- start Back To Top -->
+    <div id="back-to-top">
+        <a href="#"><i class="ion-ios-arrow-up"></i></a>
+    </div>
+    <!-- end Back To Top -->
+    <!-- start Sign-in Modal -->
+    <div id="loginModal" class="modal fade login-box-wrapper" tabindex="-1" data-width="550" data-backdrop="static" data-keyboard="false" data-replace="true">
 
-			</footer>
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title text-center">Sign-in into your account</h4>
+        </div>
 
-		</div>
-		<!-- end Footer Wrapper -->
-	</div>
-	<!-- end Container Wrapper -->
-	<!-- start Back To Top -->
-	<div id="back-to-top">
-		<a href="#"><i class="ion-ios-arrow-up"></i></a>
-	</div>
-	<!-- end Back To Top -->
-	<!-- start Sign-in Modal -->
-	<div id="loginModal" class="modal fade login-box-wrapper" tabindex="-1" data-width="550" data-backdrop="static" data-keyboard="false" data-replace="true">
+        <div class="modal-body">
+            <div class="row gap-20">
 
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h4 class="modal-title text-center">Sign-in into your account</h4>
-		</div>
+                <div class="col-sm-6 col-md-6">
+                    <button class="btn btn-facebook btn-block mb-5-xs">Log-in with Facebook</button>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <button class="btn btn-google-plus btn-block">Log-in with Google+</button>
+                </div>
 
-		<div class="modal-body">
-			<div class="row gap-20">
+                <div class="col-md-12">
+                    <div class="login-modal-or">
+                        <div><span>or</span></div>
+                    </div>
+                </div>
 
-				<div class="col-sm-6 col-md-6">
-					<button class="btn btn-facebook btn-block mb-5-xs">Log-in with Facebook</button>
-				</div>
-				<div class="col-sm-6 col-md-6">
-					<button class="btn btn-google-plus btn-block">Log-in with Google+</button>
-				</div>
+                <div class="col-sm-12 col-md-12">
 
-				<div class="col-md-12">
-					<div class="login-modal-or">
-						<div><span>or</span></div>
-					</div>
-				</div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input class="form-control" placeholder="Min 4 and Max 10 characters" type="text">
+                    </div>
 
-				<div class="col-sm-12 col-md-12">
+                </div>
 
-					<div class="form-group">
-						<label>Username</label>
-						<input class="form-control" placeholder="Min 4 and Max 10 characters" type="text">
-					</div>
+                <div class="col-sm-12 col-md-12">
 
-				</div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input class="form-control" placeholder="Min 4 and Max 10 characters" type="text">
+                    </div>
 
-				<div class="col-sm-12 col-md-12">
+                </div>
 
-					<div class="form-group">
-						<label>Password</label>
-						<input class="form-control" placeholder="Min 4 and Max 10 characters" type="text">
-					</div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="checkbox-block">
+                        <input id="remember_me_checkbox" name="remember_me_checkbox" class="checkbox" value="First Choice" type="checkbox">
+                        <label class="" for="remember_me_checkbox">Remember me</label>
+                    </div>
+                </div>
 
-				</div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="login-box-link-action">
+                        <a data-toggle="modal" href="#forgotPasswordModal" class="block line18 mt-1">Forgot password?</a>
+                    </div>
+                </div>
 
-				<div class="col-sm-6 col-md-6">
-					<div class="checkbox-block">
-						<input id="remember_me_checkbox" name="remember_me_checkbox" class="checkbox" value="First Choice" type="checkbox">
-						<label class="" for="remember_me_checkbox">Remember me</label>
-					</div>
-				</div>
+                <div class="col-sm-12 col-md-12">
+                    <div class="login-box-box-action">
+                        No account? <a data-toggle="modal" href="#registerModal">Register</a>
+                    </div>
+                </div>
 
-				<div class="col-sm-6 col-md-6">
-					<div class="login-box-link-action">
-						<a data-toggle="modal" href="#forgotPasswordModal" class="block line18 mt-1">Forgot password?</a>
-					</div>
-				</div>
+            </div>
+        </div>
 
-				<div class="col-sm-12 col-md-12">
-					<div class="login-box-box-action">
-						No account? <a data-toggle="modal" href="#registerModal">Register</a>
-					</div>
-				</div>
+        <div class="modal-footer text-center">
+            <button type="button" class="btn btn-primary">Log-in</button>
+            <button type="button" data-dismiss="modal" class="btn btn-primary btn-border">Close</button>
+        </div>
 
-			</div>
-		</div>
+    </div>
+    <!-- end Sign-in Modal -->
+    <!-- start Register Modal -->
+    <div id="registerModal" class="modal fade login-box-wrapper" tabindex="-1" data-backdrop="static" data-keyboard="false" data-replace="true">
 
-		<div class="modal-footer text-center">
-			<button type="button" class="btn btn-primary">Log-in</button>
-			<button type="button" data-dismiss="modal" class="btn btn-primary btn-border">Close</button>
-		</div>
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title text-center">Create your account for free</h4>
+        </div>
 
-	</div>
-	<!-- end Sign-in Modal -->
-	<!-- start Register Modal -->
-	<div id="registerModal" class="modal fade login-box-wrapper" tabindex="-1" data-backdrop="static" data-keyboard="false" data-replace="true">
+        <div class="modal-body">
 
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h4 class="modal-title text-center">Create your account for free</h4>
-		</div>
+            <div class="row gap-20">
 
-		<div class="modal-body">
+                <div class="col-sm-6 col-md-6">
+                    <button class="btn btn-facebook btn-block mb-5-xs">Register with Facebook</button>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <button class="btn btn-google-plus btn-block">Register with Google+</button>
+                </div>
 
-			<div class="row gap-20">
+                <div class="col-md-12">
+                    <div class="login-modal-or">
+                        <div><span>or</span></div>
+                    </div>
+                </div>
 
-				<div class="col-sm-6 col-md-6">
-					<button class="btn btn-facebook btn-block mb-5-xs">Register with Facebook</button>
-				</div>
-				<div class="col-sm-6 col-md-6">
-					<button class="btn btn-google-plus btn-block">Register with Google+</button>
-				</div>
+                <div class="col-sm-12 col-md-12">
 
-				<div class="col-md-12">
-					<div class="login-modal-or">
-						<div><span>or</span></div>
-					</div>
-				</div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input class="form-control" placeholder="Min 4 and Max 10 characters" type="text">
+                    </div>
 
-				<div class="col-sm-12 col-md-12">
+                </div>
 
-					<div class="form-group">
-						<label>Username</label>
-						<input class="form-control" placeholder="Min 4 and Max 10 characters" type="text">
-					</div>
+                <div class="col-sm-12 col-md-12">
 
-				</div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input class="form-control" placeholder="Enter your email address" type="text">
+                    </div>
 
-				<div class="col-sm-12 col-md-12">
+                </div>
 
-					<div class="form-group">
-						<label>Email Address</label>
-						<input class="form-control" placeholder="Enter your email address" type="text">
-					</div>
+                <div class="col-sm-12 col-md-12">
 
-				</div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input class="form-control" placeholder="Min 8 and Max 20 characters" type="text">
+                    </div>
 
-				<div class="col-sm-12 col-md-12">
+                </div>
 
-					<div class="form-group">
-						<label>Password</label>
-						<input class="form-control" placeholder="Min 8 and Max 20 characters" type="text">
-					</div>
+                <div class="col-sm-12 col-md-12">
 
-				</div>
+                    <div class="form-group">
+                        <label>Password Confirmation</label>
+                        <input class="form-control" placeholder="Re-type password again" type="text">
+                    </div>
 
-				<div class="col-sm-12 col-md-12">
+                </div>
 
-					<div class="form-group">
-						<label>Password Confirmation</label>
-						<input class="form-control" placeholder="Re-type password again" type="text">
-					</div>
+                <div class="col-sm-12 col-md-12">
+                    <div class="checkbox-block">
+                        <input id="register_accept_checkbox" name="register_accept_checkbox" class="checkbox" value="First Choice" type="checkbox">
+                        <label class="" for="register_accept_checkbox">By register, I read &amp; accept <a href="#">the terms</a></label>
+                    </div>
+                </div>
 
-				</div>
+                <div class="col-sm-12 col-md-12">
+                    <div class="login-box-box-action">
+                        Already have account? <a data-toggle="modal" href="#loginModal">Log-in</a>
+                    </div>
+                </div>
 
-				<div class="col-sm-12 col-md-12">
-					<div class="checkbox-block">
-						<input id="register_accept_checkbox" name="register_accept_checkbox" class="checkbox" value="First Choice" type="checkbox">
-						<label class="" for="register_accept_checkbox">By register, I read &amp; accept <a href="#">the terms</a></label>
-					</div>
-				</div>
+            </div>
 
-				<div class="col-sm-12 col-md-12">
-					<div class="login-box-box-action">
-						Already have account? <a data-toggle="modal" href="#loginModal">Log-in</a>
-					</div>
-				</div>
+        </div>
 
-			</div>
+        <div class="modal-footer text-center">
+            <button type="button" class="btn btn-primary">Register</button>
+            <button type="button" data-dismiss="modal" class="btn btn-primary btn-border">Close</button>
+        </div>
 
-		</div>
+    </div>
+    <!-- end Register Modal -->
+    <!-- start Forget Password Modal -->
+    <div id="forgotPasswordModal" class="modal fade login-box-wrapper" tabindex="-1" data-backdrop="static" data-keyboard="false" data-replace="true">
 
-		<div class="modal-footer text-center">
-			<button type="button" class="btn btn-primary">Register</button>
-			<button type="button" data-dismiss="modal" class="btn btn-primary btn-border">Close</button>
-		</div>
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title text-center">Restore your forgotten password</h4>
+        </div>
 
-	</div>
-	<!-- end Register Modal -->
-	<!-- start Forget Password Modal -->
-	<div id="forgotPasswordModal" class="modal fade login-box-wrapper" tabindex="-1" data-backdrop="static" data-keyboard="false" data-replace="true">
+        <div class="modal-body">
+            <div class="row gap-20">
 
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h4 class="modal-title text-center">Restore your forgotten password</h4>
-		</div>
+                <div class="col-sm-12 col-md-12">
+                    <p class="mb-20">Maids table how learn drift but purse stand yet set. Music me house could among oh as their. Piqued our sister shy nature almost his wicket. Hand dear so we hour to.</p>
+                </div>
 
-		<div class="modal-body">
-			<div class="row gap-20">
+                <div class="col-sm-12 col-md-12">
 
-				<div class="col-sm-12 col-md-12">
-					<p class="mb-20">Maids table how learn drift but purse stand yet set. Music me house could among oh as their. Piqued our sister shy nature almost his wicket. Hand dear so we hour to.</p>
-				</div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input class="form-control" placeholder="Enter your email address" type="text">
+                    </div>
 
-				<div class="col-sm-12 col-md-12">
+                </div>
 
-					<div class="form-group">
-						<label>Email Address</label>
-						<input class="form-control" placeholder="Enter your email address" type="text">
-					</div>
+                <div class="col-sm-12 col-md-12">
+                    <div class="checkbox-block">
+                        <input id="forgot_password_checkbox" name="forgot_password_checkbox" class="checkbox" value="First Choice" type="checkbox">
+                        <label class="" for="forgot_password_checkbox">Generate new password</label>
+                    </div>
+                </div>
 
-				</div>
+                <div class="col-sm-12 col-md-12">
+                    <div class="login-box-box-action">
+                        Return to <a data-toggle="modal" href="#loginModal">Log-in</a>
+                    </div>
+                </div>
 
-				<div class="col-sm-12 col-md-12">
-					<div class="checkbox-block">
-						<input id="forgot_password_checkbox" name="forgot_password_checkbox" class="checkbox" value="First Choice" type="checkbox">
-						<label class="" for="forgot_password_checkbox">Generate new password</label>
-					</div>
-				</div>
+            </div>
+        </div>
 
-				<div class="col-sm-12 col-md-12">
-					<div class="login-box-box-action">
-						Return to <a data-toggle="modal" href="#loginModal">Log-in</a>
-					</div>
-				</div>
+        <div class="modal-footer text-center">
+            <button type="button" class="btn btn-primary">Restore</button>
+            <button type="button" data-dismiss="modal" class="btn btn-primary btn-border">Close</button>
+        </div>
 
-			</div>
-		</div>
+    </div>
 
-		<div class="modal-footer text-center">
-			<button type="button" class="btn btn-primary">Restore</button>
-			<button type="button" data-dismiss="modal" class="btn btn-primary btn-border">Close</button>
-		</div>
-
-	</div>
-
-	<!-- Core JS -->
-	<script type="text/javascript" src="~/js/jquery.min.js"></script>
-	<script type="text/javascript" src="~/js/core-plugins.js"></script>
-	<script type="text/javascript" src="~/js/customs.js"></script>
-	@await RenderSectionAsync("Scripts", required: false)
+    <!-- Core JS -->
+    <script type="text/javascript" src="~/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/core-plugins.js"></script>
+    <script type="text/javascript" src="~/js/customs.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
