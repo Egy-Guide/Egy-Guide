@@ -13,9 +13,9 @@ namespace EgyGuide.Models
     {
         [Key]
         public int TripId { get; set; }
-        public string GuideId { get; set; }
+        public int GuideId { get; set; }
         [ForeignKey("GuideId")]
-        public ApplicationUser ApplicationUser { get; set; }
+        public GuideUser GuideUser { get; set; }
 
         [Required]
         public int CityId { get; set; }
@@ -33,7 +33,7 @@ namespace EgyGuide.Models
         public int Nights { get; set; }
         public string Transport { get; set; }
         public string MeetingPlace { get; set; }
-        public DateTime MeetingDate { get; set; }
+        public DateTime? MeetingDate { get; set; }
         [Required]
         public string Price { get; set; }
         

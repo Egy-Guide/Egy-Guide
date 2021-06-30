@@ -201,7 +201,7 @@
                 var timeFrom = document.getElementById("from+" + i).value;
                 var timeTo = document.getElementById("to+" + i).value;
                 var description = document.getElementById("description+" + i).value;
-
+                
                 if (title && remark && description  != null) {
                     matrix.push({ Title:title, TimeFrom:timeFrom, TimeTo:timeTo, Remark:remark, Description:description });
                 }
@@ -221,20 +221,7 @@
         }
         
     </script>
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'lists',
-            menubar: 'file edit format',
-        });
-        function validateInput() {
-            if (document.getElementById("uploadBox").value == "") {
-                swal("Error", "Please select an image", "error");
-                return false;
-            } 
-            return true;
-        }
-    </script>
+
     <script src="js/jquery.bootstrap-touchspin.js"></script>
     <script src="js/dropzone.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>

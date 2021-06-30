@@ -60,7 +60,8 @@ namespace EgyGuide.Areas.TourGuide.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index()
         {
-
+            // Do not need the identity image
+            ModelState.Remove("GuideUser.IdentityImage");
             if (ModelState.IsValid)
             {
                 // Get user's image from db

@@ -18,6 +18,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [Authorize]
         [Route("booking")]
         public IActionResult Index(int? id)
         {
@@ -26,7 +27,8 @@ namespace EgyGuide.Areas.Tourist.Controllers
             
             return View();
         }
-        
+
+        [Authorize]
         [Route("booking-confirmation")]
         public IActionResult BookingConfirmation()
         {
