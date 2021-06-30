@@ -10284,19 +10284,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sully\\.nuget\\packages\\": {}
+    "C:\\Users\\M&G\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\project\\Egy-Guide\\EgyGuide\\EgyGuide.csproj",
+      "projectUniqueName": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide\\EgyGuide.csproj",
       "projectName": "EgyGuide",
-      "projectPath": "E:\\project\\Egy-Guide\\EgyGuide\\EgyGuide.csproj",
-      "packagesPath": "C:\\Users\\Sully\\.nuget\\packages\\",
-      "outputPath": "E:\\project\\Egy-Guide\\EgyGuide\\obj\\",
+      "projectPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide\\EgyGuide.csproj",
+      "packagesPath": "C:\\Users\\M&G\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Sully\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\M&G\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10310,14 +10310,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\project\\Egy-Guide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj": {
-              "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj"
+            "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.DataAcess\\EgyGuide.DataAccess.csproj"
             },
-            "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj": {
-              "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj"
+            "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj": {
+              "projectPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Models\\EgyGuide.Models.csproj"
             },
-            "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {
-              "projectPath": "E:\\project\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj"
+            "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj": {
+              "projectPath": "C:\\Users\\M&G\\Source\\Repos\\Egy-Guide\\EgyGuide.Utility\\EgyGuide.Utility.csproj"
             }
           }
         }
@@ -10395,7 +10395,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.204\\RuntimeIdentifierGraph.json"
       }
     }
   }
