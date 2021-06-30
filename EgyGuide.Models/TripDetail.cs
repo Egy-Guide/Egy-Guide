@@ -33,7 +33,7 @@ namespace EgyGuide.Models
         public int Nights { get; set; }
         public string Transport { get; set; }
         public string MeetingPlace { get; set; }
-        public DateTime MeetingDate { get; set; }
+        public DateTime? MeetingDate { get; set; }
         [Required]
         public string Price { get; set; }
         

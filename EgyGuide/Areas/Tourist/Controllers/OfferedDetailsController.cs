@@ -33,7 +33,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
             var images = _db.Galleries.Where(i => i.TripId == id);
             var daysDetails = _db.TripDaysDetails.Where(t => t.TripId == id);
             var trip = _unit.OfferCreate.GetFirstOrDefault
-                (u => u.TripId == id, includeProperties: "City,SelectedImages,Included,Excluded");
+                (u => u.TripId == id, includeProperties: "City,Included,Excluded");
             var city = _db.Cities.SingleOrDefault(s => s.CityId == trip.CityId).Name;
             OfferCreateVM tripVM = new OfferCreateVM()
             {

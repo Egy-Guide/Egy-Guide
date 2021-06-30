@@ -38,7 +38,12 @@
  * Header
  */
 
-
+.dropdown-divider {
+	height: 0;
+	margin: .5rem 0;
+	overflow: hidden;
+	border-top: 1px solid #e9ecef;
+}
 
 .navbar-default {
 	background: #1C1C1F;
@@ -899,7 +904,7 @@ ul.bottom-footer-menu.for-social li:after {
 @media only screen and (max-width: 767px) {
 	.modal.login-box-wrapper {
 		width: auto;
-		margin-left: auto!
+		margin-left: auto;
 	}
 	.login-box-link-action {
 		text-align: left;

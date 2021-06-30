@@ -468,7 +468,7 @@ namespace EgyGuide.DataAccess.Migrations
                     b.Property<int>("MaxTravellers")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("MeetingDate")
+                    b.Property<DateTime?>("MeetingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("MeetingPlace")

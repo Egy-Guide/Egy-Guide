@@ -159,7 +159,7 @@
                         <div class="mb-25"></div>
 
                         <div class="featured-icon-simple-wrapper">
-
+                            
                             <div class="GridLex-gap-30 GridLex-gap-20-xs">
 
                                 <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-4_sm-4_xs-3_xss-1 GridLex-grid-center">
@@ -237,12 +237,12 @@
                                             </div>
                                             
                                             <div class="col-xs-12 col-sm-5 text-primary text-right text-left-xs mt-xs space">
-                                                <i class="ti-timer mr-5"></i> @Model.TripDetail.MeetingDate.ToString("hh:mm")
+                                                <i class="ti-timer mr-5"></i> @Model.TripDetail.MeetingDate.ToString()
                                             </div>
                                         </li>
                                         <li class="row gap-20">
                                             <div class="col-xs-12 col-sm-7">
-                                                Maximum traellers
+                                                Maximum travellers
                                             </div>
                                             <div class="col-xs-12 col-sm-5 text-primary text-right text-left-xs mt-xs space">
                                                 <i class="ti-user mr-5"></i> @Model.TripDetail.MaxTravellers
@@ -327,8 +327,6 @@
                                     <div id="bootstarp-toggle-@day.i-2" class="panel-collapse collapse">
                                         <div class="panel-body">
                                             <p class="font-lg">@SD.StripHtml(day.value.Description). </p>
-
-
                                         </div>
                                     </div>
 
