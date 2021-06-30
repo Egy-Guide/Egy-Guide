@@ -1,4 +1,5 @@
 ﻿using EgyGuide.DataAccess.Repository.IRepository;
+using EgyGuide.Models;
 using EgyGuide.Models.ViewModels;
 using EgyGuide.Utility;
 using Microsoft.AspNetCore.Authorization;
@@ -38,7 +39,24 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             if (GuideUserVM.GuideUser == null)
                 return NotFound();
 
+            // Get Current Guide User
             GuideUserVM.GuideUserDetails = _unitOfWork.GuideUserDetails.GetFirstOrDefault(u => u.GuideId == GuideUserVM.GuideUser.Id);
+
+            // New Guide User
+            if (GuideUserVM.GuideUserDetails == null)
+            {
+                GuideUserVM.GuideUserDetails = new GuideUserDetails()
+                {
+                    GuideId = GuideUserVM.GuideUser.Id,
+                    Introduction = "None",
+                    PrivateTransportation = "No",
+                    PublicTransportation = "Yes",
+                    MoreDetails = "None"
+                };
+
+                _unitOfWork.GuideUserDetails.Add(GuideUserVM.GuideUserDetails);
+                _unitOfWork.Save();
+            }
 
             return View(GuideUserVM);
         }

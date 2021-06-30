@@ -41,7 +41,17 @@
                                             <h3>@String.Format("{0} {1}", guide.ApplicationUser.FirstName, guide.ApplicationUser.LastName)</h3>
                                         </div>
                                         <ul class="user-meta">
-                                            <li><i class="fa fa-map-marker"></i> @guideDetails.Street, @guideDetails.State @guideDetails.ZipCode <span class="mh-5 text-muted">|</span> <i class="fa fa-phone"></i> +2 @guide.ApplicationUser.PhoneNumber</li>
+                                            @if (guideDetails != null)
+                                            {
+                                            <li>
+                                                <i class="fa fa-map-marker"></i>
+                                                @(guideDetails.Street != null ? @guideDetails.Street : "") 
+                                                @(guideDetails.State != null ? ", " + guideDetails.State : "")
+                                                @(guideDetails.ZipCode != null ? ", " + guideDetails.ZipCode + "" : "")
+                                                @(guide.ApplicationUser.Country) <span class="mh-5 text-muted">|</span>
+                                                <i class="fa fa-phone"></i> +2 @guide.ApplicationUser.PhoneNumber
+                                            </li>
+                                            }
                                             <li>
                                                 <div class="user-social inline-block">
                                                     <a target="_blank" href="~//@guide.TwitterProfile"><i class="icon-social-twitter" data-toggle="tooltip" data-placement="top" title="twitter"></i></a>

@@ -35,6 +35,7 @@ namespace EgyGuide.Models
         public string Remark { get; set; }
 
         [NotMapped]
+        [Required]
         public IFormFile IdentityImage { get; set; }
     }
 }
