@@ -56,6 +56,8 @@ namespace EgyGuide.DataAccess.Data
         public DbSet<GuideUserDetails> GuideUsersDetails { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<TripBooking> TripBookings { get; set; }
+        public DbSet<TravellerDetails> TravellersDetails { get; set; }
         //public DbSet<Follower> Followers { get; set; }       
     }
 }
