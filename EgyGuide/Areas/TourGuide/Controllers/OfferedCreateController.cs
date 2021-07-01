@@ -221,8 +221,13 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                    
                     //save the data from view into trip table
                     tripVM.TripDetail.SelcetedStyles = dataFromView;
+
+                    //save cover image 
+                    if (files.Count > 0)
+                        UploadImage(webRootPath, files);
                     //save all the model
                     _unit.OfferCreate.Add(tripVM.TripDetail);
+
                     _unit.Save();
 
                     SavePlaces();
@@ -365,6 +370,28 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
             }
         }
+        public void UploadImage(string rootPath, IFormFileCollection image)
+        {
+            // The folder path where the images will be uploded
+            string folderPath = Path.Combine(rootPath, @"Trips\Cover");
+            // Generate a unique image name
+            string imageName = Guid.NewGuid().ToString();
+            // Get the extension of the image
+            string extension = Path.GetExtension(image[0].FileName);
+            // ImageURL
+            string imageURL = Path.Combine(folderPath, imageName + extension);
+
+            // Upload image to physical storage
+            using (var fileStream = new FileStream(imageURL, FileMode.Create))
+            {
+                image[0].CopyTo(fileStream);
+                fileStream.Dispose();
+            }
+
+            // Upload image to Database
+            tripVM.TripDetail.CoverImageUrl = @"\Trips\Cover\" + imageName + extension;
+        }
+
         public void UploadImages(int id)
         {
 
@@ -498,26 +525,26 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             return Json(new { data = allObj });
         }
 
-        //[HttpDelete]
-        //public IActionResult Delete(int id)
-        //{
-        //    var objFromDb = _unit.OfferCreate.Get(id);
-        //    if (objFromDb == null)
-        //    {
-        //        return Json(new { success = false, message = "Error while deleting" });
-        //    }
-        //    string webRootPath = _hostEnvironment.WebRootPath;
-        //    var imagePath = Path.Combine(webRootPath, objFromDb.ImageUrl.TrimStart('\\'));
-        //    if (System.IO.File.Exists(imagePath))
-        //    {
-        //        System.IO.File.Delete(imagePath);
-        //    }
-        //    _unit.OfferCreate.Remove(objFromDb);
-        //    _unit.Save();
-        //    return Json(new { success = true, message = "Delete Successful" });
+       
+        #region APIs
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var deletedTrip = _unit.OfferCreate.Get(id);
+            if (deletedTrip == null)
+                return Json(new { success = false });
 
-        //}
+            _unit.OfferCreate.Remove(deletedTrip);
+            _db.Galleries.RemoveRange(_db.Galleries.Where(i => i.TripId == id));
+            _db.Includeds.RemoveRange(_db.Includeds.Where(i => i.TripId == id));
+            _db.Excludeds.RemoveRange(_db.Excludeds.Where(i => i.TripId == id));
+            _db.Places.RemoveRange(_db.Places.Where(i => i.TripId == id));
+            _db.SelectedStyles.RemoveRange(_db.SelectedStyles.Where(i => i.TripId == id));
+            _unit.Save();
 
+            return Json(new { success = true });
+        }
+        #endregion
         #endregion
 
     }

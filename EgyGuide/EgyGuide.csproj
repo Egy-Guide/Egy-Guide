@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Trips\Trip-days\**" />
+    <Content Remove="wwwroot\Trips\Trip-days\**" />
+    <EmbeddedResource Remove="wwwroot\Trips\Trip-days\**" />
+    <None Remove="wwwroot\Trips\Trip-days\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.33" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="5.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.5" />
@@ -39,7 +46,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\tourist-profile-images\" />
     <Folder Include="wwwroot\Trips\gallery\" />
-    <Folder Include="wwwroot\Trips\Trip-days\" />
+    <Folder Include="wwwroot\Trips\Cover\" />
   </ItemGroup>
 
 </Project>
