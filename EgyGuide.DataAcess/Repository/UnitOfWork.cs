@@ -22,6 +22,8 @@ namespace EgyGuide.DataAccess.Repository
             TripDays = new TripDaysRepository(_db);
             OfferCreate = new OfferCreateRepository(_db);
             Requested = new RequestedRepository(_db);
+            TripBooking = new TripBookingRepository(_db);
+            TravellerDetails = new TravellerDetailsRepository(_db);
         }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
@@ -34,6 +36,8 @@ namespace EgyGuide.DataAccess.Repository
 
         public IOfferCreateRepository OfferCreate { get; private set; }
         public IRequestedRepository Requested { get; private set; }
+        public ITripBookingRepository TripBooking { get; private set; }
+        public ITravellerDetailsRepository TravellerDetails { get; private set; }
         public void Dispose()
         {
             _db.Dispose();

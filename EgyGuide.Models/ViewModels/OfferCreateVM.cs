@@ -20,8 +20,7 @@ namespace EgyGuide.Models.ViewModels
         public IEnumerable<Excluded> Excluded { get; set; }
         public IEnumerable<SelectListItem> CityList { get; set; }
         public string City { get; set; }
-
-
+        public GuideUser GuideUser { get; set; }
 
     }
 }

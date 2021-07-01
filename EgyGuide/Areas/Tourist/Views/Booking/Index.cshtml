@@ -1,10 +1,20 @@
-﻿@using Microsoft.AspNetCore.Http;
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+﻿@using Microsoft.AspNetCore.Identity 
+@model EgyGuide.Models.ViewModels.BookingVM
+@inject EgyGuide.DataAccess.Repository.IRepository.IUnitOfWork _unitOfWork
+@inject UserManager<IdentityUser> _userManager
 
 @{
     ViewData["Title"] = "Booking";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int noTravellers = Convert.ToInt32(TempData["NoTravellers"]);
+    DateTime tripDateFrom = Convert.ToDateTime(TempData["tripDateFrom"]);
+    DateTime tripDateTo = Convert.ToDateTime(TempData["tripDateTo"]);
+    double totalPrice = Model.TripDetail.Price != null ? Convert.ToDouble(Model.TripDetail.Price) * noTravellers : 0;
+
+    // Tourist User
+    var currentUser = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == _userManager.GetUserId(User));
+    string email = currentUser.Email;
+    string phone = currentUser.PhoneNumber;
 }
 
 <!-- start breadcrumb -->
@@ -12,7 +22,6 @@
     <!-- end breadcrumb -->
 
     <div class="user-profile-wrapper">
-
         <div class="payment-header">
 
             <div class="container">
@@ -51,7 +60,7 @@
 
                                     <div class="GridLex-col-3_sm-6_xs-5_xss-12">
                                         <div class="GridLex-inner text-right text-left-xss">
-                                            <a onclick="backToTrip()" class="btn btn-primary btn-sm btn-block mt-15-xs"><i class="ion-arrow-left-c"></i> Back to detail</a>
+                                            <a onclick="backToTrip(@Model.TripDetail.TripId)" class="btn btn-primary btn-sm btn-block mt-15-xs"><i class="ion-arrow-left-c"></i> Back to detail</a>
                                         </div>
                                     </div>
 
@@ -79,7 +88,13 @@
 
                 <div class="col-xs-12 col-sm-8 col-md-8 mt-20">
 
-                    <form>
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="TripBooking.TravellersNo" value="@noTravellers" />
+                        <input type="hidden" asp-for="TripBooking.TripStart" value="@tripDateFrom" />
+                        <input type="hidden" asp-for="TripBooking.TripEnd" value="@tripDateTo" />
+                        <input type="hidden" asp-for="TripBooking.TotalPrice" value="@totalPrice" />
+                        <input type="hidden" asp-for="TripBooking.TripId" value="@Model.TripDetail.TripId" />
 
                         <h4 class="section-title">Traveller Details</h4>
 
@@ -101,12 +116,13 @@
                                         <div class="form-group select2-input-hide">
                                             <label class="col-sm-3 col-md-2 control-label">Title:</label>
                                             <div class="col-sm-3 col-md-2">
-                                                <select class="selectpicker show-tick form-control" data-live-search="false">
-                                                    <option value="0">Title</option>
+                                                <select asp-for="TravellersDetails[i].Title" class="selectpicker show-tick form-control">
+                                                    <option value="">Title</option>
                                                     <option value="mr">Mr.</option>
                                                     <option value="mrs">Mrs.</option>
                                                     <option value="miss">Miss</option>
                                                 </select>
+                                                <span asp-validation-for="TravellersDetails[i].Title" class="text-danger"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +131,8 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 col-md-2 control-label">First Name:</label>
                                             <div class="col-sm-5 col-md-5">
-                                                <input type="text" class="form-control" value="">
+                                                <input asp-for="TravellersDetails[i].FirstName" type="text" class="form-control">
+                                                <span asp-validation-for="TravellersDetails[i].FirstName" class="text-danger"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +141,8 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 col-md-2 control-label">Last Name:</label>
                                             <div class="col-sm-5 col-md-5">
-                                                <input type="text" class="form-control" value="">
+                                                <input asp-for="TravellersDetails[i].LastName" type="text" class="form-control">
+                                                <span asp-validation-for="TravellersDetails[i].LastName" class="text-danger"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -133,65 +151,22 @@
                                         <div class="form-group select2-input-hide">
                                             <label class="col-sm-3 col-md-2 control-label">Gender:</label>
                                             <div class="col-sm-3 col-md-2">
-                                                <select class="selectpicker show-tick form-control" data-live-search="false">
+                                                <select asp-for="TravellersDetails[i].Gender" class="selectpicker show-tick form-control" data-live-search="false">
                                                     <option value="">Gender</option>
-                                                    <option value="male">Male.</option>
-                                                    <option value="female">Female.</option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
                                                 </select>
+                                                <span asp-validation-for="TravellersDetails[i].Gender" class="text-danger"></span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-horizontal">
                                         <div class="form-group select2-input-hide">
-                                            <label class="col-sm-3 col-md-2 control-label">Gender:</label>
+                                            <label class="col-sm-3 col-md-2 control-label">Birthday:</label>
                                             <div class="col-sm-8 col-md-5">
-
-                                                <div class="row gap-5">
-                                                    <div class="col-xs-3 col-sm-3">
-                                                        <select class="selectpicker form-control" data-live-search="false">
-                                                            <option value="0">day</option>
-                                                            <option value="1">01</option>
-                                                            <option value="2" selected>02</option>
-                                                            <option value="3">03</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-xs-5 col-sm-5">
-                                                        <select class="selectpicker form-control" data-live-search="false">
-                                                            <option value="0">month</option>
-                                                            <option value="1">Jan</option>
-                                                            <option value="2" selected>Feb</option>
-                                                            <option value="3">Mar</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-xs-4 col-sm-4">
-                                                        <select class="selectpicker form-control" data-live-search="false">
-                                                            <option value="0">year</option>
-                                                            <option value="1">1985</option>
-                                                            <option value="2" selected>1986</option>
-                                                            <option value="3">1987</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 col-md-2 control-label">Email:</label>
-                                            <div class="col-sm-5 col-md-5">
-                                                <input type="email" class="form-control" value="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 col-md-2 control-label">Phone:</label>
-                                            <div class="col-sm-5 col-md-5">
-                                                <input type="email" class="form-control" value="">
+                                                <input asp-for="TravellersDetails[i].Birthday" type="date" class="form-control">
+                                                <span asp-validation-for="TravellersDetails[i].Birthday" class="text-danger"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -200,22 +175,42 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 col-md-2 control-label">Nationality:</label>
                                             <div class="col-sm-5 col-md-5">
-                                                <select class="selectpicker show-tick form-control" data-live-search="false">
-                                                    <option value="">Nationality</option>
-                                                    <option value="Thai">Thai</option>
-                                                    <option value="Malaysian">Malaysian</option>
-                                                    <option value="Indonesian">Indonesian</option>
-                                                    <option value="American">American</option>
-                                                    <option value="England">England</option>
-                                                    <option value="German">German</option>
-                                                    <option value="Polish">Polish</option>
+                                                <select asp-for="TravellersDetails[i].Nationality" class="selectpicker show-tick form-control" data-live-search="false">
+                                                    <partial name="~/Views/Shared/Country.cshtml" />
                                                 </select>
+                                                <span asp-validation-for="TravellersDetails[i].Nationality" class="text-danger"></span>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
                             }
+
+                        </div>
+
+                        <div class="payment-content">
+
+                            <h4 class="section-title">Contact Info</h4>
+
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 col-md-2 control-label">Email:</label>
+                                    <div class="col-sm-5 col-md-5">
+                                        <input asp-for="TripBooking.Email" value="@email" type="text" class="form-control">
+                                        <span asp-validation-for="TripBooking.Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 col-md-2 control-label">Phone Number:</label>
+                                    <div class="col-sm-5 col-md-5">
+                                        <input asp-for="TripBooking.PhoneNumber" value="@phone" type="text" class="form-control">
+                                        <span asp-validation-for="TripBooking.PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -226,7 +221,7 @@
                             <label class="" for="accept_booking">By submitting a booking request, you accept our <a href="#">terms and conditions</a> as well as the <a href="#">cancellation policy</a> and  <a href="#">House Rules</a> .</label>
                         </div>
 
-                        <a class="btn btn-primary mt-25" asp-action="BookingConfirmation">Book Now</a>
+                        <button type="submit" asp-action="Index" class="btn btn-primary mt-25">Book Now</button>
 
                         <p class="line16 mt-20 font14"><span class="font600">Prepared is me marianne</span>: pleasure likewise debating. Wonder an unable except better stairs do ye admire.</p>
 
@@ -251,18 +246,28 @@
                                 <ul class="price-summary-list">
 
                                     <li>
+                                        <h6>From</h6>
+                                        <p class="text-muted">@tripDateFrom.ToString("dd-MM-yyy")</p>
+                                    </li>
+
+                                    <li>
+                                        <h6>To</h6>
+                                        <p class="text-muted">@tripDateTo.ToString("dd-MM-yyyy")</p>
+                                    </li>
+
+                                    <li>
                                         <h6>Meeting point</h6>
-                                        <p class="text-muted">Bangkok in't airport</p>
+                                        <p class="text-muted">@Model.TripDetail.MeetingPlace</p>
                                     </li>
 
                                     <li>
                                         <h6>Meeting time</h6>
-                                        <p class="text-muted">09:00 am</p>
+                                        <p class="text-muted">@(Model.TripDetail.MeetingDate.HasValue ? Model.TripDetail.MeetingDate.Value.ToString("hh:mm tt") : "<not available>")</p>
                                     </li>
 
                                     <li>
                                         <h6>Travellers</h6>
-                                        <p class="text-muted">2 adults</p>
+                                        <p class="text-muted">@noTravellers</p>
                                     </li>
 
                                     <li class="divider"></li>
@@ -274,7 +279,7 @@
                                                 Brochure Price
                                             </div>
                                             <div class="col-xs-5 col-sm-5 text-right">
-                                                $650
+                                                @(String.Format("${0:#.00}", Convert.ToDouble(Model.TripDetail.Price)))
                                             </div>
                                         </div>
                                         <div class="row gap-10 mt-10">
@@ -295,8 +300,8 @@
                                                 <span class="font600">Total </span>
                                             </div>
                                             <div class="col-xs-5 col-sm-5 text-right">
-                                                $6500 x2
-                                                <span class="font600 font26 block text-primary mt-5">$1,300</span>
+                                                @String.Format("${0:#.00} x{1}", Convert.ToDouble(Model.TripDetail.Price), noTravellers)
+                                                <span class="font600 font26 block text-primary mt-5">@String.Format("${0:#.00}", totalPrice)</span>
                                             </div>
                                         </div>
                                     </li>
@@ -324,6 +329,20 @@
     </div>
 
     @section Scripts{
+        <script>
+        check(@Model.TripDetail.TripId)
+
+        function check(id) {
+            if (@noTravellers < 1) {
+                location.replace(`/offered-details?id=${id}`)
+            }
+        }
+
+        function backToTrip(id) {
+            location.replace(`/offered-details?id=${id}`)
+        }
+        </script>
+
         <script src="~/js/jquery.stickit.js"></script>
         <script src="~/js/bootstrap-tokenfield.js"></script>
         <script src="~/js/typeahead.bundle.min.js"></script>
@@ -332,9 +351,5 @@
         <script src="~/js/jquery.bootstrap-touchspin.js"></script>
         <script src="~/js/customs-detail.js"></script>
 
-        <script>
-            function backToTrip() {
-                window.history.back();
-            }
-        </script>
+        <partial name="_ValidationScriptsPartial" />
     }

@@ -4,14 +4,16 @@ using EgyGuide.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EgyGuide.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210630161142_EditTravellerNo")]
+    partial class EditTravellerNo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -463,16 +465,10 @@ namespace EgyGuide.DataAccess.Migrations
                     b.Property<string>("BookingStatus")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PaymentStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("TotalPrice")
@@ -481,7 +477,7 @@ namespace EgyGuide.DataAccess.Migrations
                     b.Property<string>("TouristId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("TravellersNo")
+                    b.Property<int>("TravellerNo")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("TripEnd")
