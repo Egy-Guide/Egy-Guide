@@ -535,6 +535,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 return Json(new { success = false });
 
             _unit.OfferCreate.Remove(deletedTrip);
+            _unit.TripDays.RemoveRange(_db.TripDaysDetails.Where(i => i.TripId == id));
             _db.Galleries.RemoveRange(_db.Galleries.Where(i => i.TripId == id));
             _db.Includeds.RemoveRange(_db.Includeds.Where(i => i.TripId == id));
             _db.Excludeds.RemoveRange(_db.Excludeds.Where(i => i.TripId == id));
