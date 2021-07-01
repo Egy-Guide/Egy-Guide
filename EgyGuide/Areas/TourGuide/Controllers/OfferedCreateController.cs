@@ -530,17 +530,47 @@ namespace EgyGuide.Areas.TourGuide.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
+            // delete trip from trips table
             var deletedTrip = _unit.OfferCreate.Get(id);
             if (deletedTrip == null)
                 return Json(new { success = false });
 
             _unit.OfferCreate.Remove(deletedTrip);
+
+            // delete days of trip from trip days table 
             _unit.TripDays.RemoveRange(_db.TripDaysDetails.Where(i => i.TripId == id));
+
+            //delete images 
+            //must delete images from physical
+            string webRootPath = _hostEnvironment.WebRootPath;
+
+            foreach (var image in _db.Galleries.Where(i => i.TripId == id))
+            {
+                if (image.URL != null)
+                {
+                    string imagePath = Path.Combine(webRootPath, image.URL.TrimStart('\\'));
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
+                }
+            }
+            //delete from galleries table from its table
             _db.Galleries.RemoveRange(_db.Galleries.Where(i => i.TripId == id));
+
+            // delete includes of trip from its table
             _db.Includeds.RemoveRange(_db.Includeds.Where(i => i.TripId == id));
+
+            // delete excludeds of trip from its table
             _db.Excludeds.RemoveRange(_db.Excludeds.Where(i => i.TripId == id));
+
+            // delete places of trip from its table
             _db.Places.RemoveRange(_db.Places.Where(i => i.TripId == id));
+            
+            // delete selected styles of trip from its table
             _db.SelectedStyles.RemoveRange(_db.SelectedStyles.Where(i => i.TripId == id));
+            
+            //save aLL
             _unit.Save();
 
             return Json(new { success = true });
