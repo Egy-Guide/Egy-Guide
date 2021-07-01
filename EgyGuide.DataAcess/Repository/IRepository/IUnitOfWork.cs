@@ -16,6 +16,8 @@ namespace EgyGuide.DataAccess.Repository.IRepository
         ITripDaysRepository TripDays { get; }
         IOfferCreateRepository OfferCreate { get; }
         IRequestedRepository Requested { get; }
+        ITripBookingRepository TripBooking { get; }
+        ITravellerDetailsRepository TravellerDetails { get; }
         void Save();
     }
 }
