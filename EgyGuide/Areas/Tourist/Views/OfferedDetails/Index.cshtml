@@ -1,9 +1,17 @@
 ﻿@model EgyGuide.Models.ViewModels.OfferCreateVM
+@inject EgyGuide.DataAccess.Data.ApplicationDbContext _db
+
 @using EgyGuide.Utility
 @{
     ViewData["Title"] = "Offered Details";
     ViewData["AddClassToBodyTag"] = "transparent-header with-multiple-sticky";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var guide = new Dictionary<string, string>();
+    guide.Add("FirstName", Model.GuideUser.ApplicationUser.FirstName);
+    guide.Add("LastName", Model.GuideUser.ApplicationUser.LastName);
+    guide.Add("ImgSrc", Model.GuideUser.ApplicationUser.ImageUrl);
+    guide.Add("ToursNo", _db.TripDetails.Count(t => t.GuideId == Model.GuideUser.Id).ToString());
 }
 
 <!-- start breadcrumb -->
@@ -32,13 +40,13 @@
             </div>
         </div>
 
-            <div class="breadcrumb-wrapper text-left">
-                <ol class="breadcrumb">
-                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-controller="Offered" asp-action="Index">Offered</a></li>
-                    <li class="active">@Model.City</li>
-                </ol>
-            </div>
+        <div class="breadcrumb-wrapper text-left">
+            <ol class="breadcrumb">
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-controller="Offered" asp-action="Index">Offered</a></li>
+                <li class="active">@Model.City</li>
+            </ol>
+        </div>
 
     </div>
 </div>
@@ -131,7 +139,7 @@
                                                 <i class="flaticon-travel-icons-map"></i>
                                             </div>
                                             @{ string[] places = @Model.TripDetail.SelectedPlaces.Split("-");
-                                                var count = places.Length;  }
+                                                var count = places.Length; }
                                             Visit @count places:<br />@Model.TripDetail.SelectedPlaces
                                         </div>
 
@@ -159,25 +167,26 @@
                         <div class="mb-25"></div>
 
                         <div class="featured-icon-simple-wrapper">
-                            
+
                             <div class="GridLex-gap-30 GridLex-gap-20-xs">
 
                                 <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-4_sm-4_xs-3_xss-1 GridLex-grid-center">
-                                    
-                                    @foreach (var style in Model.TripStyles) {
 
-                                    <div class="GridLex-col">
+                                    @foreach (var style in Model.TripStyles)
+                                    {
 
-                                        <div class="featured-icon-simple-item">
-                                            <div class="icon">
-                                                <i class="flaticon-travel-icons-@style.ClassName"></i>
+                                        <div class="GridLex-col">
+
+                                            <div class="featured-icon-simple-item">
+                                                <div class="icon">
+                                                    <i class="flaticon-travel-icons-@style.ClassName"></i>
+                                                </div>
+                                                @style.StyleName
                                             </div>
-                                            @style.StyleName
-                                        </div>
 
-                                    </div>
+                                        </div>
                                     }
-                                    
+
 
 
 
@@ -194,14 +203,14 @@
                         <div class="user-long-sm-item clearfix">
 
                             <div class="image">
-                                <img src="images/man/03.jpg" alt="Images" />
+                                <img src="@(guide["ImgSrc"])" alt="Images" />
                             </div>
 
                             <div class="content">
                                 <span class="labeling">Offered by: </span>
-                                <h4>Shady Khalil</h4>
+                                <h4>@String.Format("{0} {1}", guide["FirstName"], guide["LastName"])</h4>
                                 <ul class="user-meta">
-                                    <li>10 tours</li>
+                                    <li>@guide["ToursNo"] tours</li>
                                     <li>20 reviews</li>
                                     <li>3 awards</li>
                                 </ul>
@@ -235,9 +244,9 @@
                                             <div class="col-xs-12 col-sm-7">
                                                 Meeting time (what time we meet?)
                                             </div>
-                                            
+
                                             <div class="col-xs-12 col-sm-5 text-primary text-right text-left-xs mt-xs space">
-                                                <i class="ti-timer mr-5"></i> @Model.TripDetail.MeetingDate.ToString()
+                                                <i class="ti-timer mr-5"></i> @(Model.TripDetail.MeetingDate.HasValue ? Model.TripDetail.MeetingDate.Value.ToString("hh:mm tt") : "<not available>")
                                             </div>
                                         </li>
                                         <li class="row gap-20">
@@ -268,8 +277,9 @@
                                     <h4 class="text-uppercase spacing-1">What's included?</h4>
 
                                     <ul class="list-yes-no">
-                                        @foreach (var included in Model.Included) {
-                                        <li>@included.Title </li>
+                                        @foreach (var included in Model.Included)
+                                        {
+                                            <li>@included.Title </li>
 
                                         }
                                     </ul>
@@ -306,32 +316,32 @@
                         <div class="itinerary-toggle-wrapper mb-40">
 
                             <div class="panel-group bootstrap-toggle">
-                            @foreach (var day in Model.TripDaysDetail.Select((value,i) =>  ( i, value)))
-                            {
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#" href="#bootstarp-toggle-@day.i-2">
-                                                <div class="itinerary-day">
-                                                    Day
-                                                    <span class="number">@day.value.DayNum </span>
-                                                </div>
-                                                <div class="itinerary-header">
-                                                    <h4>@day.value.Title</h4>
-                                                    <p class="font-md">@day.value.Remark</p>
-                                                    <div class="image"><img src="images/itinerary-sq/01.jpg" alt="images" /></div>
-                                                </div>
-                                            </a>
+                                @foreach (var day in Model.TripDaysDetail.Select((value, i) => (i, value)))
+                                {
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#" href="#bootstarp-toggle-@day.i-2">
+                                                    <div class="itinerary-day">
+                                                        Day
+                                                        <span class="number">@day.value.DayNum </span>
+                                                    </div>
+                                                    <div class="itinerary-header">
+                                                        <h4>@day.value.Title</h4>
+                                                        <p class="font-md">@day.value.Remark</p>
+                                                        <div class="image"><img src="images/itinerary-sq/01.jpg" alt="images" /></div>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div id="bootstarp-toggle-@day.i-2" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <p class="font-lg">@SD.StripHtml(day.value.Description). </p>
+                                        <div id="bootstarp-toggle-@day.i-2" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p class="font-lg">@SD.StripHtml(day.value.Description). </p>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </div>
-     }
+                                    </div>
+                                }
                                 <!-- end of panel -->
 
 
@@ -889,19 +899,19 @@
 
                         <div class="sidebar-booking-inner">
 
-                            <div class="row gap-10" id="rangeDatePicker">
+                            <div class="row gap-10">
 
                                 <div class="col-xss-12 col-xs-6 col-sm-6">
-                                    <div class="form-group">
+                                    <div class="form-group" id="tripDateFromForm">
                                         <label>From</label>
-                                        <input type="text" id="rangeDatePickerTo" class="form-control" placeholder="yyyy/mm/dd" />
+                                        <input id="tripDateFrom" type="date" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="col-xss-12 col-xs-6 col-sm-6">
-                                    <div class="form-group">
+                                    <div class="form-group" id="tripDateToForm">
                                         <label>To</label>
-                                        <input type="text" id="rangeDatePickerFrom" class="form-control" placeholder="yyyy/mm/dd" />
+                                        <input id="tripDateTo" type="date" class="form-control">
                                     </div>
                                 </div>
 
@@ -911,7 +921,7 @@
 
                                 <div class="col-xss-12 col-xs-12 col-sm-12">
                                     <div class="form-group">
-                                        <label>No. of traveller</label>
+                                        <label>No. of travellers</label>
                                         <div class="form-group form-spin-group">
                                             <input id="noTravellers" type="text" class="form-control form-spin" value="1" />
                                         </div>
@@ -920,7 +930,7 @@
 
                                 <div class="col-xss-12 col-xs-12 col-sm-12">
                                     <div class="mt-5">
-                                        <a onclick="getNoTravellers()" class="btn btn-primary btn-block">Request to Book</a>
+                                        <a id="my-click" class="btn btn-primary btn-block">Request to Book</a>
                                     </div>
                                 </div>
 
@@ -1198,18 +1208,55 @@
     <script type="text/javascript" src="js/jquery.daterangepicker.js"></script>
     <script type="text/javascript" src="js/customs-datepicker.js"></script>
     <script>
-        function getNoTravellers() {
+        $("#my-click").click(function () {
+            var tripDateFrom = $("#tripDateFrom").val();
+            var tripDateTo = $("#tripDateTo").val();
+            var noTravellersVal = $("#noTravellers").val();
+
+            if ((tripDateFrom == "") && (tripDateTo == "")) {
+                $("#tripDateFromForm span").remove()
+                $("#tripDateToForm span").remove()
+                $("#tripDateFromForm").append('<span class="text-danger">Required</span>')
+                $("#tripDateToForm").append('<span class="text-danger">Required</span>')
+            }
+
+            if ((tripDateFrom == "") && (tripDateTo != "")) {
+                $("#tripDateFromForm span").remove()
+                $("#tripDateToForm span").remove()
+                $("#tripDateFromForm").append('<span class="text-danger">Required</span>')
+            }
+
+            if ((tripDateFrom != "") && (tripDateTo == "")) {
+                $("#tripDateFromForm span").remove()
+                $("#tripDateToForm span").remove()
+                $("#tripDateToForm").append('<span class="text-danger">Required</span>')
+            }
+
+            if ((tripDateFrom != "") && (tripDateTo != "")) {
+
+                $("#tripDateFromForm span").remove()
+                $("#tripDateToForm span").remove()
+
+                $.ajax({
+                    url: "/Tourist/Booking/GetNoTravellers",
+                    type: "POST",
+                    data: { tripDateFrom: tripDateFrom, tripDateTo: tripDateTo, noTravellers: noTravellersVal },
+                    success: function (data) {
+                        if (data.success)
+                            location.href = `/booking?id=${@Model.TripDetail.TripId}`
+                    }
+                })
+            }
+
+        })
+
+        function getNoTravellers(id) {
+            console.log(fromDate + ", " + toDate)
+
             var noTravellersVal = document.getElementById("noTravellers").value
-            $.ajax({
-                url: "/Tourist/Booking/GetNoTravellers",
-                type: "POST",
-                data: { noTravellers: noTravellersVal },
-                success: function (data) {
-                    if (data.success)
-                        location.href = `/booking?id=${1}`
-                }
-            })
+
         }
+
     </script>
 
     <script>

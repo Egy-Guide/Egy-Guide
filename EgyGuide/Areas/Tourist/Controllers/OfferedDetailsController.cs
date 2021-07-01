@@ -3,6 +3,7 @@ using EgyGuide.DataAccess.Data;
 using EgyGuide.DataAccess.Repository.IRepository;
 using EgyGuide.Models;
 using EgyGuide.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,12 @@ namespace EgyGuide.Areas.Tourist.Controllers
     {
         private readonly IUnitOfWork _unit;
         private readonly ApplicationDbContext _db;
-        public OfferedDetailsController(IUnitOfWork unit, ApplicationDbContext db)
+        private readonly UserManager<IdentityUser> _userManager;
+        public OfferedDetailsController(IUnitOfWork unit, ApplicationDbContext db, UserManager<IdentityUser> userManager)
         {
             _unit = unit;
             _db = db;
+            _userManager = userManager;
         }
         public IActionResult Index(int id)
         {
@@ -38,12 +41,15 @@ namespace EgyGuide.Areas.Tourist.Controllers
             OfferCreateVM tripVM = new OfferCreateVM()
             {
                 TripDetail = trip,
-                TripStyles = _db.TripStyles.Where(t=> selectedStyles.Contains(t.StyleId)),
+                TripStyles = _db.TripStyles.Where(t => selectedStyles.Contains(t.StyleId)),
                 Included = included,
                 Galleries = images,
                 TripDaysDetail = daysDetails,
-                City = city
+                City = city,
+                GuideUser = _unit.GuideUser.GetFirstOrDefault(g => g.Id == trip.GuideId)
             };
+
+            tripVM.GuideUser.ApplicationUser = _unit.ApplicationUser.GetFirstOrDefault(u => u.Id == tripVM.GuideUser.UserId);
 
             return View(tripVM);
         }

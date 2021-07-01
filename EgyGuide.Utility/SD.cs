@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EgyGuide.Utility
@@ -10,6 +11,16 @@ namespace EgyGuide.Utility
         public const string Role_User_Tourist = "Tourist";
         public const string Role_User_Tour_Guide = "Tour Guide";
         public const string Role_User_Suspended_Guide = "Suspended Guide";
+
+        // Booking Status
+        public const string BookingStatusConfirmation = "Confirmation";
+        public const string BookingStatusCompleted = "Completed";
+        public const string BookingStatusCancelled = "Cancelled";
+
+        // Payment Status
+        public const string PaymentStatusPending = "Pending";
+        public const string PaymentStatusApproved = "Approved";
+        public const string PaymentStatusRejected = "Rejected";
 
         public static string StripHtml(string htmlDescription)
         {
@@ -24,5 +35,22 @@ namespace EgyGuide.Utility
             string newString = string.Join(" ", text.Split(" ").Take(wordsNumber));
             return newString.TrimEnd('.');
         }
-    }    
+
+        // Generete Unique BookingId
+        public static string GenBookingNo(List<string> ReservedBookingIds)
+        {
+            var rand = new Random();
+            int randId = rand.Next(1, 10000);
+            string bookingNo = "EGYGUIDE-BK" + randId.ToString();
+
+            while (ReservedBookingIds.Contains(bookingNo))
+            {
+                randId = rand.Next(1, 10000);
+                bookingNo = "EGYGUIDE-BK" + randId.ToString();
+            }
+
+            return bookingNo;
+        }
+        
+}    
 }
