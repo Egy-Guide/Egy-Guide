@@ -1,0 +1,149 @@
+﻿@model EgyGuide.Models.ViewModels.TouristVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="~/Views/Shared/Breadcrumb.cshtml">
+    <partial name="~/Views/Shared/TourGuide/UserProfileWrapper.cshtml">
+
+        <div class="pt-30 pb-50">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <partial name="~/Views/Shared/TourGuide/DashboardSidebarMenu.cshtml">
+
+                        <div class="col-xs-12 col-sm-8 col-md-9 mt-20">
+
+                            <div class="dashboard-wrapper">
+
+                                <h4 class="section-title">My tours</h4>
+
+                                @if (Model.Trips.ToList().Count() != 0)
+                                {
+                                    <div class="trip-list-wrapper no-bb-last">
+
+                                        @foreach (var trip in Model.Trips)
+                                        {
+                                            <div class="trip-list-item">
+
+                                                <div class="content">
+
+                                                    <div class="GridLex-gap-20 mb-5">
+
+                                                        <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-middle">
+
+                                                            <div class="GridLex-col-7_sm-12_xs-12_xss-12">
+
+                                                                <div class="GridLex-inner">
+                                                                    <h6>@trip.Title</h6>
+                                                                    <span class="font-italic font14">@trip.Days days @trip.Nights nights</span>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="GridLex-col-1_sm-4_xs-4_xss-4">
+                                                                <div class="GridLex-inner text-center text-left-sm line-1 font14 text-muted spacing-1">
+                                                                    <span class="block text-primary font22 font700 mb-1"><i class="fa fa-shopping-cart font14"></i> 24</span>	Sells
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="GridLex-col-4_sm-8_xs-8_xss-8">
+                                                                <div class="GridLex-inner text-right">
+                                                                    <a asp-controller="RequestedDetails" asp-action="Index" asp-route-id="@trip.TripId" class="btn btn-primary btn-sm">View</a>
+                                                                    <a asp-controller="RequestedDetails" asp-action="Index" asp-route-id="@trip.TripId" class="btn btn-info btn-sm">Edit</a>
+                                                                    <a onclick="Delete(@trip.TripId)" class="btn btn-danger btn-sm">Delete</a>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        }
+
+
+
+                                    </div>
+
+                                    <div class="pager-wrappper text-left clearfix bt mt-0 pt-20">
+
+                                        <div class="pager-innner">
+
+                                            <div class="clearfix">
+                                                Showing reslut 1 to 15 from 248
+                                            </div>
+
+                                            <div class="clearfix">
+                                                <nav>
+                                                    <ul class="pagination">
+                                                        <li>
+                                                            <a href="#" aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="active"><a href="#">1</a></li>
+                                                        <li><a href="#">2</a></li>
+                                                        <li><a href="#">3</a></li>
+                                                        <li><span>...</span></li>
+                                                        <li><a href="#">11</a></li>
+                                                        <li><a href="#">12</a></li>
+                                                        <li><a href="#">13</a></li>
+                                                        <li>
+                                                            <a href="#" aria-label="Next">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <p style="color:red"><strong>You have no requested trips, yet.... you can create your own trip Now.</strong></p>
+                                    <a asp-controller="RequestedCreate" asp-action="Index" class="btn btn-primary">Create</a>
+                                }
+                            </div>
+
+                        </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        @section Scripts{
+            <partial name="~/Views/Shared/TourGuide/UserProfileScripts.cshtml">
+                <script>
+
+                    function Delete(id) {
+                        var isConfirmed = confirm("Are you sure to delete?")
+
+                        if (isConfirmed) {
+                            $.ajax({
+                                url: "/TourGuide/RequestedCreate/Delete?id=" + id,
+                                type: "DELETE",
+                                success: function (data) {
+                                    if (data) {
+                                        alert("Deleted Done..");
+                                        location.reload();
+                                    }
+                                    else
+                                        alert("OOH! Problem has occured");
+                                }
+                            })
+                        }
+
+                    }
+                </script>
+        }

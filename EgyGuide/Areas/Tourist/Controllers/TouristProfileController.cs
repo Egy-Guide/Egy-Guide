@@ -37,11 +37,11 @@ namespace EgyGuide.Areas.Tourist.Controllers
             return View(TouristUser);
         }
 
-        [Route("tours")]
-        public IActionResult Tours()
-        {
-            return View();
-        }
+        //[Route("tours")]
+        //public IActionResult Tours()
+        //{
+        //    return View();
+        //}
 
     }
 }

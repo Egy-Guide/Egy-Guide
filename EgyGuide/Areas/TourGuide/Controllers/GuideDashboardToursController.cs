@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace EgyGuide.Areas.TourGuide.Controllers
 {
     [Area("TourGuide")]
-    [Route("guide/dashboard/my-tours")]
+    
     [Authorize(Roles = SD.Role_User_Tour_Guide)]
     public class GuideDashboardToursController : Controller
     {
@@ -23,6 +23,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             _unitOfWork = unitOfWork;
             _userManager = userManager;
         }
+        [Route("guide/dashboard/my-tours")]
         public IActionResult Index()
         {
             var guideUserId = _unitOfWork.GuideUser.GetFirstOrDefault(u => u.UserId == _userManager.GetUserId(User)).Id;

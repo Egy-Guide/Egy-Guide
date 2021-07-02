@@ -1118,3 +1118,7 @@ C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.dll
 C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\ref\EgyGuide.dll
 C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.pdb
 C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\EgyGuide.genruntimeconfig.cache
+C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\TouristTours\Index.cshtml.g.cs
+C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\TouristDashboardTours\Index.cshtml.g.cs
+C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\TourGuide\Views\GuideDashboardToursReservation\Index.cshtml.g.cs
+C:\Users\M&G\Source\Repos\Egy-Guide\EgyGuide\obj\Debug\net5.0\Razor\Areas\Tourist\Views\TouristDashboardToursReservation\Index.cshtml.g.cs

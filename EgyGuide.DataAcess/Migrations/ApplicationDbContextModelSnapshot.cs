@@ -407,6 +407,103 @@ namespace EgyGuide.DataAccess.Migrations
                     b.ToTable("SelectedStyles");
                 });
 
+            modelBuilder.Entity("EgyGuide.Models.TravellerDetails", b =>
+                {
+                    b.Property<int>("TravellerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TravellerId");
+
+                    b.HasIndex("BookingId");
+
+                    b.ToTable("TravellersDetails");
+                });
+
+            modelBuilder.Entity("EgyGuide.Models.TripBooking", b =>
+                {
+                    b.Property<int>("BookingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("BookingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BookingNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BookingStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
+                    b.Property<string>("TouristId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("TravellersNo")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TripEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TripId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TripStart")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("BookingId");
+
+                    b.HasIndex("TouristId");
+
+                    b.HasIndex("TripId");
+
+                    b.ToTable("TripBookings");
+                });
+
             modelBuilder.Entity("EgyGuide.Models.TripDaysDetail", b =>
                 {
                     b.Property<int>("Id")
@@ -938,6 +1035,34 @@ namespace EgyGuide.DataAccess.Migrations
                     b.Navigation("TripDetail");
 
                     b.Navigation("TripStyle");
+                });
+
+            modelBuilder.Entity("EgyGuide.Models.TravellerDetails", b =>
+                {
+                    b.HasOne("EgyGuide.Models.TripBooking", "TripBooking")
+                        .WithMany()
+                        .HasForeignKey("BookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TripBooking");
+                });
+
+            modelBuilder.Entity("EgyGuide.Models.TripBooking", b =>
+                {
+                    b.HasOne("EgyGuide.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("TouristId");
+
+                    b.HasOne("EgyGuide.Models.TripDetail", "TripDetail")
+                        .WithMany()
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("TripDetail");
                 });
 
             modelBuilder.Entity("EgyGuide.Models.TripDaysDetail", b =>
