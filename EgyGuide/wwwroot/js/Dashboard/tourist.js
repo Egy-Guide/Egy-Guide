@@ -14,7 +14,6 @@ function loadDataTable() {
         "columns": [
             { "data": "tripDetail.title", "width": "15%" },
             { "data": "bookingNo", "width": "15%" },
-            { "data": "bookingStatus", "width": "15%" },
             { "data": "bookingDate", "width": "15%" },
             { "data": "bookingStatus", "width": "15%" },
             {
@@ -23,16 +22,27 @@ function loadDataTable() {
                     return `
                             <div class="text-center">
                                 <a href="/offered-details?id=${data}" class="btn btn-success text-white" style="cursor:pointer">
-                                    View Trip 
+                                    View 
                                 </a>
-                                <a href="" class="btn btn-success text-white" style="cursor:pointer">
-                                    View Reservation 
-                                </a>
+                               
                             </div>
                            `;
-                }, "width": "40%"
-
+                }, "width": "20%"
+            },
+            {
+                "data": "bookingId",
+                "render": function (data) {
+                    return `
+                            <div class="text-center">
+                                <a href="/booking-confirmation?bookingId=${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                    View  
+                                </a>
+                               
+                            </div>
+                           `;
+                }, "width": "20%"
             }
+            
         ]
     });
 }
