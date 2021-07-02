@@ -3,6 +3,7 @@ using EgyGuide.DataAccess.Data;
 using EgyGuide.DataAccess.Repository;
 using EgyGuide.DataAccess.Repository.IRepository;
 using EgyGuide.Models;
+using EgyGuide.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +52,10 @@ namespace EgyGuide
                 options.ClientId = Configuration["Authentication:Google:ClientId"];
                 options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
             });
+
+            // Stripe
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
             services.AddControllersWithViews();
             services.AddSession(options =>
             {
@@ -80,6 +86,7 @@ namespace EgyGuide
             app.UseStaticFiles();
 
             app.UseRouting();
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
             app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();            

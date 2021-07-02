@@ -41,13 +41,13 @@
 
                         <ul class="book-sum-list mt-30">
                             <li><span class="font600">Booking Number: </span>@bookingInfo.BookingNo</li>
-                            <li><span class="font600">Booking Date: </span>@bookingInfo.BookingDate</li>
+                            <li><span class="font600">Booking Date: </span>@bookingInfo.BookingDate.ToString("dd-MMMM-yyyy")</li>
                             <li><span class="font600">Traveller Name: </span>@String.Format("{0} {1}", userInfo.FirstName, userInfo.LastName)</li>
                             <li><span class="font600">Travellers Number: </span>@bookingInfo.TravellersNo</li>
-                            <li><span class="font600">Total Price: </span>@bookingInfo.TotalPrice</li>
+                            <li><span class="font600">Total Price: </span>@String.Format("${0:#.00}", Convert.ToDouble(bookingInfo.TotalPrice))</li>
                             <li><span class="font600">Package Name: </span>@String.Format("{0} ({1} days {2} nights)", @tripInfo.Title, tripInfo.Days, tripInfo.Nights)</li>
-                            <li><span class="font600">Starting: </span>@bookingInfo.TripStart.ToString("dd-MM-yyyy")</li>
-                            <li><span class="font600">End: </span>@bookingInfo.TripEnd.ToString("dd-MM-yyyy")</li>
+                            <li><span class="font600">Starting: </span>@bookingInfo.TripStart.ToString("dd-MMMM-yyyy")</li>
+                            <li><span class="font600">End: </span>@bookingInfo.TripEnd.ToString("dd-MMMM-yyyy")</li>
                             <li><span class="font600">Billing Email: </span>@bookingInfo.Email</li>
                             <li><span class="font600">Phone Number: </span>@bookingInfo.PhoneNumber</li>
                         </ul>
