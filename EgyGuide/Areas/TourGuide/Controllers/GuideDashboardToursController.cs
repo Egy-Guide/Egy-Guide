@@ -27,7 +27,8 @@ namespace EgyGuide.Areas.TourGuide.Controllers
         public IActionResult Index()
         {
             var guideUserId = _unitOfWork.GuideUser.GetFirstOrDefault(u => u.UserId == _userManager.GetUserId(User)).Id;
-            var trips = _unitOfWork.OfferCreate.GetAll().Where(g => g.GuideId == guideUserId);
+            var trips = _unitOfWork.OfferCreate.GetAll(g => g.GuideId == guideUserId);
+
             GuideUserVM GuideUserVM = new GuideUserVM()
             {
                 GuideUser = _unitOfWork.GuideUser.GetFirstOrDefault(u => u.UserId == _userManager.GetUserId(User), includeProperties: "ApplicationUser"),

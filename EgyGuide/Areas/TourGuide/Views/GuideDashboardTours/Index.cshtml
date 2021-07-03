@@ -1,4 +1,7 @@
 ﻿@model EgyGuide.Models.ViewModels.GuideUserVM
+@inject EgyGuide.DataAccess.Repository.IRepository.IUnitOfWork Unit
+@using EgyGuide.Utility
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -52,7 +55,9 @@
                                                                 <div class="GridLex-inner text-center text-left-sm line-1 font14 text-muted spacing-1">
                                                                     
                                                                     <a asp-area="TourGuide" asp-controller="GuideDashboardToursReservation" asp-action="Index" asp-route-id="@trip.TripId">
-                                                                    <span class="block text-primary font22 font700 mb-1"><i class="fa fa-shopping-cart font14"></i> 24</span>
+                                                                    <span class="block text-primary font22 font700 mb-1"><i class="fa fa-shopping-cart font14">
+                                                                             </i> @Unit.TripBooking.GetAll(tB => tB.TripId == trip.TripId && (tB.BookingStatus == SD.BookingStatusConfirmation || tB.BookingStatus == SD.BookingStatusCompleted)).Count()
+                                                                    </span>
                                                                     Sells
                                                                     </a>
                                                                 </div>

@@ -17,7 +17,8 @@ function loadDataTable() {
             { "data": "email", "width": "15%" },
             { "data": "phoneNumber", "width": "15%" },
             { "data": "bookingDate", "width": "15%" },
-            { "data": "bookingStatus", "width": "40%" }
+            { "data": "bookingStatus", "width": "40%" },
+
             
             
         ]
