@@ -46,7 +46,7 @@ namespace EgyGuide.Models
         public string SelectedLanguages { get; set; }
         
         public int MaxTravellers { get; set; }
-
+        public string CoverImageUrl { get; set; }
         public ICollection<Excluded> Excluded { get; set; }
 
         public ICollection<Included> Included { get; set; }

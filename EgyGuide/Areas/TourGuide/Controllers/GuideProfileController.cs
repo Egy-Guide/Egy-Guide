@@ -62,14 +62,23 @@ namespace EgyGuide.Areas.TourGuide.Controllers
         [Route("tours")]
         public IActionResult Tours()
         {
-            return View();
+            var guideUserId = _unitOfWork.GuideUser.GetFirstOrDefault(u => u.UserId == _userManager.GetUserId(User)).Id;
+            var trips = _unitOfWork.OfferCreate.GetAll().Where(g => g.GuideId == guideUserId);
+            GuideUserVM = new GuideUserVM()
+            {
+                GuideUser = _unitOfWork.GuideUser.GetFirstOrDefault(u => u.UserId == _userManager.GetUserId(User), includeProperties: "ApplicationUser"),
+                Trips = trips
+            };
+            
+
+            return View(GuideUserVM);
         }
         
-        [Route("gallery")]
-        public IActionResult Gallery()
-        {
-            return View();
-        }
+        //[Route("gallery")]
+        //public IActionResult Gallery()
+        //{
+        //    return View();
+        //}
 
     }
 }

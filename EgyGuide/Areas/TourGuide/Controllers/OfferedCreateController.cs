@@ -221,8 +221,13 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                    
                     //save the data from view into trip table
                     tripVM.TripDetail.SelcetedStyles = dataFromView;
+
+                    //save cover image 
+                    if (files.Count > 0)
+                        UploadImage(webRootPath, files);
                     //save all the model
                     _unit.OfferCreate.Add(tripVM.TripDetail);
+
                     _unit.Save();
 
                     SavePlaces();
@@ -365,6 +370,28 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
             }
         }
+        public void UploadImage(string rootPath, IFormFileCollection image)
+        {
+            // The folder path where the images will be uploded
+            string folderPath = Path.Combine(rootPath, @"Trips\Cover");
+            // Generate a unique image name
+            string imageName = Guid.NewGuid().ToString();
+            // Get the extension of the image
+            string extension = Path.GetExtension(image[0].FileName);
+            // ImageURL
+            string imageURL = Path.Combine(folderPath, imageName + extension);
+
+            // Upload image to physical storage
+            using (var fileStream = new FileStream(imageURL, FileMode.Create))
+            {
+                image[0].CopyTo(fileStream);
+                fileStream.Dispose();
+            }
+
+            // Upload image to Database
+            tripVM.TripDetail.CoverImageUrl = @"\Trips\Cover\" + imageName + extension;
+        }
+
         public void UploadImages(int id)
         {
 
@@ -498,26 +525,57 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             return Json(new { data = allObj });
         }
 
-        //[HttpDelete]
-        //public IActionResult Delete(int id)
-        //{
-        //    var objFromDb = _unit.OfferCreate.Get(id);
-        //    if (objFromDb == null)
-        //    {
-        //        return Json(new { success = false, message = "Error while deleting" });
-        //    }
-        //    string webRootPath = _hostEnvironment.WebRootPath;
-        //    var imagePath = Path.Combine(webRootPath, objFromDb.ImageUrl.TrimStart('\\'));
-        //    if (System.IO.File.Exists(imagePath))
-        //    {
-        //        System.IO.File.Delete(imagePath);
-        //    }
-        //    _unit.OfferCreate.Remove(objFromDb);
-        //    _unit.Save();
-        //    return Json(new { success = true, message = "Delete Successful" });
+       
+        #region APIs
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            // delete trip from trips table
+            var deletedTrip = _unit.OfferCreate.Get(id);
+            if (deletedTrip == null)
+                return Json(new { success = false });
 
-        //}
+            _unit.OfferCreate.Remove(deletedTrip);
 
+            // delete days of trip from trip days table 
+            _unit.TripDays.RemoveRange(_db.TripDaysDetails.Where(i => i.TripId == id));
+
+            //delete images 
+            //must delete images from physical
+            string webRootPath = _hostEnvironment.WebRootPath;
+
+            foreach (var image in _db.Galleries.Where(i => i.TripId == id))
+            {
+                if (image.URL != null)
+                {
+                    string imagePath = Path.Combine(webRootPath, image.URL.TrimStart('\\'));
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
+                }
+            }
+            //delete from galleries table from its table
+            _db.Galleries.RemoveRange(_db.Galleries.Where(i => i.TripId == id));
+
+            // delete includes of trip from its table
+            _db.Includeds.RemoveRange(_db.Includeds.Where(i => i.TripId == id));
+
+            // delete excludeds of trip from its table
+            _db.Excludeds.RemoveRange(_db.Excludeds.Where(i => i.TripId == id));
+
+            // delete places of trip from its table
+            _db.Places.RemoveRange(_db.Places.Where(i => i.TripId == id));
+            
+            // delete selected styles of trip from its table
+            _db.SelectedStyles.RemoveRange(_db.SelectedStyles.Where(i => i.TripId == id));
+            
+            //save aLL
+            _unit.Save();
+
+            return Json(new { success = true });
+        }
+        #endregion
         #endregion
 
     }

@@ -1,7 +1,7 @@
 ﻿@model EgyGuide.Models.TripDaysDetail
 @using Microsoft.AspNetCore.Antiforgery
 @inject IAntiforgery antiforgery
- 
+
 @{ ViewData["Title"] = "Tour";
     ViewData["AddClassToBodyTag"] = "transparent-header";
     ViewData["AddToBreadcrumbHeaderHereBox"] = "pb-100 no-bg";
@@ -125,16 +125,16 @@
 
                                                     @*<div class="col-xs-12 col-sm-12">
 
-                                                        <label>Upload Photo:</label>
+                                                            <label>Upload Photo:</label>
 
-                                                        <div class="image-upload">
-                                                            <div class="">
-                                                                <input id="files+@i"name="file" type="file" class="form-control">
-                                                                
+                                                            <div class="image-upload">
+                                                                <div class="">
+                                                                    <input id="files+@i"name="file" type="file" class="form-control">
+
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                    </div>*@
+                                                        </div>*@
 
                                                 </div>
 
@@ -163,7 +163,6 @@
                             </div>
 
                             <div class="mb-25"></div>
-
                             <button type="submit" onclick="saveList()" class="btn btn-primary btn-wide">Submit</button>
                             <a href="#" class="btn btn-primary btn-wide btn-border">Save as draft</a>
 
@@ -183,14 +182,15 @@
 </div>
 
 
-@{ 
+@{
     var token = antiforgery.GetAndStoreTokens(Context);
- }
+}
 
 @section Scripts{
 
     <partial name="_ValidationScriptsPartial" />
     <script src="https://cdn.tiny.cloud/1/i54fe6u5lagl1he8pqydwfq525q0iiqncl244x4bzlp7acjm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+   
     <script>
         var saveList = function () {
             var matrix = new Array();
@@ -201,7 +201,7 @@
                 var timeFrom = document.getElementById("from+" + i).value;
                 var timeTo = document.getElementById("to+" + i).value;
                 var description = document.getElementById("description+" + i).value;
-                
+
                 if (title && remark && description  != null) {
                     matrix.push({ Title:title, TimeFrom:timeFrom, TimeTo:timeTo, Remark:remark, Description:description });
                 }
@@ -219,7 +219,7 @@
                 })
             }
         }
-        
+
     </script>
 
     <script src="js/jquery.bootstrap-touchspin.js"></script>

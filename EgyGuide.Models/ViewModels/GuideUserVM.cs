@@ -10,5 +10,6 @@ namespace EgyGuide.Models.ViewModels
     {
         public GuideUser GuideUser { get; set; }
         public GuideUserDetails GuideUserDetails { get; set; }
+        public IEnumerable<TripDetail> Trips { get; set; }
     }
 }
