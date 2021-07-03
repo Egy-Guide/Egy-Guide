@@ -139,9 +139,12 @@ namespace EgyGuide.Areas.Tourist.Controllers
 
                     _db.TravellersDetails.AddRange(travellersDetails);
                 }
+
+                _unitOfWork.Save();
             }
 
-            _unitOfWork.Save();
+            else
+                return NotFound();
 
             return RedirectToAction("BookingConfirmation", new { bookingId = tripBooking.BookingId });
         }
