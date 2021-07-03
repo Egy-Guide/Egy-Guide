@@ -13,6 +13,7 @@ namespace EgyGuide.Utility
         public const string Role_User_Suspended_Guide = "Suspended Guide";
 
         // Booking Status
+        public const string BookingStatusPending = "Pending";
         public const string BookingStatusConfirmation = "Confirmation";
         public const string BookingStatusCompleted = "Completed";
         public const string BookingStatusCancelled = "Cancelled";
@@ -21,6 +22,7 @@ namespace EgyGuide.Utility
         public const string PaymentStatusPending = "Pending";
         public const string PaymentStatusApproved = "Approved";
         public const string PaymentStatusRejected = "Rejected";
+        public const string PaymentStatusRefunded = "Refunded";
 
         public static string StripHtml(string htmlDescription)
         {

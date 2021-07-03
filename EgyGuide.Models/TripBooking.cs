@@ -20,6 +20,7 @@ namespace EgyGuide.Models
         public ApplicationUser ApplicationUser { get; set; }
         public string BookingNo { get; set; }
         public DateTime BookingDate { get; set; }
+        public string TransactionId { get; set; }
         public string BookingStatus { get; set; }
         public string PaymentStatus { get; set; }
         public DateTime PaymentDate { get; set; }

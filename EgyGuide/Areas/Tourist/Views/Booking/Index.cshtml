@@ -1,7 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity 
+@using Microsoft.Extensions.Options 
+@using EgyGuide.Utility
 @model EgyGuide.Models.ViewModels.BookingVM
 @inject EgyGuide.DataAccess.Repository.IRepository.IUnitOfWork _unitOfWork
 @inject UserManager<IdentityUser> _userManager
+@inject IOptions<StripeSettings> Stripe
 
 @{
     ViewData["Title"] = "Booking";
@@ -19,308 +22,58 @@
 
 <!-- start breadcrumb -->
 <partial name="~/Views/Shared/Breadcrumb.cshtml">
-    <!-- end breadcrumb -->
+<!-- end breadcrumb -->
 
-    <div class="user-profile-wrapper">
-        <div class="payment-header">
-
-            <div class="container">
-
-                <div class="content">
-
-                    <div class="trip-list-item no-border">
-                        <div class="image-absolute">
-                            <div class="image image-object-fit image-object-fit-cover">
-                                <img src="images/trip/01.jpg" alt="image">
-                            </div>
-                        </div>
-                        <div class="content">
-
-                            <div class="GridLex-gap-20 mb-5">
-
-                                <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-middle">
-
-                                    <div class="GridLex-col-6_sm-12_xs-12_xss-12">
-
-                                        <div class="GridLex-inner">
-                                            <h6>Hong Kong Best Highlight Explore</h6>
-                                            <span class="font-italic font14">5 days 4 nights</span>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="GridLex-col-3_sm-6_xs-7_xss-12">
-                                        <div class="GridLex-inner line-1 font14 text-center text-left-sm text-muted spacing-1">
-                                            <div class="rating-item rating-item-lg  mt-10-xs">
-                                                <input type="hidden" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="4.5" />
-                                                <div class="rating-text">Based on <a href="#">32 reviews</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="GridLex-col-3_sm-6_xs-5_xss-12">
-                                        <div class="GridLex-inner text-right text-left-xss">
-                                            <a onclick="backToTrip(@Model.TripDetail.TripId)" class="btn btn-primary btn-sm btn-block mt-15-xs"><i class="ion-arrow-left-c"></i> Back to detail</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="pt-30 pb-50">
+<div class="user-profile-wrapper">
+    <div class="payment-header">
 
         <div class="container">
 
-            <div class="row">
+            <div class="content">
 
-                <div class="col-xs-12 col-sm-8 col-md-8 mt-20">
-
-                    <form method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="TripBooking.TravellersNo" value="@noTravellers" />
-                        <input type="hidden" asp-for="TripBooking.TripStart" value="@tripDateFrom" />
-                        <input type="hidden" asp-for="TripBooking.TripEnd" value="@tripDateTo" />
-                        <input type="hidden" asp-for="TripBooking.TotalPrice" value="@totalPrice" />
-                        <input type="hidden" asp-for="TripBooking.TripId" value="@Model.TripDetail.TripId" />
-
-                        <h4 class="section-title">Traveller Details</h4>
-
-                        <div class="payment-content">
-
-                            @for (int i = 0; i < noTravellers; i++)
-                            {
-                                <div class="payment-traveller">
-
-                                    <div class="row gap-0">
-
-                                        <div class="col-sm-9 col-sm-offser-3 col-md-10 col-md-offset-2">
-                                            <h6 class="text-primary spacing-2 text-uppercase">Traveller @(i+1)</h6>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="form-horizontal">
-                                        <div class="form-group select2-input-hide">
-                                            <label class="col-sm-3 col-md-2 control-label">Title:</label>
-                                            <div class="col-sm-3 col-md-2">
-                                                <select asp-for="TravellersDetails[i].Title" class="selectpicker show-tick form-control">
-                                                    <option value="">Title</option>
-                                                    <option value="mr">Mr.</option>
-                                                    <option value="mrs">Mrs.</option>
-                                                    <option value="miss">Miss</option>
-                                                </select>
-                                                <span asp-validation-for="TravellersDetails[i].Title" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 col-md-2 control-label">First Name:</label>
-                                            <div class="col-sm-5 col-md-5">
-                                                <input asp-for="TravellersDetails[i].FirstName" type="text" class="form-control">
-                                                <span asp-validation-for="TravellersDetails[i].FirstName" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 col-md-2 control-label">Last Name:</label>
-                                            <div class="col-sm-5 col-md-5">
-                                                <input asp-for="TravellersDetails[i].LastName" type="text" class="form-control">
-                                                <span asp-validation-for="TravellersDetails[i].LastName" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-horizontal">
-                                        <div class="form-group select2-input-hide">
-                                            <label class="col-sm-3 col-md-2 control-label">Gender:</label>
-                                            <div class="col-sm-3 col-md-2">
-                                                <select asp-for="TravellersDetails[i].Gender" class="selectpicker show-tick form-control" data-live-search="false">
-                                                    <option value="">Gender</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
-                                                </select>
-                                                <span asp-validation-for="TravellersDetails[i].Gender" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-horizontal">
-                                        <div class="form-group select2-input-hide">
-                                            <label class="col-sm-3 col-md-2 control-label">Birthday:</label>
-                                            <div class="col-sm-8 col-md-5">
-                                                <input asp-for="TravellersDetails[i].Birthday" type="date" class="form-control">
-                                                <span asp-validation-for="TravellersDetails[i].Birthday" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 col-md-2 control-label">Nationality:</label>
-                                            <div class="col-sm-5 col-md-5">
-                                                <select asp-for="TravellersDetails[i].Nationality" class="selectpicker show-tick form-control" data-live-search="false">
-                                                    <partial name="~/Views/Shared/Country.cshtml" />
-                                                </select>
-                                                <span asp-validation-for="TravellersDetails[i].Nationality" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            }
-
+                <div class="trip-list-item no-border">
+                    <div class="image-absolute">
+                        <div class="image image-object-fit image-object-fit-cover">
+                            <img src="images/trip/01.jpg" alt="image">
                         </div>
+                    </div>
+                    <div class="content">
 
-                        <div class="payment-content">
+                        <div class="GridLex-gap-20 mb-5">
 
-                            <h4 class="section-title">Contact Info</h4>
+                            <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-middle">
 
-                            <div class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-3 col-md-2 control-label">Email:</label>
-                                    <div class="col-sm-5 col-md-5">
-                                        <input asp-for="TripBooking.Email" value="@email" type="text" class="form-control">
-                                        <span asp-validation-for="TripBooking.Email" class="text-danger"></span>
+                                <div class="GridLex-col-6_sm-12_xs-12_xss-12">
+
+                                    <div class="GridLex-inner">
+                                        <h6>Hong Kong Best Highlight Explore</h6>
+                                        <span class="font-italic font14">5 days 4 nights</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="GridLex-col-3_sm-6_xs-7_xss-12">
+                                    <div class="GridLex-inner line-1 font14 text-center text-left-sm text-muted spacing-1">
+                                        <div class="rating-item rating-item-lg  mt-10-xs">
+                                            <input type="hidden" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="4.5" />
+                                            <div class="rating-text">Based on <a href="#">32 reviews</a></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-3 col-md-2 control-label">Phone Number:</label>
-                                    <div class="col-sm-5 col-md-5">
-                                        <input asp-for="TripBooking.PhoneNumber" value="@phone" type="text" class="form-control">
-                                        <span asp-validation-for="TripBooking.PhoneNumber" class="text-danger"></span>
+                                <div class="GridLex-col-3_sm-6_xs-5_xss-12">
+                                    <div class="GridLex-inner text-right text-left-xss">
+                                        <a onclick="backToTrip(@Model.TripDetail.TripId)" class="btn btn-primary btn-sm btn-block mt-15-xs"><i class="ion-arrow-left-c"></i> Back to detail</a>
                                     </div>
                                 </div>
+
                             </div>
 
                         </div>
 
-                        <div class="bb mt-20 mb-20"></div>
-
-                        <div class="checkbox-block">
-                            <input id="accept_booking" name="accept_booking" type="checkbox" class="checkbox" value="paymentsCreditCard" />
-                            <label class="" for="accept_booking">By submitting a booking request, you accept our <a href="#">terms and conditions</a> as well as the <a href="#">cancellation policy</a> and  <a href="#">House Rules</a> .</label>
-                        </div>
-
-                        <button type="submit" asp-action="Index" class="btn btn-primary mt-25">Book Now</button>
-
-                        <p class="line16 mt-20 font14"><span class="font600">Prepared is me marianne</span>: pleasure likewise debating. Wonder an unable except better stairs do ye admire.</p>
-
-                    </form>
-
+                    </div>
                 </div>
 
-                <div id="sidebar-sticky" class="col-xs-12 col-sm-4 col-md-4 mt-20 sticky-mt-30 mt-50-sm">
-
-                    <aside class="sidebar-wrapper with-box-shadow">
-
-                        <div class="sidebar-booking-box">
-
-                            <div class="sidebar-booking-header pt-20 pb-15 clearfix">
-
-                                <h3 class="text-white text-uppercase spacing-3 mb-0 line-1">Trip Summary</h3>
-
-                            </div>
-
-                            <div class="sidebar-booking-inner">
-
-                                <ul class="price-summary-list">
-
-                                    <li>
-                                        <h6>From</h6>
-                                        <p class="text-muted">@tripDateFrom.ToString("dd-MM-yyy")</p>
-                                    </li>
-
-                                    <li>
-                                        <h6>To</h6>
-                                        <p class="text-muted">@tripDateTo.ToString("dd-MM-yyyy")</p>
-                                    </li>
-
-                                    <li>
-                                        <h6>Meeting point</h6>
-                                        <p class="text-muted">@Model.TripDetail.MeetingPlace</p>
-                                    </li>
-
-                                    <li>
-                                        <h6>Meeting time</h6>
-                                        <p class="text-muted">@(Model.TripDetail.MeetingDate.HasValue ? Model.TripDetail.MeetingDate.Value.ToString("hh:mm tt") : "<not available>")</p>
-                                    </li>
-
-                                    <li>
-                                        <h6>Travellers</h6>
-                                        <p class="text-muted">@noTravellers</p>
-                                    </li>
-
-                                    <li class="divider"></li>
-
-                                    <li>
-                                        <h6 class="heading mt-20 mb-5 text-primary uppercase">Price per person</h6>
-                                        <div class="row gap-10 mt-10">
-                                            <div class="col-xs-7 col-sm-7">
-                                                Brochure Price
-                                            </div>
-                                            <div class="col-xs-5 col-sm-5 text-right">
-                                                @(String.Format("${0:#.00}", Convert.ToDouble(Model.TripDetail.Price)))
-                                            </div>
-                                        </div>
-                                        <div class="row gap-10 mt-10">
-                                            <div class="col-xs-7 col-sm-7">
-                                                Tax &amp; fee
-                                            </div>
-                                            <div class="col-xs-5 col-sm-5 text-right">
-                                                $0
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li class="divider"></li>
-
-                                    <li>
-                                        <div class="row gap-10 mt-10">
-                                            <div class="col-xs-7 col-sm-7">
-                                                <span class="font600">Total </span>
-                                            </div>
-                                            <div class="col-xs-5 col-sm-5 text-right">
-                                                @String.Format("${0:#.00} x{1}", Convert.ToDouble(Model.TripDetail.Price), noTravellers)
-                                                <span class="font600 font26 block text-primary mt-5">@String.Format("${0:#.00}", totalPrice)</span>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li class="divider"></li>
-
-                                    <li>
-                                        <a asp-controller="Offered" asp-action="Index" class="btn btn-primary btn-sm mt-5">Change my trip</a>
-                                    </li>
-
-                                </ul>
-
-                            </div>
-
-                        </div>
-
-                    </aside>
-
-                </div>
 
             </div>
 
@@ -328,28 +81,187 @@
 
     </div>
 
-    @section Scripts{
-        <script>
-        check(@Model.TripDetail.TripId)
+</div>
 
-        function check(id) {
-            if (@noTravellers < 1) {
-                location.replace(`/offered-details?id=${id}`)
-            }
-        }
+<div class="pt-30 pb-50">
 
-        function backToTrip(id) {
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="TripBooking.TravellersNo" value="@noTravellers" />
+                    <input type="hidden" asp-for="TripBooking.TripStart" value="@tripDateFrom" />
+                    <input type="hidden" asp-for="TripBooking.TripEnd" value="@tripDateTo" />
+                    <input type="hidden" asp-for="TripBooking.TotalPrice" value="@totalPrice" />
+                    <input type="hidden" asp-for="TripBooking.TripId" value="@Model.TripDetail.TripId" />
+
+                    <h4 class="section-title">Traveller Details</h4>
+
+                    <div class="payment-content">
+
+                        @for (int i = 0; i < noTravellers; i++)
+                        {
+                            <div class="payment-traveller">
+
+                                <div class="row gap-0">
+
+                                    <div class="col-sm-9 col-sm-offser-3 col-md-10 col-md-offset-2">
+                                        <h6 class="text-primary spacing-2 text-uppercase">Traveller @(i+1)</h6>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-horizontal">
+                                    <div class="form-group select2-input-hide">
+                                        <label class="col-sm-3 col-md-2 control-label">Title:</label>
+                                        <div class="col-sm-3 col-md-2">
+                                            <select asp-for="TravellersDetails[i].Title" class="selectpicker show-tick form-control">
+                                                <option value="">Title</option>
+                                                <option value="mr">Mr.</option>
+                                                <option value="mrs">Mrs.</option>
+                                                <option value="miss">Miss</option>
+                                            </select>
+                                            <span asp-validation-for="TravellersDetails[i].Title" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-2 control-label">First Name:</label>
+                                        <div class="col-sm-5 col-md-5">
+                                            <input asp-for="TravellersDetails[i].FirstName" type="text" class="form-control">
+                                            <span asp-validation-for="TravellersDetails[i].FirstName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-2 control-label">Last Name:</label>
+                                        <div class="col-sm-5 col-md-5">
+                                            <input asp-for="TravellersDetails[i].LastName" type="text" class="form-control">
+                                            <span asp-validation-for="TravellersDetails[i].LastName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-horizontal">
+                                    <div class="form-group select2-input-hide">
+                                        <label class="col-sm-3 col-md-2 control-label">Gender:</label>
+                                        <div class="col-sm-3 col-md-2">
+                                            <select asp-for="TravellersDetails[i].Gender" class="selectpicker show-tick form-control" data-live-search="false">
+                                                <option value="">Gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                            </select>
+                                            <span asp-validation-for="TravellersDetails[i].Gender" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-horizontal">
+                                    <div class="form-group select2-input-hide">
+                                        <label class="col-sm-3 col-md-2 control-label">Birthday:</label>
+                                        <div class="col-sm-8 col-md-5">
+                                            <input asp-for="TravellersDetails[i].Birthday" type="date" class="form-control">
+                                            <span asp-validation-for="TravellersDetails[i].Birthday" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-2 control-label">Nationality:</label>
+                                        <div class="col-sm-5 col-md-5">
+                                            <select asp-for="TravellersDetails[i].Nationality" class="selectpicker show-tick form-control" data-live-search="false">
+                                                <partial name="~/Views/Shared/Country.cshtml" />
+                                            </select>
+                                            <span asp-validation-for="TravellersDetails[i].Nationality" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+
+                    <div class="payment-content">
+
+                        <h4 class="section-title">Contact Info</h4>
+
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 col-md-2 control-label">Email:</label>
+                                <div class="col-sm-5 col-md-5">
+                                    <input asp-for="TripBooking.Email" value="@email" type="text" class="form-control">
+                                    <span asp-validation-for="TripBooking.Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 col-md-2 control-label">Phone Number:</label>
+                                <div class="col-sm-5 col-md-5">
+                                    <input asp-for="TripBooking.PhoneNumber" value="@phone" type="text" class="form-control">
+                                    <span asp-validation-for="TripBooking.PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="bb mt-20 mb-20"></div>
+
+                    <div class="checkbox-block">
+                        <input id="accept_booking" name="accept_booking" type="checkbox" class="checkbox" value="paymentsCreditCard" />
+                        <label class="" for="accept_booking">By submitting a booking request, you accept our <a href="#">terms and conditions</a> as well as the <a href="#">cancellation policy</a> and  <a href="#">House Rules</a> .</label>
+                    </div>
+
+                    <button type="submit" asp-action="Index" class="btn btn-primary mt-25">Book Now</button>
+
+                    <p class="line16 mt-20 font14"><span class="font600">Prepared is me marianne</span>: pleasure likewise debating. Wonder an unable except better stairs do ye admire.</p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+    check(@Model.TripDetail.TripId)
+
+    function check(id) {
+        if (@noTravellers < 1) {
             location.replace(`/offered-details?id=${id}`)
         }
-        </script>
-
-        <script src="~/js/jquery.stickit.js"></script>
-        <script src="~/js/bootstrap-tokenfield.js"></script>
-        <script src="~/js/typeahead.bundle.min.js"></script>
-        <script src="~/js/jquery.sumogallery.js"></script>
-        <script src="~/js/images-grid.js"></script>
-        <script src="~/js/jquery.bootstrap-touchspin.js"></script>
-        <script src="~/js/customs-detail.js"></script>
-
-        <partial name="_ValidationScriptsPartial" />
     }
+
+    function backToTrip(id) {
+        location.replace(`/offered-details?id=${id}`)
+    }
+
+    $(".stripe-button-el").css("display", "none")
+    </script>
+
+    <script src="~/js/jquery.stickit.js"></script>
+    <script src="~/js/bootstrap-tokenfield.js"></script>
+    <script src="~/js/typeahead.bundle.min.js"></script>
+    <script src="~/js/jquery.sumogallery.js"></script>
+    <script src="~/js/images-grid.js"></script>
+    <script src="~/js/jquery.bootstrap-touchspin.js"></script>
+    <script src="~/js/customs-detail.js"></script>
+
+    <partial name="_ValidationScriptsPartial" />
+}
