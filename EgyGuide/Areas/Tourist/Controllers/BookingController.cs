@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,26 +64,89 @@ namespace EgyGuide.Areas.Tourist.Controllers
                 // Booking Processing
                 BookingVM.TripBooking.TouristId = userId;
                 BookingVM.TripBooking.BookingNo = bookingNo;
-                BookingVM.TripBooking.BookingDate = DateTime.Now;
-                BookingVM.TripBooking.BookingStatus = SD.BookingStatusConfirmation;
+                BookingVM.TripBooking.BookingDate = DateTime.Today;
+                BookingVM.TripBooking.BookingStatus = SD.BookingStatusPending;
                 BookingVM.TripBooking.PaymentStatus = SD.PaymentStatusPending;
-                BookingVM.TripBooking.PaymentDate = DateTime.Now;
+                BookingVM.TripBooking.PaymentDate = DateTime.Today;
 
                 // Save Booking in DB First
                 _unitOfWork.TripBooking.Add(BookingVM.TripBooking);
                 _unitOfWork.Save();
 
-                // Save Traveller's information
-                foreach (var travellerDetails in BookingVM.TravellersDetails)
-                    travellerDetails.BookingId = BookingVM.TripBooking.BookingId;
+                // Save the object to use it in checkout
+                HttpContext.Session.SetString("TripBooking", JsonConvert.SerializeObject(BookingVM.TripBooking));
+                HttpContext.Session.SetString("TravellersDetails", JsonConvert.SerializeObject(BookingVM.TravellersDetails));
 
-                _db.TravellersDetails.AddRange(BookingVM.TravellersDetails);
-                _unitOfWork.Save();
-
-                return RedirectToAction("BookingConfirmation", new { bookingId = BookingVM.TripBooking.BookingId });
+                return RedirectToAction("Checkout", new { surl = Guid.NewGuid().ToString("N") });
             }
 
             return View(BookingVM);
+        }
+
+        [Authorize]
+        [Route("checkout")]
+        public IActionResult Checkout(string surl)
+        {
+            if (surl == null)
+                return NotFound();
+
+            var tripBooking = JsonConvert.DeserializeObject<TripBooking>(HttpContext.Session.GetString("TripBooking"));
+            tripBooking.TripDetail = _db.TripDetails.FirstOrDefault(tD => tD.TripId == tripBooking.TripId);
+
+            return View(tripBooking);
+        }
+
+        [Authorize]
+        [Route("checkout")]
+        [HttpPost]
+        [ActionName("Checkout")]
+        public IActionResult OnPostCheckout(string stripeToken)
+        {
+            var tripBooking = JsonConvert.DeserializeObject<TripBooking>(HttpContext.Session.GetString("TripBooking"));
+
+            if (stripeToken != null)
+            {
+                var options = new ChargeCreateOptions()
+                {
+                    Amount = Convert.ToInt32(tripBooking.TotalPrice * 100),
+                    Currency = "usd",
+                    Description = "Booking No. : " + tripBooking.BookingNo,
+                    Source = stripeToken
+                };
+
+                var service = new ChargeService();
+                Charge charge = service.Create(options);
+
+
+                if (charge.BalanceTransactionId == null)
+                    tripBooking.PaymentStatus = SD.PaymentStatusRejected;
+                else
+                    tripBooking.TransactionId = charge.BalanceTransactionId;
+
+
+                if (charge.Status.ToLower() == "succeeded")
+                {
+                    tripBooking.BookingStatus = SD.BookingStatusConfirmation;
+                    tripBooking.PaymentStatus = SD.PaymentStatusApproved;
+                    tripBooking.BookingDate = DateTime.Now;
+                    tripBooking.PaymentDate = DateTime.Now;
+
+                    // Save Traveller's information
+                    var travellersDetails = JsonConvert.DeserializeObject<List<TravellerDetails>>(HttpContext.Session.GetString("TravellersDetails"));
+
+                    foreach (var travellerDetails in travellersDetails)
+                        travellerDetails.BookingId = tripBooking.BookingId;
+
+                    _db.TravellersDetails.AddRange(travellersDetails);
+                }
+
+                _unitOfWork.Save();
+            }
+
+            else
+                return NotFound();
+
+            return RedirectToAction("BookingConfirmation", new { bookingId = tripBooking.BookingId });
         }
 
         [Authorize]
