@@ -31,6 +31,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
 
         [BindProperty]
         public BookingVM BookingVM { get; set; }
+        public TripBooking TripBookingDb => _unitOfWork.TripBooking.GetFirstOrDefault(tB => tB.BookingId == (int)HttpContext.Session.GetInt32("TripBookingId"));
 
         [Authorize]
         [Route("booking")]
@@ -74,7 +75,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
                 _unitOfWork.Save();
 
                 // Save the object to use it in checkout
-                HttpContext.Session.SetString("TripBooking", JsonConvert.SerializeObject(BookingVM.TripBooking));
+                HttpContext.Session.SetInt32("TripBookingId", BookingVM.TripBooking.BookingId);
                 HttpContext.Session.SetString("TravellersDetails", JsonConvert.SerializeObject(BookingVM.TravellersDetails));
 
                 return RedirectToAction("Checkout", new { surl = Guid.NewGuid().ToString("N") });
@@ -90,10 +91,9 @@ namespace EgyGuide.Areas.Tourist.Controllers
             if (surl == null)
                 return NotFound();
 
-            var tripBooking = JsonConvert.DeserializeObject<TripBooking>(HttpContext.Session.GetString("TripBooking"));
-            tripBooking.TripDetail = _db.TripDetails.FirstOrDefault(tD => tD.TripId == tripBooking.TripId);
+            TripBookingDb.TripDetail = _db.TripDetails.FirstOrDefault(tD => tD.TripId == TripBookingDb.TripId);
 
-            return View(tripBooking);
+            return View(TripBookingDb);
         }
 
         [Authorize]
@@ -102,15 +102,15 @@ namespace EgyGuide.Areas.Tourist.Controllers
         [ActionName("Checkout")]
         public IActionResult OnPostCheckout(string stripeToken)
         {
-            var tripBooking = JsonConvert.DeserializeObject<TripBooking>(HttpContext.Session.GetString("TripBooking"));
+            int bookingId = (int)HttpContext.Session.GetInt32("TripBookingId");
 
             if (stripeToken != null)
             {
                 var options = new ChargeCreateOptions()
                 {
-                    Amount = Convert.ToInt32(tripBooking.TotalPrice * 100),
+                    Amount = Convert.ToInt32(TripBookingDb.TotalPrice * 100),
                     Currency = "usd",
-                    Description = "Booking No. : " + tripBooking.BookingNo,
+                    Description = "Booking No. : " + TripBookingDb.BookingNo,
                     Source = stripeToken
                 };
 
@@ -119,23 +119,23 @@ namespace EgyGuide.Areas.Tourist.Controllers
 
 
                 if (charge.BalanceTransactionId == null)
-                    tripBooking.PaymentStatus = SD.PaymentStatusRejected;
+                    TripBookingDb.PaymentStatus = SD.PaymentStatusRejected;
                 else
-                    tripBooking.TransactionId = charge.BalanceTransactionId;
+                    TripBookingDb.TransactionId = charge.BalanceTransactionId;
 
 
                 if (charge.Status.ToLower() == "succeeded")
                 {
-                    tripBooking.BookingStatus = SD.BookingStatusConfirmation;
-                    tripBooking.PaymentStatus = SD.PaymentStatusApproved;
-                    tripBooking.BookingDate = DateTime.Now;
-                    tripBooking.PaymentDate = DateTime.Now;
+                    TripBookingDb.BookingStatus = SD.BookingStatusConfirmation;
+                    TripBookingDb.PaymentStatus = SD.PaymentStatusApproved;
+                    TripBookingDb.BookingDate = DateTime.Now;
+                    TripBookingDb.PaymentDate = DateTime.Now;
 
                     // Save Traveller's information
                     var travellersDetails = JsonConvert.DeserializeObject<List<TravellerDetails>>(HttpContext.Session.GetString("TravellersDetails"));
 
                     foreach (var travellerDetails in travellersDetails)
-                        travellerDetails.BookingId = tripBooking.BookingId;
+                        travellerDetails.BookingId = TripBookingDb.BookingId;
 
                     _db.TravellersDetails.AddRange(travellersDetails);
                 }
@@ -146,7 +146,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
             else
                 return NotFound();
 
-            return RedirectToAction("BookingConfirmation", new { bookingId = tripBooking.BookingId });
+            return RedirectToAction("BookingConfirmation", new { bookingId = TripBookingDb.BookingId });
         }
 
         [Authorize]

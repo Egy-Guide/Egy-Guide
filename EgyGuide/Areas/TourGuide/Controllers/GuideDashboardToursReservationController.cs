@@ -25,12 +25,28 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             _userManager = userManager;
         }
         [Route("guide/dashboard/my-tours/sells")]
-        public IActionResult Index(string id)
+        public IActionResult Index(int id)
         {
+            if (id == 0)
+                return NotFound();
+
             var key = "my-key";
 
-            HttpContext.Session.SetString(key, id);
+            HttpContext.Session.SetInt32(key, id);
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult TripCompleted(int bookingId)
+        {
+            if (bookingId == 0)
+                return NotFound();
+
+            var booking = _unitOfWork.TripBooking.GetFirstOrDefault(tB => tB.BookingId == bookingId);
+            booking.BookingStatus = SD.BookingStatusCompleted;
+            _unitOfWork.Save();
+
+            return Json(new { success = true });
         }
 
         #region API CALLS
@@ -39,11 +55,20 @@ namespace EgyGuide.Areas.TourGuide.Controllers
         public IActionResult TourSells()
         {
             var key = "my-key";
-            var id = HttpContext.Session.GetString(key);
-            int idParsed = Int32.Parse(id);
-            var trips = _unitOfWork.TripBooking.GetAll(g => 
-            (g.TripId == idParsed) && (g.BookingStatus == SD.BookingStatusConfirmation || g.BookingStatus == SD.BookingStatusCompleted),
-            includeProperties: "TripDetail,ApplicationUser");
+            var tripId = HttpContext.Session.GetInt32(key);
+            var trips = _unitOfWork.TripBooking.GetAll(g =>
+            (g.TripId == tripId) && (g.BookingStatus == SD.BookingStatusConfirmation || g.BookingStatus == SD.BookingStatusCompleted),
+            includeProperties: "TripDetail,ApplicationUser").Select(g => new
+            {
+                bookingId = g.BookingId,
+                tripTitle = g.TripDetail.Title,
+                userFirstName = g.ApplicationUser.FirstName,
+                email = g.Email,
+                phoneNumber = g.PhoneNumber,
+                bookingDate = g.BookingDate.ToString("dd/MMMM/yyyy"),
+                bookingStatus = g.BookingStatus
+            });
+
             return Json(new { data = trips });
         }
         #endregion

@@ -12,6 +12,8 @@
     guide.Add("LastName", Model.GuideUser.ApplicationUser.LastName);
     guide.Add("ImgSrc", Model.GuideUser.ApplicationUser.ImageUrl);
     guide.Add("ToursNo", _db.TripDetails.Count(t => t.GuideId == Model.GuideUser.Id).ToString());
+    guide.Add("DateFrom", Model.TripDetail.MeetingDate.Value.ToString("dd/MMMM/yyyy"));
+    guide.Add("DateTo", Model.TripDetail.MeetingDate.Value.AddDays(Model.TripDetail.MeetingDate.Value.Day).ToString("dd/MMMM/yyyy"));
 }
 
 <!-- start breadcrumb -->
@@ -902,16 +904,16 @@
                             <div class="row gap-10">
 
                                 <div class="col-xss-12 col-xs-6 col-sm-6">
-                                    <div class="form-group" id="tripDateFromForm">
+                                    <div class="form-group">
                                         <label>From</label>
-                                        <input id="tripDateFrom" type="date" class="form-control">
+                                        <input id="tripDateFrom" type="text" value="@guide["DateFrom"]" class="form-control" disabled>
                                     </div>
                                 </div>
 
                                 <div class="col-xss-12 col-xs-6 col-sm-6">
-                                    <div class="form-group" id="tripDateToForm">
+                                    <div class="form-group">
                                         <label>To</label>
-                                        <input id="tripDateTo" type="date" class="form-control">
+                                        <input id="tripDateTo" value="@guide["DateTo"]" class="form-control" disabled>
                                     </div>
                                 </div>
 
@@ -1213,31 +1215,7 @@
             var tripDateTo = $("#tripDateTo").val();
             var noTravellersVal = $("#noTravellers").val();
 
-            if ((tripDateFrom == "") && (tripDateTo == "")) {
-                $("#tripDateFromForm span").remove()
-                $("#tripDateToForm span").remove()
-                $("#tripDateFromForm").append('<span class="text-danger">Required</span>')
-                $("#tripDateToForm").append('<span class="text-danger">Required</span>')
-            }
-
-            if ((tripDateFrom == "") && (tripDateTo != "")) {
-                $("#tripDateFromForm span").remove()
-                $("#tripDateToForm span").remove()
-                $("#tripDateFromForm").append('<span class="text-danger">Required</span>')
-            }
-
-            if ((tripDateFrom != "") && (tripDateTo == "")) {
-                $("#tripDateFromForm span").remove()
-                $("#tripDateToForm span").remove()
-                $("#tripDateToForm").append('<span class="text-danger">Required</span>')
-            }
-
-            if ((tripDateFrom != "") && (tripDateTo != "")) {
-
-                $("#tripDateFromForm span").remove()
-                $("#tripDateToForm span").remove()
-
-                $.ajax({
+            $.ajax({
                     url: "/Tourist/Booking/GetNoTravellers",
                     type: "POST",
                     data: { tripDateFrom: tripDateFrom, tripDateTo: tripDateTo, noTravellers: noTravellersVal },
@@ -1245,8 +1223,7 @@
                         if (data.success)
                             location.href = `/booking?id=${@Model.TripDetail.TripId}`
                     }
-                })
-            }
+            })
 
         })
 
