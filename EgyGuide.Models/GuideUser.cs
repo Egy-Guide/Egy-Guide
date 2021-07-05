@@ -33,6 +33,8 @@ namespace EgyGuide.Models
         public string InstagramProfile { get; set; }
         public string YoutubeProfile { get; set; }
         public string Remark { get; set; }
+        public DateTime RegistrationDate { get; set; }
+        public string Status { get; set; }
 
         [NotMapped]
         [Required]

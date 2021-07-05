@@ -102,7 +102,6 @@ namespace EgyGuide.Areas.Tourist.Controllers
         [ActionName("Checkout")]
         public IActionResult OnPostCheckout(string stripeToken)
         {
-            int bookingId = (int)HttpContext.Session.GetInt32("TripBookingId");
 
             if (stripeToken != null)
             {

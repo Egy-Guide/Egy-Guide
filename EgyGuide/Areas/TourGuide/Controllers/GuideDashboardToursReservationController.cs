@@ -36,19 +36,6 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult TripCompleted(int bookingId)
-        {
-            if (bookingId == 0)
-                return NotFound();
-
-            var booking = _unitOfWork.TripBooking.GetFirstOrDefault(tB => tB.BookingId == bookingId);
-            booking.BookingStatus = SD.BookingStatusCompleted;
-            _unitOfWork.Save();
-
-            return Json(new { success = true });
-        }
-
         #region API CALLS
         
         [HttpGet]
@@ -70,6 +57,19 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             });
 
             return Json(new { data = trips });
+        }
+
+        [HttpPost]
+        public IActionResult TripCompleted(int bookingId)
+        {
+            if (bookingId == 0)
+                return NotFound();
+
+            var booking = _unitOfWork.TripBooking.GetFirstOrDefault(tB => tB.BookingId == bookingId);
+            booking.BookingStatus = SD.BookingStatusCompleted;
+            _unitOfWork.Save();
+
+            return Json(new { success = true });
         }
         #endregion
     }

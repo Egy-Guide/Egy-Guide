@@ -1,4 +1,6 @@
 ﻿using EgyGuide.DataAccess.Repository.IRepository;
+using EgyGuide.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,9 @@ namespace EgyGuide.Areas.Admin.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+
         [Route("admin/blog")]
+        [Authorize(Roles = SD.Role_User_Admin)]
         public IActionResult Index()
         {
             var blogs = _unitOfWork.Blog.GetAll().OrderByDescending(b => b.Date).Take(5);

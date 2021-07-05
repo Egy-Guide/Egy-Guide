@@ -13,7 +13,7 @@
     guide.Add("ImgSrc", Model.GuideUser.ApplicationUser.ImageUrl);
     guide.Add("ToursNo", _db.TripDetails.Count(t => t.GuideId == Model.GuideUser.Id).ToString());
     guide.Add("DateFrom", Model.TripDetail.MeetingDate.Value.ToString("dd/MMMM/yyyy"));
-    guide.Add("DateTo", Model.TripDetail.MeetingDate.Value.AddDays(Model.TripDetail.MeetingDate.Value.Day).ToString("dd/MMMM/yyyy"));
+    guide.Add("DateTo", Model.TripDetail.MeetingDate.Value.AddDays(Model.TripDetail.Days).ToString("dd/MMMM/yyyy"));
 }
 
 <!-- start breadcrumb -->

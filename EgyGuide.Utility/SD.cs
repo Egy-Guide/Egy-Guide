@@ -12,6 +12,11 @@ namespace EgyGuide.Utility
         public const string Role_User_Tour_Guide = "Tour Guide";
         public const string Role_User_Suspended_Guide = "Suspended Guide";
 
+        // Guide Status
+        public const string GuideStatusApproved = "Approved";
+        public const string GuideStatusPending = "Pending";
+        public const string GuideStatusLocked = "Locked";
+
         // Booking Status
         public const string BookingStatusPending = "Pending";
         public const string BookingStatusConfirmation = "Confirmation";

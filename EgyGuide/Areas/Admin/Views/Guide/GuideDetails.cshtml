@@ -1,0 +1,111 @@
+﻿@model EgyGuide.Models.GuideUser
+
+@{
+    ViewData["Title"] = "Admin - Guide Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="bg-light pt-100">
+
+    <div class="create-tour-wrapper">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="create-tour-inner">
+
+                        <h4 class="section-title">Guide Information</h4>
+
+                        <div class="row">
+
+                            <div class="col-xs-6 col-sm-6">
+                                <div class="form-group form-group-lg">
+                                    <label>First Name:</label>
+                                    <input value="@Model.ApplicationUser.FirstName" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6">
+                                <div class="form-group form-group-lg">
+                                    <label>Last Name:</label>
+                                    <input value="@Model.ApplicationUser.LastName" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="form-group form-group-lg">
+                                    <label>Email:</label>
+                                    <input value="@Model.ApplicationUser.Email" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="form-group form-group-lg">
+                                    <label>Phone Number:</label>
+                                    <input value="@Model.ApplicationUser.PhoneNumber" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6">
+                                <div class="form-group form-group-lg">
+                                    <label>Nationality:</label>
+                                    <input value="@Model.ApplicationUser.Nationality" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6">
+                                <div class="form-group form-group-lg">
+                                    <label>Country:</label>
+                                    <input value="@Model.ApplicationUser.Country" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6">
+                                <div class="form-group form-group-lg">
+                                    <label>City:</label>
+                                    <input value="@Model.ApplicationUser.City" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6">
+                                <div class="form-group form-group-lg">
+                                    <label>Experience:</label>
+                                    <input value="@Model.YearExperience" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="form-group form-group-lg">
+                                    <label>Service Areas:</label>
+                                    <input value="@Model.ServiceArea" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="form-group form-group-lg">
+                                    <label>Languages:</label>
+                                    <input value="@Model.Language" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="form-group form-group-lg">
+                                    <label>Identity Image:</label>
+                                    <img src="@Model.IdentityCardUrl" style="max-height:415px">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -87,6 +87,7 @@ namespace EgyGuide.Areas.Identity.Pages.Account
                     City = RegisterVM.Input.City,
                     UserName = RegisterVM.Input.Email,
                     Email = RegisterVM.Input.Email,
+                    ImageUrl = "/images/avatar.jpg",
                     Role = RegisterVM.Input.Role
                 };                
 

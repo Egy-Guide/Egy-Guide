@@ -1,5 +1,7 @@
 ﻿using EgyGuide.DataAccess.Repository.IRepository;
 using EgyGuide.Models;
+using EgyGuide.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,7 @@ namespace EgyGuide.Areas.Admin.Controllers
         public Category Category { get; set; }
 
         [Route("category")]
+        [Authorize(Roles = SD.Role_User_Admin)]
         public IActionResult Index()
         {
             IEnumerable<Category> Category = _unitOfWork.Category.GetAll();

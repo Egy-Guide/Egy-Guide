@@ -29,7 +29,6 @@ namespace EgyGuide.Areas.Identity.Pages.Account.Guide
         private readonly IUnitOfWork _unitOfWork;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IWebHostEnvironment _hostEnviroment;
@@ -45,7 +44,6 @@ namespace EgyGuide.Areas.Identity.Pages.Account.Guide
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
-            _roleManager = roleManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
@@ -87,6 +85,7 @@ namespace EgyGuide.Areas.Identity.Pages.Account.Guide
                     City = RegisterVM.Input.City,
                     UserName = RegisterVM.Input.Email,
                     Email = RegisterVM.Input.Email,
+                    ImageUrl = "/images/avatar.jpg",
                     Role = RegisterVM.Input.Role
                 };                
 
@@ -96,11 +95,10 @@ namespace EgyGuide.Areas.Identity.Pages.Account.Guide
                 // Add new guide.
                 if (RegisterVM.Guide != null)
                 {
-                    // Locked the new guide for revising.
-                    //var futureDateLocked = DateTime.Now.AddYears(1000);
-                    //await _userManager.SetLockoutEndDateAsync(user, futureDateLocked);
-
-                    RegisterVM.Guide.UserId = await _userManager.GetUserIdAsync(user);         
+                    
+                    RegisterVM.Guide.UserId = await _userManager.GetUserIdAsync(user);
+                    RegisterVM.Guide.RegistrationDate = DateTime.Now;
+                    RegisterVM.Guide.Status = SD.BookingStatusPending;
 
                     #region Upload Identity Card
 
@@ -121,7 +119,7 @@ namespace EgyGuide.Areas.Identity.Pages.Account.Guide
                             await fileStream.DisposeAsync();
                         }                         
 
-                        RegisterVM.Guide.IdentityCardUrl = imageURL;
+                        RegisterVM.Guide.IdentityCardUrl = "/images/guide-identity/" + imageName  + extension;
 
                     }
 
@@ -135,7 +133,7 @@ namespace EgyGuide.Areas.Identity.Pages.Account.Guide
                     _logger.LogInformation("User created a new account with password.");
 
                     // Add role to Suspended Guide.                    
-                    await _userManager.AddToRoleAsync(user, SD.Role_User_Tour_Guide);
+                    await _userManager.AddToRoleAsync(user, SD.Role_User_Suspended_Guide);
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
