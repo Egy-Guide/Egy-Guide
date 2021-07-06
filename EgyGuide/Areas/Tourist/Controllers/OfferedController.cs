@@ -22,7 +22,8 @@ namespace EgyGuide.Areas.Tourist.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<TripDetail> tripList = _unit.OfferCreate.GetAll();
+            IEnumerable<TripDetail> tripList = _unit.OfferCreate.GetAll(includeProperties: "GuideUser,GuideUser.ApplicationUser");
+            
 
             return View(tripList);
         }

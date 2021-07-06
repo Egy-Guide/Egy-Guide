@@ -43,10 +43,10 @@
                             <div class="trip-guide-bottom">
                                 <div class="trip-guide-person clearfix">
                                     <div class="image">
-                                        <img src="images/testimonial/01.jpg" class="img-circle" alt="images" />
+                                        <img src="@trip.GuideUser.ApplicationUser.ImageUrl" class="img-circle" alt="images" />
                                     </div>
-                                    <p class="name">By: <a href="#">Shady Khalil</a></p>
-                                    <p>Local expert from Egypt</p>
+                                    <p class="name">By: <b>@String.Format("{0} {1}", @trip.GuideUser.ApplicationUser.FirstName, @trip.GuideUser.ApplicationUser.LastName)</b></p>
+                                    <p>Local expert from @trip.GuideUser.ApplicationUser.Country</p>
                                 </div>
 
                                 <div class="trip-guide-meta row gap-10">
