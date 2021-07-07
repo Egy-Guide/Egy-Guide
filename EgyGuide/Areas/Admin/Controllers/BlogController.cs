@@ -22,33 +22,54 @@ namespace EgyGuide.Areas.Admin.Controllers
         [Authorize(Roles = SD.Role_User_Admin)]
         public IActionResult Index()
         {
-            var blogs = _unitOfWork.Blog.GetAll().OrderByDescending(b => b.Date).Take(5);
-            return View(blogs);
+            return View();
         }
 
-        [Route("admin/blog/active")]
+        #region API's Calls
+        [HttpGet]
+        public IActionResult GetBlogs()
+        {
+            var blogs = _unitOfWork.Blog.GetAll(includeProperties: "ApplicationUser").Select(b => new
+            {
+                id = b.Id,
+                title = SD.SubstringByWords(b.Title, 10),
+                date = b.Date.ToString("MMMM d, yyyy"),
+                createdBy = b.ApplicationUser.FirstName + " " + b.ApplicationUser.LastName,
+                views = b.Views,
+                status = b.Status
+            });
+
+            return Json(new { data = blogs });
+        }
+
         [HttpPost]
         public IActionResult Active(int id)
         {
             var blog = _unitOfWork.Blog.Get(id);
+
+            if (blog == null)
+                return Json(new { success = false });
+
             blog.Status = "active";
             _unitOfWork.Save();
 
-            return RedirectToAction(nameof(Index));
+            return Json(new { success = true });
         }
 
-        [Route("admin/blog/unactive")]
         [HttpPost]
         public IActionResult Unactive(int id)
         {
             var blog = _unitOfWork.Blog.Get(id);
+
+            if (blog == null)
+                return Json(new { success = false });
+
             blog.Status = "unactive";
             _unitOfWork.Save();
 
-            return RedirectToAction(nameof(Index));
+            return Json(new { success = true });
         }
 
-        #region APIs
         [HttpDelete]
         public IActionResult Delete(int id)
         {
