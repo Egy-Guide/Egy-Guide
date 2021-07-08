@@ -95,7 +95,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
             if (ModelState.IsValid)
             {
                
-                return RedirectToAction("OfferedCreateDone","TripDays");
+                return RedirectToAction("OfferedCreateDone","TripDays", new { id = lastRecord.TripId });
             }
             return View(tripDays);
             //else
@@ -139,9 +139,11 @@ namespace EgyGuide.Areas.TourGuide.Controllers
         //}
 
         [Route("offered-create-done")]
-        public IActionResult OfferedCreateDone()
+        public IActionResult OfferedCreateDone(int id)
         {
-            return View();
+            var trip = _unit.OfferCreate.GetFirstOrDefault(t => t.TripId == id);
+
+            return View(trip);
         }
 
         #region API CALLS

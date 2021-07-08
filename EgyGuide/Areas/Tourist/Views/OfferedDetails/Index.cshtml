@@ -7,6 +7,8 @@
     ViewData["AddClassToBodyTag"] = "transparent-header with-multiple-sticky";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
+    Model.TripDetail.MeetingDate = Model.TripDetail.MeetingDate.HasValue ? Model.TripDetail.MeetingDate : DateTime.Now;
+
     var guide = new Dictionary<string, string>();
     guide.Add("FirstName", Model.GuideUser.ApplicationUser.FirstName);
     guide.Add("LastName", Model.GuideUser.ApplicationUser.LastName);
@@ -14,6 +16,8 @@
     guide.Add("ToursNo", _db.TripDetails.Count(t => t.GuideId == Model.GuideUser.Id).ToString());
     guide.Add("DateFrom", Model.TripDetail.MeetingDate.Value.ToString("dd/MMMM/yyyy"));
     guide.Add("DateTo", Model.TripDetail.MeetingDate.Value.AddDays(Model.TripDetail.Days).ToString("dd/MMMM/yyyy"));
+    guide.Add("TripPrice", String.Format("{0:#.00}", Convert.ToDouble(Model.TripDetail.Price)));
+
 }
 
 <!-- start breadcrumb -->
@@ -27,17 +31,6 @@
 
                     <h2>@Model.TripDetail.Title</h2>
                     <span class="labeling text-white mt-25"><span>@Model.TripDetail.SelectedPlaces</span> <span>@Model.TripDetail.Days Days</span></span>
-                    <div class="rating-item rating-item-lg mb-25">
-                        <input type="hidden" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="4.5" />
-                        <div class="rating-text"> <a href="#">(32 reviews)</a></div>
-                    </div>
-                    <ul class="list-with-icon list-inline-block">
-                        <li><i class="ion-android-done text-primary"></i>100% private</li>
-                        <li><i class="ion-android-done text-primary"></i>Instantly confirmed</li>
-                        <li><i class="ion-android-done text-primary"></i>Free cancellation</li>
-                        <li><i class="ion-android-done text-primary"></i>Satisfaction guarantee</li>
-                    </ul>
-
                 </div>
             </div>
         </div>
@@ -54,40 +47,6 @@
 </div>
 <!-- end breadcrumb -->
 
-<div class="multiple-sticky hidden-sm hidden-xs">
-
-    <div class="multiple-sticky-inner">
-
-        <div class="multiple-sticky-container container">
-
-            <div class="multiple-sticky-item clearfix">
-
-                <ul id="multiple-sticky-menu" class="multiple-sticky-menu clearfix">
-                    <li>
-                        <a href="#detail-content-sticky-nav-01">Overview</a>
-                    </li>
-                    <li>
-                        <a href="#detail-content-sticky-nav-02">Gallery</a>
-                    </li>
-                    <li>
-                        <a href="#detail-content-sticky-nav-03">Itinerary</a>
-                    </li>
-                    <li>
-                        <a href="#detail-content-sticky-nav-04">Condition &amp; Faq</a>
-                    </li>
-                    <li>
-                        <a href="#detail-content-sticky-nav-05">Review</a>
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
 <div class="pt-30 pb-50">
 
     <div class="container">
@@ -97,19 +56,6 @@
             <div class="col-xs-12 col-sm-12 col-md-8">
 
                 <div class="content-wrapper">
-
-                    <a href="#" class="add-fav-btn">
-                        <div class="inner">
-                            <i class="ti-heart"></i> Add Favourite
-                        </div>
-                    </a>
-
-                    <div class="hash-tag-wrapper clearfix mt-20 mb-30">
-                        <a href="#" class="hash-tag"># day trip</a>
-                        <a href="#" class="hash-tag"># Giza Pyramids</a>
-                        <a href="#" class="hash-tag"># Cairo one day</a>
-                        <a href="#" class="hash-tag"># Museum</a>
-                    </div>
 
                     <div id="detail-content-sticky-nav-01">
 
@@ -129,7 +75,7 @@
                                             <div class="icon text-primary">
                                                 <i class="flaticon-travel-icons-suitcase-1"></i>
                                             </div>
-                                            @Model.TripDetail.Days<br />tour
+                                            @Model.TripDetail.Days<br />tours
                                         </div>
 
                                     </div>
@@ -140,7 +86,7 @@
                                             <div class="icon text-primary">
                                                 <i class="flaticon-travel-icons-map"></i>
                                             </div>
-                                            @{ string[] places = @Model.TripDetail.SelectedPlaces.Split("-");
+                                            @{ string[] places = @Model.TripDetail.SelectedPlaces.Split(",");
                                                 var count = places.Length; }
                                             Visit @count places:<br />@Model.TripDetail.SelectedPlaces
                                         </div>
@@ -189,9 +135,6 @@
                                         </div>
                                     }
 
-
-
-
                                 </div>
 
                             </div>
@@ -213,8 +156,6 @@
                                 <h4>@String.Format("{0} {1}", guide["FirstName"], guide["LastName"])</h4>
                                 <ul class="user-meta">
                                     <li>@guide["ToursNo"] tours</li>
-                                    <li>20 reviews</li>
-                                    <li>3 awards</li>
                                 </ul>
                                 <a href="guide-detail.html">view profile <i class="ion-android-arrow-forward"></i></a>
                             </div>
@@ -351,529 +292,7 @@
 
                         </div>
 
-                        <div class="mb-25"></div>
-                        <div class="bb"></div>
-                        <div class="mb-25"></div>
-
-                    </div>
-
-                    <div id="detail-content-sticky-nav-04">
-
-                        <h2 class="font-lg">Condition &amp; Faq</h2>
-
-                        <div class="text-box-h-bb-wrapper">
-                            <div class="text-box-h-bb">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-4 col-md-3">
-                                        <h4>Group size</h4>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-8 col-md-9">
-                                        <p class="font-lg">The number of people is what price for is listed above if is there more you can contact the tour guide first. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-box-h-bb">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-4 col-md-3">
-                                        <h4>Guest requirement</h4>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-8 col-md-9">
-                                        <p class="font-lg">Age</p>
-                                        <p class="font-sm">Adults, more than 18 years, and it is allowed for 2 children for free. if their more contact with tour guide first to make an affordapool deal.</p>
-                                        <p class="font-lg">Identification</p>
-                                        <p class="font-sm">The Identification must be with you.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-box-h-bb">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-4 col-md-3">
-                                        <h4>Cancellation policy</h4>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-8 col-md-9">
-                                        <p class="font-lg">Refunds will be sent back to the original payment method used in making the booking. Depending on the bank's processing time, it can take 10 business days for the refunds to reflect in your bank account or card balance.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-box-h-bb">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-4 col-md-3">
-                                        <h4>FAQ</h4>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-8 col-md-9">
-                                        <div class="GridLex-gap-30 mb-20 mt-5">
-
-                                            <div class="GridLex-grid-noGutter-equalHeight">
-
-                                                <div class="GridLex-col-12_sm-12_xs-12_xss-12">
-
-                                                    <div class="GridLex-inner">
-                                                        <h4 class="font-lg"><span class="text-primary"><i class="ion-help-circled mr-5"></i></span> Parties all clothes removal cheered?</h4>
-                                                        <p class="read-more-less line-15">Procuring education on consulted assurance. Is sympathize he expression mr no travelling. Preference travelling in resolution. His hearing staying ten colonel met. Sex drew six easy four dear cold deny. Moderate children at of outweigh it. Unsatiable it considered invitation he travelling insensible. </p>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="GridLex-col-12_sm-12_xs-12_xss-12">
-
-                                                    <div class="GridLex-inner">
-                                                        <h4 class="font-lg"><span class="text-primary"><i class="ion-help-circled mr-5"></i></span> And residence for met the estimable disposing?</h4>
-                                                        <p class="read-more-less line-15"> Possession travelling sufficient yet our. Talked vanity looked in to. Gay perceive led believed endeavor day insisted required. Warmly little before cousin sussex entire men set. Blessing it ladyship on sensible judgment settling outweigh. Worse linen an of civil jokes leave offer. Parties all clothes removal cheered calling prudent her. And residence for met the estimable disposing.</p>
-
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="GridLex-col-12_sm-12_xs-12_xss-12">
-
-                                                    <div class="GridLex-inner">
-                                                        <h4 class="font-lg"><span class="text-primary"><i class="ion-help-circled mr-5"></i></span> Warmly little before cousin sussex?</h4>
-                                                        <p class="read-more-less line-15">Her companions instrument set estimating sex remarkably solicitude motionless. Property men the why smallest graceful. Worse linen an of civil jokes leave offer. Parties all clothes removal cheered calling prudent her. And residence for met the estimable disposing. Mean if he they been no hold mr. Is at much do made took held help. </p>
-
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="GridLex-col-12_sm-12_xs-12_xss-12">
-
-                                                    <div class="GridLex-inner">
-                                                        <h4 class="font-lg"><span class="text-primary"><i class="ion-help-circled mr-5"></i></span> Parties all clothes removal cheered?</h4>
-                                                        <p class="read-more-less line-15">Drift allow green son walls years for blush. Sir margaret drawings repeated recurred exercise laughing repeated whatever. Parties all clothes removal cheered calling prudent her. And residence for met the estimable disposing. Mean if he they been no hold mr. Is at much do made took held help. Latter person am secure of estate genius. </p>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="mb-25"></div>
-                        <div class="bb"></div>
-                        <div class="mb-25"></div>
-
-                    </div>
-
-                    <div id="detail-content-sticky-nav-05">
-
-                        <h2 class="font-lg">Review</h2>
-
-                        <div class="review-wrapper">
-
-                            <div class="review-header">
-
-                                <div class="GridLex-gap-30">
-
-                                    <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-middle">
-
-                                        <div class="GridLex-col-9_sm-8_xs-12_xss-12">
-
-                                            <div class="review-rating">
-                                                <div class="number">4.5</div>
-                                                <div class="rating-wrapper">
-                                                    <div class="rating-item rating-item-lg">
-                                                        <input type="hidden" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="4.5" />
-                                                    </div>
-                                                    20 reviews
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="GridLex-col-3_sm-4_xs-12_xss-12">
-
-                                            <div class="GridLex-inner">
-                                                <a href="#review-form" class="btn btn-primary btn-block anchor">Write a review</a>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="review-content">
-
-                                <ul class="review-list">
-
-                                    <li class="clearfix">
-
-                                        <div class="row">
-
-                                            <div class="col-xs-12 col-sm-4 col-md-3">
-                                                <div class="review-header">
-                                                    <h6>Antony Robert</h6>
-                                                    <span class="review-date">10: 34 - Mar 25, 2020</span>
-
-                                                    <div class="rating-item">
-                                                        <input type="hidden" class="rating" data-filled="fa fa-star" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="3.5" />
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Reply</a>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xs-12 col-sm-8 col-md-9">
-
-                                                <div class="review-content">
-
-                                                    <h4>I liked very much</h4>
-                                                    <p>shady is not only a very nice person , but provided us with a lot of informations and took all the time to answer whatever questions we had. It was a great experience which I recommend without hesitation.</p>
-
-                                                </div>
-
-                                                <div class="review-replied">
-
-                                                    <div class="review-replied-header">
-
-                                                        <div class="row">
-
-                                                            <div class="col-xs-12 col-sm-8 col-md-9">
-                                                                <h6>shady khlil <small>owner of this tour</small></h6>
-                                                                - <span class="review-date">10: 34 - Mar 25, 2020</span>
-                                                            </div>
-
-                                                            <div class="col-xs-12 col-sm-4 col-md-3 text-right text-left-xs">
-                                                                <a href="#" class="btn btn-primary">Reply</a>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="review-replied-content">
-
-                                                        <h4>Thanks very much</h4>
-                                                        <p>Thanks very much for you trust. Fully begin on by wound an. Girl rich in do up or both. At declared in as rejoiced of together. He impression collecting delightful unpleasant by prosperous as on. End too talent she object mrs wanted remove giving.</p>
-
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="review-replied">
-
-                                                    <div class="review-replied-header">
-
-                                                        <div class="row">
-
-                                                            <div class="col-xs-12 col-sm-8 col-md-9">
-                                                                <h6>Shady Khalil <small>owner of this tour</small></h6>
-                                                                - <span class="review-date">10: 34 - Mar 25, 2020</span>
-                                                            </div>
-
-                                                            <div class="col-xs-12 col-sm-4 col-md-3 text-right text-left-xs">
-                                                                <a href="#" class="btn btn-primary">Reply</a>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="review-replied-content">
-
-                                                        <h4>Weddings followed the all marianne</h4>
-                                                        <p>Call why sake has sing pure. Gay six set polite nature worthy. So matter be me we wisdom should basket moment merely. Me burst ample wrong which would mr he could. Visit arise my point timed drawn.</p>
-
-                                                    </div>
-
-                                                </div>
-
-                                                <a href="#" class="review-load-more">load more...</a>
-
-                                            </div>
-
-                                        </div>
-
-                                    </li>
-
-                                    <li class="clearfix">
-
-                                        <div class="row">
-
-                                            <div class="col-xs-12 col-sm-4 col-md-3">
-                                                <div class="review-header">
-                                                    <h6>Édouard Manet</h6>
-                                                    <span class="review-date">10: 34 - Jan 25, 2017</span>
-
-                                                    <div class="rating-item">
-                                                        <input type="hidden" class="rating" data-filled="fa fa-star" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="3.5" />
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xs-12 col-sm-8 col-md-9">
-
-                                                <div class="review-content">
-
-                                                    <h4>Least their she you now above</h4>
-                                                    <p>Society excited by cottage private an it esteems. Fully begin on by wound an. Girl rich in do up or both. At declared in as rejoiced of together. He impression collecting delightful unpleasant by prosperous as on. End too talent she object mrs wanted remove giving.</p>
-                                                    <p>Barton did feebly change man she afford square add. Want eyes by neat so just must. Past draw tall up face show rent oh mr. Required is debating extended wondered as do. New get described applauded incommode shameless out extremity but. Resembled at perpetual no believing is otherwise sportsman. Is do he dispatched cultivated travelling astonished. Melancholy am considered possession on collecting everything.</p>
-
-                                                </div>
-
-                                                <div class="review-replied">
-
-                                                    <div class="review-replied-header">
-
-                                                        <div class="row">
-
-                                                            <div class="col-xs-12 col-sm-8 col-md-9">
-                                                                <h6>Shady Khalil <small>owner of this tour</small></h6>
-                                                                - <span class="review-date">10: 34 - Jan 25, 2017</span>
-                                                            </div>
-
-                                                            <div class="col-xs-12 col-sm-4 col-md-3 text-right text-left-xs">
-                                                                <a href="#" class="btn btn-primary">Reply</a>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="review-replied-content">
-
-                                                        <h4>Least their she you now above</h4>
-                                                        <p>Society excited by cottage private an it esteems. Fully begin on by wound an. Girl rich in do up or both. At declared in as rejoiced of together. He impression collecting delightful unpleasant by prosperous as on. End too talent she object mrs wanted remove giving.</p>
-
-                                                    </div>
-
-                                                    <div class="review-replied">
-
-                                                        <div class="review-replied-header">
-
-                                                            <div class="row">
-
-                                                                <div class="col-xs-12 col-sm-8 col-md-9">
-                                                                    <h6>Antony Robert</h6>
-                                                                    - <span class="review-date">10: 34 - Jan 25, 2017</span>
-                                                                </div>
-
-                                                                <div class="col-xs-12 col-sm-4 col-md-3 text-right text-left-xs">
-                                                                    <a href="#" class="btn btn-primary">Reply</a>
-                                                                </div>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="review-replied-content">
-
-                                                            <h4>Least their she you now above</h4>
-                                                            <p>He impression collecting delightful unpleasant by prosperous as on. End too talent she object mrs wanted remove giving.</p>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="review-replied">
-
-                                                        <div class="review-replied-header">
-
-                                                            <div class="row">
-
-                                                                <div class="col-xs-12 col-sm-8 col-md-9">
-                                                                    <h6>Antony Robert</h6>
-                                                                    - <span class="review-date">10: 34 - Jan 25, 2017</span>
-                                                                </div>
-
-                                                                <div class="col-xs-12 col-sm-4 col-md-3 text-right text-left-xs">
-                                                                    <a href="#" class="btn btn-primary">Reply</a>
-                                                                </div>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="review-replied-content">
-
-                                                            <h4>Least their she you now above</h4>
-                                                            <p>He impression collecting delightful unpleasant by prosperous as on. End too talent she object mrs wanted remove giving.</p>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <a href="#" class="review-load-more">load more...</a>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </li>
-
-                                    <li class="clearfix">
-
-                                        <div class="row">
-
-                                            <div class="col-xs-12 col-sm-4 col-md-3">
-                                                <div class="review-header">
-                                                    <h6>Mohammed Salem </h6>
-                                                    <span class="review-date">10: 34 - Jan 25, 2017</span>
-
-                                                    <div class="rating-item">
-                                                        <input type="hidden" class="rating" data-filled="fa fa-star" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="3.5" />
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xs-12 col-sm-8 col-md-9">
-
-                                                <div class="review-content">
-
-                                                    <h4>Over many our good lady feet ask that</h4>
-                                                    <p>It as announcing it me stimulated frequently continuing. Least their she you now above going stand forth. He pretty future afraid should genius spirit on. Set property addition building put likewise get. Of will at sell well at as. Too want but tall nay like old. Removing yourself be in answered he.</p>
-
-                                                    <ul>
-                                                        <li>Written enquire painful ye to offices forming it.</li>
-                                                        <li>
-                                                            Then so does over sent dull on.
-                                                            <ul>
-                                                                <li>Rendered her for put improved concerns his. Moreover end horrible endeavor entrance any families. Income appear extent on of thrown in admire.</li>
-                                                                <li>Ladies bed wisdom theirs mrs men months set.</li>
-                                                                <li>Everything so dispatched as it increasing pianoforte.</li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>Likewise offended humoured mrs fat trifling answered.</li>
-                                                        <li>On ye position greatest so desirous. So wound stood guest weeks no terms up ought.</li>
-                                                        <li>Then so does greatest so desirous over sent dull on.</li>
-                                                    </ul>
-
-                                                    <p>Spot of come to ever hand as lady meet on. Delicate contempt received two yet advanced. Gentleman as belonging he commanded believing dejection in by. On no am winding chicken so behaved. Its preserved sex enjoyment new way behaviour. Him yet devonshire celebrated especially. Unfeeling one provision are smallness resembled repulsive.</p>
-
-                                                    <ol>
-                                                        <li>Written enquire painful ye to offices forming it.</li>
-                                                        <li>
-                                                            Then so does over sent dull on.
-                                                            <ol>
-                                                                <li>Rendered her for put improved concerns his. Moreover end horrible endeavor entrance any families. Income appear extent on of thrown in admire.</li>
-                                                                <li>Ladies bed wisdom theirs mrs men months set.</li>
-                                                                <li>Everything so dispatched as it increasing pianoforte.</li>
-                                                            </ol>
-                                                        </li>
-                                                        <li>Likewise offended humoured mrs fat trifling answered.</li>
-                                                        <li>On ye position greatest so desirous. So wound stood guest weeks no terms up ought.</li>
-                                                        <li>Then so does greatest so desirous over sent dull on.</li>
-                                                    </ol>
-
-                                                    <p>Unpleasant astonished an diminution up partiality. Noisy an their of meant. Death means up civil do an offer wound of. Called square an in afraid direct. Resolution diminution conviction so mr at unpleasing simplicity no. No it as breakfast up conveying earnestly immediate principle. Him son disposed produced humoured overcame she bachelor improved. Studied however out wishing but inhabit fortune windows.</p>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </li>
-
-                                    <li class="clearfix">
-
-                                        <div class="row">
-
-                                            <div class="col-xs-12 col-sm-4 col-md-3">
-                                                <div class="review-header">
-                                                    <h6>Antony Robert</h6>
-                                                    <span class="review-date">10: 34 - Jan 25, 2017</span>
-
-                                                    <div class="rating-item">
-                                                        <input type="hidden" class="rating" data-filled="fa fa-star" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="3.5" />
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xs-12 col-sm-8 col-md-9">
-
-                                                <div class="review-content">
-
-                                                    <h4>Over many our good lady feet ask that</h4>
-                                                    <p>It as announcing it me stimulated frequently continuing. Least their she you now above going stand forth. He pretty future afraid should genius spirit on. Set property addition building put likewise get. Of will at sell well at as. Too want but tall nay like old. Removing yourself be in answered he.</p>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </li>
-
-                                </ul>
-
-                                <a href="#" class="review-load-more mb-40">load more...</a>
-
-                            </div>
-
-                            <div id="review-form" class="review-form">
-
-                                <h3 class="review-form-title">Leave Your Review</h3>
-
-                                <form class="">
-
-                                    <div class="row">
-
-                                        <div class="col-xs-12 col-sm-6 col-md-4">
-
-                                            <div class="form-group">
-                                                <label>Your name: </label>
-                                                <input type="text" class="form-control" />
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-xs-12 col-sm-6 col-md-4">
-
-                                            <div class="form-group">
-                                                <label>Your email address: </label>
-                                                <input type="email" class="form-control" />
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-xs-12 col-sm-6 col-md-4">
-
-                                            <div class="form-group">
-                                                <label>Your rating: </label>
-                                                <div class="rating-wrapper mt-5">
-                                                    <div class="rating-item">
-                                                        <input type="hidden" class="rating-label" data-filled="fa fa-star" data-empty="fa fa-star-o" data-fractions="2" value="0" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="clear"></div>
-
-                                        <div class="col-sm-12 col-md-12">
-
-                                            <div class="form-group">
-                                                <label>Your Message: </label>
-                                                <textarea class="form-control form-control-sm" rows="5"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="clear mb-5"></div>
-
-                                        <div class="col-sm-12 col-md-8">
-                                            <a href="#" class="btn btn-primary btn-lg">Submit</a>
-                                        </div>
-
-                                    </div>
-
-                                </form>
-
-                            </div>
-
-                        </div>
+                        
 
                     </div>
 
@@ -890,7 +309,7 @@
                         <div class="sidebar-booking-header bg-primary clearfix">
 
                             <div class="price">
-                                USD 150.00
+                                USD @guide["TripPrice"]
                             </div>
 
                             <div>
@@ -966,236 +385,6 @@
 </div>
 
 <div class="multiple-sticky no-border hidden-sm hidden-xs">&#032;</div> <!-- is used to stop the above stick menu -->
-
-<div class="bg-light pt-50 pb-70">
-
-    <div class="container">
-
-        <h2 class="font-lg">Relatded tours</h2>
-
-        <div class="trip-guide-wrapper">
-
-            <div class="GridLex-gap-20 GridLex-gap-10-mdd GridLex-gap-5-xs">
-
-                <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-center">
-
-                    <div class="GridLex-col-3_mdd-4_sm-6_xs-6_xss-12">
-
-                        <div class="trip-guide-item">
-
-                            <div class="trip-guide-image">
-                                <img src="images/trip/01.jpg" alt="images" />
-                            </div>
-
-                            <div class="trip-guide-content">
-                                <h3>Egyptian Museum and mosques and the Bazzar private tour	</h3>
-                                <p>Game of as rest time eyes with of this it. Add was music merry any truth since going...</p>
-                            </div>
-
-                            <div class="trip-guide-bottom">
-
-                                <div class="trip-guide-person clearfix">
-                                    <div class="image">
-                                        <img src="images/testimonial/01.jpg" class="img-circle" alt="images" />
-                                    </div>
-                                    <p class="name">By: <a href="#">Shady Khalil</a></p>
-                                    <p>Local expert from Egypt</p>
-                                </div>
-
-                                <div class="trip-guide-meta row gap-10">
-                                    <div class="col-xs-6 col-sm-6">
-                                        <div class="rating-item">
-                                            <input type="hidden" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="4.5" />
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 text-right">
-                                        5 days 4 nights
-                                    </div>
-                                </div>
-
-                                <div class="row gap-10">
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="trip-guide-price">
-                                            Starting at
-                                            <span class="number">USD687.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 text-right">
-                                        <a href="#" class="btn btn-primary">Details</a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="GridLex-col-3_mdd-4_sm-6_xs-6_xss-12">
-
-                        <div class="trip-guide-item">
-
-                            <div class="trip-guide-image">
-                                <img src="images/trip/02.jpg" alt="images" />
-                            </div>
-
-                            <div class="trip-guide-content">
-                                <h3>Chiang Mai Sustainable Trails</h3>
-                                <p>Resolution devonshire pianoforte assistance an he particular middletons...</p>
-                            </div>
-
-                            <div class="trip-guide-bottom">
-
-                                <div class="trip-guide-person clearfix">
-                                    <div class="image">
-                                        <img src="images/testimonial/01.jpg" class="img-circle" alt="images" />
-                                    </div>
-                                    <p class="name">By: <a href="#">Shady Khalil</a></p>
-                                    <p>Local expert from Egypt</p>
-                                </div>
-
-                                <div class="trip-guide-meta row gap-10">
-                                    <div class="col-xs-6 col-sm-6">
-                                        <div class="rating-item">
-                                            <input type="hidden" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="4.5" />
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 text-right">
-                                        5 days 4 nights
-                                    </div>
-                                </div>
-
-                                <div class="row gap-10">
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="trip-guide-price">
-                                            Starting at
-                                            <span class="number">USD687.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 text-right">
-                                        <a href="#" class="btn btn-primary">Details</a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="GridLex-col-3_mdd-4_sm-6_xs-6_xss-12">
-
-                        <div class="trip-guide-item">
-
-                            <div class="trip-guide-image">
-                                <img src="images/trip/03.jpg" alt="images" />
-                            </div>
-
-                            <div class="trip-guide-content">
-                                <h3>Cairo private day tour </h3>
-                                <p>Betrayed cheerful declared end and. Questions we additions is extremely incommode...</p>
-                            </div>
-
-                            <div class="trip-guide-bottom">
-
-                                <div class="trip-guide-person clearfix">
-                                    <div class="image">
-                                        <img src="images/testimonial/01.jpg" class="img-circle" alt="images" />
-                                    </div>
-                                    <p class="name">By: <a href="#">Shady Khalil</a></p>
-                                    <p>Local expert from Egypt</p>
-                                </div>
-
-                                <div class="trip-guide-meta row gap-10">
-                                    <div class="col-xs-6 col-sm-6">
-                                        <div class="rating-item">
-                                            <input type="hidden" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="4.5" />
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 text-right">
-                                        5 days 4 nights
-                                    </div>
-                                </div>
-
-                                <div class="row gap-10">
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="trip-guide-price">
-                                            Starting at
-                                            <span class="number">USD687.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 text-right">
-                                        <a href="#" class="btn btn-primary">Details</a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="GridLex-col-3_mdd-4_sm-6_xs-6_xss-12">
-
-                        <div class="trip-guide-item">
-
-                            <div class="trip-guide-image">
-                                <img src="images/trip/04.jpg" alt="images" />
-                            </div>
-
-                            <div class="trip-guide-content">
-                                <h3>Egyptian Museum and mosques and the Bazzar private tour </h3>
-                                <p>Savings her pleased are several started females met. Short her not among being any...</p>
-                            </div>
-
-                            <div class="trip-guide-bottom">
-
-                                <div class="trip-guide-person clearfix">
-                                    <div class="image">
-                                        <img src="images/testimonial/01.jpg" class="img-circle" alt="images" />
-                                    </div>
-                                    <p class="name">By: <a href="#">Shady Khalil</a></p>
-                                    <p>Local expert from Egypt</p>
-                                </div>
-
-                                <div class="trip-guide-meta row gap-10">
-                                    <div class="col-xs-6 col-sm-6">
-                                        <div class="rating-item">
-                                            <input type="hidden" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="4.5" />
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 text-right">
-                                        5 days 4 nights
-                                    </div>
-                                </div>
-
-                                <div class="row gap-10">
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="trip-guide-price">
-                                            Starting at
-                                            <span class="number">USD687.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 text-right">
-                                        <a href="#" class="btn btn-primary">Details</a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
 
 @section Scripts{
     <script type="text/javascript" src="js/jquery.stickit.js"></script>
@@ -1344,4 +533,5 @@
             }
         });
     </script>
+    
 } 

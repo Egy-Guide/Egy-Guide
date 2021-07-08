@@ -34,7 +34,7 @@
                 <div class="trip-list-item no-border">
                     <div class="image-absolute">
                         <div class="image image-object-fit image-object-fit-cover">
-                            <img src="images/trip/01.jpg" alt="image">
+                            <img src="@Model.TripDetail.CoverImageUrl" alt="image">
                         </div>
                     </div>
                     <div class="content">
@@ -46,18 +46,15 @@
                                 <div class="GridLex-col-6_sm-12_xs-12_xss-12">
 
                                     <div class="GridLex-inner">
-                                        <h6>Hong Kong Best Highlight Explore</h6>
-                                        <span class="font-italic font14">5 days 4 nights</span>
+                                        <h6>@Model.TripDetail.Title</h6>
+                                        <span class="font-italic font14">@Model.TripDetail.Days days @Model.TripDetail.Nights nights</span>
                                     </div>
 
                                 </div>
 
                                 <div class="GridLex-col-3_sm-6_xs-7_xss-12">
                                     <div class="GridLex-inner line-1 font14 text-center text-left-sm text-muted spacing-1">
-                                        <div class="rating-item rating-item-lg  mt-10-xs">
-                                            <input type="hidden" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o" data-fractions="2" data-readonly value="4.5" />
-                                            <div class="rating-text">Based on <a href="#">32 reviews</a></div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
 
