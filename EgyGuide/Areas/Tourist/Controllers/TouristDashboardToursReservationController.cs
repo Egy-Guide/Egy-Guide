@@ -48,6 +48,20 @@ namespace EgyGuide.Areas.Tourist.Controllers
             var trips = _unitOfWork.TripBooking.GetAll(includeProperties: "TripDetail").Where(g => g.TouristId == userId);
             return Json(new { data = trips });
         }
+
+        [HttpPost]
+        public IActionResult TripCanceled(int id)
+        {
+            var booking = _unitOfWork.TripBooking.Get(id);
+
+            if (booking == null)
+                return Json(new { success = false });
+
+            booking.BookingStatus = SD.BookingStatusCancelled;
+            _unitOfWork.Save();
+
+            return Json(new { success = true });
+        }
         #endregion
     }
 }

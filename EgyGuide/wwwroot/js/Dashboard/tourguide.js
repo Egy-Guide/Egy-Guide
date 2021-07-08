@@ -4,12 +4,12 @@
         "url": "/TourGuide/GuideDashboardToursReservation/TourSells"
     },
     "columns": [
-        { "data": "tripTitle", "width": "15%" },
+        { "data": "tripTitle", "width": "25%" },
         { "data": "userFirstName", "width": "15%" },
         { "data": "email", "width": "15%" },
-        { "data": "phoneNumber", "width": "15%" },
+        { "data": "phoneNumber", "width": "5%" },
         { "data": "bookingDate", "width": "15%" },
-        { "data": "bookingStatus", "width": "40%" },
+        { "data": "bookingStatus", "width": "20%" },
         {
             "data": { "bookingId": "bookingId", "bookingStatus": "bookingStatus" },
             "render": function (data) {
@@ -21,7 +21,9 @@
                                     </a>
                                 </div>
                                `
-                } else {
+                }
+
+                if (data.bookingStatus == "Completed") {
                     return `
                                 <div class="text-center">
                                     <a class="btn btn-success">
@@ -29,8 +31,16 @@
                                     </a>
                                 </div>
                                `
+                } else {
+                    return `
+                                <div class="text-center">
+                                    -
+                                </div>
+                               `
                 }
-            }, "width": "40%"
+
+
+            }, "width": "5%"
         }
     ]
 });

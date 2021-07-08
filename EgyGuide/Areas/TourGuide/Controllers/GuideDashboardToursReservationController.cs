@@ -43,9 +43,8 @@ namespace EgyGuide.Areas.TourGuide.Controllers
         {
             var key = "my-key";
             var tripId = HttpContext.Session.GetInt32(key);
-            var trips = _unitOfWork.TripBooking.GetAll(g =>
-            (g.TripId == tripId) && (g.BookingStatus == SD.BookingStatusConfirmation || g.BookingStatus == SD.BookingStatusCompleted),
-            includeProperties: "TripDetail,ApplicationUser").Select(g => new
+            var trips = _unitOfWork.TripBooking.GetAll(g => g.TripId == tripId,
+                includeProperties: "TripDetail,ApplicationUser").Select(g => new
             {
                 bookingId = g.BookingId,
                 tripTitle = g.TripDetail.Title,
