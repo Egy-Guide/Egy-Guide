@@ -420,7 +420,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 var gallery = new Gallery()
                 {
 
-                    URL = @"\Trips\gallery\" + fileName + extension,
+                    URL = @"/Trips/gallery/" + fileName + extension,
                     TripId = id,
 
                 };
@@ -492,7 +492,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 included.Title = data[i];
                 included.TripId = lastRecord.TripId;
                 _db.Includeds.Add(included);
-               
+                _db.SaveChanges();
 
             }
         }
@@ -509,7 +509,7 @@ namespace EgyGuide.Areas.TourGuide.Controllers
                 excluded.Title = data[i];
                 excluded.TripId = lastRecord.TripId;
                 _db.Excludeds.Add(excluded);
-
+                _db.SaveChanges();
 
             }
         }

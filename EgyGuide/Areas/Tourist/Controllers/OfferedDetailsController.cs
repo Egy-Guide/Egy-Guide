@@ -33,6 +33,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
             }
             var selectedStyles = _db.SelectedStyles.Where(s => s.TripId == id).Select(s=>s.StyleId);
             var included = _db.Includeds.Where(i => i.TripId == id);
+            var excluded = _db.Excludeds.Where(i => i.TripId == id);
             var images = _db.Galleries.Where(i => i.TripId == id);
             var daysDetails = _db.TripDaysDetails.Where(t => t.TripId == id);
             var trip = _unit.OfferCreate.GetFirstOrDefault
@@ -43,6 +44,7 @@ namespace EgyGuide.Areas.Tourist.Controllers
                 TripDetail = trip,
                 TripStyles = _db.TripStyles.Where(t => selectedStyles.Contains(t.StyleId)),
                 Included = included,
+                Excluded = excluded,
                 Galleries = images,
                 TripDaysDetail = daysDetails,
                 City = city,

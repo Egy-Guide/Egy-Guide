@@ -4,7 +4,7 @@
         "url": "/TourGuide/GuideDashboardToursReservation/TourSells"
     },
     "columns": [
-        { "data": "tripTitle", "width": "25%" },
+        { "data": "tripTitle", "width": "30%" },
         { "data": "userFirstName", "width": "15%" },
         { "data": "email", "width": "15%" },
         { "data": "phoneNumber", "width": "5%" },

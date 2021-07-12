@@ -28,8 +28,8 @@
                     {
                     <div class="GridLex-col-3_mdd-4_sm-6_xs-6_xss-12">
                         <div class="trip-guide-item">
-                            <div class="trip-guide-image">
-                                <img src="@trip.CoverImageUrl" alt="images" />
+                            <div class="trip-guide-image" style="height:201px">
+                                <img style="height:100%;object-fit:cover" src="@trip.CoverImageUrl" alt="images" />
                             </div>
 
                             <div class="trip-guide-content">
@@ -37,7 +37,7 @@
                                             var minimizeDescription = SD.SubstringByWords(SD.StripHtml(description), 20);
                                 }
                                 <h3>@trip.Title</h3>
-                                <p>@SD.StripHtml(minimizeDescription)...</p>
+                                <p class="pb-10">@SD.StripHtml(minimizeDescription)...</p>
                             </div>
 
                             <div class="trip-guide-bottom">

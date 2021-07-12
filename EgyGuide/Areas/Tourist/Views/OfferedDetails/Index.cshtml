@@ -226,6 +226,16 @@
 
                                         }
                                     </ul>
+
+                                    <h4 class="text-uppercase spacing-1">What's excluded?</h4>
+
+                                    <ul class="list-yes-no">
+                                        @foreach (var excluded in Model.Excluded)
+                                        {
+                                            <li>@excluded.Title </li>
+
+                                        }
+                                    </ul>
                                 </div>
 
                             </div>
@@ -272,7 +282,7 @@
                                                     <div class="itinerary-header">
                                                         <h4>@day.value.Title</h4>
                                                         <p class="font-md">@day.value.Remark</p>
-                                                        <div class="image"><img src="images/itinerary-sq/01.jpg" alt="images" /></div>
+                                                        <div class="image"><img src="@Model.TripDetail.CoverImageUrl" alt="images" /></div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -532,6 +542,40 @@
                     .end().filter("[href='#" + id + "']").parent().addClass("active");
             }
         });
+
+    </script>
+    
+    <script>
+        /**
+     * Image Grid with Lightbox
+*/
+
+        var y = {
+            images: [],
+            cells: 3,
+            align: true
+        }
+
+
+        @for (int x = 0; x < Model.Galleries.Count(); x++)
+            {
+                <text>
+                    y.images.push({ src: '@Model.Galleries.ToList()[x].URL', alt: 'Second image', caption: @(x+1) })
+                </text>
+            }
+
+        //y.images.push({ src: 'images/diff-size/03.jpg', alt: 'Second image', caption: 3 })
+
+
+        $('#gallery1').imagesGrid(y)
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $('#gallery-in-tab').imagesGrid(y);
+
+            $('.selectpicker-in-tab').selectpicker({});
+        });
+
+        console.log($('#gallery1').imagesGrid())
     </script>
     
 } 

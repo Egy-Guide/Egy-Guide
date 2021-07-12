@@ -504,39 +504,36 @@
                     $.ajax({
                         url: "/TourGuide/OfferedCreate/SaveEncluded",
                         type: "POST",
-                        headers: { '@token.HeaderName': '@token.RequestToken' },
                         data: { ItemList: string },
                         success: function (response) {
-                            //
+                            //save excluded
+                            var arrTextBoxesExcluded = [];
+                            for (var i = 7; i <= 13; i++) {
+                                var value = document.getElementById(i).value;
+                                if (value != "") {
+                                    arrTextBoxesExcluded.push(value);
+                                }
+                            }
+
+                            var string = arrTextBoxesExcluded.toString();
+                            if (arrTextBoxesExcluded.length != 0) {
+
+                                $.ajax({
+                                    url: "/TourGuide/OfferedCreate/SaveExecluded",
+                                    type: "POST",
+                                    data: { ItemList: string },
+                                    success: function (response) {
+                                        //
+                                    }
+                                })
+                            }
                         }
                     })
                 }
+
+                
             }
 
-            if (@id == 0) {
-                //save excluded
-                var arrTextBoxesExcluded = [];
-                for (var i = 7; i <= 13; i++) {
-                    var value = document.getElementById(i).value;
-                    if (value != "") {
-                        arrTextBoxesExcluded.push(value);
-                    }
-                }
-
-                var string = arrTextBoxesExcluded.toString();
-                if (arrTextBoxesExcluded.length != 0) {
-
-                    $.ajax({
-                        url: "/TourGuide/OfferedCreate/SaveExecluded",
-                        type: "POST",
-                        headers: { '@token.HeaderName': '@token.RequestToken' },
-                        data: { ItemList: string },
-                        success: function (response) {
-                            //
-                        }
-                    })
-                }
-            }
             if (@id != 0) {
                 //update encluded
                 var updateEncluded = [];

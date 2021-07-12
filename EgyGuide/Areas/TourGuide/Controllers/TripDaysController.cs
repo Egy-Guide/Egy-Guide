@@ -31,7 +31,6 @@ namespace EgyGuide.Areas.TourGuide.Controllers
 
         
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public void SaveList(TripDaysDetail[] ItemList)
         {
             //here there is an exception, must edit it.

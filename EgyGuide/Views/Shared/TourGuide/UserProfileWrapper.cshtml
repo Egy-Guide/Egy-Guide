@@ -5,6 +5,7 @@
 @{
     var guide = _unitOfWork.GuideUser.GetFirstOrDefault(u => u.UserId == UserManager.GetUserId(User), includeProperties: "ApplicationUser");
     var guideDetails = _unitOfWork.GuideUserDetails.GetFirstOrDefault(u => u.GuideId == guide.Id);
+    int tripsNo = _unitOfWork.OfferCreate.GetAll(t => t.GuideId == guide.Id).Count();
 }
 
 <div class="user-profile-wrapper">
@@ -111,7 +112,7 @@
 
                         <ul class="user-header-menu">
                             <li><a asp-controller="GuideProfile" asp-action="Index">Profile</a></li>
-                            <li><a asp-controller="GuideProfile" asp-action="Tours">Tours <span>12</span></a></li>
+                            <li><a asp-controller="GuideProfile" asp-action="Tours">Tours <span>@tripsNo</span></a></li>
                             @*<li><a asp-controller="GuideProfile" asp-action="Gallery">Gallery</a></li>*@
                             <li><a asp-controller="GuideDetailsReviews" asp-action="Index">Reviews</a></li>
                             @*<li><a asp-controller="GuideDetailsFollowing" asp-action="Index">Followings <span>25</span></a></li>
