@@ -1,0 +1,23 @@
+﻿@inject EgyGuide.DataAccess.Repository.IRepository.IUnitOfWork _unitOfWork
+
+@{
+    int PostsNumber = 5;
+    IEnumerable<Blog> popularPosts = _unitOfWork.Blog.GetAll(b => b.Status == "active").OrderByDescending(b => b.Views).Take(PostsNumber);
+}
+
+<ul class="sidebar-post">
+    @foreach (var popularPost in popularPosts)
+    {
+        <li class="clearfix">
+            <a href="/blog-single?id=@popularPost.Id">
+                <div class="image">
+                    <img src="@popularPost.ImageURL" alt="Popular Post" />
+                </div>
+                <div class="content">
+                    <h6>@popularPost.Title</h6>
+                    <p class="recent-post-sm-meta"><i class="fa fa-comments mr-5"></i>@popularPost.Views views</p>
+                </div>
+            </a>
+        </li>
+    }
+</ul>

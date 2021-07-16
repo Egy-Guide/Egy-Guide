@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Admin - Trips";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="padding-30">
+    <h2>Panel - Trips</h2>
+    <table id="tblData" class="table table-striped" style="width:100%;text-align:center">
+        <thead class="thead-dark">
+            <tr class="table-info">
+                <th>Title</th>
+                <th>Tour Guide</th>
+                <th>Details</th>
+                <th>Process</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(".table-info th").css("text-align", "center")
+        $("head").append('<link rel="stylesheet" href="/css/datatable.css">');
+    </script>
+    <script src="~/js/Dashboard/admin/trip.js"></script>
+}
+

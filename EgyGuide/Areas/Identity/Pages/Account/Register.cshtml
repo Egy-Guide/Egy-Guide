@@ -1,0 +1,169 @@
+﻿@page
+@model RegisterModel
+@inject UserManager<IdentityUser> UserManger 
+@using EgyGuide.Utility
+
+@{
+    ViewData["AddClassToBodyTag"] = "transparent-header";
+    ViewData["Title"] = "Register";
+    ViewData["HeaderTitle"] = "create your account for free";
+}
+
+<!-- start breadcrumb -->
+<partial name="~/Views/Shared/BreadcrumbHeader.cshtml">
+<!-- start breadcrumb -->
+
+<div class="pt-30 pb-60">
+
+    <div class="container">
+
+        <!-- start Register Modal -->
+        <div class="modal-body">
+
+            <div class="row gap-20">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+
+                    <h4 class="text-center">Use another service to register.</h4>
+                    <hr />
+
+                    <!-- External OAuth -->
+                    <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            if (provider.Name.ToLower().Contains("facebook"))
+                            {
+                                <div class="col-sm-6 col-md-6">
+                                    <button type="submit" name="provider" class="btn btn-facebook btn-lg btn-block mb-5-xs" value="@provider.Name" title="@provider.DisplayName">
+                                        <i class="fa fa-facebook"></i> Register with Facebook
+                                    </button>
+                                </div>
+                            }
+
+                            if (provider.Name.ToLower().Contains("google"))
+                            {
+                                <div class="col-sm-6 col-md-6">
+                                    <button type="submit" name="provider" class="btn btn-google-plus btn-lg btn-block" value="@provider.Name" title="@provider.DisplayName">
+                                        <i class="fa fa-google"></i> Register with Google
+                                    </button>
+                                </div>
+                            }
+
+                        }
+
+                    </form>
+                    <!-- End External OAuth -->
+
+                    <div class="col-md-12">
+                        <div class="login-modal-or">
+                            <div><span>or</span></div>
+                        </div>
+                    </div>
+
+                    <form autocomplete="off" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input asp-for="RegisterVM.Input.FirstName" class="form-control" type="text" placeholder="First Name">
+                                <span asp-validation-for="RegisterVM.Input.FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input asp-for="RegisterVM.Input.LastName" class="form-control" type="text" placeholder="Last Name">
+                                <span asp-validation-for="RegisterVM.Input.LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input asp-for="RegisterVM.Input.Email" class="form-control" type="email" placeholder="Email">
+                                <span asp-validation-for="RegisterVM.Input.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input asp-for="RegisterVM.Input.PhoneNumber" class="form-control" type="text" placeholder="Phone Number">
+                                <span asp-validation-for="RegisterVM.Input.PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label>Nationality</label>
+                                <select asp-for="RegisterVM.Input.Nationality" class="selectpicker show-tick form-control">
+                                    <partial name="~/Views/Shared/Country.cshtml" />
+                                </select>
+                                <span asp-validation-for="RegisterVM.Input.Nationality" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <select asp-for="RegisterVM.Input.Country" class="selectpicker show-tick form-control">
+                                    <partial name="~/Views/Shared/Country.cshtml" />
+                                </select>
+                                <span asp-validation-for="RegisterVM.Input.Country" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input asp-for="RegisterVM.Input.City" class="form-control" type="text" placeholder="City">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input asp-for="RegisterVM.Input.Password" class="form-control" type="password" placeholder="Password">
+                                <span asp-validation-for="RegisterVM.Input.Password" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <input asp-for="RegisterVM.Input.ConfirmPassword" class="form-control" type="password" placeholder="Confirm Password">
+                                <span asp-validation-for="RegisterVM.Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="checkbox-block">
+                                <input id="register_accept_checkbox" name="register_accept_checkbox" class="checkbox" value="First Choice" type="checkbox">
+                                <label class="" for="register_accept_checkbox">By register, I read &amp; accept <a href="#">the terms</a></label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="login-box-box-action">
+                                Already have account? <a data-toggle="modal" asp-area="Identity" asp-page="Login">Log-in</a>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                        </div>
+                    </form>
+                </div>                
+            </div>
+
+        </div>        
+        <!-- end Register Modal -->
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

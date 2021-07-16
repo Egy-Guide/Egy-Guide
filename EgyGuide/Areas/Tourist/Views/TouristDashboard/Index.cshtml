@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="~/Views/Shared/Breadcrumb.cshtml">
+<partial name="~/Views/Shared/UserProfileWrapper.cshtml">
+
+<div class="pt-30 pb-50">
+
+    <div class="container">
+
+        <div class="row">
+
+            <partial name="~/Views/Shared/TourGuide/DashboardSidebarMenu.cshtml">
+
+            <div class="col-xs-12 col-sm-8 col-md-9 mt-20">
+
+                <div class="dashboard-wrapper">
+
+                    <h4 class="section-title">Hello Kalvin</h4>
+
+                    <div class="admin-empty-dashboard">
+
+                        <div class="icon">
+                            <i class="ion-ios-book-outline"></i>
+                        </div>
+
+                        <h4>You have no any activities yet!</h4>
+
+                        <a asp-controller="RequestedCreate" asp-action="Index" class="btn btn-primary">Request a Trip</a>
+                        <a asp-area="Tourist" asp-controller="Requested" asp-action="Index" class="btn btn-primary">Browse Requested Tours</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+    <partial name="~/Views/Shared/TourGuide/UserProfileScripts.cshtml">
+}

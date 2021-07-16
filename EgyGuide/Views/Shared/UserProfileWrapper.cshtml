@@ -1,0 +1,78 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject EgyGuide.DataAccess.Repository.IRepository.IUnitOfWork _unitOfWork
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    var tourist = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == UserManager.GetUserId(User));
+}
+
+<div class="user-profile-wrapper">
+
+    <div class="user-header">
+
+        <div class="content">
+
+            <div class="content-top">
+
+                <div class="container">
+
+                    <div class="inner-top">
+
+                        <div class="image">
+                            @if (tourist.ImageUrl == null)
+                            {
+                                <img src="~/images/avatar.jpg" alt="image" />
+                            }
+                            else
+                            {
+                                <img src="@tourist.ImageUrl" alt="image" />
+                            }
+                        </div>
+
+                        <div class="GridLex-gap-20">
+
+                            <div class="GridLex-grid-noGutter-equalHeight GirdLex-grid-bottom">
+
+                                <div class="GridLex-col-7_sm-12_xs-12_xss-12">
+
+                                    <div class="GridLex-inner">
+                                        <div class="heading clearfix">
+                                            <h3>@String.Format("{0} {1}", tourist.FirstName, tourist.LastName)</h3>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="content-bottom">
+
+                <div class="container">
+
+                    <div class="inner-bottom">
+
+                        <ul class="user-header-menu">
+                            <li><a asp-controller="TouristProfile" asp-action="Index">Profile</a></li>
+                            @*<li><a asp-controller="TouristProfile" asp-action="Tours">Tours <span>12</span></a></li>*@
+                            <li><a asp-controller="TouristDashboard" asp-action="Index">Dashboard</a></li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

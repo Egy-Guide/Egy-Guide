@@ -38,6 +38,13 @@
  * Header
  */
 
+.dropdown-divider {
+	height: 0;
+	margin: .5rem 0;
+	overflow: hidden;
+	border-top: 1px solid #e9ecef;
+}
+
 .navbar-default {
 	background: #1C1C1F;
 }
@@ -855,13 +862,18 @@ ul.bottom-footer-menu.for-social li:after {
 	background: #3b5998
 }
 
+.btn-facebook:hover {
+	background: #2d4373;
+	color: #FFF
+}
+
 .btn-google-plus {
 	background: #d34836
 }
 
-.btn-facebook:hover,
 .btn-google-plus:hover {
-	opacity: .8
+	background: #c23321;
+	color: #FFF
 }
 
 .login-container-wrapper {
@@ -892,7 +904,7 @@ ul.bottom-footer-menu.for-social li:after {
 @media only screen and (max-width: 767px) {
 	.modal.login-box-wrapper {
 		width: auto;
-		margin-left: auto!
+		margin-left: auto;
 	}
 	.login-box-link-action {
 		text-align: left;
@@ -3499,7 +3511,9 @@ a.review-load-more:hover {
  * User Profile
  */
 
-.user-profile-wrapper {}
+.user-profile-wrapper {
+	min-height: 156px;
+}
 
 .user-header {
 	position: relative;
@@ -4319,7 +4333,7 @@ ul.common-menu-list li:last-child {
 	border-bottom: 0;
 }
 
-ul.common-menu-list li a {
+ul.common-menu-list li a, ul.common-menu-list li form button{
 	display: block;
 	color: #999;
 	line-height: 1.2;
@@ -4333,6 +4347,11 @@ ul.common-menu-list li a {
 	margin-bottom: -1px;
 	position: relative;
 	font-size: 13px;
+}
+
+ul.common-menu-list li form button{
+	border: none;
+	background: none;
 }
 
 ul.common-menu-list li a:after {
@@ -4721,7 +4740,19 @@ ul.common-menu-list.common-menu-list-shadow {
 .blog-media {
 	position: relative;
 	background: #eee;
-	margin-bottom: 30px;
+	margin-bottom: 30px;	
+}
+
+.blog-image{
+	width: 740px;
+	height: 340px;
+}
+
+.blog-image img{
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .blog-media a {

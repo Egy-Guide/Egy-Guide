@@ -1,4 +1,5 @@
-(function($) {
+
+(function ($) {
   'use strict';
 
   var _currentSpinnerId = 0;
@@ -32,8 +33,8 @@
     }
 
     var defaults = {
-      min: 0,
-      max: 100,
+      min: 1,
+      max: $("#noTravellers").data("max"),
       initval: '',
       replacementval: '',
       step: 1,

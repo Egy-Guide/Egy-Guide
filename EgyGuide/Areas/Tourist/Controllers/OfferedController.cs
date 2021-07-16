@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EgyGuide.DataAccess.Repository.IRepository;
+using EgyGuide.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +14,18 @@ namespace EgyGuide.Areas.Tourist.Controllers
     [Route("offered")]
     public class OfferedController : Controller
     {
+        private readonly IUnitOfWork _unit;
+
+        public OfferedController(IUnitOfWork unit)
+        {
+            _unit = unit;
+        }
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<TripDetail> tripList = _unit.OfferCreate.GetAll(includeProperties: "GuideUser,GuideUser.ApplicationUser");
+            
+
+            return View(tripList);
         }
     }
 }

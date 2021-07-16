@@ -13,6 +13,6 @@ namespace EgyGuide.Areas.Tourist.Controllers
         public IActionResult Index()
         {
             return View();
-        }
+        }        
     }
 }

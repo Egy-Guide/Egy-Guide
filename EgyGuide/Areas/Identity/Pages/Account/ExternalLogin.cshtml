@@ -1,0 +1,119 @@
+﻿@page
+@model ExternalLoginModel
+@{
+    ViewData["Title"] = "Register";
+    ViewData["AddClassToBodyTag"] = "transparent-header";
+    ViewData["HeaderTitle"] = "create your account for free";
+}
+
+<!-- start breadcrumb -->
+<partial name="~/Views/Shared/BreadcrumbHeader.cshtml">
+<!-- start breadcrumb -->
+
+<div class="pt-30 pb-60">
+
+    <div class="container">
+
+        <!-- start Register Modal -->
+        <div class="modal-body">
+
+            <div class="row gap-20">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <h4 class="text-center text-success">
+                        You've successfully authenticated with <strong>@Model.ProviderDisplayName</strong>.
+                    </h4>
+
+                    <hr />
+
+                    <form autocomplete="off" asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input asp-for="Input.FirstName" class="form-control" type="text">
+                                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input asp-for="Input.LastName" class="form-control" type="text">
+                                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input asp-for="Input.Email" class="form-control" type="email">
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input asp-for="Input.PhoneNumber" class="form-control" type="text">
+                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Nationality</label>
+                                <select asp-for="Input.Nationality" class="selectpicker show-tick form-control">
+                                    <partial name="~/Views/Shared/Country.cshtml" />
+                                </select>
+                                <span asp-validation-for="Input.Nationality" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <select asp-for="Input.Country" class="selectpicker show-tick form-control">
+                                    <partial name="~/Views/Shared/Country.cshtml" />
+                                </select>
+                                <span asp-validation-for="Input.Country" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input asp-for="Input.City" class="form-control" type="text">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="checkbox-block">
+                                <input id="register_accept_checkbox" name="register_accept_checkbox" class="checkbox" value="First Choice" type="checkbox">
+                                <label class="" for="register_accept_checkbox">By register, I read &amp; accept <a href="#">the terms</a></label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="login-box-box-action">
+                                Already have account? <a data-toggle="modal" asp-area="Identity" asp-page="Login">Log-in</a>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                        </div>
+                    </form>
+                </div>                
+            </div>
+
+        </div>        
+        <!-- end Register Modal -->
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

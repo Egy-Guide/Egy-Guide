@@ -1,0 +1,23 @@
+﻿@inject EgyGuide.DataAccess.Repository.IRepository.IUnitOfWork _unitOfWork
+
+@{
+    int PostsNumber = 5;
+    IEnumerable<Blog> latestPosts = _unitOfWork.Blog.GetAll(b => b.Status == "active").OrderByDescending(b => b.Date).Take(PostsNumber);
+}
+
+<ul class="sidebar-post">
+    @foreach (var lastPost in latestPosts)
+    {
+        <li class="clearfix">
+            <a href="/blog-single?id=@lastPost.Id">
+                <div class="image">
+                    <img src="@lastPost.ImageURL" alt="Popular Post" />
+                </div>
+                <div class="content">
+                    <h6>@lastPost.Title</h6>
+                    <p class="recent-post-sm-meta"><i class="fa fa-clock-o mr-5"></i>@lastPost.Date.ToString("dd/M/yyyy")</p>
+                </div>
+            </a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,114 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log In";
+    ViewData["AddClassToBodyTag"] = "transparent-header";
+    ViewData["HeaderTitle"] = "sign-in into your account";
+}
+
+<!-- start breadcrumb -->
+<partial name="~/Views/Shared/BreadcrumbHeader.cshtml">
+<!-- start breadcrumb -->
+
+<div class="pt-30 pb-60">
+    <div class="container">
+
+        <!-- start Login Modal -->
+        <div class="modal-body">
+            <div class="row gap-20">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <h4 class="text-center">Use another service to login.</h4>
+                    <hr />
+
+                    <!-- External OAuth -->
+                    <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            if (provider.Name.ToLower().Contains("facebook"))
+                            {
+                                <div class="col-sm-6 col-md-6">
+                                    <button type="submit" name="provider" class="btn btn-facebook btn-lg btn-block mb-5-xs" value="@provider.Name" title="@provider.DisplayName">
+                                        <i class="fa fa-facebook"></i> Log-in with Facebook
+                                    </button>
+                                </div>
+                            }
+
+                            if (provider.Name.ToLower().Contains("google"))
+                            {
+                                <div class="col-sm-6 col-md-6">
+                                    <button type="submit" name="provider" class="btn btn-google-plus btn-lg btn-block" value="@provider.Name" title="@provider.DisplayName">
+                                        <i class="fa fa-google"></i> Log-in with Google
+                                    </button>
+                                </div>
+                            }
+
+                        }
+                    </form>
+                    <!-- End External OAuth -->
+
+                    <div class="col-md-12">
+                        <div class="login-modal-or">
+                            <div><span>or</span></div>
+                        </div>
+                    </div>
+
+                    <form autocomplete="off" id="account" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input asp-for="Input.Email" class="form-control" type="email">
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input asp-for="Input.Password" class="form-control" type="password">
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="checkbox-block">
+                                <label asp-for="Input.RememberMe">
+                                    <input asp-for="Input.RememberMe" />
+                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="login-box-link-action">
+                                <a data-toggle="modal" id="forgot-password" asp-page="./ForgotPassword" class="block line18 mt-1">
+                                    Forgot password?
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12">
+                            <div class="login-box-box-action">
+                                No account? <a data-toggle="modal" asp-area="Identity" asp-page="Register">Register</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12">
+                            <div class="login-box-box-action">
+                                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Log-in</button>
+                        </div>
+                    </form>
+                </div>                
+            </div>
+
+        </div>        
+        <!-- end Login Modal -->
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

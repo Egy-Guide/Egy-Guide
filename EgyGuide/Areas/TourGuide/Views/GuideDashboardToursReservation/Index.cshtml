@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Guide - Reservations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="~/Views/Shared/Breadcrumb.cshtml">
+<partial name="~/Views/Shared/TourGuide/UserProfileWrapper.cshtml">
+
+<div class="pt-30 pb-50">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-xs-12 mt-20">
+
+                <div class="dashboard-wrapper">
+
+                    <h4 class="section-title">Sells</h4>
+
+                    <table id="tblData" class="table table-striped table-bordered " style="width:100%;text-align:center">
+                        <thead class="thead-dark">
+                            <tr class="table-info">
+                                <th>Trip Name</th>
+                                <th>Tourist Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Booking Date</th>
+                                <th>Booking Status</th>
+                                <th>Process</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+@section Scripts{
+
+    <script>
+        $(".table-info th").css("text-align", "center")
+    </script>
+    <script src="~/js/Dashboard/tourguide.js"></script>
+}

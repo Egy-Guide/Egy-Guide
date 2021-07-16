@@ -1,0 +1,135 @@
+﻿@using Microsoft.Extensions.Options
+@using EgyGuide.Utility
+@model EgyGuide.Models.TripBooking
+@inject IOptions<StripeSettings> Stripe
+
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- start breadcrumb -->
+<partial name="~/Views/Shared/Breadcrumb.cshtml">
+    <!-- end breadcrumb -->
+
+    <div class="pt-30 pb-50">
+
+        <div class="container">
+
+            <div class="row">
+                <form method="post">
+                    <div id="sidebar-sticky" class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+
+                        <aside class="sidebar-wrapper with-box-shadow">
+
+                            <div class="sidebar-booking-box">
+
+                                <div class="sidebar-booking-header pt-20 pb-15 clearfix">
+
+                                    <h3 class="text-white text-uppercase spacing-3 mb-0 line-1">Trip Summary</h3>
+
+                                </div>
+
+                                <div class="sidebar-booking-inner">
+
+                                    <ul class="price-summary-list">
+
+                                        <li>
+                                            <h6>From</h6>
+                                            <p class="text-muted">@Model.TripStart.ToString("dd/MMMM/yyyy")</p>
+                                        </li>
+
+                                        <li>
+                                            <h6>To</h6>
+                                            <p class="text-muted">@Model.TripEnd.ToString("dd/MMMM/yyyy")</p>
+                                        </li>
+
+                                        <li>
+                                            <h6>Meeting point</h6>
+                                            <p class="text-muted">@Model.TripDetail.MeetingPlace</p>
+                                        </li>
+
+                                        <li>
+                                            <h6>Meeting time</h6>
+                                            <p class="text-muted">@(Model.TripDetail.MeetingDate.HasValue ? Model.TripDetail.MeetingDate.Value.ToString("hh:mm tt") : "<not available>")</p>
+                                        </li>
+
+                                        <li>
+                                            <h6>Travellers</h6>
+                                            <p class="text-muted">@Model.TravellersNo</p>
+                                        </li>
+
+                                        <li class="divider"></li>
+
+                                        <li>
+                                            <h6 class="heading mt-20 mb-5 text-primary uppercase">Price per person</h6>
+                                            <div class="row gap-10 mt-10">
+                                                <div class="col-xs-7 col-sm-7">
+                                                    Brochure Price
+                                                </div>
+                                                <div class="col-xs-5 col-sm-5 text-right">
+                                                    @(String.Format("${0:#.00}", Convert.ToDouble(Model.TripDetail.Price)))
+                                                </div>
+                                            </div>
+                                            <div class="row gap-10 mt-10">
+                                                <div class="col-xs-7 col-sm-7">
+                                                    Tax &amp; fee
+                                                </div>
+                                                <div class="col-xs-5 col-sm-5 text-right">
+                                                    $0
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li class="divider"></li>
+
+                                        <li>
+                                            <div class="row gap-10 mt-10">
+                                                <div class="col-xs-7 col-sm-7">
+                                                    <span class="font600">Total </span>
+                                                </div>
+                                                <div class="col-xs-5 col-sm-5 text-right">
+                                                    @String.Format("${0:#.00} x{1}", Convert.ToDouble(Model.TripDetail.Price), Model.TravellersNo)
+                                                    <span class="font600 font26 block text-primary mt-5">@String.Format("${0:#.00}", Model.TotalPrice)</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li class="divider"></li>
+
+                                        <li>
+                                            <script src="https://checkout.stripe.com/checkout.js"
+                                                    class="stripe-button"
+                                                    data-key="@Stripe.Value.PublishableKey"
+                                                    data-name="Egy Guide"
+                                                    data-description="Every tourist has an incomplete story, we complete this story"
+                                                    data-amount="@(Model.TotalPrice * 100)"
+                                                    data-locale="auto"
+                                                    data-remember-me="false"
+                                                    data-image="/images/ico/apple-touch-icon-114-precomposed.png"
+                                                    data-currency="usd">
+                                            </script>
+                                            <button style="width:100%;display:block" type="submit" asp-action="Checkout" class="btn btn-success btn-lg block mt-5">Checkout</button>
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                        </aside>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+@section Scripts{
+    <script>
+        $(".stripe-button-el").css("display", "none")
+    </script>
+}
